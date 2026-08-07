@@ -1,0 +1,25 @@
+# Vercel & Build Artifacts
+.vercel
+dist/
+build/
+*.log
+
+# Dependencies
+node_modules/
+
+# OS / Environment Files
+.DS_Store
+Thumbs.db
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

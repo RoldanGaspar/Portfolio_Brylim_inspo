@@ -1,0 +1,142 @@
+/* ==========================================
+   ANIMATIONS & TRANSITIONS
+   ========================================== */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+@keyframes lightningStrike {
+    0% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 4px #fbbf24) brightness(1);
+    }
+    12% {
+        transform: scale(1.35) rotate(-14deg);
+        filter: drop-shadow(0 0 16px #ffffff) drop-shadow(0 0 25px #a855f7) brightness(2.5);
+    }
+    18% {
+        transform: scale(1.1) rotate(8deg);
+        filter: drop-shadow(0 0 8px #a855f7) brightness(1.6);
+    }
+    24% {
+        transform: scale(1.28) rotate(-6deg);
+        filter: drop-shadow(0 0 18px #ffffff) drop-shadow(0 0 28px #c084fc) brightness(2.8);
+    }
+    30% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 6px #f59e0b) brightness(1);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 6px #f59e0b) brightness(1);
+    }
+}
+
+@keyframes electricBeam {
+    0% { left: -100%; }
+    25% { left: 200%; }
+    100% { left: 200%; }
+}
+
+@keyframes brainPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px #c084fc);
+    }
+    50% {
+        transform: scale(1.25);
+        filter: drop-shadow(0 0 14px #e9d5ff) drop-shadow(0 0 20px #c084fc);
+    }
+}
+
+@keyframes shieldGlow {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px #10b981);
+    }
+    50% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 14px #6ee7b7) drop-shadow(0 0 20px #00ff87);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Scroll Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children reveals */
+.reveal:nth-child(2) { transition-delay: 0.08s; }
+.reveal:nth-child(3) { transition-delay: 0.16s; }
+.reveal:nth-child(4) { transition-delay: 0.24s; }
+.reveal:nth-child(5) { transition-delay: 0.32s; }
+.reveal:nth-child(6) { transition-delay: 0.4s; }
+.reveal:nth-child(7) { transition-delay: 0.48s; }
+.reveal:nth-child(8) { transition-delay: 0.56s; }
+.reveal:nth-child(9) { transition-delay: 0.64s; }
+
+/* Page Transitions */
+#router-view {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#router-view.page-exit {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+#router-view.page-enter {
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3D Tilt Cards */
+.tilt-card {
+    transition: transform 0.15s ease, box-shadow 0.3s ease;
+    will-change: transform;
+}
+
+.tilt-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .tilt-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Magnetic Elements */
+.magnetic {
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover effect on project cards */
+.projects-stack:hover .left {
+    transform: translateX(-160px) rotate(-12deg) scale(0.9);
+}
+.projects-stack:hover .right {
+    transform: translateX(160px) rotate(12deg) scale(0.9);
+}

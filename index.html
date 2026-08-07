@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roldan Gaspar - Portfolio</title>
+    <link rel="icon" type="image/png" href="MyPic.png">
+    <link rel="shortcut icon" type="image/png" href="MyPic.png">
+    <link rel="apple-touch-icon" href="MyPic.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="src/css/main.css">
+</head>
+<body>
+    <!-- Mobile Sticky Top Bar -->
+    <header class="mobile-header-bar">
+        <a href="#/" class="mobile-logo">Roldan Gaspar</a>
+        <div class="mobile-header-actions">
+            <button id="mobile-menu-toggle" class="mobile-btn" aria-label="Toggle Navigation Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="#/" class="logo-link">
+                    <h1>Roldan Gaspar</h1>
+                </a>
+            </div>
+            <div class="sidebar-scrollable">
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#/shop"><span class="icon"><i class="ph ph-shopping-bag"></i></span> Shop</a></li>
+                    <li><a href="#/blog"><span class="icon"><i class="ph ph-file-text"></i></span> Blog</a></li>
+                    <li><a href="#/gear"><span class="icon"><i class="ph ph-desktop"></i></span> Gear</a></li>
+                    <li><a href="#/resources"><span class="icon"><i class="ph ph-books"></i></span> Resources</a></li>
+                </ul>
+                <div class="nav-divider"></div>
+                <ul>
+                    <li><a href="#/collabs"><span class="icon"><i class="ph ph-users"></i></span> Collabs</a></li>
+                    <li><a href="#/consulting"><span class="icon"><i class="ph ph-briefcase"></i></span> Consulting</a></li>
+                    <li><a href="#/audio"><span class="icon"><i class="ph ph-headphones"></i></span> Audio Lounge</a></li>
+                </ul>
+                <div class="nav-divider"></div>
+                <ul class="section-links">
+                    <li><a href="#/projects">Projects</a></li>
+                    <li><a href="#/experience">Experience</a></li>
+                    <li><a href="#/stack">Stack</a></li>
+                    <li><a href="#/certifications">Certifications</a></li>
+                    <li><a href="#/recommendations">Recommendations</a></li>
+                    <li><a href="#/affiliations">Affiliations</a></li>
+                </ul>
+            </nav>
+            </div>
+
+            <div class="sidebar-fixed-bottom">
+                <div class="sidebar-widgets">
+                    <button class="widget-btn">
+                    <span>Ask anything</span>
+                    <span class="kbd">Alt + K</span>
+                </button>
+                <button class="widget-btn">
+                    <span>Typing test</span>
+                    <span class="kbd">Alt + J</span>
+                </button>
+                </div>
+
+                <div class="sidebar-divider"></div>
+
+                <div class="sidebar-community">
+                    <div class="avatars">
+                    <img src="https://ui-avatars.com/api/?name=User&background=random" alt="Avatar">
+                    <img src="https://ui-avatars.com/api/?name=User2&background=random" alt="Avatar">
+                    <span class="avatar-count">+13</span>
+                </div>
+                <p class="community-status"><strong>16</strong> people viewing now</p>
+                <a href="#" class="community-chat-link"><span class="icon"><i class="ph ph-chat-circle"></i></span> community chat</a>
+                </div>
+
+                <div class="sidebar-divider"></div>
+
+                <div class="sidebar-footer">
+                    <div class="theme-toggles">
+                        <div class="theme-group">
+                            <button class="theme-btn" data-set-theme="system"><i class="ph ph-desktop"></i></button>
+                            <button class="theme-btn active" data-set-theme="light"><i class="ph ph-sun"></i></button>
+                            <button class="theme-btn" data-set-theme="dark"><i class="ph ph-moon"></i></button>
+                        </div>
+                        <button class="theme-btn sound-btn" id="soundscape-toggle-btn" title="Toggle Lo-Fi Ambient Soundscape"><i class="ph ph-speaker-slash"></i></button>
+                    </div>
+                    <p class="contact-text">For work, collabs & everything else, reach me at</p>
+                    <a href="mailto:gaspar26roldan@gmail.com" class="contact-email"><span class="icon"><i class="ph ph-envelope-simple"></i></span> gaspar26roldan@gmail.com</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                
+                <!-- Dynamic SPA Content -->
+                <div id="router-view"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating AI Chatbot Widget -->
+    <div class="ai-widget-container">
+        <button id="ai-widget-btn" class="ai-widget-trigger" aria-label="Ask Roldan's AI Assistant">
+            <i class="ph-fill ph-sparkle"></i>
+            <span class="ai-label">Ask AI</span>
+        </button>
+
+        <div id="ai-chat-drawer" class="ai-chat-drawer">
+            <div class="ai-drawer-header">
+                <div class="ai-avatar">
+                    <i class="ph-fill ph-robot"></i>
+                </div>
+                <div class="ai-title-info">
+                    <h3>Roldan's AI Assistant</h3>
+                    <span class="online-status">● Online</span>
+                </div>
+                <button id="ai-drawer-close" class="ai-close-btn"><i class="ph ph-x"></i></button>
+            </div>
+            
+            <div id="ai-chat-messages" class="ai-chat-messages">
+                <div class="ai-msg bot">
+                    👋 Hi! I'm Roldan's AI Assistant. Ask me anything about his experience, projects, skills, or shop templates!
+                </div>
+                <div class="ai-chips">
+                    <button class="chip-btn" data-q="What are Roldan's top skills?">⚡ Top Skills</button>
+                    <button class="chip-btn" data-q="What projects has Roldan built?">🚀 Top Projects</button>
+                    <button class="chip-btn" data-q="How can I contact Roldan?">📧 Contact Info</button>
+                    <button class="chip-btn" data-q="Is Roldan available for consulting?">💼 Consulting</button>
+                </div>
+            </div>
+
+            <div class="ai-drawer-footer">
+                <input type="text" id="ai-user-input" placeholder="Ask AI about Roldan..." maxlength="100">
+                <button id="ai-send-btn"><i class="ph-fill ph-paper-plane-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/js/data.js"></script>
+    <script src="src/js/components/github-graph.js"></script>
+    <script src="src/js/utils/audio.js"></script>
+    <script src="src/js/utils/scroll.js"></script>
+    <script src="src/js/utils/effects.js"></script>
+    <script src="src/js/utils/theme.js"></script>
+    <script src="src/js/utils/modals.js"></script>
+    <script src="src/js/utils/ai-bot.js"></script>
+    <script src="src/js/utils/command-palette.js"></script>
+    <script src="src/js/views/home.js"></script>
+    <script src="src/js/views/projects-all.js"></script>
+    <script src="src/js/views/project-detail.js"></script>
+    <script src="src/js/views/experience-all.js"></script>
+    <script src="src/js/views/stack-all.js"></script>
+    <script src="src/js/views/certifications-all.js"></script>
+    <script src="src/js/views/recommendations-all.js"></script>
+    <script src="src/js/views/shop.js"></script>
+    <script src="src/js/views/shop-detail.js"></script>
+    <script src="src/js/views/blog.js"></script>
+    <script src="src/js/views/gear.js"></script>
+    <script src="src/js/views/resources.js"></script>
+    <script src="src/js/views/collabs.js"></script>
+    <script src="src/js/views/consulting.js"></script>
+    <script src="src/js/views/audio-lounge.js"></script>
+    <script src="src/js/router.js"></script>
+    <script src="src/js/app.js"></script>
+</body>
+</html>
