@@ -254,6 +254,164 @@ window.portfolioData = {
             skills: ["AWS Bedrock", "SageMaker", "Cloud AI Security"]
         }
     ],
+    netacadCertsList: [
+        {
+            title: "JavaScript Essentials 1",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "Networking Academy",
+            date: "Sep 12, 2026",
+            hours: 40,
+            description: "Design, develop, and improve JavaScript programs.",
+            badgeUrl: "https://images.credly.com/images/b93bf373-3da6-4ada-9879-a0c39d6a11f8/image.png",
+            credlyUrl: "https://www.credly.com/badges/9a2489bc-b20c-4600-8e5e-7f4cbdb524e0",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=cd68c261-6098-4948-b38b-dd52b2735bcb",
+            certificateImage: "assets/certificates/javascript-essentials-1.png",
+            skills: ["JavaScript", "Programming Fundamentals"]
+        },
+        {
+            title: "JavaScript Essentials 2",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "Networking Academy",
+            date: "Sep 12, 2026",
+            hours: 50,
+            description: "Build a strong JavaScript foundation and prepare for JSA certification.",
+            badgeUrl: "https://images.credly.com/images/e090c1e1-dbd4-40f8-bbb3-93cc07884d7f/image.png",
+            credlyUrl: "https://www.credly.com/badges/06bf7beb-dc73-484f-94ce-8d0835d4e146",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=9bb8a3cf-fbd2-4f21-9f0d-f84cd0bb6577",
+            certificateImage: "assets/certificates/javascript-essentials-2.png",
+            skills: ["JavaScript", "JSA Preparation"]
+        },
+        {
+            title: "Network Defense",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "Networking Academy",
+            date: "Sep 12, 2026",
+            hours: 27,
+            description: "Monitor and protect networks while evaluating security alerts.",
+            badgeUrl: "https://images.credly.com/images/51526f76-711b-4caf-b04d-27f89512b112/NetworkDefense_v1_091721.png",
+            credlyUrl: "https://www.credly.com/badges/4317f869-fb2b-4cfd-a377-3ff898d6d236",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=bb7d044d-e528-4437-aa58-21e42aebfcad",
+            certificateImage: "assets/certificates/network-defense.png",
+            skills: ["Network Security", "Security Alerts"]
+        },
+        {
+            title: "Ethical Hacker",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "Networking Academy",
+            date: "Sep 12, 2026",
+            hours: 70,
+            description: "Uncover cyber threats and vulnerabilities before attackers do.",
+            badgeUrl: "https://images.credly.com/images/242902b5-f527-42ad-865e-977c9e1b5b58/image.png",
+            credlyUrl: "https://www.credly.com/badges/b75d8f5e-1b06-4be1-8f2e-d5a2fc5ead83",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=95403cdc-07e9-4bd9-b45f-71b3f8d8d6c8",
+            certificateImage: "assets/certificates/ethical-hacker.png",
+            skills: ["Ethical Hacking", "Vulnerability Discovery"]
+        },
+        {
+            title: "Data Analytics Essentials",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "DICT-ITU DTC Initiative",
+            date: "Sep 12, 2026",
+            hours: 30,
+            description: "Learn the essential tools of data analytics.",
+            badgeUrl: "https://images.credly.com/images/1fdfeaeb-e61c-4450-bdfe-a07bd4e715df/image.png",
+            credlyUrl: "https://www.credly.com/badges/b8f40efc-a6b3-469a-9c5a-c9dbd20cad2e",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=d84879d8-31bf-4a50-914a-4536d08ca89d",
+            certificateImage: "assets/certificates/data-analytics-essentials.png",
+            skills: ["Data Analytics", "Analytics Tools"]
+        },
+        {
+            title: "Python Essentials 1",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "Networking Academy",
+            date: "Sep 12, 2026",
+            hours: 30,
+            description: "Learn fundamental programming concepts with Python.",
+            badgeUrl: "https://images.credly.com/images/68c0b94d-f6ac-40b1-a0e0-921439eb092e/image.png",
+            credlyUrl: "https://www.credly.com/badges/ae0773b6-42f5-4558-9d79-7f769fa1a114",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=6426f512-66bf-48cd-8fa4-71c9ff65efbb",
+            certificateImage: "assets/certificates/python-essentials-1.png",
+            skills: ["Python", "Programming Fundamentals"]
+        },
+        {
+            title: "Python Essentials 2",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "Networking Academy",
+            date: "Sep 12, 2026",
+            hours: 40,
+            description: "Expand Python programming skills and prepare for certification.",
+            badgeUrl: "https://images.credly.com/images/3f802526-7274-4230-91ab-f6d1a35340e6/image.png",
+            credlyUrl: "https://www.credly.com/badges/7ca14f5f-c2fd-4144-a7ca-96a847b30a3c",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=d0cbc502-cd0f-453c-8724-6b3cbd4ae4f5",
+            certificateImage: "assets/certificates/python-essentials-2.png",
+            skills: ["Python", "Certification Prep"]
+        },
+        {
+            title: "Networking Basics",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "Networking Academy",
+            date: "Aug 27, 2026",
+            hours: 22,
+            description: "Learn how computer networks operate.",
+            badgeUrl: "https://images.credly.com/images/5bdd6a39-3e03-4444-9510-ecff80c9ce79/image.png",
+            credlyUrl: "https://www.credly.com/badges/3982861e-0288-4e85-b483-6e954f46a3e4",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=673d5cb3-f150-4d96-b0d0-02c172234ce5",
+            certificateImage: "assets/certificates/networking-basics.png",
+            skills: ["Networking", "Network Fundamentals"]
+        },
+        {
+            title: "Introduction to Cybersecurity",
+            issuer: "CISCO NETWORKING ACADEMY",
+            academy: "Networking Academy",
+            date: "Jun 12, 2026",
+            hours: 6,
+            description: "Explore cybersecurity and why it is a future-proof career.",
+            badgeUrl: "https://images.credly.com/images/af8c6b4e-fc31-47c4-8dcb-eb7a2065dc5b/I2CS__1_.png",
+            credlyUrl: "https://www.credly.com/badges/0ef8090b-0504-475e-a886-c36f33baed44",
+            verifyUrl: "https://www.netacad.com/certificates/?issuanceId=1eb1be6e-5686-48c4-a91b-d98d1ca892ee",
+            certificateImage: "assets/certificates/introduction-to-cybersecurity.png",
+            skills: ["Cybersecurity", "Security Awareness"]
+        }
+    ],
+    credlyAdditionalBadgesList: [
+        {
+            title: "AWS Educate Introduction to Cloud 101 - Training Badge",
+            issuer: "AMAZON WEB SERVICES",
+            academy: "AWS Educate",
+            date: "Jun 13, 2026",
+            description: "Completed the AWS Educate Introduction to Cloud 101 training.",
+            badgeUrl: "https://images.credly.com/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob",
+            credlyUrl: "https://www.credly.com/badges/7eda7327-b679-4eaf-b005-a761222d2fc9",
+            skills: ["AWS", "Cloud Foundations"]
+        }
+    ],
+    netacadAchievementsList: [
+        {
+            title: "Resource Specialist",
+            date: "Jun 12, 2026",
+            badgeUrl: "https://www.netacad.com/p/ff9e491c-49be-4734-803e-a79e6e83dab1/badges/badge-images/resource_specialist_7.png"
+        },
+        {
+            title: "Network Defense",
+            date: "Jun 12, 2026",
+            badgeUrl: "https://www.netacad.com/p/ff9e491c-49be-4734-803e-a79e6e83dab1/badges/badge-images/network_defense_6.png"
+        },
+        {
+            title: "System Safeguards",
+            date: "Jun 12, 2026",
+            badgeUrl: "https://www.netacad.com/p/ff9e491c-49be-4734-803e-a79e6e83dab1/badges/badge-images/system_safeguards_5.png"
+        },
+        {
+            title: "Threat Analysis",
+            date: "Jun 12, 2026",
+            badgeUrl: "https://www.netacad.com/p/ff9e491c-49be-4734-803e-a79e6e83dab1/badges/badge-images/threat_analysis_4.png"
+        },
+        {
+            title: "Cybersecurity Administration",
+            date: "Jun 12, 2026",
+            badgeUrl: "https://www.netacad.com/p/ff9e491c-49be-4734-803e-a79e6e83dab1/badges/badge-images/cybersecurity_administration_3.png"
+        }
+    ],
     recsList: [
         {
             author: "Henry Aguda",

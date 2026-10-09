@@ -228,6 +228,15 @@ function renderHome() {
                     <a href="#/certifications" class="cert-verify">{ VERIFY }</a>
                 </div>
             </div>
+            <div class="certs-provider-callout">
+                <img src="${portfolioData.netacadCertsList[0].badgeUrl}" alt="JavaScript Essentials 1 badge" class="certs-provider-callout-badge">
+                <div class="certs-provider-callout-copy">
+                    <span class="cert-provider-kicker">CISCO NETWORKING ACADEMY</span>
+                    <h4>10 Credly badges &amp; 9 certificates</h4>
+                    <p>Cisco Networking Academy and AWS Educate credentials.</p>
+                </div>
+                <a href="#/certifications" class="view-all magnetic">VIEW ALL &rarr;</a>
+            </div>
         </section>
 
         <!-- Recommendations Section -->
