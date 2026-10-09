@@ -298,13 +298,15 @@
     position: sticky;
     top: 0;
     z-index: 200;
-    height: 56px;
-    padding: 0 18px;
-    background-color: var(--sidebar-bg);
+    height: 60px;
+    padding: 0 20px;
+    background-color: var(--glass-bg);
     border-bottom: 1px solid var(--border-color);
     align-items: center;
     justify-content: space-between;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
 
 .mobile-logo {
@@ -313,19 +315,25 @@
     font-weight: 700;
     color: var(--text-color);
     text-decoration: none;
+    letter-spacing: -0.3px;
 }
 
 .mobile-btn {
-    background: transparent;
-    border: none;
-    font-size: 1.4rem;
+    background: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    font-size: 1.35rem;
     color: var(--text-color);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px;
-    border-radius: 6px;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.mobile-btn:active {
+    transform: scale(0.94);
 }
 
 /* Responsive Grid & Mobile Drawer */
@@ -340,10 +348,13 @@
     
     .sidebar {
         position: fixed;
-        top: 56px;
+        top: 60px;
         left: 0;
         width: 100%;
-        height: calc(100vh - 56px);
+        height: calc(100vh - 60px);
+        background-color: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         z-index: 190;
         transform: translateY(-100%);
         opacity: 0;
@@ -373,3 +384,4 @@
         padding: 20px 14px;
     }
 }
+

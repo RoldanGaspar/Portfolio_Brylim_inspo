@@ -113,18 +113,45 @@
     animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 3D Tilt Cards */
+/* 3D Tilt Cards & Glass Cards */
 .tilt-card {
-    transition: transform 0.15s ease, box-shadow 0.3s ease;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
     will-change: transform;
 }
 
 .tilt-card:hover {
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(56, 189, 248, 0.4);
 }
 
 [data-theme="dark"] .tilt-card:hover {
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(56, 189, 248, 0.45);
+}
+
+/* Glass Card & Filter Pill Interactions */
+.filter-pill {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-pill:hover {
+    transform: translateY(-2px);
+}
+
+.filter-pill.active {
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
+}
+
+/* Subtle Shimmer Effect for Badges */
+@keyframes subtleShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.shimmer-badge {
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
+    background-size: 200% 100%;
+    animation: subtleShimmer 4s infinite linear;
 }
 
 /* Magnetic Elements */
@@ -140,3 +167,4 @@
 .projects-stack:hover .right {
     transform: translateX(160px) rotate(12deg) scale(0.9);
 }
+

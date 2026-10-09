@@ -3,28 +3,46 @@
    ========================================== */
 
 :root {
-    --bg-color: #ffffff;
+    --bg-color: #fcfcfc;
     --text-color: #111111;
     --text-muted: #666666;
     --border-color: #e5e5e5;
     --card-bg: #ffffff;
+    --card-border-glow: rgba(0, 0, 0, 0.06);
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --card-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
     --sidebar-bg: #ffffff;
-    --hover-bg: rgba(0, 0, 0, 0.03);
+    --hover-bg: rgba(0, 0, 0, 0.035);
     --tag-bg: #f3f3f3;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(0, 0, 0, 0.08);
     
+    --accent-blue: #0284c7;
+    --accent-violet: #8b5cf6;
+    --accent-cyan: #06b6d4;
+
     --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --mono-font: 'Space Mono', monospace;
 }
 
 [data-theme="dark"] {
-    --bg-color: #0c0c0c;
-    --text-color: #f0f0f0;
-    --text-muted: #888888;
-    --border-color: #222222;
-    --card-bg: #141414;
-    --sidebar-bg: #0c0c0c;
+    --bg-color: #0b0c0e;
+    --text-color: #f3f4f6;
+    --text-muted: #9ca3af;
+    --border-color: #1f242d;
+    --card-bg: #12151b;
+    --card-border-glow: rgba(255, 255, 255, 0.06);
+    --card-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+    --card-shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(56, 189, 248, 0.08);
+    --sidebar-bg: #0b0c0e;
     --hover-bg: rgba(255, 255, 255, 0.05);
-    --tag-bg: #1f1f1f;
+    --tag-bg: #191e26;
+    --glass-bg: rgba(18, 21, 27, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.08);
+
+    --accent-blue: #38bdf8;
+    --accent-violet: #a78bfa;
+    --accent-cyan: #22d3ee;
 }
 
 * {
