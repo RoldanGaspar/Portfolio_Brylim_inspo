@@ -40,6 +40,10 @@
 - **💬 Redesigned Recommendations & Certifications**:
   - 3-card grid with Phosphor quote icons, monospace tags, `{ VERIFY }` links, and sleek high-contrast hover accents.
 
+- **📜 Cisco Networking Academy Certifications Gallery & High-Res Lightbox**:
+  - Interactive certificates gallery with category filter tabs (Cybersecurity, Programming, Networking, Data).
+  - High-resolution modal lightbox viewer with PDF downloads and credential verification.
+
 - **↗️ Hero Stats Bar**:
   - Borderless vertical divider layout with diagonal arrow lifting animation (`transform: translate(3px, -3px)`).
 
@@ -62,6 +66,8 @@ PORTFOLIO/
 ├── index.html              # Main HTML entry point & sidebar layout
 ├── vercel.json             # Vercel deployment configuration
 ├── MyPic.png               # Profile picture & browser tab favicon
+├── assets/                 # Certificates, PDFs, audio assets, and media
+│   └── certificates/       # High-res badges, previews, and PDF credentials
 ├── src/
 │   ├── css/
 │   │   ├── main.css        # Global CSS entry
@@ -77,6 +83,7 @@ PORTFOLIO/
 │       ├── views/          # Modular page view renderers
 │       │   ├── home.js
 │       │   ├── audio-lounge.js
+│       │   ├── certifications-all.js
 │       │   ├── projects-all.js
 │       │   ├── project-detail.js
 │       │   ├── recommendations-all.js
