@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (window.initTheme) initTheme(getCurrentView);
     if (window.initModals) initModals();
     if (window.initSoundToggle) initSoundToggle();
+    if (window.updateVisitorCounterUI) updateVisitorCounterUI();
     
     // Add sound feedback & auto-close drawer on click
     document.querySelectorAll('.sidebar a').forEach(link => {

@@ -286,7 +286,7 @@ function renderHome() {
         <section id="affiliations" class="content-section reveal">
             <div class="section-header">
                 <span class="section-number">06 &mdash; affiliations</span>
-                <a href="#" class="view-all magnetic">ALL AFFILIATIONS &rarr;</a>
+                <a href="#affiliations" class="view-all magnetic">ALL AFFILIATIONS &rarr;</a>
             </div>
             <div class="aff-grid">
                 <div class="aff-item">
@@ -317,14 +317,9 @@ function renderHome() {
         <section id="github" class="content-section reveal">
             <div class="section-header">
                 <span class="section-number">07 &mdash; github</span>
-                <a href="#" class="view-all magnetic">@ROLDANGASPAR &nearr;</a>
+                <a href="https://github.com/RoldanGaspar" target="_blank" rel="noopener noreferrer" class="view-all magnetic">@ROLDANGASPAR &nearr;</a>
             </div>
-            <div class="github-graph-container">
-                <div class="github-grid">
-                    ${generateGithubGraph()}
-                </div>
-                <p class="github-footer">2,106 CONTRIBUTIONS IN THE LAST YEAR</p>
-            </div>
+            ${generateGithubGraph()}
         </section>
     `;
 }

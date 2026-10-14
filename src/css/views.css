@@ -584,15 +584,187 @@
 }
 
 .github-dot[data-level="0"]::after { width: 0; height: 0; }
-.github-dot[data-level="1"]::after { width: 4px; height: 4px; }
-.github-dot[data-level="2"]::after { width: 6px; height: 6px; }
-.github-dot[data-level="3"]::after { width: 9px; height: 9px; }
-.github-dot[data-level="4"]::after { width: 12px; height: 12px; }
+.github-dot[data-level="1"]::after { width: 4px; height: 4px; background-color: rgba(16, 185, 129, 0.45); }
+.github-dot[data-level="2"]::after { width: 6px; height: 6px; background-color: rgba(16, 185, 129, 0.7); }
+.github-dot[data-level="3"]::after { width: 9px; height: 9px; background-color: rgba(16, 185, 129, 0.85); }
+.github-dot[data-level="4"]::after { width: 12px; height: 12px; background-color: #10b981; }
+
+.github-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
 .github-footer {
     font-family: var(--mono-font);
     font-size: 0.75rem;
     color: var(--text-muted);
+    margin: 0;
+}
+
+.github-footer strong {
+    color: var(--text-color);
+}
+
+.github-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 3px 9px;
+    border-radius: 12px;
+}
+
+.github-live-badge i {
+    font-size: 0.5rem;
+    animation: pulse-green 2s infinite;
+}
+
+/* Featured Public Repositories Section */
+.github-repos-section {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.github-repos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.repos-kicker {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.repos-view-all {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.repos-view-all:hover {
+    color: var(--accent-blue);
+}
+
+.github-repos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.github-repo-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.github-repo-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.repo-card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.repo-icon {
+    font-size: 1.05rem;
+    color: var(--accent-blue);
+    display: flex;
+}
+
+.repo-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+.repo-external {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    transition: transform 0.2s, color 0.2s;
+}
+
+.github-repo-card:hover .repo-external {
+    transform: translate(2px, -2px);
+    color: var(--accent-blue);
+}
+
+.repo-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0 0 14px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.repo-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: auto;
+}
+
+.repo-lang {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.repo-stars,
+.repo-forks {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.repo-date {
+    margin-left: auto;
+    font-size: 0.68rem;
 }
 
 /* Shop Grid View */

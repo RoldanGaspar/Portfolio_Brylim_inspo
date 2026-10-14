@@ -66,6 +66,7 @@ function router() {
             if (window.initProjectsStack) initProjectsStack();
             if (window.initVerifiedBadgeConfetti) initVerifiedBadgeConfetti();
             if (window.initAudioLoungeEvents && viewHash === '#/audio') initAudioLoungeEvents();
+            if (window.initGithubGraph && (viewHash === '#/' || viewHash === '#home')) initGithubGraph();
             if (window.playSound) playSound('nav');
         }, currentView === null ? 0 : 200);
     }

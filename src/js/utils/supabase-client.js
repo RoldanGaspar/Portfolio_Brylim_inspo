@@ -201,8 +201,52 @@ function closeContactModal() {
     }
 }
 
+// Site Analytics & Atomic Visitor Counter
+async function recordAndGetPageView() {
+    const client = getSupabaseClient();
+    if (!client) return null;
+
+    try {
+        const hasCountedSession = sessionStorage.getItem('visited_session');
+        if (!hasCountedSession) {
+            const { data, error } = await client.rpc('increment_site_views');
+            if (!error && data !== null) {
+                sessionStorage.setItem('visited_session', 'true');
+                return data;
+            }
+        }
+        
+        // Fetch current count without re-incrementing
+        const { data, error } = await client
+            .from('site_metrics')
+            .select('count')
+            .eq('metric_key', 'page_views')
+            .single();
+
+        if (!error && data) {
+            return data.count;
+        }
+    } catch (err) {
+        console.warn('Visitor counter fetch notice:', err);
+    }
+    return null;
+}
+
+async function updateVisitorCounterUI() {
+    const counterEl = document.getElementById('site-visitor-counter');
+    if (!counterEl) return;
+
+    const count = await recordAndGetPageView();
+    if (count !== null && counterEl) {
+        counterEl.textContent = Number(count).toLocaleString();
+    }
+}
+
 // Global Exports
 window.getSupabaseClient = getSupabaseClient;
 window.submitContactMessage = submitContactMessage;
 window.openContactModal = openContactModal;
 window.closeContactModal = closeContactModal;
+window.recordAndGetPageView = recordAndGetPageView;
+window.updateVisitorCounterUI = updateVisitorCounterUI;
+
