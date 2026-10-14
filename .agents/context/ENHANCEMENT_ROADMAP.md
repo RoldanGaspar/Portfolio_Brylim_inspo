@@ -65,25 +65,20 @@ flowchart LR
 
 ---
 
-## 📋 Phase 4: AI Chatbot & Resume Asset Upgrades
+## 📋 Phase 4: AI Chatbot & Resume Asset Upgrades `[COMPLETED ✅ - Commit 7da044c]`
 **Goal:** Upgrade the portfolio's AI assistant from simple keyword matching to an intelligent companion, and make resumes downloadable.
 
 ### Scope of Work
 1. **Intelligent "Ask AI" Assistant Upgrade:**
-   - Current: `ai-bot.js` uses simple `if (query.includes('skill'))` string checks.
-   - Upgrade: Expand knowledge base with verified Cisco NetAcad certificates, technical stack, career interests, and consultation details. Provide smart suggestions and quick-action chips.
-2. **Working ATS Resume Downloader:**
-   - Replace `downloadUrl: "#"` in `data.js` and `#/shop/developer-resume-template`.
-   - Provide a clean, downloadable PDF/DOCX developer resume asset in `assets/resume/`.
-
-### Operating Standards
-* **Rules to Follow:**
-  - [`content-integrity.md`](../rules/content-integrity.md) — Bot answers must never invent achievements, jobs, or metrics.
-  - [`code-style.md`](../rules/code-style.md) — User inputs rendered via `textContent` to prevent XSS.
-* **Skills to Use:**
-  - [`update-content`](../skills/update-content/SKILL.md) — Sync chatbot knowledge with `portfolioData`.
-  - [`craft-ui`](../skills/craft-ui/SKILL.md) — Improve chat drawer responsiveness on mobile screens.
-* **MCP Tools:** `github`, `vercel`.
+   - Grounded chatbot knowledge base strictly in Roldan's verified facts: 10 Cisco NetAcad credentials, AWS Educate Cloud 101, tech stack, featured apps (Tarsi, Kabi, Travel Buddy, AWarden-A), and consulting offerings.
+   - Built interactive in-chat action buttons (direct links to certificates gallery, contact modal prefill, live GitHub profile).
+   - Enforced strict XSS prevention by setting user chat bubbles via `textContent`.
+2. **Downloadable Developer Resume Assets:**
+   - Built a clean, printable ATS developer resume for Roldan at `assets/resume/roldan-gaspar-resume.html` with print-to-PDF styles and clean ATS formatting.
+   - Generated genuine OpenXML `assets/resume/developer-resume-template.docx` for the free shop template download.
+   - Updated `data.js` and `shop-detail.js` so clicking download immediately delivers the file with `download` attribute (eliminating placeholder `#` links).
+   - Added command palette shortcut: *"View / Print Roldan's Resume"*.
+   - Verified live in production at [roldangaspar.vercel.app](https://roldangaspar.vercel.app).
 
 ---
 
