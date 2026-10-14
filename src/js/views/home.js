@@ -4,7 +4,7 @@ function renderHome() {
         <section class="hero reveal" id="home">
             <div class="hero-image-container">
                 <div class="halftone-effect">
-                    <img src="MyPic.png" alt="Roldan Gaspar">
+                    <img src="MyPic.webp" alt="Roldan Gaspar" width="600" height="600" loading="eager">
                 </div>
             </div>
             <div class="hero-text">
@@ -37,7 +37,7 @@ function renderHome() {
                     Right now I'm building cool new stuff every day. I love turning rough ideas into things people actually use.
                 </p>
                 <div class="hero-socials">
-                    <a href="#" class="magnetic">github</a> / <a href="#" class="magnetic">linkedin</a> / <a href="#" class="magnetic">instagram</a> / <a href="#" class="magnetic">email</a>
+                    <a href="https://github.com/RoldanGaspar" target="_blank" rel="noopener noreferrer" class="magnetic">github</a> / <a href="https://www.linkedin.com/in/roldangaspar" target="_blank" rel="noopener noreferrer" class="magnetic">linkedin</a> / <a href="mailto:gaspar26roldan@gmail.com" class="magnetic">email</a>
                 </div>
             </div>
         </section>

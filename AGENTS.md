@@ -35,6 +35,7 @@ Classic `<script>` tags sharing globals (NOT ES modules — the README is wrong 
 4. **Use design tokens**, never hard-coded colors, and every UI change must work in light AND dark theme. See [design-system](.agents/rules/design-system.md).
 5. **Verify before claiming done**: run `node .agents/skills/verify-locally/scripts/check.mjs`. See [verify-locally](.agents/skills/verify-locally/SKILL.md).
 6. **Keep duplicated data in sync** (projects/skills appear in several files). See [DATA_SCHEMA](.agents/context/DATA_SCHEMA.md#duplication-map).
+7. **MCP & Cloud Safety**: Zero unconfirmed deletions on Vercel deployments, DNS, or Supabase tables; never expose secret keys. See [mcp-safety](.agents/rules/mcp-safety.md).
 
 ## Where to look next
 
@@ -43,6 +44,9 @@ Classic `<script>` tags sharing globals (NOT ES modules — the README is wrong 
 | Who Roldan is, audience, tone | [.agents/context/PROJECT_BRIEF.md](.agents/context/PROJECT_BRIEF.md) |
 | How the code fits together | [.agents/context/ARCHITECTURE.md](.agents/context/ARCHITECTURE.md) |
 | Content fields & where each is rendered | [.agents/context/DATA_SCHEMA.md](.agents/context/DATA_SCHEMA.md) |
+| Vercel & Supabase integration architecture | [.agents/context/INTEGRATIONS.md](.agents/context/INTEGRATIONS.md) |
+| Tri-MCP automated development pipeline | [.agents/context/PIPELINE_WORKFLOW.md](.agents/context/PIPELINE_WORKFLOW.md) |
+| Phase-by-phase enhancement roadmap | [.agents/context/ENHANCEMENT_ROADMAP.md](.agents/context/ENHANCEMENT_ROADMAP.md) |
 | Known bugs, debt, placeholder content | [.agents/context/KNOWN_ISSUES.md](.agents/context/KNOWN_ISSUES.md) |
 | Why things are the way they are | [.agents/context/DECISIONS.md](.agents/context/DECISIONS.md) |
 | Step-by-step playbooks | [.agents/skills/](.agents/skills/) |

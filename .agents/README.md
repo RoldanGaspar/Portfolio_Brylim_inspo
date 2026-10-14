@@ -13,6 +13,7 @@ flowchart TD
         R3["production-safety.md · always_on"]
         R4["code-style.md · on demand"]
         R5["design-system.md · on demand"]
+        R6["mcp-safety.md · on demand"]
     end
     A --> S
     subgraph S["skills/ — step-by-step playbooks (loaded when relevant)"]
@@ -23,14 +24,19 @@ flowchart TD
         S5[verify-locally]
         S6[ship-to-production]
         S7[evolve-ai-system]
+        S8[manage-vercel]
+        S9[manage-supabase]
     end
     A --> C
     subgraph C["context/ — WHAT the project is (read on demand)"]
         C1[PROJECT_BRIEF]
         C2[ARCHITECTURE]
         C3[DATA_SCHEMA]
-        C4[KNOWN_ISSUES]
-        C5[DECISIONS]
+        C4[INTEGRATIONS]
+        C5[PIPELINE_WORKFLOW]
+        C6[ENHANCEMENT_ROADMAP]
+        C7[KNOWN_ISSUES]
+        C8[DECISIONS]
     end
 ```
 
@@ -54,7 +60,8 @@ AGENTS.md
 │   ├── content-integrity.md      never fabricate; verified vs unverified content
 │   ├── production-safety.md      main = live; approval gates; commits
 │   ├── code-style.md             JS/CSS/HTML conventions
-│   └── design-system.md          tokens, type, motion, anti-slop checklist
+│   ├── design-system.md          tokens, type, motion, anti-slop checklist
+│   └── mcp-safety.md             Vercel & Supabase safety, non-destructive, secrets isolation
 ├── skills/
 │   ├── add-page/                 new route, all 7 touch points
 │   ├── update-content/           edit content + keep duplicated copies in sync
@@ -63,11 +70,16 @@ AGENTS.md
 │   ├── verify-locally/           check script, local server, browser checklist
 │   │   └── scripts/check.mjs     zero-dependency static checker
 │   ├── ship-to-production/       commit, preview branch, deploy (approval-gated)
-│   └── evolve-ai-system/         how to grow/maintain this folder
+│   ├── evolve-ai-system/         how to grow/maintain this folder
+│   ├── manage-vercel/            deployment inspection, build logs, domain checks
+│   └── manage-supabase/          table schema, RLS policies, frontend connection
 └── context/
     ├── PROJECT_BRIEF.md          owner, audience, goals, voice, feature list
     ├── ARCHITECTURE.md           boot sequence, router, global API, CSS layers
     ├── DATA_SCHEMA.md            every data field + duplication map
+    ├── INTEGRATIONS.md           Vercel & Supabase hosting & database architecture
+    ├── PIPELINE_WORKFLOW.md      Tri-MCP development pipeline & failure recovery
+    ├── ENHANCEMENT_ROADMAP.md    5-phase strategic enhancement plan
     ├── KNOWN_ISSUES.md           audit findings, prioritized
     └── DECISIONS.md              why things are the way they are
 ```
