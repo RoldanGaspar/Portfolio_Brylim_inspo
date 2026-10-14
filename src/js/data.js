@@ -15,7 +15,7 @@ window.portfolioData = {
             ],
             sections: "Education · Work Experience · Projects · Activities · Skills & Certifications",
             footerText: "Just download, open in Word or Google Docs, and edit away — completely free.",
-            downloadUrl: "#"
+            downloadUrl: "assets/resume/developer-resume-template.docx"
         }
     ],
     projects: [

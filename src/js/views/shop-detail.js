@@ -26,7 +26,7 @@ function renderShopDetail(item) {
                     <h2 class="shop-detail-title">${item.title}</h2>
                     <div class="shop-detail-price">${item.price}</div>
                     
-                    <a href="${item.downloadUrl}" class="btn-download magnetic">
+                    <a href="${item.downloadUrl}" download class="btn-download magnetic">
                         Download free <i class="ph ph-download-simple"></i>
                     </a>
                     

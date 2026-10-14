@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roldan Gaspar — Software Engineer Resume</title>
+    <link rel="icon" type="image/svg+xml" href="../../MyPic.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent: #0284c7;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--text);
+            font-family: var(--font-main);
+            line-height: 1.5;
+            padding: 30px 16px;
+        }
+
+        .resume-toolbar {
+            max-width: 820px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toolbar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+
+        .toolbar-btn.primary {
+            background-color: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+        }
+
+        .toolbar-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .resume-page {
+            max-width: 820px;
+            margin: 0 auto;
+            background: var(--bg);
+            padding: 48px 56px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        section {
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: 0.82rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 8px 16px;
+            font-size: 0.86rem;
+        }
+
+        .skills-grid strong {
+            font-size: 0.82rem;
+            color: #334155;
+        }
+
+        .item {
+            margin-bottom: 16px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .item-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .item-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .item-date {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            color: var(--text-muted);
+        }
+
+        ul {
+            list-style: disc;
+            margin-left: 20px;
+            font-size: 0.86rem;
+            color: #334155;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        .cert-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        .cert-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+            }
+            .resume-toolbar {
+                display: none;
+            }
+            .resume-page {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-toolbar">
+        <a href="../../" class="toolbar-btn">&larr; Back to Portfolio</a>
+        <button onclick="window.print()" class="toolbar-btn primary">Print / Save as PDF</button>
+    </div>
+
+    <div class="resume-page">
+        <header>
+            <h1>Roldan Gaspar</h1>
+            <p class="subtitle">Software Engineer · AI · Cybersecurity Enthusiast</p>
+            <div class="contact-info">
+                <span>📍 Pampanga, Philippines</span>
+                <span>•</span>
+                <a href="mailto:gaspar26roldan@gmail.com">gaspar26roldan@gmail.com</a>
+                <span>•</span>
+                <a href="https://github.com/RoldanGaspar" target="_blank">github.com/RoldanGaspar</a>
+                <span>•</span>
+                <a href="https://roldangaspar.vercel.app" target="_blank">roldangaspar.vercel.app</a>
+            </div>
+        </header>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <strong>Languages:</strong>
+                <span>TypeScript, JavaScript (ES6+), Python, C#, Swift, SQL, HTML5, CSS3</span>
+                <strong>Frameworks/UI:</strong>
+                <span>React, Next.js, Node.js, Express, FastAPI, Tailwind CSS, Vanilla JS Engine</span>
+                <strong>AI &amp; Data:</strong>
+                <span>OpenAI APIs, Anthropic Claude, LangChain, PyTorch, RAG Pipelines, Vector Search</span>
+                <strong>Cloud &amp; DevOps:</strong>
+                <span>Supabase, PostgreSQL, AWS, Docker, Vercel, Git &amp; GitHub Actions</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Featured Projects</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">Personal Developer Portfolio SPA</span>
+                    <span class="item-date">2026</span>
+                </div>
+                <div class="item-sub">Vanilla JavaScript · Supabase PostgreSQL · Vercel · Web Audio</div>
+                <ul>
+                    <li>Designed an ultra-fast, zero-dependency SPA with custom hash routing, token-based design system, and dark/light themes.</li>
+                    <li>Integrated Supabase for dynamic contact inquiries with PostgreSQL Row Level Security (RLS) and atomic page-view analytics.</li>
+                    <li>Built real-time GitHub integration featuring public contribution calendar and live synced repository cards.</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">Tarsi — Budget &amp; Expense Tracker</span>
+                    <span class="item-date">2025 – 2026</span>
+                </div>
+                <div class="item-sub">Offline-First Mobile Architecture · Financial Data Encryption</div>
+                <ul>
+                    <li>Developed an intuitive personal finance application designed for sub-second transaction logging and privacy preservation.</li>
+                    <li>Featured on the App Store as an App Store Hidden Gem in the Philippines.</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">Security &amp; Management Tools (Open-Source)</span>
+                    <span class="item-date">2026</span>
+                </div>
+                <div class="item-sub">AWarden-A (TypeScript) · POS &amp; Inventory (Python) · Pet Hub Payroll (TypeScript)</div>
+                <ul>
+                    <li>Built AppLocker policy automation and credential tooling for secure enterprise administration.</li>
+                    <li>Engineered desktop POS transaction tracking and veterinary clinic payroll computation modules.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Verified Certifications &amp; Credentials</h2>
+            <div class="cert-list">
+                <div class="cert-entry">
+                    <span>• Cybersecurity Essentials</span>
+                    <span class="item-date">Cisco NetAcad</span>
+                </div>
+                <div class="cert-entry">
+                    <span>• Network Security</span>
+                    <span class="item-date">Cisco NetAcad</span>
+                </div>
+                <div class="cert-entry">
+                    <span>• Python Essentials 1 &amp; 2</span>
+                    <span class="item-date">Cisco NetAcad</span>
+                </div>
+                <div class="cert-entry">
+                    <span>• JavaScript Essentials 1</span>
+                    <span class="item-date">Cisco NetAcad</span>
+                </div>
+                <div class="cert-entry">
+                    <span>• Cloud 101</span>
+                    <span class="item-date">AWS Educate</span>
+                </div>
+                <div class="cert-entry">
+                    <span>• Ethical Hacker &amp; Defense</span>
+                    <span class="item-date">Cisco NetAcad</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
