@@ -19,6 +19,7 @@ const commandItems = [
     { title: "Play Ambient Lo-Fi Beats", type: "Audio", icon: "ph-headphones", action: "playLofi" },
     { title: "Play Gentle Rain Soundscape", type: "Audio", icon: "ph-cloud-rain", action: "playRain" },
     { title: "Mute Soundscape", type: "Audio", icon: "ph-speaker-slash", action: "stopAudio" },
+    { title: "Send a Message / Contact Roldan", type: "Action", icon: "ph-paper-plane-tilt", action: "openContact" },
     { title: "Launch 2D Dev Lounge Mini-Game", type: "Action", icon: "ph-game-controller", action: "launchGame" }
 ];
 
@@ -191,6 +192,8 @@ function executeCmdItem(item) {
         if (window.setSoundscape) window.setSoundscape('rain');
     } else if (item.action === 'stopAudio') {
         if (window.stopSoundscape) window.stopSoundscape();
+    } else if (item.action === 'openContact') {
+        if (window.openContactModal) window.openContactModal('Hiring');
     } else if (item.action === 'launchGame') {
         if (window.openCommunityModal) openCommunityModal();
     }

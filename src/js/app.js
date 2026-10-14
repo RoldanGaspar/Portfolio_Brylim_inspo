@@ -42,4 +42,29 @@ window.addEventListener('DOMContentLoaded', () => {
             if (window.playSound) playSound('click');
         });
     }
+
+    // Contact Modal Trigger
+    const contactBtn = document.getElementById('open-contact-modal-btn');
+    if (contactBtn) {
+        contactBtn.addEventListener('click', () => {
+            if (window.playSound) playSound('click');
+            if (window.openContactModal) window.openContactModal('Hiring / Project');
+            if (sidebar && sidebar.classList.contains('mobile-open')) {
+                sidebar.classList.remove('mobile-open');
+                const menuBtnIcon = document.querySelector('#mobile-menu-toggle i');
+                if (menuBtnIcon) menuBtnIcon.className = 'ph ph-list';
+            }
+        });
+    }
+
+    // Delegated Contact Triggers for dynamically rendered views
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('[data-open-contact]');
+        if (trigger) {
+            e.preventDefault();
+            const inquiry = trigger.getAttribute('data-open-contact') || 'General Inquiry';
+            if (window.playSound) playSound('click');
+            if (window.openContactModal) window.openContactModal(inquiry);
+        }
+    });
 });
