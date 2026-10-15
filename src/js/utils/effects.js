@@ -39,6 +39,47 @@ function initProjectsStack() {
 
     const cards = Array.from(deck.querySelectorAll('.project-stack-card'));
 
+    function rotateDeck(direction) {
+        const currentCenter = deck.querySelector('.project-stack-card.pos-center');
+        const leftCard = deck.querySelector('.project-stack-card.pos-left');
+        const rightCard = deck.querySelector('.project-stack-card.pos-right');
+        if (!currentCenter) return;
+
+        if (direction === 'next' || direction === 'left') {
+            // Swipe left -> bring right card to front
+            if (rightCard) {
+                currentCenter.classList.remove('pos-center');
+                currentCenter.classList.add('pos-left');
+
+                if (leftCard) {
+                    leftCard.classList.remove('pos-left');
+                    leftCard.classList.add('pos-right');
+                }
+
+                rightCard.classList.remove('pos-right');
+                rightCard.classList.add('pos-center');
+
+                if (window.playSound) window.playSound('open');
+            }
+        } else if (direction === 'prev' || direction === 'right') {
+            // Swipe right -> bring left card to front
+            if (leftCard) {
+                currentCenter.classList.remove('pos-center');
+                currentCenter.classList.add('pos-right');
+
+                if (rightCard) {
+                    rightCard.classList.remove('pos-right');
+                    rightCard.classList.add('pos-left');
+                }
+
+                leftCard.classList.remove('pos-left');
+                leftCard.classList.add('pos-center');
+
+                if (window.playSound) window.playSound('open');
+            }
+        }
+    }
+
     cards.forEach(card => {
         card.addEventListener('click', (e) => {
             if (card.classList.contains('pos-center')) {
@@ -65,6 +106,36 @@ function initProjectsStack() {
             }
         });
     });
+
+    // Touch gesture swipe support for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+
+    deck.addEventListener('touchstart', (e) => {
+        if (!e.touches || e.touches.length === 0) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+    }, { passive: true });
+
+    deck.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        const timeDiff = Date.now() - touchStartTime;
+
+        // Valid swipe: horizontal travel >= 40px, mostly horizontal, under 600ms
+        if (Math.abs(deltaX) >= 40 && Math.abs(deltaX) > Math.abs(deltaY) && timeDiff < 600) {
+            if (deltaX < 0) {
+                rotateDeck('left');
+            } else {
+                rotateDeck('right');
+            }
+        }
+    }, { passive: true });
 }
 
 function initVerifiedBadgeConfetti() {

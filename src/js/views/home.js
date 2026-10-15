@@ -152,6 +152,10 @@ function renderHome() {
                     </div>
                 </div>
             </div>
+            <div class="projects-stack-hint">
+                <i class="ph-bold ph-hand-swipe-left"></i>
+                <span>Swipe or tap cards to cycle &bull; Tap front card to open</span>
+            </div>
         </section>
 
         <!-- Experience Section -->
