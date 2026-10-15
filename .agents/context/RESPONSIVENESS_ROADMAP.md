@@ -8,11 +8,11 @@
 
 ```mermaid
 flowchart LR
-    P1["Phase 1<br/><b>Shell & Safe Areas</b><br/>• 100dvh & iOS Safe Area<br/>• Mobile Drawer Navigation<br/>• Touch Target Sizing (44px)"]
-    --> P2["Phase 2<br/><b>Hero & Projects Stack</b><br/>• Fluid clamp() Typography<br/>• Neon Tagline Wrapping<br/>• 3D Stack Deck Responsive Fit"]
-    --> P3["Phase 3<br/><b>Modals & AI Drawer</b><br/>• Contact Bottom-Sheet<br/>• Guestbook Mobile Split<br/>• AI Chat Drawer Full-Width"]
-    --> P4["Phase 4<br/><b>Audio & Game Canvases</b><br/>• Fluid Audio Visualizer Canvas<br/>• Responsive 2D Game & D-Pad<br/>• Cassette Deck Mobile Touch"]
-    --> P5["Phase 5<br/><b>Grids & Scroll Polish</b><br/>• Fluid 1-to-2 Column Grids<br/>• GitHub Calendar Scroll Hint<br/>• Shop & Project Detail Stacking"]
+    P1["Phase 1 ✅<br/><b>Shell & Safe Areas</b><br/>• 100dvh & iOS Safe Area<br/>• Mobile Drawer Navigation<br/>• Touch Target Sizing (44px)"]
+    --> P2["Phase 2 ✅<br/><b>Hero & Projects Stack</b><br/>• Fluid clamp() Typography<br/>• Neon Tagline Wrapping<br/>• 3D Stack Deck Responsive Fit"]
+    --> P3["Phase 3 ✅<br/><b>Modals & AI Drawer</b><br/>• Contact Bottom-Sheet<br/>• Guestbook Mobile Split<br/>• AI Chat Drawer Full-Width"]
+    --> P4["Phase 4 ✅<br/><b>Audio & Game Canvases</b><br/>• Fluid Audio Visualizer Canvas<br/>• Responsive 2D Game & D-Pad<br/>• Cassette Deck Mobile Touch"]
+    --> P5["Phase 5 ✅<br/><b>Grids & Scroll Polish</b><br/>• Fluid 1-to-2 Column Grids<br/>• GitHub Calendar Scroll Hint<br/>• Shop & Project Detail Stacking"]
 ```
 
 ---
@@ -80,16 +80,17 @@ flowchart LR
 
 ---
 
-## 📋 Phase 5: Content Grids, Detail Views & GitHub Scroll Hint
+## 📋 Phase 5: Content Grids, Detail Views & GitHub Scroll Hint `[COMPLETED ✅ - Commit 2b9a808]`
 **Goal:** Refine all multi-card galleries, detail pages, and horizontal overflow sections.
 
 ### Scope of Work
 1. **Fluid Gallery Grids:**
-   - Update `.certs-full-grid`, `.shop-grid`, `.recs-full-grid`, `.gear-grid`, `.consulting-grid` to smoothly adapt from 3 columns (desktop) to 2 columns (tablet) and 1 column (mobile).
+   - Implemented progressive 3-column (desktop `> 992px`), 2-column (tablet `600px–992px`), and 1-column (mobile `< 600px`) grid transitions for `.certs-full-grid`, `.shop-grid`, `.recs-full-grid`, `.gear-grid`, `.cert-grid`, and `.consulting-grid`.
 2. **GitHub Contribution Calendar Mobile Indicator:**
-   - Add a subtle horizontal scroll hint with gradient fade indicator on `.github-graph-container` so mobile users know they can swipe through the 52 weeks.
+   - Rendered animated `.github-scroll-hint` with pulsing arrow indicator below the calendar to guide mobile users to swipe through 365 days of activity.
 3. **Shop & Project Detail Stacking:**
-   - Ensure sticky meta sidebars in `#/projects/:id` and `#/shop/:id` un-stick and stack gracefully above/below the main content on mobile screens.
+   - Stacked `.project-detail-header` vertically on screens `< 768px` and converted `.project-stats-bar` into a fluid auto-fit grid (`repeat(auto-fit, minmax(90px, 1fr))`).
+   - Gracefully un-stuck `.shop-detail-meta` on screens `< 600px` for natural vertical reading order.
 
 ---
 
