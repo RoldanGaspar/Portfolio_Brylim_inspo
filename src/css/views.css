@@ -653,6 +653,35 @@
     animation: pulse-green 2s infinite;
 }
 
+.github-scroll-hint {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .github-scroll-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-family: var(--mono-font);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        margin-top: 10px;
+        user-select: none;
+    }
+
+    .github-scroll-hint i {
+        font-size: 0.95rem;
+        color: #10b981;
+        animation: pulseArrows 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseArrows {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.18); }
+    }
+}
+
 /* Featured Public Repositories Section */
 .github-repos-section {
     margin-top: 26px;
@@ -2383,7 +2412,8 @@
     .rec-grid,
     .consulting-grid,
     .resource-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
     }
 
     .shop-detail-header {
@@ -2395,12 +2425,14 @@
         font-size: 1.6rem;
     }
 
-    .gear-grid,
-    .cert-grid,
-    .rec-grid,
-    .consulting-grid,
-    .resource-grid {
-        grid-template-columns: 1fr;
+    .project-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .project-header-left {
+        width: 100%;
     }
 
     .contact-card {
@@ -2468,6 +2500,40 @@
 
     .transport-buttons {
         justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .shop-grid,
+    .projects-gallery-grid,
+    .certs-full-grid,
+    .recs-full-grid,
+    .gear-grid,
+    .cert-grid,
+    .rec-grid,
+    .consulting-grid,
+    .resource-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .project-detail-title {
+        font-size: clamp(1.4rem, 5vw, 1.8rem);
+    }
+
+    .project-stats-bar {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .shop-detail-meta {
+        position: static;
+        width: 100%;
+    }
+
+    .shop-detail-header {
+        gap: 18px;
     }
 }
 

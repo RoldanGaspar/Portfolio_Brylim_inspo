@@ -99,6 +99,10 @@ function generateGithubGraph() {
                 </p>
                 <span class="github-live-badge"><i class="ph-fill ph-circle"></i> live synced</span>
             </div>
+            <div class="github-scroll-hint">
+                <i class="ph-bold ph-arrows-horizontal"></i>
+                <span>Swipe horizontally to view full activity</span>
+            </div>
         </div>
 
         <div class="github-repos-section">
