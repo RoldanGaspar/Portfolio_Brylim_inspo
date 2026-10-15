@@ -27,6 +27,15 @@ function initAIBot() {
         });
     }
 
+    // Dismiss drawer when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!drawer.classList.contains('active')) return;
+        if (!drawer.contains(e.target) && !triggerBtn.contains(e.target)) {
+            drawer.classList.remove('active');
+            if (window.playSound) window.playSound('close');
+        }
+    });
+
     // Delegated Quick Chip Clicks
     messagesEl.addEventListener('click', (e) => {
         const chip = e.target.closest('.chip-btn');
