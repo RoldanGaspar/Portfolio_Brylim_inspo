@@ -47,6 +47,7 @@ Classic `<script>` tags sharing globals (NOT ES modules — the README is wrong 
 | Vercel & Supabase integration architecture | [.agents/context/INTEGRATIONS.md](.agents/context/INTEGRATIONS.md) |
 | Tri-MCP automated development pipeline | [.agents/context/PIPELINE_WORKFLOW.md](.agents/context/PIPELINE_WORKFLOW.md) |
 | Phase-by-phase enhancement roadmap | [.agents/context/ENHANCEMENT_ROADMAP.md](.agents/context/ENHANCEMENT_ROADMAP.md) |
+| Phase-by-phase responsiveness roadmap | [.agents/context/RESPONSIVENESS_ROADMAP.md](.agents/context/RESPONSIVENESS_ROADMAP.md) |
 | Known bugs, debt, placeholder content | [.agents/context/KNOWN_ISSUES.md](.agents/context/KNOWN_ISSUES.md) |
 | Why things are the way they are | [.agents/context/DECISIONS.md](.agents/context/DECISIONS.md) |
 | Step-by-step playbooks | [.agents/skills/](.agents/skills/) |
