@@ -66,16 +66,17 @@ flowchart LR
 
 ---
 
-## 📋 Phase 4: Audio Studio & 2D Mini-Game Canvas Scaling
+## 📋 Phase 4: Audio Studio & 2D Mini-Game Canvas Scaling `[COMPLETED ✅ - Commit ce31fb9]`
 **Goal:** Ensure canvas-driven experiences resize fluidly without horizontal overflow or pixel distortion.
 
 ### Scope of Work
 1. **Responsive Audio Visualizer Canvas (`#/audio`):**
-   - Make `#audio-visualizer-canvas` fluidly fill the tape bridge width (`width: 100%`) rather than fixed 340px.
-   - Polish mobile layout of the Hi-Fi cassette deck, Pomodoro widget, and volume slider.
+   - In `audio-lounge.js`, dynamically calibrated `#audio-visualizer-canvas` resolution to the exact container width on mount and on window resize.
+   - Polished mobile layout of the Hi-Fi cassette deck in `views.css` across 768px, 480px, and 380px with scaled tape reels (52px -> 40px -> 34px), compact padding, and touch-friendly controls.
 2. **2D Dev Lounge Canvas Scaling:**
-   - In `modals.js`, dynamically calculate `#game-canvas` width based on viewport width (`Math.min(600, window.innerWidth - 40)`).
-   - Ensure the mobile on-screen D-pad is comfortably reachable with thumbs.
+   - In `modals.js`, dynamically calculate target canvas dimensions (`Math.min(600, Math.max(280, maxAvailWidth))`) maintaining a pixel-perfect 15:8 aspect ratio.
+   - Updated game furniture props (`drawProp`) and avatar bounds to scale proportionally with canvas dimensions.
+   - Enlarged mobile D-pad buttons to WCAG 44×44px with touchcancel handling for responsive thumb movement.
 
 ---
 
