@@ -17,18 +17,20 @@ flowchart LR
 
 ---
 
-## 📋 Phase 1: App Shell, Mobile Drawer & Safe Areas
+## 📋 Phase 1: App Shell, Mobile Drawer & Safe Areas `[COMPLETED ✅ - Commit e55b3fc]`
 **Goal:** Perfect the core mobile frame, prevent content clipping under browser toolbars/home indicators, and ensure accessible touch targets.
 
 ### Scope of Work
-1. **Dynamic Viewport & Safe Area Tokens:**
-   - Define `--safe-top: env(safe-area-inset-top, 0px);` and `--safe-bottom: env(safe-area-inset-bottom, 0px);` in `tokens.css`.
-   - Update `.sidebar` mobile drawer to use `height: calc(100dvh - 60px)` with `padding-bottom: calc(24px + var(--safe-bottom))` so theme and contact buttons are never clipped.
-2. **Smooth Drawer Scrolling & Hamburger Menu:**
-   - Add `-webkit-overflow-scrolling: touch;` and momentum scrolling to the mobile sidebar drawer.
-   - Clean up hamburger transition animation and backdrop blur.
+1. **Dynamic Viewport & Safe Area Tokens (`tokens.css`):**
+   - Defined `--safe-top`, `--safe-bottom`, `--safe-left`, and `--safe-right` using standard `env(...)` insets.
+   - Upgraded mobile header to account for top notch/Dynamic Island (`height: calc(60px + var(--safe-top))`).
+   - Upgraded mobile drawer height to `calc(100dvh - 60px - var(--safe-top))` with bottom safe area padding `calc(28px + var(--safe-bottom))` so theme and contact buttons are never clipped.
+2. **Smooth Drawer Scrolling & Momentum:**
+   - Added `-webkit-overflow-scrolling: touch;` and `overscroll-behavior: contain;` for buttery smooth mobile scrolling.
+   - Upgraded backdrop blur to `blur(24px)`.
 3. **Touch Targets (44px WCAG Guideline):**
-   - Ensure the mobile menu button, theme toggles, sound toggle, and sidebar links have comfortable 44x44px touch targets.
+   - Configured `#mobile-menu-toggle`, `.theme-btn`, `.sound-btn`, `.sidebar-contact-btn`, and navigation links with minimum 44x44px touch targets.
+   - Verified live in production at [roldangaspar.vercel.app](https://roldangaspar.vercel.app).
 
 ---
 
