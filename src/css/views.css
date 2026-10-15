@@ -2443,6 +2443,32 @@
     .achievement-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    /* Audio Studio & Cassette Deck Tablet Scaling */
+    .cassette-deck-card {
+        padding: 22px 18px;
+        border-radius: 20px;
+        gap: 18px;
+    }
+
+    .cassette-window {
+        padding: 14px 16px;
+    }
+
+    .tape-reel {
+        width: 52px;
+        height: 52px;
+    }
+
+    .cassette-controls-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .transport-buttons {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2499,6 +2525,71 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+
+    .cert-card-full {
+        padding: 24px;
+    }
+
+    .cert-card-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cert-date-badge {
+        text-align: left;
+    }
+
+    .achievement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Audio Studio & Cassette Deck Mobile Polish */
+    .cassette-deck-card {
+        padding: 16px 12px;
+        border-radius: 16px;
+        gap: 14px;
+    }
+
+    .cassette-window {
+        padding: 8px 10px;
+        gap: 6px;
+        border-radius: 12px;
+    }
+
+    .tape-reel {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+    }
+
+    .reel-spoke {
+        width: 10px;
+        height: 10px;
+        box-shadow: 0 0 0 3px #475569;
+    }
+
+    .track-title-heading {
+        font-size: clamp(1.15rem, 4.5vw, 1.4rem);
+    }
+
+    .track-artwork-banner {
+        height: 120px;
+    }
+
+    .cassette-controls-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .deck-volume-widget {
+        padding: 4px 12px;
+        gap: 8px;
+    }
+
+    #deck-volume-slider {
+        width: 80px;
+    }
 }
 
 @media (max-width: 380px) {
@@ -2549,23 +2640,15 @@
     .projects-stack-hint {
         font-size: 0.72rem;
     }
-}
 
-    .cert-card-full {
-        padding: 24px;
+    .tape-reel {
+        width: 34px;
+        height: 34px;
+        border-width: 2px;
     }
 
-    .cert-card-top {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .cert-date-badge {
-        text-align: left;
-    }
-
-    .achievement-grid {
-        grid-template-columns: 1fr;
+    .cassette-window {
+        padding: 6px 8px;
     }
 }
 

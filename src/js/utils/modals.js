@@ -279,12 +279,21 @@ function initModals() {
         const chatInput = document.getElementById('game-chat-input');
         const sendBtn = document.getElementById('game-send-btn');
 
+        // Dynamic responsive canvas sizing
+        const modalArea = canvas.closest('.modal-content-area');
+        const maxAvailWidth = modalArea ? (modalArea.clientWidth - 4) : (window.innerWidth - 48);
+        const targetWidth = Math.min(600, Math.max(280, maxAvailWidth));
+        const targetHeight = Math.round(targetWidth * (320 / 600));
+
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
         let animationFrameId = null;
 
         const player = {
             name: "Roldan (You)",
-            x: 280,
-            y: 160,
+            x: Math.round(targetWidth / 2),
+            y: Math.round(targetHeight / 2),
             radius: 12,
             color: "#00f2fe",
             speed: 3.2,
@@ -295,10 +304,10 @@ function initModals() {
         const keys = {};
 
         const aiAvatars = [
-            { name: "Alex", x: 100, y: 80, color: "#a855f7", dx: 0.8, dy: 0.5, message: "GenAI is crazy! 🚀", msgTime: Date.now() + 3000 },
-            { name: "Sophia", x: 450, y: 120, color: "#ec4899", dx: -0.6, dy: 0.4, message: "Deploying to prod... 🤞", msgTime: Date.now() + 5000 },
-            { name: "Kenji", x: 180, y: 240, color: "#10b981", dx: 0.5, dy: -0.7, message: "Love this 2D mini-game!", msgTime: Date.now() + 2000 },
-            { name: "Elena", x: 400, y: 220, color: "#f59e0b", dx: -0.4, dy: -0.5, message: "Coffee breaks make code faster ☕", msgTime: Date.now() + 4000 }
+            { name: "Alex", x: Math.round(targetWidth * 0.2), y: Math.round(targetHeight * 0.25), color: "#a855f7", dx: 0.8, dy: 0.5, message: "GenAI is crazy! 🚀", msgTime: Date.now() + 3000 },
+            { name: "Sophia", x: Math.round(targetWidth * 0.75), y: Math.round(targetHeight * 0.35), color: "#ec4899", dx: -0.6, dy: 0.4, message: "Deploying to prod... 🤞", msgTime: Date.now() + 5000 },
+            { name: "Kenji", x: Math.round(targetWidth * 0.3), y: Math.round(targetHeight * 0.75), color: "#10b981", dx: 0.5, dy: -0.7, message: "Love this 2D mini-game!", msgTime: Date.now() + 2000 },
+            { name: "Elena", x: Math.round(targetWidth * 0.65), y: Math.round(targetHeight * 0.7), color: "#f59e0b", dx: -0.4, dy: -0.5, message: "Coffee breaks make code faster ☕", msgTime: Date.now() + 4000 }
         ];
 
         const randomQuotes = [
@@ -339,8 +348,9 @@ function initModals() {
             };
             btn.addEventListener('mousedown', () => setDir(true));
             btn.addEventListener('mouseup', () => setDir(false));
-            btn.addEventListener('touchstart', (e) => { e.preventDefault(); setDir(true); });
-            btn.addEventListener('touchend', (e) => { e.preventDefault(); setDir(false); });
+            btn.addEventListener('touchstart', (e) => { e.preventDefault(); setDir(true); }, { passive: false });
+            btn.addEventListener('touchend', (e) => { e.preventDefault(); setDir(false); }, { passive: false });
+            btn.addEventListener('touchcancel', (e) => { e.preventDefault(); setDir(false); }, { passive: false });
         });
 
         function sendMessage() {
@@ -438,10 +448,10 @@ function initModals() {
                 ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
             }
 
-            drawProp(120, 60, "💻 Workspace", "#1e293b");
-            drawProp(480, 60, "🛋️ Lounge", "#334155");
-            drawProp(80, 260, "☕ Coffee Bar", "#1e293b");
-            drawProp(480, 260, "🕹️ Arcade", "#334155");
+            drawProp(Math.round(canvas.width * 0.2), Math.round(canvas.height * 0.2), "💻 Workspace", "#1e293b");
+            drawProp(Math.round(canvas.width * 0.8), Math.round(canvas.height * 0.2), "🛋️ Lounge", "#334155");
+            drawProp(Math.round(canvas.width * 0.2), Math.round(canvas.height * 0.8), "☕ Coffee Bar", "#1e293b");
+            drawProp(Math.round(canvas.width * 0.8), Math.round(canvas.height * 0.8), "🕹️ Arcade", "#334155");
 
             aiAvatars.forEach(ai => {
                 ai.x += ai.dx;

@@ -459,6 +459,15 @@ function initCanvasVisualizer() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
+    function syncCanvasWidth() {
+        if (!canvas || !canvas.parentElement) return;
+        const availableWidth = canvas.parentElement.clientWidth;
+        if (availableWidth > 0) {
+            canvas.width = Math.min(340, Math.max(120, availableWidth));
+        }
+    }
+    syncCanvasWidth();
+
     let particleArray = [];
     for (let p = 0; p < 24; p++) {
         particleArray.push({
@@ -469,6 +478,15 @@ function initCanvasVisualizer() {
             vy: (Math.random() - 0.5) * 1.8
         });
     }
+
+    const resizeHandler = () => {
+        if (document.getElementById('audio-visualizer-canvas')) {
+            syncCanvasWidth();
+        } else {
+            window.removeEventListener('resize', resizeHandler);
+        }
+    };
+    window.addEventListener('resize', resizeHandler, { passive: true });
 
     function renderFrame() {
         if (!document.getElementById('audio-visualizer-canvas')) return;
