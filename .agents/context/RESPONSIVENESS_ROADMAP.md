@@ -50,18 +50,19 @@ flowchart LR
 
 ---
 
-## 📋 Phase 3: Interactive Modals & AI Chatbot Drawer
+## 📋 Phase 3: Interactive Modals & AI Chatbot Drawer `[COMPLETED ✅ - Commit 14e7e43]`
 **Goal:** Transform desktop-centric popups into natural mobile bottom-sheets and responsive overlay panels.
 
 ### Scope of Work
 1. **Contact Modal & Guestbook Modal Mobile Bottom-Sheet:**
-   - On screens `< 600px`, anchor `.contact-modal-card` and `.guestbook-modal-card` to the bottom of the viewport with rounded top corners (`border-radius: 20px 20px 0 0`) and `max-height: 90dvh`.
-   - Stack guestbook form and notes feed vertically with smooth touch scrolling.
+   - On screens `≤ 600px`, anchored `.contact-modal-card` and `.guestbook-modal-card` to the bottom with rounded top corners (`border-radius: 20px 20px 0 0`), drag handle indicators, and `max-height: calc(90dvh - var(--safe-top))`.
+   - Added bottom safe area padding (`calc(24px + var(--safe-bottom))`) and momentum touch scrolling.
 2. **AI Chatbot Drawer Responsiveness:**
-   - On screens `< 480px`, expand `.ai-chat-drawer` to full width (`width: 100%; right: 0; bottom: 0; border-radius: 20px 20px 0 0; height: 85dvh;`).
-   - Prevent mobile on-screen keyboard from breaking drawer layout.
+   - On screens `≤ 480px`, converted `.ai-chat-drawer` into a fixed slide-up sheet (`100vw` wide, `85dvh` height, drag handle indicator, safe area bottom padding on footer input).
+   - Added dismiss-on-outside-click listener in `ai-bot.js` for seamless closing.
+   - Enforced 16px font size on `#ai-user-input` to prevent iOS Safari auto-zoom.
 3. **Terminal & Typing Modals:**
-   - Adjust terminal font size and horizontal padding for easy reading on phones.
+   - Reduced `.modal-content-area` padding to `18px 12px` and scaled `.terminal-modal h2` using `clamp(1.4rem, 5vw, 2.2rem)`.
 
 ---
 
