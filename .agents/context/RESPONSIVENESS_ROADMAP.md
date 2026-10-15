@@ -34,18 +34,19 @@ flowchart LR
 
 ---
 
-## 📋 Phase 2: Hero Section, Neon Badges & Projects Stack
+## 📋 Phase 2: Hero Section, Neon Badges & Projects Stack `[COMPLETED ✅ - Commit 417f20b]`
 **Goal:** Ensure the portfolio homepage looks crisp, proportional, and unclipped on narrow mobile viewports (320px–400px).
 
 ### Scope of Work
 1. **Fluid Hero Typography & Image:**
-   - Use CSS `clamp(1.6rem, 5vw, 2.4rem)` for `.hero-title` to prevent awkward word wrapping.
-   - Scale `.hero-image-container` fluidly on ultra-compact screens.
+   - Implemented CSS `clamp(1.6rem, 5vw, 2.5rem)` for `.hero-title` and `clamp(1.6rem, 4.5vw, 2.5rem)` for `.page-header h2`.
+   - Scaled `.hero-image-container` fluidly with `max-width: 75vw` and `aspect-ratio: 22/25` for narrow displays.
 2. **Neon Badge Wrapping:**
-   - Make `.hero-neon-tagline` wrap cleanly with consistent 8px gaps and centered alignment on mobile.
-3. **Projects Stack Deck Mobile Fit:**
-   - Optimize `.projects-stack-container` on `< 400px` phones: adjust `translateX(-50px)` / `translateX(50px)` and scale so side cards don't create horizontal page spillover.
-   - Add a subtle swipe indicator / visual card hint.
+   - Perfected `.hero-neon-tagline` wrapping with centered alignment and tight 6px–8px gap on mobile.
+3. **Projects Stack Deck Mobile Fit & Touch Gestures:**
+   - Reduced side card horizontal displacement (`translateX(-32px)` / `translateX(32px)` at 480px; `translateX(-18px)` / `translateX(18px)` at 380px) to completely eliminate horizontal viewport overflow.
+   - Added passive touch listeners (`touchstart`, `touchend`) to `#projects-stack-deck` supporting natural mobile swipe gestures to rotate cards with sound feedback.
+   - Rendered animated `.projects-stack-hint` below deck guiding mobile visitors to swipe or tap cards.
 
 ---
 
