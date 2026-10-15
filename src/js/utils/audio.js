@@ -26,7 +26,8 @@ window.audioPlaylist = [
     { id: "rain-coffee", title: "Late Night Rain & Coffee", genre: "Ambient Soundscape", bpm: "65 BPM", duration: "∞ Loop", desc: "Cozy white noise rain filtered through warm coffee shop ambience.", icon: "ph-cloud-rain", accent: "#60a5fa", tag: "AMBIENT RAIN" },
     { id: "synthwave", title: "Cyberpunk Synthwave Pulse", genre: "Electronic / Synth", bpm: "120 BPM", duration: "∞ Loop", desc: "Energetic synth basslines for hackathons and fast shipping.", icon: "ph-lightning", accent: "#c084fc", tag: "SYNTHWAVE" },
     { id: "piano-pads", title: "Space Echo Piano", genre: "Ambient / Classical", bpm: "72 BPM", duration: "∞ Loop", desc: "Minimalist ambient piano with space echo delay.", icon: "ph-sparkle", accent: "#f472b6", tag: "SPACE PIANO" },
-    { id: "keyboard-asmr", title: "Cherry MX Blue Keyboard ASMR", genre: "Foley / ASMR", bpm: "100 BPM", duration: "∞ Loop", desc: "Satisfying mechanical typing cadence.", icon: "ph-keyboard", accent: "#34d399", tag: "ASMR FOLEY" }
+    { id: "keyboard-asmr", title: "Cherry MX Blue Keyboard ASMR", genre: "Foley / ASMR", bpm: "100 BPM", duration: "∞ Loop", desc: "Satisfying mechanical typing cadence.", icon: "ph-keyboard", accent: "#34d399", tag: "ASMR FOLEY" },
+    { id: "binaural-flow", title: "40Hz Deep Focus Binaural Beats", genre: "Binaural / Brainwave", bpm: "40 Hz", duration: "∞ Loop", desc: "Pure Gamma wave binaural tone for peak flow-state concentration.", icon: "ph-brain", accent: "#2dd4bf", tag: "FLOW STATE" }
 ];
 
 function initAudioContext() {
@@ -245,6 +246,12 @@ function setSoundscape(mode) {
         if (icon) icon.className = 'ph-fill ph-speaker-high';
         startKeyboardASMR();
         showAudioToast('⌨️ Playing Cherry MX Blue Keyboard ASMR');
+    } else if (mode === 'binaural-flow') {
+        activeTrackId = 'binaural-flow';
+        isPlayingTrack = true;
+        if (icon) icon.className = 'ph-fill ph-speaker-high';
+        startBinauralSoundscape();
+        showAudioToast('🧠 Playing 40Hz Deep Focus Binaural Beats');
     } else {
         activeTrackId = null;
         isPlayingTrack = false;
@@ -467,6 +474,55 @@ function startKeyboardASMR() {
     }
 
     typeClick();
+}
+
+function startBinauralSoundscape() {
+    ambientGain = audioCtx.createGain();
+    ambientGain.gain.setValueAtTime(ambientVolume * 0.7, audioCtx.currentTime);
+    if (analyserNode) ambientGain.connect(analyserNode);
+    ambientGain.connect(audioCtx.destination);
+
+    // Dual detuned oscillators: 200 Hz & 240 Hz create a 40 Hz Gamma wave binaural tone
+    const oscLeft = audioCtx.createOscillator();
+    const oscRight = audioCtx.createOscillator();
+    const subDrone = audioCtx.createOscillator();
+
+    const gainLeft = audioCtx.createGain();
+    const gainRight = audioCtx.createGain();
+    const gainSub = audioCtx.createGain();
+
+    oscLeft.type = 'sine';
+    oscLeft.frequency.setValueAtTime(200, audioCtx.currentTime);
+
+    oscRight.type = 'sine';
+    oscRight.frequency.setValueAtTime(240, audioCtx.currentTime);
+
+    subDrone.type = 'triangle';
+    subDrone.frequency.setValueAtTime(100, audioCtx.currentTime);
+
+    gainLeft.gain.setValueAtTime(0.25, audioCtx.currentTime);
+    gainRight.gain.setValueAtTime(0.25, audioCtx.currentTime);
+    gainSub.gain.setValueAtTime(0.12, audioCtx.currentTime);
+
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 400;
+
+    subDrone.connect(filter);
+    filter.connect(gainSub);
+    gainSub.connect(ambientGain);
+
+    oscLeft.connect(gainLeft);
+    gainLeft.connect(ambientGain);
+
+    oscRight.connect(gainRight);
+    gainRight.connect(ambientGain);
+
+    oscLeft.start();
+    oscRight.start();
+    subDrone.start();
+
+    activeOscillators.push(oscLeft, oscRight, subDrone);
 }
 
 function showAudioToast(text) {

@@ -68,4 +68,28 @@ window.addEventListener('DOMContentLoaded', () => {
             if (window.openContactModal) window.openContactModal(inquiry);
         }
     });
+
+    // Guestbook Modal Trigger
+    const guestbookBtn = document.getElementById('sidebar-guestbook-btn');
+    if (guestbookBtn) {
+        guestbookBtn.addEventListener('click', () => {
+            if (window.playSound) playSound('click');
+            if (window.openGuestbookModal) window.openGuestbookModal();
+            if (sidebar && sidebar.classList.contains('mobile-open')) {
+                sidebar.classList.remove('mobile-open');
+                const menuBtnIcon = document.querySelector('#mobile-menu-toggle i');
+                if (menuBtnIcon) menuBtnIcon.className = 'ph ph-list';
+            }
+        });
+    }
+
+    // Delegated Guestbook Triggers
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('[data-open-guestbook]');
+        if (trigger) {
+            e.preventDefault();
+            if (window.playSound) playSound('click');
+            if (window.openGuestbookModal) window.openGuestbookModal();
+        }
+    });
 });

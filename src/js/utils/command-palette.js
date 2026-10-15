@@ -18,7 +18,9 @@ const commandItems = [
     { title: "Toggle Theme (Light / Dark)", type: "Action", icon: "ph-moon", action: "toggleTheme" },
     { title: "Play Ambient Lo-Fi Beats", type: "Audio", icon: "ph-headphones", action: "playLofi" },
     { title: "Play Gentle Rain Soundscape", type: "Audio", icon: "ph-cloud-rain", action: "playRain" },
+    { title: "Play 40Hz Deep Focus Binaural Beats", type: "Audio", icon: "ph-brain", action: "playBinaural" },
     { title: "Mute Soundscape", type: "Audio", icon: "ph-speaker-slash", action: "stopAudio" },
+    { title: "Sign Developer Guestbook", type: "Action", icon: "ph-book-bookmark", action: "openGuestbook" },
     { title: "Send a Message / Contact Roldan", type: "Action", icon: "ph-paper-plane-tilt", action: "openContact" },
     { title: "View / Print Roldan's Resume", type: "Action", icon: "ph-file-pdf", action: "viewResume" },
     { title: "Launch 2D Dev Lounge Mini-Game", type: "Action", icon: "ph-game-controller", action: "launchGame" }
@@ -191,8 +193,12 @@ function executeCmdItem(item) {
         if (window.setSoundscape) window.setSoundscape('lofi');
     } else if (item.action === 'playRain') {
         if (window.setSoundscape) window.setSoundscape('rain');
+    } else if (item.action === 'playBinaural') {
+        if (window.setSoundscape) window.setSoundscape('binaural-flow');
     } else if (item.action === 'stopAudio') {
         if (window.stopSoundscape) window.stopSoundscape();
+    } else if (item.action === 'openGuestbook') {
+        if (window.openGuestbookModal) window.openGuestbookModal();
     } else if (item.action === 'openContact') {
         if (window.openContactModal) window.openContactModal('Hiring');
     } else if (item.action === 'viewResume') {

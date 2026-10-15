@@ -182,6 +182,17 @@ function initAIBot() {
             `;
         }
 
+        // 5b. Guestbook
+        if (query.includes('guestbook') || query.includes('leave a note') || query.includes('greeting') || query.includes('sign')) {
+            return `
+                ✍️ <strong>Developer Guestbook:</strong><br>
+                You can sign Roldan's interactive guestbook and leave a note or greeting for the community!<br><br>
+                <button class="ai-action-btn" onclick="if(window.openGuestbookModal)window.openGuestbookModal();">
+                    <i class="ph-fill ph-book-bookmark"></i> Open Guestbook &nearr;
+                </button>
+            `;
+        }
+
         // 6. Consulting Services & Mentoring
         if (query.includes('consult') || query.includes('coach') || query.includes('train') || query.includes('service') || query.includes('rate')) {
             return `

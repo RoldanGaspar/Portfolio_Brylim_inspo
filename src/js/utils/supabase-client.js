@@ -250,3 +250,253 @@ window.closeContactModal = closeContactModal;
 window.recordAndGetPageView = recordAndGetPageView;
 window.updateVisitorCounterUI = updateVisitorCounterUI;
 
+// ==========================================
+// INTERACTIVE DEVELOPER GUESTBOOK
+// ==========================================
+async function fetchGuestbookEntries() {
+    const client = getSupabaseClient();
+    if (!client) return [];
+
+    try {
+        const { data, error } = await client
+            .from('guestbook_entries')
+            .select('id, created_at, name, handle_or_role, message')
+            .order('created_at', { ascending: false })
+            .limit(40);
+
+        if (error) {
+            console.error('Failed to fetch guestbook:', error);
+            return [];
+        }
+        return data || [];
+    } catch (err) {
+        console.error('Error fetching guestbook:', err);
+        return [];
+    }
+}
+
+async function submitGuestbookEntry(payload) {
+    const client = getSupabaseClient();
+    if (!client) {
+        throw new Error('Database client not connected.');
+    }
+
+    const { data, error } = await client
+        .from('guestbook_entries')
+        .insert([{
+            name: payload.name.trim(),
+            handle_or_role: payload.handle_or_role ? payload.handle_or_role.trim() : null,
+            message: payload.message.trim(),
+            is_approved: true
+        }])
+        .select('id, created_at, name, handle_or_role, message')
+        .single();
+
+    if (error) {
+        console.error('Guestbook insert error:', error);
+        throw error;
+    }
+    return data;
+}
+
+function openGuestbookModal() {
+    let modal = document.getElementById('guestbook-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'guestbook-modal';
+        modal.className = 'contact-modal-overlay guestbook-modal-overlay';
+        modal.innerHTML = `
+            <div class="contact-modal-card guestbook-modal-card">
+                <div class="contact-modal-header">
+                    <div class="contact-header-left">
+                        <div class="contact-icon-badge" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
+                            <i class="ph-fill ph-book-bookmark"></i>
+                        </div>
+                        <div>
+                            <h3>Developer Guestbook</h3>
+                            <p>Leave a note, feedback, or greeting for Roldan</p>
+                        </div>
+                    </div>
+                    <button class="contact-close-btn" id="guestbook-modal-close" aria-label="Close guestbook">
+                        <i class="ph ph-x"></i>
+                    </button>
+                </div>
+
+                <div class="guestbook-split-container">
+                    <form id="guestbook-form" class="guestbook-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="gb-name">Your Name</label>
+                                <input type="text" id="gb-name" required placeholder="Alex Rivera" maxlength="60">
+                            </div>
+                            <div class="form-group">
+                                <label for="gb-handle">Role / Handle (Optional)</label>
+                                <input type="text" id="gb-handle" placeholder="@arivera or Frontend Dev" maxlength="60">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gb-message">Message</label>
+                            <textarea id="gb-message" rows="3" required placeholder="Say hi or leave a comment on the portfolio..." maxlength="280"></textarea>
+                        </div>
+                        <div class="contact-form-footer">
+                            <span id="gb-status" class="contact-status-msg"></span>
+                            <button type="submit" id="gb-submit-btn" class="btn-primary contact-submit-btn" style="background-color: #10b981;">
+                                <span class="btn-text">Sign Guestbook</span>
+                                <i class="ph-fill ph-paper-plane-right"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="guestbook-feed-section">
+                        <div class="feed-header">
+                            <span class="feed-kicker">COMMUNITY NOTES</span>
+                            <span class="feed-count" id="gb-feed-count">Loading...</span>
+                        </div>
+                        <div class="guestbook-feed-list" id="gb-feed-list">
+                            <!-- Populated with guestbook entries -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Bind events
+        const closeBtn = document.getElementById('guestbook-modal-close');
+        if (closeBtn) closeBtn.addEventListener('click', closeGuestbookModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeGuestbookModal();
+        });
+
+        // Form Submit Handler
+        const form = document.getElementById('guestbook-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('gb-submit-btn');
+            const statusMsg = document.getElementById('gb-status');
+
+            const name = document.getElementById('gb-name').value;
+            const handle_or_role = document.getElementById('gb-handle').value;
+            const message = document.getElementById('gb-message').value;
+
+            try {
+                submitBtn.disabled = true;
+                submitBtn.querySelector('.btn-text').textContent = 'Signing...';
+                statusMsg.textContent = '';
+                statusMsg.className = 'contact-status-msg';
+
+                const newEntry = await submitGuestbookEntry({ name, handle_or_role, message });
+                if (window.playSound) window.playSound('open');
+
+                statusMsg.textContent = '✓ Note signed successfully!';
+                statusMsg.classList.add('success');
+                form.reset();
+                submitBtn.querySelector('.btn-text').textContent = 'Signed!';
+
+                // Prepend newly signed entry to live feed
+                const feedList = document.getElementById('gb-feed-list');
+                if (feedList && newEntry) {
+                    const card = createGuestbookCardEl(newEntry);
+                    feedList.insertBefore(card, feedList.firstChild);
+                    updateGuestbookCount();
+                }
+
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.querySelector('.btn-text').textContent = 'Sign Guestbook';
+                    statusMsg.textContent = '';
+                }, 2500);
+
+            } catch (err) {
+                console.error(err);
+                if (window.playSound) window.playSound('close');
+                submitBtn.disabled = false;
+                submitBtn.querySelector('.btn-text').textContent = 'Try Again';
+                statusMsg.textContent = 'Failed to submit. Please try again.';
+                statusMsg.classList.add('error');
+            }
+        });
+    }
+
+    modal.classList.add('active');
+    if (window.playSound) window.playSound('open');
+    loadGuestbookFeed();
+}
+
+function closeGuestbookModal() {
+    const modal = document.getElementById('guestbook-modal');
+    if (modal && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        if (window.playSound) window.playSound('close');
+    }
+}
+
+async function loadGuestbookFeed() {
+    const feedList = document.getElementById('gb-feed-list');
+    if (!feedList) return;
+
+    feedList.innerHTML = '<div class="gb-loading"><i class="ph ph-spinner-gap"></i> Loading community notes...</div>';
+    const entries = await fetchGuestbookEntries();
+
+    if (entries.length === 0) {
+        feedList.innerHTML = '<div class="gb-empty">Be the first to sign the guestbook!</div>';
+        return;
+    }
+
+    feedList.innerHTML = '';
+    entries.forEach(entry => {
+        feedList.appendChild(createGuestbookCardEl(entry));
+    });
+    updateGuestbookCount();
+}
+
+function createGuestbookCardEl(entry) {
+    const card = document.createElement('div');
+    card.className = 'guestbook-card fade-in';
+    const dateStr = entry.created_at ? new Date(entry.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'Today';
+
+    const header = document.createElement('div');
+    header.className = 'gb-card-top';
+
+    const author = document.createElement('strong');
+    author.className = 'gb-author';
+    author.textContent = entry.name;
+    header.appendChild(author);
+
+    if (entry.handle_or_role) {
+        const role = document.createElement('span');
+        role.className = 'gb-role-pill';
+        role.textContent = entry.handle_or_role;
+        header.appendChild(role);
+    }
+
+    const date = document.createElement('span');
+    date.className = 'gb-date';
+    date.textContent = dateStr;
+    header.appendChild(date);
+
+    const body = document.createElement('p');
+    body.className = 'gb-msg';
+    body.textContent = entry.message;
+
+    card.appendChild(header);
+    card.appendChild(body);
+    return card;
+}
+
+function updateGuestbookCount() {
+    const countEl = document.getElementById('gb-feed-count');
+    const feedList = document.getElementById('gb-feed-list');
+    if (countEl && feedList) {
+        const count = feedList.querySelectorAll('.guestbook-card').length;
+        countEl.textContent = `${count} note${count === 1 ? '' : 's'}`;
+    }
+}
+
+window.fetchGuestbookEntries = fetchGuestbookEntries;
+window.submitGuestbookEntry = submitGuestbookEntry;
+window.openGuestbookModal = openGuestbookModal;
+window.closeGuestbookModal = closeGuestbookModal;
+
+

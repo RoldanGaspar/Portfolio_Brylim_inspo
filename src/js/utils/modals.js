@@ -98,8 +98,8 @@ function initModals() {
                    <code>clear</code> — Clear output`,
             about: `<span class="t-green">Roldan Gaspar</span> — Full-stack engineer focused on generative AI.<br>Building modern web & mobile apps, turning rough ideas into things people actually use.`,
             contact: `<span class="t-green">📧</span> gaspar26roldan@gmail.com<br>
-                      <span class="t-green">🐙</span> github.com/bryllim<br>
-                      <span class="t-green">💼</span> linkedin.com/in/bryllim`,
+                      <span class="t-green">🐙</span> github.com/RoldanGaspar<br>
+                      <span class="t-green">💼</span> linkedin.com/in/roldangaspar`,
             stack: `<span class="t-green">Languages:</span> TypeScript, Python, Swift<br>
                     <span class="t-green">Frontend:</span> React, Next.js, SwiftUI<br>
                     <span class="t-green">Backend:</span> Node.js, Laravel, FastAPI<br>
