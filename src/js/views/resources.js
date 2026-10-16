@@ -12,7 +12,7 @@ function renderResources() {
                 </div>
                 <div class="resource-grid">
                     ${items.map(item => `
-                        <a href="#" class="resource-card">
+                        <a href="${item.url || 'https://github.com/RoldanGaspar'}" target="_blank" rel="noopener noreferrer" class="resource-card">
                             <h4>${item.title}</h4>
                             <p>${item.desc}</p>
                         </a>

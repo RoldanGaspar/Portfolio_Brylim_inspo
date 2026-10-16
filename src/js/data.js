@@ -38,7 +38,7 @@ window.portfolioData = {
             ],
             techStack: ["Swift", "SwiftUI", "CoreML", "CoreData", "Charts"],
             stats: { rank: "#1 Finance App", downloads: "50,000+", rating: "4.9 ★" },
-            downloadUrl: "#",
+            downloadUrl: "https://github.com/RoldanGaspar",
             mockupBg: "#1f2937"
         },
         {
@@ -60,7 +60,7 @@ window.portfolioData = {
             ],
             techStack: ["SwiftUI", "WatchKit", "ActivityKit", "CoreData"],
             stats: { rank: "#1 Paid Fitness", downloads: "35,000+", rating: "4.8 ★" },
-            downloadUrl: "#",
+            downloadUrl: "https://github.com/RoldanGaspar",
             mockupBg: "#111827"
         },
         {
@@ -82,7 +82,7 @@ window.portfolioData = {
             ],
             techStack: ["React Native", "TypeScript", "FastAPI", "OpenAI APIs"],
             stats: { rank: "Featured AI App", downloads: "20,000+", rating: "4.9 ★" },
-            downloadUrl: "#",
+            downloadUrl: "https://github.com/RoldanGaspar",
             mockupBg: "#0f172a"
         }
     ],
@@ -275,16 +275,16 @@ window.portfolioData = {
     },
     resources: {
         "LEARN AI / ML": [
-            { title: "DeepLearning.AI", desc: "Andrew Ng's specializations on ML, deep learning, and generative AI." },
-            { title: "fast.ai - Practical Deep Learning", desc: "Top-down, code-first deep learning course for coders." },
-            { title: "Hugging Face LLM Course", desc: "Free hands-on course on transformers, NLP, and LLMs." },
-            { title: "Google ML Crash Course", desc: "Google's interactive intro to machine learning fundamentals." }
+            { title: "DeepLearning.AI", desc: "Andrew Ng's specializations on ML, deep learning, and generative AI.", url: "https://www.deeplearning.ai/" },
+            { title: "fast.ai - Practical Deep Learning", desc: "Top-down, code-first deep learning course for coders.", url: "https://course.fast.ai/" },
+            { title: "Hugging Face LLM Course", desc: "Free hands-on course on transformers, NLP, and LLMs.", url: "https://huggingface.co/learn/nlp-course" },
+            { title: "Google ML Crash Course", desc: "Google's interactive intro to machine learning fundamentals.", url: "https://developers.google.com/machine-learning/crash-course" }
         ],
         "AI ENGINEERING & LLMS": [
-            { title: "Anthropic Prompt Engineering", desc: "Official guide to prompting Claude effectively." },
-            { title: "Anthropic Cookbook", desc: "Code recipes for building Claude: RAG, tools, agents." },
-            { title: "OpenAI Cookbook", desc: "Practical code examples for building with OpenAI models." },
-            { title: "LangChain Docs", desc: "Framework docs for building LLM apps, agents, and RAG." }
+            { title: "Anthropic Prompt Engineering", desc: "Official guide to prompting Claude effectively.", url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" },
+            { title: "Anthropic Cookbook", desc: "Code recipes for building Claude: RAG, tools, agents.", url: "https://github.com/anthropics/anthropic-cookbook" },
+            { title: "OpenAI Cookbook", desc: "Practical code examples for building with OpenAI models.", url: "https://cookbook.openai.com/" },
+            { title: "LangChain Docs", desc: "Framework docs for building LLM apps, agents, and RAG.", url: "https://python.langchain.com/docs/introduction/" }
         ]
     },
     consulting: [
@@ -316,43 +316,32 @@ window.portfolioData = {
     experienceList: [
         {
             id: "lead-ai-engineer",
-            year: "2025 - Present",
+            initials: "SC",
+            year: "AUG 2025 – PRESENT · 11 MOS",
+            shortYear: "2025",
             title: "Lead AI Engineer",
             company: "Standard Chartered",
-            location: "Manila / Remote",
-            desc: "Leading enterprise GenAI initiatives, multi-agent AI harness architectures, and scalable LLM orchestration for banking automation.",
-            highlights: [
-                "Built autonomous multi-agent systems reducing manual workflow time by 75%",
-                "Architected privacy-preserving RAG pipelines on enterprise AWS cloud",
-                "Mentored a team of 10+ software & AI engineers"
-            ],
-            tech: ["Python", "PyTorch", "LangChain", "FastAPI", "AWS", "Docker"]
+            employmentType: "Full-time",
+            location: "",
+            desc: "Driving AI initiatives and system-level solutions across key areas of the business. Focused on scalable, secure, and responsible innovation.",
+            highlights: [],
+            tech: ["Artificial Intelligence (AI)", "Generative AI", "+2 skills"]
         },
         {
             id: "ai-ops-engineer",
-            year: "2025",
+            initials: "CU",
+            year: "FEB 2025 – AUG 2025 · 7 MOS",
+            shortYear: "2025",
             title: "AI Ops Engineer",
-            company: "CoE for GenAI - Cambridge",
-            location: "Cambridge, UK",
-            desc: "Engineered LLM evaluation frameworks, AI guardrails, and automated model deployment pipelines.",
+            company: "Cambridge University Press & Assessment",
+            employmentType: "Full-time · 1 yr 2 mos",
+            location: "Makati, National Capital Region, Philippines · Hybrid",
+            desc: "Pioneered the GenAI Centre of Excellence to deliver scalable AI solutions that support the organization's global education and publishing initiatives.",
             highlights: [
-                "Designed low-latency inference endpoints serving 100k+ daily queries",
-                "Implemented hallucination monitoring & automated safety guardrails"
+                "Led GenAI model deployments across Azure Foundry and AWS Bedrock, leveraging Dockerized workflows orchestrated through ECS with Fargate, App Runner, and Amplify. Standardized DevOps practices with CI/CD pipelines, IAM policy hardening, automated EC2/Lambda provisioning, and secure secret management via AWS Secrets Manager and Parameter Store. Integrated centralized observability using CloudWatch for logs, metrics, and alerting.",
+                "Architected and deployed a WhatsApp-based lesson planner for South African Foundation Phase educators. The solution utilized Turn.io for conversational UX, n8n for orchestration, and Qdrant for vector search, enabling context-aware RAG over curriculum documents for rapid lesson plan generation."
             ],
-            tech: ["Python", "Claude API", "Docker", "Kubernetes", "Prometheus"]
-        },
-        {
-            id: "sr-fullstack-dev",
-            year: "2024 - 2025",
-            title: "Senior Full-Stack Developer",
-            company: "Core Technology",
-            location: "Cambridge, UK",
-            desc: "Built high-performance web and mobile applications using React, Next.js, and Swift.",
-            highlights: [
-                "Shipped 3 production web apps used by over 50,000 active users",
-                "Reduced bundle load times by 60% through aggressive optimization"
-            ],
-            tech: ["TypeScript", "React", "Next.js", "SwiftUI", "Node.js"]
+            tech: []
         }
     ],
     certsList: [
@@ -361,7 +350,7 @@ window.portfolioData = {
             issuer: "GOOGLE",
             date: "2025",
             logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg",
-            verifyUrl: "#",
+            verifyUrl: "#/certifications",
             skills: ["LLM Architecture", "GenAI Strategy", "Prompt Engineering"]
         },
         {
@@ -369,7 +358,7 @@ window.portfolioData = {
             issuer: "ORACLE",
             date: "2025",
             logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg",
-            verifyUrl: "#",
+            verifyUrl: "#/certifications",
             skills: ["Oracle AI Services", "Vector Search", "Fine-Tuning"]
         },
         {
@@ -377,7 +366,7 @@ window.portfolioData = {
             issuer: "NEO4J",
             date: "2024",
             logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Neo4j-logo.svg",
-            verifyUrl: "#",
+            verifyUrl: "#/certifications",
             skills: ["Graph Databases", "Cypher Query", "Knowledge Graphs"]
         },
         {
@@ -385,7 +374,7 @@ window.portfolioData = {
             issuer: "AMAZON WEB SERVICES",
             date: "2024",
             logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
-            verifyUrl: "#",
+            verifyUrl: "#/certifications",
             skills: ["AWS Bedrock", "SageMaker", "Cloud AI Security"]
         }
     ],

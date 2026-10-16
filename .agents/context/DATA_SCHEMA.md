@@ -32,14 +32,13 @@ Fields marked `html` are inserted raw via template literals — only trusted, ha
 Item: `name`, `desc`, `image`. Category keys are UPPERCASE display labels.
 
 ### `resources{ [CATEGORY]: item[] }` → `views/resources.js`
-Item: `title`, `desc`. (No `url` field yet — links are `href="#"`.)
+Item: `title`, `desc`, `url` (official external documentation URL).
 
 ### `consulting[]` → `views/consulting.js`
 `title`, `price` (string, ₱), `desc`, `points` (string[]).
 
-### `experienceList[]` → ⚠️ **not rendered anywhere**
-`id`, `year`, `title`, `company`, `location`, `desc`, `highlights[]`, `tech[]`.
-`experience-all.js` and `home.js` hard-code their own copies instead.
+### `experienceList[]` → `views/experience-all.js`
+`id`, `initials`, `year`, `shortYear`, `title`, `company`, `employmentType`, `location`, `desc`, `highlights[]`, `tech[]`.
 
 ### `certsList[]` → `views/certifications-all.js`
 `title`, `issuer` (UPPERCASE), `date`, `logo` (url), `verifyUrl`, `skills[]`.

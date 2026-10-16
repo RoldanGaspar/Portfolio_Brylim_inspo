@@ -214,7 +214,7 @@ function renderCertificationsAll() {
                     <img id="lightbox-img" src="" alt="Certificate Preview">
                 </div>
                 <div class="lightbox-footer">
-                    <a id="lightbox-credly-link" href="#" target="_blank" rel="noopener noreferrer" class="lightbox-action-btn credly">
+                    <a id="lightbox-credly-link" href="https://www.netacad.com/profile?tab=badges" target="_blank" rel="noopener noreferrer" class="lightbox-action-btn credly">
                         <i class="ph ph-medal"></i> Verify on Credly
                     </a>
                 </div>

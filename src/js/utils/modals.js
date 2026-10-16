@@ -52,75 +52,152 @@ function initModals() {
         }
     });
 
+    const terminalHistory = [];
+    let terminalHistoryIdx = -1;
+
+    function escapeTerminalText(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
     function openTerminalModal() {
         openModal(`
             <div class="terminal-modal fade-in">
-                <h2>what do you want to ask?</h2>
+                <h2>roldan@cyberops-shell:~</h2>
                 <div class="terminal-input-area">
-                    <input type="text" id="terminal-input" class="terminal-input" placeholder="type a command..." autofocus>
+                    <input type="text" id="terminal-input" class="terminal-input" placeholder="type a command (Tab to autocomplete, ↑/↓ history)..." autocomplete="off" autofocus>
                 </div>
-                <div class="terminal-output" id="terminal-output"></div>
-                <div class="terminal-hints">
-                    <span>Try: <code>help</code>, <code>about</code>, <code>contact</code>, <code>stack</code>, <code>sudo</code></span>
+                <div class="terminal-output" id="terminal-output">
+                    <div class="terminal-line">
+                        <span class="t-green">RoldanOS CyberOps Shell v4.0</span> &mdash; Type <code>help</code> or click a command below.
+                    </div>
+                </div>
+                <div class="terminal-hints" id="terminal-quick-chips">
+                    <span>Try: <code>help</code>, <code>ls</code>, <code>cat certs.json</code>, <code>nmap</code>, <code>verify-certs</code>, <code>cd cyber-lab</code>, <code>matrix</code></span>
                 </div>
             </div>
         `);
         
         const input = document.getElementById('terminal-input');
         const output = document.getElementById('terminal-output');
+        const hints = document.getElementById('terminal-quick-chips');
+
+        const autoCompletePool = [
+            'help', 'about', 'contact', 'stack', 'projects', 'whoami',
+            'ls', 'cat resume.md', 'cat certs.json', 'cat security.log',
+            'nmap', 'verify-certs', 'cd projects', 'cd blog', 'cd cyber-lab',
+            'cd audio', 'cd certifications', 'matrix', 'game', 'theme', 'sudo', 'clear'
+        ];
+
+        if (hints && input) {
+            hints.querySelectorAll('code').forEach(codeEl => {
+                codeEl.style.cursor = 'pointer';
+                codeEl.addEventListener('click', () => {
+                    const cmdText = codeEl.textContent.trim();
+                    terminalHistory.push(cmdText);
+                    terminalHistoryIdx = terminalHistory.length;
+                    processTerminalCommand(cmdText, output);
+                    if (window.playSound) window.playSound('key');
+                    input.focus();
+                });
+            });
+        }
         
         if (input) {
             setTimeout(() => input.focus(), 100);
             
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
-                    const cmd = input.value.trim().toLowerCase();
+                    const rawCmd = input.value.trim();
+                    if (!rawCmd) return;
+                    terminalHistory.push(rawCmd);
+                    terminalHistoryIdx = terminalHistory.length;
                     input.value = '';
-                    processTerminalCommand(cmd, output);
+                    processTerminalCommand(rawCmd.toLowerCase(), output);
                     if (window.playSound) window.playSound('key');
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (terminalHistory.length > 0 && terminalHistoryIdx > 0) {
+                        terminalHistoryIdx--;
+                        input.value = terminalHistory[terminalHistoryIdx];
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (terminalHistoryIdx < terminalHistory.length - 1) {
+                        terminalHistoryIdx++;
+                        input.value = terminalHistory[terminalHistoryIdx];
+                    } else {
+                        terminalHistoryIdx = terminalHistory.length;
+                        input.value = '';
+                    }
+                } else if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const currentVal = input.value.trim().toLowerCase();
+                    if (!currentVal) return;
+                    const match = autoCompletePool.find(item => item.startsWith(currentVal));
+                    if (match) {
+                        input.value = match;
+                        if (window.playSound) window.playSound('key');
+                    }
                 }
             });
         }
     }
     
     function processTerminalCommand(cmd, output) {
+        const netacadCount = (window.portfolioData && portfolioData.netacadCertsList) ? portfolioData.netacadCertsList.length : 10;
+        const safeEcho = escapeTerminalText(cmd);
+
+        const virtualFiles = {
+            'resume.md': `<span class="t-green"># Roldan Gaspar — Software Engineer · AI · Cybersecurity</span><br>Location: Pampanga, Philippines<br>Email: gaspar26roldan@gmail.com<br>Printable CV: <a href="assets/resume/roldan-gaspar-resume.html" target="_blank" style="text-decoration:underline;">Open ATS Resume &nearr;</a>`,
+            'certs.json': `<span class="t-green">{ "verifiedProvider": "Cisco Networking Academy & AWS", "count": ${netacadCount + 1} }</span><br>&bull; CyberOps Associate &bull; Ethical Hacker &bull; Network Defense<br>&bull; Endpoint Security &bull; Python Essentials 1 &amp; 2 &bull; JS Essentials 1 &amp; 2`,
+            'security.log': `<span class="t-green">[SIEM-OK]</span> Perimeter ASA Firewall ACL #104 active<br><span class="t-green">[RLS-OK]</span> Supabase PostgreSQL Row-Level Security enforced<br><span class="t-green">[XSS-OK]</span> Strict textContent sanitization verified`
+        };
+
         const commands = {
-            help: `<span class="t-green">Available commands:</span><br>
-                   <code>about</code> — Who am I<br>
-                   <code>contact</code> — How to reach me<br>
-                   <code>stack</code> — My tech stack<br>
-                   <code>projects</code> — Featured projects<br>
-                   <code>whoami</code> — Current session & user info<br>
-                   <code>matrix</code> — 🟢 Launch Matrix rain<br>
-                   <code>game</code> — 🎮 Launch 2D Dev Lounge<br>
-                   <code>theme</code> — Toggle light/dark theme<br>
-                   <code>sudo</code> — 🤫<br>
-                   <code>clear</code> — Clear output`,
-            about: `<span class="t-green">Roldan Gaspar</span> — Full-stack engineer focused on generative AI.<br>Building modern web & mobile apps, turning rough ideas into things people actually use.`,
+            help: `<span class="t-green">CyberOps Shell Commands:</span><br>
+                   <code>ls</code> / <code>cat &lt;file&gt;</code> — Browse virtual filesystem (<code>resume.md</code>, <code>certs.json</code>, <code>security.log</code>)<br>
+                   <code>cd &lt;route&gt;</code> — Navigate SPA (<code>projects</code>, <code>blog</code>, <code>cyber-lab</code>, <code>audio</code>, <code>certifications</code>)<br>
+                   <code>nmap</code> — Run perimeter port &amp; service posture scan<br>
+                   <code>verify-certs</code> — List verified Cisco NetAcad &amp; AWS credentials<br>
+                   <code>about</code> · <code>contact</code> · <code>stack</code> · <code>projects</code> · <code>whoami</code><br>
+                   <code>matrix</code> · <code>game</code> · <code>theme</code> · <code>clear</code>`,
+            ls: `<span class="t-green">drwxr-xr-x</span>  projects/   blog/   cyber-lab/   audio/<br><span class="t-green">-rw-r--r--</span>  resume.md   certs.json   security.log`,
+            nmap: `<span class="t-green">Starting Nmap 7.95 scan on roldangaspar.vercel.app...</span><br>
+                   PORT      STATE     SERVICE       REASON<br>
+                   443/tcp   <span class="t-green">open</span>      https         Vercel Edge TLS 1.3 (Strict-Transport)<br>
+                   5432/tcp  <span class="t-green">filtered</span>  postgresql    Supabase RLS Policy Enforced<br>
+                   8021/tcp  <span class="t-green">open</span>      cyber-lab     Snort IPS &amp; Stateful ACL #104 Active<br>
+                   <span class="t-muted">0 unmitigated vulnerabilities detected.</span>`,
+            'verify-certs': `<span class="t-green">✔ Verified Cisco NetAcad &amp; Cloud Credentials (${netacadCount + 1} total):</span><br>` +
+                ((window.portfolioData && portfolioData.netacadCertsList)
+                    ? portfolioData.netacadCertsList.slice(0, 6).map(c => `&bull; <strong>${c.title}</strong> (${c.date})`).join('<br>') + `<br><span class="t-muted">Type <code>cd certifications</code> to inspect all ${netacadCount} certificates.</span>`
+                    : `&bull; CyberOps Associate &bull; Ethical Hacker &bull; Network Defense`),
+            about: `<span class="t-green">Roldan Gaspar</span> — Software Engineer, AI builder, and Cybersecurity enthusiast based in Pampanga, Philippines.`,
             contact: `<span class="t-green">📧</span> gaspar26roldan@gmail.com<br>
                       <span class="t-green">🐙</span> github.com/RoldanGaspar<br>
                       <span class="t-green">💼</span> linkedin.com/in/roldangaspar`,
-            stack: `<span class="t-green">Languages:</span> TypeScript, Python, Swift<br>
-                    <span class="t-green">Frontend:</span> React, Next.js, SwiftUI<br>
-                    <span class="t-green">Backend:</span> Node.js, Laravel, FastAPI<br>
-                    <span class="t-green">AI/ML:</span> PyTorch, LangChain, Claude<br>
-                    <span class="t-green">Infra:</span> AWS, Docker, Kubernetes`,
+            stack: `<span class="t-green">Languages:</span> TypeScript, JavaScript, Python, Swift, SQL<br>
+                    <span class="t-green">Frontend:</span> React, Next.js, Vanilla JS SPA, CSS Tokens<br>
+                    <span class="t-green">Security &amp; Cloud:</span> Cisco CyberOps, Supabase RLS, AWS, Vercel`,
             projects: `<span class="t-green">Tarsi</span> — #1 Finance App on App Store 🏆<br>
                        <span class="t-green">Kabi</span> — #1 Paid Fitness App<br>
                        <span class="t-green">Travel Buddy</span> — Trip planning companion`,
-            whoami: `<span class="t-green">User:</span> guest@roldangaspar.dev<br>
+            whoami: `<span class="t-green">User:</span> operator@roldangaspar.dev<br>
                      <span class="t-green">Location:</span> Pampanga, Philippines 📍<br>
-                     <span class="t-green">Role:</span> Software Engineer \\ AI \\ Cybersecurity Enthusiast`,
-            matrix: `<span class="t-green">🟢 Entering Matrix stream...</span>`,
+                     <span class="t-green">Clearance:</span> Zero-Trust Verified`,
+            matrix: `<span class="t-green">🟢 Matrix telemetry stream initialized:</span><br><code style="letter-spacing:2px;color:var(--status-ok);">01000011 01011001 01000010 01000101 01010010 01001111 01010000 01010011</code>`,
             game: `<span class="t-green">🎮 Launching 2D Dev Lounge...</span>`,
             theme: `<span class="t-green">🌗 Theme toggled!</span>`,
-            sudo: `<span class="t-red">Permission denied:</span> Nice try. You're not the admin here. 😎`,
+            sudo: `<span class="t-red">sudo:</span> incident logged to SIEM telemetry. Nice try! 🛡️`,
             clear: 'CLEAR'
         };
         
         const thinkingEl = document.createElement('div');
         thinkingEl.className = 'terminal-line';
-        thinkingEl.innerHTML = `<span class="t-muted">> ${cmd}</span><br><span class="t-thinking">thinking...</span>`;
+        thinkingEl.innerHTML = `<span class="t-muted">&gt; ${safeEcho}</span><br><span class="t-thinking">executing...</span>`;
         output.appendChild(thinkingEl);
         output.scrollTop = output.scrollHeight;
         
@@ -141,10 +218,36 @@ function initModals() {
                 if (themeBtn) themeBtn.click();
             }
 
-            const response = commands[cmd] || `<span class="t-red">Unknown command:</span> "${cmd}". Type <code>help</code> for available commands.`;
-            thinkingEl.innerHTML = `<span class="t-muted">> ${cmd}</span><br>${response}`;
+            if (cmd.startsWith('cat ')) {
+                const fileName = cmd.replace('cat ', '').trim();
+                const fileContent = virtualFiles[fileName] || `<span class="t-red">cat:</span> ${escapeTerminalText(fileName)}: No such file. Try <code>ls</code>.`;
+                thinkingEl.innerHTML = `<span class="t-muted">&gt; ${safeEcho}</span><br>${fileContent}`;
+                output.scrollTop = output.scrollHeight;
+                return;
+            }
+
+            if (cmd.startsWith('cd ')) {
+                const target = cmd.replace('cd ', '').replace(/^\/+/, '').trim();
+                const validRoutes = ['projects', 'blog', 'cyber-lab', 'audio', 'certifications', 'stack', 'experience', 'shop', 'gear', 'resources'];
+                if (target === '' || target === '~' || target === 'home') {
+                    closeModal();
+                    window.location.hash = '#/';
+                    return;
+                }
+                if (validRoutes.includes(target)) {
+                    closeModal();
+                    window.location.hash = '#/' + target;
+                    return;
+                }
+                thinkingEl.innerHTML = `<span class="t-muted">&gt; ${safeEcho}</span><br><span class="t-red">cd:</span> no such route "${escapeTerminalText(target)}".`;
+                output.scrollTop = output.scrollHeight;
+                return;
+            }
+
+            const response = commands[cmd] || `<span class="t-red">Unknown command:</span> "${safeEcho}". Type <code>help</code> for available commands.`;
+            thinkingEl.innerHTML = `<span class="t-muted">&gt; ${safeEcho}</span><br>${response}`;
             output.scrollTop = output.scrollHeight;
-        }, 600);
+        }, 280);
     }
 
     function openTypingModal() {

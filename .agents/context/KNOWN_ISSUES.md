@@ -14,45 +14,33 @@ Needs Roldan's confirmation before it stays on a live site under his name. Do no
 | "Six years… 60+ products shipped" | `experience-all.js` |
 | Hero stats: 200K+ community, 6+ yrs, 10x hackathons, PH100 StellarPH | `home.js` |
 | Recommendations from Henry Aguda (DICT Secretary), Joshua Shailes, Cris Lawrence Adrian(o) | `data.js#recsList`, `home.js` |
-| Certs: Google GenAI Leader, Oracle GenAI Professional, Neo4j, AWS AI Practitioner (all `verifyUrl: "#"`) | `data.js#certsList` |
+| Certs: Google GenAI Leader, Oracle GenAI Professional, Neo4j, AWS AI Practitioner | `data.js#certsList` |
 | Gear (MacBook Pro M3 Max 128GB, Studio Display, WHOOP…) | `data.js#gear` |
-| Blog posts (no actual post pages exist) | `data.js#blog` |
 | Consulting rates (₱10k/hr, ₱20k/hr) | `data.js#consulting` |
 | Stack list (~70 technologies) | `stack-all.js` |
-| "16 people viewing now", "+13" avatars | `index.html` sidebar (static, not live) |
-
-## 🔴 Broken / placeholder links
-
-- Hero socials (github / linkedin / instagram / email) are `href="#"` — `home.js`.
-- "ALL AFFILIATIONS →" is `href="#"` — `home.js`.
-- Sidebar "Affiliations" → `#/affiliations` has no route; renders Home without scrolling to `#affiliations`.
-- "community chat" link `href="#"` — `index.html`.
-- All `downloadUrl: "#"` (shop + projects), resource items have no URL — `resources.js`.
 
 ## 🟠 Maintainability
 
-- **Duplicated content** across files — see `DATA_SCHEMA.md#duplication-map`. `experienceList` is defined but never used.
+- **Duplicated content** across files — see `DATA_SCHEMA.md#duplication-map`.
 - **README is inaccurate:** says "ES6 Modules" (actually classic scripts), directory tree omits several files, `LICENSE` file referenced but missing, license badge URL malformed (`green.style=` → `green?style=`).
 - **Legacy root files** `data.js`, `main.js`, `style.css` are dead code (~90 KB). Candidate for deletion with approval.
-- `views.css` is ~3,000 lines; finding styles is slow. Consider splitting per view (keep `@import` order).
+- `views.css` is ~4,500 lines; finding styles is slow. Consider splitting per view (keep `@import` order).
 - `ai-bot.js` answers are hard-coded strings, not derived from `portfolioData`.
-- GitHub graph is random on every render — it is not real contribution data.
 
 ## 🟠 Accessibility
 
-- No `prefers-reduced-motion` handling anywhere (tilt, magnetic, confetti, page transitions, reveal).
+- Partial `prefers-reduced-motion` handling (added in `#/cyber-lab` and `#/blog/:id`, still missing on tilt, magnetic, confetti, page transitions, reveal).
 - Hero verified badge is an `<i>` with a click handler — not keyboard-focusable, no role/label.
 - Project stack cards are clickable `<div>`s — not keyboard accessible.
 - Command palette / modals: verify focus trap and focus return.
 
 ## 🟢 Performance
 
-- `MyPic.png` is ~2.9 MB and used as hero image AND favicon. Should be resized/compressed (e.g. 512px WebP for hero, 32/180px PNGs for icons).
+- `MyPic.png` (~2.9 MB) is still used as favicon (hero now uses `MyPic.webp` at 34 KB). Consider 32/180px PNGs for icons.
 - Phosphor Icons loaded from unpkg without a pinned version (`@phosphor-icons/web`) — unpredictable upgrades; consider pinning `@2.1.1`.
-- ~25 separate script requests; fine on HTTP/2 but all render-blocking at end of body.
+- ~29 separate script requests; fine on HTTP/2 but all render-blocking at end of body.
 - Blog/gear images are hot-linked from Unsplash.
 
 ## 🟢 SEO / sharing
 
-- No `<meta name="description">`, Open Graph, or Twitter card tags in `index.html`.
 - Hash routing means subpages aren't individually indexable.
