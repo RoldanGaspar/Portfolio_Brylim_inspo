@@ -258,6 +258,8 @@ function updateLivePresenceDOM(activeCount) {
     }
 }
 
+let loungeBroadcastCallback = null;
+
 function initLivePresence() {
     const client = getSupabaseClient();
     if (!client || typeof client.channel !== 'function' || presenceChannel) return;
@@ -268,10 +270,12 @@ function initLivePresence() {
             sessionKey = 'v_' + Math.random().toString(36).slice(2, 10);
             sessionStorage.setItem('rg_presence_key', sessionKey);
         }
+        window.rgPresenceKey = sessionKey;
 
         presenceChannel = client.channel('roldan_portfolio_presence', {
             config: {
-                presence: { key: sessionKey }
+                presence: { key: sessionKey },
+                broadcast: { self: false }
             }
         });
 
@@ -280,6 +284,11 @@ function initLivePresence() {
                 const state = presenceChannel.presenceState();
                 const activeKeys = state ? Object.keys(state).length : 1;
                 updateLivePresenceDOM(activeKeys);
+            })
+            .on('broadcast', { event: 'lounge_state' }, (msg) => {
+                if (typeof loungeBroadcastCallback === 'function' && msg && msg.payload) {
+                    loungeBroadcastCallback(msg.payload);
+                }
             })
             .subscribe(async (status) => {
                 if (status === 'SUBSCRIBED') {
@@ -292,6 +301,23 @@ function initLivePresence() {
     } catch (err) {
         console.warn('Live presence notice:', err);
     }
+}
+
+function broadcastLoungeState(payload) {
+    if (!presenceChannel || typeof presenceChannel.send !== 'function') return;
+    try {
+        presenceChannel.send({
+            type: 'broadcast',
+            event: 'lounge_state',
+            payload: Object.assign({ key: window.rgPresenceKey || 'anon' }, payload)
+        });
+    } catch (e) {
+        // Ignore transient realtime broadcast error
+    }
+}
+
+function subscribeLoungeBroadcast(cb) {
+    loungeBroadcastCallback = cb;
 }
 
 async function updateVisitorCounterUI() {
@@ -324,6 +350,8 @@ window.closeContactModal = closeContactModal;
 window.recordAndGetPageView = recordAndGetPageView;
 window.updateVisitorCounterUI = updateVisitorCounterUI;
 window.initLivePresence = initLivePresence;
+window.broadcastLoungeState = broadcastLoungeState;
+window.subscribeLoungeBroadcast = subscribeLoungeBroadcast;
 
 // ==========================================
 // INTERACTIVE DEVELOPER GUESTBOOK

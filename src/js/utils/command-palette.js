@@ -26,7 +26,7 @@ const commandItems = [
     { title: "Sign Developer Guestbook", type: "Action", icon: "ph-book-bookmark", action: "openGuestbook" },
     { title: "Send a Message / Contact Roldan", type: "Action", icon: "ph-paper-plane-tilt", action: "openContact" },
     { title: "View / Print Roldan's Resume", type: "Action", icon: "ph-file-pdf", action: "viewResume" },
-    { title: "Launch 2D Dev Lounge Mini-Game", type: "Action", icon: "ph-game-controller", action: "launchGame" }
+    { title: "Launch 3D Cyber-Loft Dev Lounge", type: "Action", icon: "ph-cube-transparent", action: "launchGame" }
 ];
 
 let selectedIdx = 0;
