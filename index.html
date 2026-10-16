@@ -91,17 +91,57 @@
                 <div class="sidebar-divider"></div>
 
                 <div class="sidebar-community">
-                    <div class="community-status-row">
-                        <span class="pulse-indicator" title="Live Analytics Active"></span>
-                        <p class="community-status"><strong id="site-visitor-counter">—</strong> total site views</p>
+                    <div class="avatars" id="sidebar-avatar-stack" title="Live Portfolio Community & Visitors">
+                        <span class="avatar-circle" aria-hidden="true">
+                            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="18" cy="18" r="18" fill="#ffffff"/>
+                                <path d="M8 34C8.8 27.5 12.5 24 18 24C23.5 24 27.2 27.5 28 34" fill="#18181b"/>
+                                <path d="M14 24.5V34M22 24.5V34" stroke="#ffffff" stroke-width="1.6"/>
+                                <circle cx="18" cy="14.5" r="6" fill="#ffffff" stroke="#18181b" stroke-width="1.8"/>
+                                <path d="M12.5 13C13 9.5 15.5 8 19 8.5C21.8 8.8 23.5 10.5 23.5 13C21.5 11.8 19.5 11.5 16.5 12C14.5 12.3 13.2 12.8 12.5 13Z" fill="#18181b"/>
+                                <rect x="14.2" y="13.5" width="3.2" height="2.2" rx="1" fill="#18181b"/>
+                                <rect x="18.8" y="13.5" width="3.2" height="2.2" rx="1" fill="#18181b"/>
+                                <path d="M17.4 14.5H18.8" stroke="#18181b" stroke-width="1.2"/>
+                                <path d="M16.5 17.8C17.3 18.4 18.7 18.4 19.5 17.8" stroke="#18181b" stroke-width="1.3" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="avatar-circle" aria-hidden="true">
+                            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="18" cy="18" r="18" fill="#ffffff"/>
+                                <path d="M8.5 34C9.5 28 13 24.5 18 24.5C23 24.5 26.5 28 27.5 34" fill="#18181b"/>
+                                <path d="M15 26L18 30L21 26" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="18" cy="14.8" r="5.8" fill="#ffffff" stroke="#18181b" stroke-width="1.8"/>
+                                <path d="M12 14.5C11.2 11 13.8 8 18 8C22.2 8 24.8 11 24 14.5C23.2 12.2 21 11.2 18 11.2C15 11.2 12.8 12.2 12 14.5Z" fill="#18181b"/>
+                                <circle cx="16" cy="14.8" r="1" fill="#18181b"/>
+                                <circle cx="20" cy="14.8" r="1" fill="#18181b"/>
+                                <path d="M16.6 17.6C17.4 18.2 18.6 18.2 19.4 17.6" stroke="#18181b" stroke-width="1.3" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="avatar-circle" aria-hidden="true">
+                            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="18" cy="18" r="18" fill="#ffffff"/>
+                                <path d="M8 34C9 27.8 12.8 24.2 18 24.2C23.2 24.2 27 27.8 28 34" fill="#18181b"/>
+                                <path d="M13.5 26.5V34M18 25V34M22.5 26.5V34" stroke="#ffffff" stroke-width="1.2"/>
+                                <circle cx="18" cy="14.8" r="5.8" fill="#ffffff" stroke="#18181b" stroke-width="1.8"/>
+                                <path d="M12.2 12.8C13.2 9.2 16.8 7.6 20.8 8.6C23.2 9.2 24.5 11 24.2 12.8C21.2 11.2 15.8 11.2 12.2 12.8Z" fill="#18181b"/>
+                                <circle cx="16.2" cy="14.6" r="1" fill="#18181b"/>
+                                <circle cx="20.2" cy="14.6" r="1" fill="#18181b"/>
+                                <path d="M16.8 17.8H19.5" stroke="#18181b" stroke-width="1.3" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="avatar-count" id="community-avatar-count" title="Community notes & active sessions">+2</span>
                     </div>
+                    <p class="community-status">
+                        <strong id="live-viewer-count">1</strong> <span id="live-viewer-label">person viewing now</span>
+                        <span class="community-views-meta" title="Total Verified Site Views">&bull; <strong id="site-visitor-counter">—</strong> views</span>
+                    </p>
                     <div class="community-action-row">
-                        <button class="community-chat-link" id="sidebar-guestbook-btn" title="View & Sign Developer Guestbook">
-                            <span class="icon"><i class="ph ph-book-bookmark"></i></span> guestbook
+                        <button class="community-chat-link" id="sidebar-community-chat-btn" title="Open 2D Dev Lounge & Community Chat">
+                            <span class="icon"><i class="ph ph-chat-centered-dots"></i></span> community chat
                         </button>
                         <span class="community-sep">&bull;</span>
-                        <button class="community-chat-link" id="sidebar-quick-chat-btn" data-open-contact="General Inquiry">
-                            <span class="icon"><i class="ph ph-chat-circle"></i></span> get in touch
+                        <button class="community-sub-link" id="sidebar-guestbook-btn" title="View & Sign Developer Guestbook">
+                            guestbook
                         </button>
                     </div>
                 </div>

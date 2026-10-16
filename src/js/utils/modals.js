@@ -31,12 +31,27 @@ function initModals() {
         });
     });
 
-    document.querySelectorAll('.community-chat-link').forEach(link => {
-        link.addEventListener('click', (e) => {
+    const communityChatBtn = document.getElementById('sidebar-community-chat-btn');
+    if (communityChatBtn) {
+        communityChatBtn.addEventListener('click', (e) => {
             e.preventDefault();
             openCommunityModal();
+            const sidebar = document.querySelector('.sidebar');
+            const menuBtnIcon = document.querySelector('#mobile-menu-toggle i');
+            if (sidebar && sidebar.classList.contains('mobile-open')) {
+                sidebar.classList.remove('mobile-open');
+                if (menuBtnIcon) menuBtnIcon.className = 'ph ph-list';
+            }
         });
-    });
+    }
+
+    const avatarStack = document.getElementById('sidebar-avatar-stack');
+    if (avatarStack) {
+        avatarStack.style.cursor = 'pointer';
+        avatarStack.addEventListener('click', () => {
+            openCommunityModal();
+        });
+    }
 
     document.addEventListener('keydown', (e) => {
         if (e.altKey && e.key.toLowerCase() === 'k') {
@@ -342,6 +357,9 @@ function initModals() {
     }
 
     function openCommunityModal() {
+        const liveCount = Math.max(1, Number(window.currentLiveViewers) || 1);
+        const liveText = `${liveCount} ${liveCount === 1 ? 'Visitor' : 'Visitors'} Live`;
+
         openModal(`
             <div class="community-modal fade-in">
                 <div class="game-header">
@@ -349,9 +367,14 @@ function initModals() {
                         <i class="ph-fill ph-game-controller"></i> 
                         <span>2D Dev Lounge</span>
                     </div>
-                    <div class="game-online">
-                        <span style="background:#22c55e; width:8px; height:8px; border-radius:50%; display:inline-block;"></span>
-                        <span>16 Devs Online</span>
+                    <div class="game-online" style="display:flex; align-items:center; gap:10px;">
+                        <button type="button" id="lounge-open-guestbook-btn" class="terminal-chip" title="Open Developer Guestbook">
+                            <i class="ph ph-book-bookmark"></i> Guestbook
+                        </button>
+                        <span style="display:inline-flex; align-items:center; gap:6px;">
+                            <span style="background:var(--status-ok); width:8px; height:8px; border-radius:50%; display:inline-block;"></span>
+                            <span id="lounge-online-count">${liveText}</span>
+                        </span>
                     </div>
                 </div>
                 
@@ -375,6 +398,16 @@ function initModals() {
                 <p class="game-hint">Move with <strong>W / A / S / D</strong> or <strong>Arrow Keys</strong>. Touch controls for mobile!</p>
             </div>
         `);
+
+        const loungeGbBtn = document.getElementById('lounge-open-guestbook-btn');
+        if (loungeGbBtn) {
+            loungeGbBtn.addEventListener('click', () => {
+                closeModal();
+                setTimeout(() => {
+                    if (window.openGuestbookModal) window.openGuestbookModal();
+                }, 180);
+            });
+        }
 
         const canvas = document.getElementById('game-canvas');
         if (!canvas) return;
@@ -585,4 +618,8 @@ function initModals() {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
         });
     }
+
+    window.openCommunityModal = openCommunityModal;
+    window.openTerminalModal = openTerminalModal;
+    window.openTypingModal = openTypingModal;
 }

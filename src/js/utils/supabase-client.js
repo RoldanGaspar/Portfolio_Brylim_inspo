@@ -232,13 +232,87 @@ async function recordAndGetPageView() {
     return null;
 }
 
+let presenceChannel = null;
+window.currentLiveViewers = 1;
+
+function updateLivePresenceDOM(activeCount) {
+    const count = Math.max(1, Number(activeCount) || 1);
+    window.currentLiveViewers = count;
+
+    const viewerCountEl = document.getElementById('live-viewer-count');
+    const viewerLabelEl = document.getElementById('live-viewer-label');
+    const avatarBadgeEl = document.getElementById('community-avatar-count');
+    const loungeCountEl = document.getElementById('lounge-online-count');
+
+    if (viewerCountEl) {
+        viewerCountEl.textContent = String(count);
+    }
+    if (viewerLabelEl) {
+        viewerLabelEl.textContent = count === 1 ? 'person viewing now' : 'people viewing now';
+    }
+    if (avatarBadgeEl && count > 3) {
+        avatarBadgeEl.textContent = `+${count - 3}`;
+    }
+    if (loungeCountEl) {
+        loungeCountEl.textContent = `${count} ${count === 1 ? 'Visitor' : 'Visitors'} Live`;
+    }
+}
+
+function initLivePresence() {
+    const client = getSupabaseClient();
+    if (!client || typeof client.channel !== 'function' || presenceChannel) return;
+
+    try {
+        let sessionKey = sessionStorage.getItem('rg_presence_key');
+        if (!sessionKey) {
+            sessionKey = 'v_' + Math.random().toString(36).slice(2, 10);
+            sessionStorage.setItem('rg_presence_key', sessionKey);
+        }
+
+        presenceChannel = client.channel('roldan_portfolio_presence', {
+            config: {
+                presence: { key: sessionKey }
+            }
+        });
+
+        presenceChannel
+            .on('presence', { event: 'sync' }, () => {
+                const state = presenceChannel.presenceState();
+                const activeKeys = state ? Object.keys(state).length : 1;
+                updateLivePresenceDOM(activeKeys);
+            })
+            .subscribe(async (status) => {
+                if (status === 'SUBSCRIBED') {
+                    await presenceChannel.track({
+                        online_at: new Date().toISOString(),
+                        route: window.location.hash || '#/'
+                    });
+                }
+            });
+    } catch (err) {
+        console.warn('Live presence notice:', err);
+    }
+}
+
 async function updateVisitorCounterUI() {
+    initLivePresence();
+
     const counterEl = document.getElementById('site-visitor-counter');
-    if (!counterEl) return;
+    const avatarBadgeEl = document.getElementById('community-avatar-count');
 
     const count = await recordAndGetPageView();
     if (count !== null && counterEl) {
         counterEl.textContent = Number(count).toLocaleString();
+    }
+
+    try {
+        const entries = await fetchGuestbookEntries();
+        if (avatarBadgeEl && window.currentLiveViewers <= 3 && Array.isArray(entries) && entries.length > 0) {
+            avatarBadgeEl.textContent = `+${entries.length}`;
+            avatarBadgeEl.title = `${entries.length} signed guestbook notes · ${count || '—'} total site views`;
+        }
+    } catch (e) {
+        // Ignore guestbook badge fallback error
     }
 }
 
@@ -249,6 +323,7 @@ window.openContactModal = openContactModal;
 window.closeContactModal = closeContactModal;
 window.recordAndGetPageView = recordAndGetPageView;
 window.updateVisitorCounterUI = updateVisitorCounterUI;
+window.initLivePresence = initLivePresence;
 
 // ==========================================
 // INTERACTIVE DEVELOPER GUESTBOOK
