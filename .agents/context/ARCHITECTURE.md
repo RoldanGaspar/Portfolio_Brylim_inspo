@@ -49,7 +49,7 @@ initVerifiedBadgeConfetti(); initAudioLoungeEvents() /* only on #/audio */; play
 | `#/certifications` | `renderCertificationsAll` | `views/certifications-all.js` |
 | `#/recommendations` | `renderRecommendationsAll` | `views/recommendations-all.js` |
 | `#/shop` · `#/shop/:id` | `renderShop` · `renderShopDetail` | `views/shop.js` · `views/shop-detail.js` |
-| `#/blog` | `renderBlog` | `views/blog.js` |
+| `#/blog` · `#/blog/:id` | `renderBlog` · `renderBlogDetail` | `views/blog.js` · `views/blog-detail.js` |
 | `#/gear` | `renderGear` | `views/gear.js` |
 | `#/resources` | `renderResources` | `views/resources.js` |
 | `#/collabs` | `renderCollabs` | `views/collabs.js` |
@@ -76,6 +76,7 @@ initVerifiedBadgeConfetti(); initAudioLoungeEvents() /* only on #/audio */; play
 | `generateGithubGraph` | `components/github-graph.js` | `home.js` |
 | `initAudioLoungeEvents`, Pomodoro fns | `audio-lounge.js` | router |
 | `renderCyberLab`, `initCyberLabEvents` | `cyber-lab.js` | router |
+| `renderBlog`, `initBlogListEvents`, `renderBlogDetail`, `initBlogDetailEvents` | `blog.js` · `blog-detail.js` | router |
 
 ## Keyboard shortcuts
 

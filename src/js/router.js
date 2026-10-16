@@ -41,6 +41,11 @@ function router() {
         const project = portfolioData.projects.find(p => p.id === slug);
         viewFunc = () => renderProjectDetail(project);
         viewHash = '#/projects';
+    } else if (hash.startsWith('#/blog/')) {
+        const slug = hash.replace('#/blog/', '');
+        const post = portfolioData.blog.find(b => b.id === slug);
+        viewFunc = () => renderBlogDetail(post);
+        viewHash = '#/blog';
     } else {
         if (!hash.startsWith('#/')) {
             viewHash = '#/';
@@ -49,12 +54,14 @@ function router() {
         viewFunc = routes[viewHash] || renderHome;
     }
 
-    if (currentView !== viewHash) {
+    const routeKey = anchor ? viewHash : hash;
+
+    if (currentView !== routeKey) {
         routerView.classList.add('page-exit');
         
         setTimeout(() => {
             routerView.innerHTML = viewFunc();
-            currentView = viewHash;
+            currentView = routeKey;
             routerView.classList.remove('page-exit');
             routerView.classList.add('page-enter');
             
@@ -68,6 +75,8 @@ function router() {
             if (window.initVerifiedBadgeConfetti) initVerifiedBadgeConfetti();
             if (window.initAudioLoungeEvents && viewHash === '#/audio') initAudioLoungeEvents();
             if (window.initCyberLabEvents && viewHash === '#/cyber-lab') initCyberLabEvents();
+            if (window.initBlogListEvents && viewHash === '#/blog') initBlogListEvents();
+            if (window.initBlogDetailEvents && viewHash === '#/blog') initBlogDetailEvents();
             if (window.initGithubGraph && (viewHash === '#/' || viewHash === '#home')) initGithubGraph();
             if (window.playSound) playSound('nav');
         }, currentView === null ? 0 : 200);
@@ -77,7 +86,7 @@ function router() {
     document.querySelectorAll('.sidebar-nav a').forEach(link => {
         link.classList.remove('active');
         const href = link.getAttribute('href');
-        if (href === hash || (viewHash === '#/' && href === anchor)) {
+        if (href === hash || href === viewHash || (viewHash === '#/' && href === anchor)) {
             link.classList.add('active');
         }
     });

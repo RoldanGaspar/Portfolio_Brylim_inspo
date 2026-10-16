@@ -72,13 +72,13 @@ function renderHome() {
             </div>
             <div class="blog-list">
                 ${portfolioData.blog.slice(0,3).map(post => `
-                    <article class="blog-item">
+                    <a href="#/blog/${post.id}" class="blog-item">
                         <div class="blog-content">
                             <h4>${post.title}</h4>
                             <p>${post.preview.substring(0, 80)}...</p>
                         </div>
                         <span class="blog-date">${post.date}</span>
-                    </article>
+                    </a>
                 `).join('')}
             </div>
         </section>

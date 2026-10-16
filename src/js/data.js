@@ -88,39 +88,174 @@ window.portfolioData = {
     ],
     blog: [
         {
+            id: "building-ai-harnesses",
             title: "Stop Focusing Only on the AI Model. Start Building AI Harnesses.",
-            preview: "An AI Harness is the system surrounding an AI model that makes it reliable, safe, and dependable...",
+            preview: "An AI Harness is the system surrounding an AI model that makes it reliable, safe, and dependable in production.",
             date: "Jul 2026",
-            readTime: "2 min",
-            image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=400&auto=format&fit=crop"
+            readTime: "4 min",
+            category: "AI Engineering",
+            tags: ["AI Agents", "Verification", "Architecture"],
+            image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop",
+            sections: [
+                {
+                    id: "model-vs-system",
+                    heading: "The Model Is Only Half the System",
+                    paragraphs: [
+                        "When an AI workflow fails in production, teams usually blame the model first. They swap prompts or wait for the next frontier checkpoint. In practice, most reliability gains come from the harness around the model—not the raw weights.",
+                        "An AI harness is the deterministic scaffolding that constrains what a model sees, what tools it can invoke, and how its outputs are verified before anything touches production state."
+                    ],
+                    callout: "A frontier model without a verification harness is just a fast way to generate unverified state changes."
+                },
+                {
+                    id: "four-layers-of-a-harness",
+                    heading: "Four Layers of a Dependable Harness",
+                    paragraphs: [
+                        "In this portfolio repository, the AI harness lives directly inside the codebase as structured rules, scoped context docs, and a zero-dependency static verifier script.",
+                        "Every change goes through four deterministic gates: context scoping, explicit schema contracts, read/write boundaries, and automated verification before commit."
+                    ],
+                    code: {
+                        lang: "javascript",
+                        snippet: "// Deterministic pre-flight check before any route or data change ships\nfunction verifyRouteContract(routes, registeredViews) {\n    const missing = Object.entries(routes)\n        .filter(([, fn]) => typeof registeredViews[fn] !== 'function');\n    if (missing.length > 0) {\n        throw new Error(`Broken route bindings: ${missing.map(([r]) => r).join(', ')}`);\n    }\n    return { ok: true, checked: Object.keys(routes).length };\n}"
+                    }
+                },
+                {
+                    id: "design-for-recovery",
+                    heading: "Design for Fast Feedback Loops",
+                    paragraphs: [
+                        "When the verifier catches a broken global or a missing asset in 200 milliseconds, an agent can self-correct in a single turn instead of shipping a silent regression.",
+                        "Before optimizing your prompt, invest in the harness: strict schemas, fast local checks, and clear rollback paths."
+                    ]
+                }
+            ]
         },
         {
-            title: "My Setup: Poke, MCPs, and a Local Mac Bridge",
-            preview: "I finally got my automation stack to a place where it actually works for me instead of the other way around...",
+            id: "mcp-automation-stack",
+            title: "My Setup: Poke, MCPs, and a Local Bridge",
+            preview: "I finally got my automation stack to a place where it actually works for me instead of the other way around.",
             date: "Jun 2026",
             readTime: "4 min",
-            image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=400&auto=format&fit=crop"
+            category: "Systems & MCP",
+            tags: ["MCP", "Supabase", "Automation"],
+            image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=600&auto=format&fit=crop",
+            sections: [
+                {
+                    id: "why-mcp-matters",
+                    heading: "Connecting Code, Database, and Deployment",
+                    paragraphs: [
+                        "Context switching between a code editor, database dashboard, and deployment logs drains momentum. Using the Model Context Protocol (MCP), those surfaces connect directly into a single development loop.",
+                        "Instead of copying SQL migrations by hand or guessing why a table insert failed, the agent inspects schema definitions and Row-Level Security policies directly."
+                    ]
+                },
+                {
+                    id: "least-privilege-by-default",
+                    heading: "Least Privilege on Every Tool Call",
+                    paragraphs: [
+                        "Connecting powerful tools requires strict operational boundaries. Public client keys only ever get narrow permissions—such as inserting a contact message or calling an atomic counter RPC—while destructive table operations require explicit human confirmation."
+                    ],
+                    code: {
+                        lang: "sql",
+                        snippet: "-- Row-Level Security: allow anonymous inserts, block public reads\nALTER TABLE public.contact_messages ENABLE ROW LEVEL SECURITY;\n\nCREATE POLICY \"allow_anon_insert_contact\"\nON public.contact_messages\nFOR INSERT TO anon\nWITH CHECK (char_length(message) BETWEEN 5 AND 2000);"
+                    }
+                },
+                {
+                    id: "keeping-the-stack-simple",
+                    heading: "Keeping the Runtime Zero-Build",
+                    paragraphs: [
+                        "Even with cloud integrations and database telemetry, the frontend remains plain HTML, CSS tokens, and vanilla JavaScript. No fragile bundler plugins—just clean standards that load fast anywhere."
+                    ]
+                }
+            ]
         },
         {
+            id: "ai-products-beyond-demos",
             title: "AI Products Need More Than a Good Demo",
-            preview: "What I think about when turning AI demos into products people can trust and use.",
+            preview: "What I think about when turning AI demos into products people can trust and use every day.",
             date: "Jun 2026",
             readTime: "3 min",
-            image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=400&auto=format&fit=crop"
+            category: "Product Engineering",
+            tags: ["Product", "UX", "Reliability"],
+            image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&auto=format&fit=crop",
+            sections: [
+                {
+                    id: "the-demo-gap",
+                    heading: "The Gap Between a 90% Demo and a Dependable Tool",
+                    paragraphs: [
+                        "Building a flashy AI prototype takes an afternoon. Making that same feature predictable when a user has slow mobile connectivity, ambiguous input, or strict privacy requirements is where real engineering begins.",
+                        "Users do not care how complex your prompt pipeline is if the interface freezes or fabricates an answer."
+                    ],
+                    callout: "Trust is built in the edge cases: clear loading states, honest fallbacks, and zero fabricated data."
+                },
+                {
+                    id: "grounded-responses",
+                    heading: "Ground Every Output in Verified Data",
+                    paragraphs: [
+                        "Whether building a portfolio assistant or a customer-facing workflow, answers should be anchored to a single source of truth. When data is unknown, saying so clearly is always better than guessing."
+                    ]
+                }
+            ]
         },
         {
+            id: "small-mobile-apps-product-taste",
             title: "What Small Mobile Apps Taught Me About Taste",
-            preview: "What focused apps like budget, fitness, and travel tools taught me about product taste.",
+            preview: "What focused apps like budget, fitness, and travel tools taught me about restraint and interface craft.",
             date: "Jun 2026",
             readTime: "5 min",
-            image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=400&auto=format&fit=crop"
+            category: "Design & Craft",
+            tags: ["UI/UX", "Mobile", "Design Systems"],
+            image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=600&auto=format&fit=crop",
+            sections: [
+                {
+                    id: "restraint-over-clutter",
+                    heading: "Restraint Beats Feature Bloat",
+                    paragraphs: [
+                        "On a 375px mobile screen, every extra border, badge, and competing accent color taxes the user's attention. Good interface taste comes from removing elements until only the essential hierarchy remains.",
+                        "A single clear primary action, generous whitespace, and legible monospace metadata age far better than heavy gradients."
+                    ]
+                },
+                {
+                    id: "tokens-and-themes",
+                    heading: "Design Tokens Keep Light and Dark Themes Honest",
+                    paragraphs: [
+                        "Hard-coding hex colors inside components guarantees visual drift. Routing every surface, border, and text role through semantic CSS custom properties ensures both light and dark modes maintain crisp contrast."
+                    ],
+                    code: {
+                        lang: "css",
+                        snippet: ":root {\n    --bg-color: #fcfcfc;\n    --card-bg: #ffffff;\n    --text-color: #111111;\n    --border-color: #e5e5e5;\n}\n\n[data-theme=\"dark\"] {\n    --bg-color: #0b0c0e;\n    --card-bg: #12151b;\n    --text-color: #f3f4f6;\n    --border-color: #1f242d;\n}"
+                    }
+                }
+            ]
         },
         {
+            id: "boring-ai-guardrails",
             title: "Boring Guardrails Make AI Features Better",
-            preview: "Why practical AI Guardrails are product decisions, not just technical controls.",
+            preview: "Why practical AI guardrails—input validation, DOM escaping, and rate limits—are product decisions, not just security checkboxes.",
             date: "Jun 2026",
             readTime: "3 min",
-            image: "https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=400&auto=format&fit=crop"
+            category: "AI Security",
+            tags: ["Cybersecurity", "XSS Defense", "Guardrails"],
+            image: "https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=600&auto=format&fit=crop",
+            sections: [
+                {
+                    id: "security-starts-at-the-boundary",
+                    heading: "Security Starts at the Input Boundary",
+                    paragraphs: [
+                        "Coursework in Cisco CyberOps and Network Defense reinforces a timeless principle: never trust unvalidated ingress traffic. That applies equally to network packets at a perimeter firewall and user input in an AI chat drawer.",
+                        "Rendering untrusted strings with innerHTML opens immediate DOM XSS vectors. Inserting user messages strictly via textContent neutralizes script injection before it ever reaches the DOM."
+                    ],
+                    code: {
+                        lang: "javascript",
+                        snippet: "// Safe DOM insertion: neutralizes script & HTML injection payloads\nfunction appendUserMessage(rawText) {\n    const bubble = document.createElement('div');\n    bubble.className = 'ai-msg user';\n    bubble.textContent = rawText.slice(0, 200);\n    messagesContainer.appendChild(bubble);\n}"
+                    }
+                },
+                {
+                    id: "defense-in-depth",
+                    heading: "Defense in Depth Across Client and Database",
+                    paragraphs: [
+                        "Client-side length checks improve UX, but real enforcement happens at the database and policy layer. Pairing frontend validation with PostgreSQL Row-Level Security and strict schema constraints ensures the system stays resilient even when queried directly."
+                    ],
+                    callout: "Good security guardrails feel invisible to honest users and impenetrable to automated probes."
+                }
+            ]
         }
     ],
     gear: {

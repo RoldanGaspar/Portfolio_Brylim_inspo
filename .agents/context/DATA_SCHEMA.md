@@ -25,8 +25,8 @@ Fields marked `html` are inserted raw via template literals — only trusted, ha
 | `stats` | `{ rank, downloads, rating }` | all strings; all three required by `project-detail.js` |
 | `downloadUrl` | url | |
 
-### `blog[]` → `views/blog.js`, `views/home.js` (first 3)
-`title`, `preview`, `date` (`"Mon YYYY"`), `readTime` (`"N min"`), `image` (url). No `id`/slug and no post pages exist yet.
+### `blog[]` → `views/blog.js`, `views/blog-detail.js`, `views/home.js` (first 3), router (`#/blog/:id`)
+`id` (slug), `title`, `preview`, `date` (`"Mon YYYY"`), `readTime` (`"N min"`), `category`, `tags[]`, `image` (url), `sections[]` (`id`, `heading`, `paragraphs[]`, optional `callout`, optional `code: { lang, snippet }`).
 
 ### `gear{ [CATEGORY]: item[] }` → `views/gear.js`
 Item: `name`, `desc`, `image`. Category keys are UPPERCASE display labels.
