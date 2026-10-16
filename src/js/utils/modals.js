@@ -359,6 +359,9 @@ function initModals() {
     function openCommunityModal() {
         const liveCount = Math.max(1, Number(window.currentLiveViewers) || 1);
         const liveText = `${liveCount} ${liveCount === 1 ? 'Visitor' : 'Visitors'} Live`;
+        const savedName = (localStorage.getItem('rg_lounge_name') || 'Roldan (You)').slice(0, 18);
+        const savedColor = localStorage.getItem('rg_lounge_color') || '#22d3ee';
+        const suitColors = ['#22d3ee', '#a855f7', '#10b981', '#f59e0b', '#ec4899'];
 
         openModal(`
             <div class="community-modal fade-in">
@@ -366,10 +369,10 @@ function initModals() {
                     <div class="game-title">
                         <i class="ph-fill ph-cube-transparent"></i> 
                         <span>3D Cyber-Loft Lounge</span>
-                        <span class="game-badge-3d">ISO-3D ENGINE</span>
+                        <span class="game-badge-3d">ISO-3D v2.0</span>
                     </div>
                     <div class="game-online" style="display:flex; align-items:center; gap:10px;">
-                        <button type="button" id="lounge-open-guestbook-btn" class="terminal-chip" title="Open Developer Guestbook">
+                        <button type="button" id="lounge-open-guestbook-btn" title="Open Developer Guestbook">
                             <i class="ph ph-book-bookmark"></i> Guestbook
                         </button>
                         <span style="display:inline-flex; align-items:center; gap:6px;">
@@ -390,12 +393,17 @@ function initModals() {
                         <button type="button" class="lounge-hud-btn" id="lounge-jump-btn" title="Jump (Space)">
                             <i class="ph ph-arrow-fat-lines-up"></i> Jump
                         </button>
+                        <div class="lounge-identity-group" title="Customize your 3D Visitor Name & Suit Color">
+                            <i class="ph ph-user-circle" style="color:var(--accent-cyan);"></i>
+                            <input type="text" id="lounge-player-name" class="lounge-name-input" value="${escapeTerminalText(savedName)}" maxlength="18" placeholder="Your nickname">
+                            ${suitColors.map(c => `<button type="button" class="lounge-color-dot ${c === savedColor ? 'active' : ''}" data-color="${c}" style="background:${c};" aria-label="Suit color ${c}"></button>`).join('')}
+                        </div>
                     </div>
                     <div class="lounge-hud-group">
-                        <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="👋 Yo!">👋 Wave</button>
-                        <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="🚀 Shipping!">🚀 Ship</button>
-                        <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="☕ Espresso!">☕ Coffee</button>
-                        <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="🛡️ Secured!">🛡️ SOC</button>
+                        <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="👋 Yo!">👋</button>
+                        <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="🚀 Shipping!">🚀</button>
+                        <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="☕ Espresso!">☕</button>
+                        <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="🛡️ Secured!">🛡️</button>
                     </div>
                 </div>
                 
@@ -411,6 +419,12 @@ function initModals() {
                         <button type="button" class="lounge-station-action-btn" id="lounge-station-action-btn">Interact [F]</button>
                     </div>
                     <canvas id="game-canvas" width="680" height="382"></canvas>
+                    <div class="lounge-station-bar">
+                        <button type="button" class="lounge-station-chip" data-station="dev-rig">💻 AI Rig</button>
+                        <button type="button" class="lounge-station-chip" data-station="soc-rack">🛡️ SOC Rack</button>
+                        <button type="button" class="lounge-station-chip" data-station="espresso-bar">☕ Lo-Fi Bar</button>
+                        <button type="button" class="lounge-station-chip" data-station="arcade-guestbook">🕹️ Arcade</button>
+                    </div>
                     <div class="game-mobile-controls">
                         <button class="dpad-btn up" data-dir="up">▲</button>
                         <div class="dpad-middle">
@@ -426,7 +440,7 @@ function initModals() {
                     <button id="game-send-btn">Send <i class="ph-fill ph-paper-plane-right"></i></button>
                 </div>
                 
-                <p class="game-hint"><strong>WASD / Arrows</strong> or <strong>Click Floor</strong> to walk &bull; <strong>Space</strong> Jump &bull; <strong>Q / E</strong> Rotate 3D Cam &bull; Walk near stations & press <strong>F</strong>!</p>
+                <p class="game-hint"><strong>WASD / Arrows</strong> or <strong>Click Floor/Stations</strong> to walk &bull; <strong>Space</strong> Jump &bull; <strong>Q / E</strong> Rotate 3D Diorama &bull; Press <strong>F</strong> near stations!</p>
             </div>
         `);
 
@@ -434,6 +448,7 @@ function initModals() {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         const chatInput = document.getElementById('game-chat-input');
+        const nameInput = document.getElementById('lounge-player-name');
         const sendBtn = document.getElementById('game-send-btn');
         const stationBanner = document.getElementById('lounge-station-banner');
         const stationIconEl = document.getElementById('lounge-station-icon');
@@ -444,7 +459,7 @@ function initModals() {
         // High-DPI Retina Canvas Scaling
         const modalArea = canvas.closest('.modal-content-area');
         const maxAvailWidth = modalArea ? (modalArea.clientWidth - 4) : (window.innerWidth - 48);
-        const cssWidth = Math.min(692, Math.max(300, maxAvailWidth));
+        const cssWidth = Math.min(696, Math.max(300, maxAvailWidth));
         const cssHeight = Math.round(cssWidth * (9 / 16));
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
@@ -456,14 +471,14 @@ function initModals() {
         let isDisposed = false;
 
         // 3D Isometric Camera & World Config
-        const WORLD_LIMIT = 148;
+        const WORLD_LIMIT = 144;
         const FLOOR_SIZE = 160;
-        let camAngle = Math.PI * 0.25; // 45 deg classic isometric
+        let camAngle = Math.PI * 0.25;
         let targetCamAngle = camAngle;
-        const isoScale = Math.min(cssWidth, cssHeight) / 355;
+        const isoScale = Math.min(cssWidth, cssHeight) / 365;
         const zScale = isoScale * 0.88;
         const centerX = cssWidth * 0.5;
-        const centerY = cssHeight * 0.55;
+        const centerY = cssHeight * 0.58;
 
         function project3D(wx, wy, wz = 0) {
             const cosA = Math.cos(camAngle);
@@ -503,10 +518,8 @@ function initModals() {
             const topPts = corners.map(c => project3D(c.x, c.y, z0 + h));
             const botPts = corners.map(c => project3D(c.x, c.y, z0));
 
-            // Draw front-facing vertical faces (where top edge goes right-to-left or by camera normal)
             for (let i = 0; i < 4; i++) {
                 const next = (i + 1) % 4;
-                // In screen space, a clockwise top polygon has front-facing sides when topPts[next].x < topPts[i].x
                 if (topPts[next].x < topPts[i].x) {
                     ctx.beginPath();
                     ctx.moveTo(topPts[i].x, topPts[i].y);
@@ -518,13 +531,12 @@ function initModals() {
                     ctx.fill();
                     if (palette.stroke) {
                         ctx.strokeStyle = palette.stroke;
-                        ctx.lineWidth = 1;
+                        ctx.lineWidth = 0.9;
                         ctx.stroke();
                     }
                 }
             }
 
-            // Top face
             ctx.beginPath();
             ctx.moveTo(topPts[0].x, topPts[0].y);
             for (let i = 1; i < 4; i++) ctx.lineTo(topPts[i].x, topPts[i].y);
@@ -533,7 +545,7 @@ function initModals() {
             ctx.fill();
             if (palette.stroke) {
                 ctx.strokeStyle = palette.stroke;
-                ctx.lineWidth = 1;
+                ctx.lineWidth = 0.9;
                 ctx.stroke();
             }
         }
@@ -546,10 +558,12 @@ function initModals() {
                 name: 'AI & Full-Stack Rig',
                 desc: 'Inspect Roldan\'s Tech Stack & AI Harness tools',
                 btnLabel: 'Open Stack [F]',
-                wx: -102,
-                wy: -102,
-                w: 52,
-                d: 36,
+                wx: -104,
+                wy: -104,
+                interactWx: -66,
+                interactWy: -66,
+                w: 54,
+                d: 40,
                 h: 22,
                 accent: '#38bdf8',
                 triggerAction: () => {
@@ -563,11 +577,13 @@ function initModals() {
                 name: 'SOC & NetAcad Defense Rack',
                 desc: 'Launch live interactive firewall & packet simulator',
                 btnLabel: 'Launch Cyber Lab [F]',
-                wx: 102,
-                wy: -102,
-                w: 44,
+                wx: 104,
+                wy: -104,
+                interactWx: 66,
+                interactWy: -66,
+                w: 48,
                 d: 44,
-                h: 48,
+                h: 50,
                 accent: '#10b981',
                 triggerAction: () => {
                     cleanupAndClose();
@@ -580,18 +596,20 @@ function initModals() {
                 name: 'Lo-Fi & Espresso Bar',
                 desc: 'Grab virtual espresso & toggle ambient Lo-Fi soundscape',
                 btnLabel: 'Brew & Play Lo-Fi [F]',
-                wx: -102,
-                wy: 102,
+                wx: -104,
+                wy: 104,
+                interactWx: -66,
+                interactWy: 66,
                 w: 54,
-                d: 38,
+                d: 42,
                 h: 24,
                 accent: '#f59e0b',
                 triggerAction: () => {
                     if (window.setSoundscape) window.setSoundscape('lofi');
                     player.message = '☕ Brewed fresh espresso + Lo-Fi beats!';
                     player.msgTime = Date.now() + 4200;
-                    player.vz = 5.5;
-                    broadcastMyState();
+                    player.vz = 5.8;
+                    broadcastMyState(true);
                 }
             },
             {
@@ -600,11 +618,13 @@ function initModals() {
                 name: 'Guestbook Arcade Kiosk',
                 desc: 'Read community notes or sign Roldan\'s Supabase Guestbook',
                 btnLabel: 'Open Guestbook [F]',
-                wx: 102,
-                wy: 102,
-                w: 42,
-                d: 42,
-                h: 44,
+                wx: 104,
+                wy: 104,
+                interactWx: 66,
+                interactWy: 66,
+                w: 44,
+                d: 44,
+                h: 46,
                 accent: '#a855f7',
                 triggerAction: () => {
                     cleanupAndClose();
@@ -619,27 +639,28 @@ function initModals() {
 
         const player = {
             id: 'local',
-            name: 'Roldan (You)',
+            name: savedName,
             wx: 0,
-            wy: 58,
+            wy: 64,
             wz: 0,
             vz: 0,
             facing: -Math.PI * 0.5,
             stride: 0,
-            color: '#22d3ee',
-            speed: 2.35,
+            color: savedColor,
+            speed: 2.4,
             targetWx: null,
             targetWy: null,
-            message: 'Welcome to the 3D Cyber-Loft! 🚀',
-            msgTime: Date.now() + 4000,
+            message: 'Welcome to the 3D Cyber-Loft v2! 🚀',
+            msgTime: Date.now() + 4200,
             isPlayer: true
         };
 
+        // Each AI engineer has a home quadrant so they don't pile up in the center
         const aiAvatars = [
-            { id: 'ai-1', name: 'Alex · AI Eng', wx: -65, wy: -55, wz: 0, vz: 0, facing: 0.4, stride: 0, color: '#a855f7', targetWx: -75, targetWy: -68, message: 'Testing agent harnesses on the rig 💻', msgTime: Date.now() + 3400 },
-            { id: 'ai-2', name: 'Sophia · SecOps', wx: 68, wy: -52, wz: 0, vz: 0, facing: 2.1, stride: 1.5, color: '#10b981', targetWx: 74, targetWy: -68, message: 'Zero packet drops on the SOC rack 🛡️', msgTime: Date.now() + 5200 },
-            { id: 'ai-3', name: 'Kenji · Creative', wx: -62, wy: 68, wz: 0, vz: 0, facing: -1.2, stride: 3.1, color: '#f59e0b', targetWx: -75, targetWy: 74, message: 'Espresso + 40Hz focus hits different ☕', msgTime: Date.now() + 2500 },
-            { id: 'ai-4', name: 'Elena · Indie', wx: 64, wy: 65, wz: 0, vz: 0, facing: -2.4, stride: 4.2, color: '#ec4899', targetWx: 72, targetWy: 72, message: 'Signed the guestbook kiosk! 🕹️', msgTime: Date.now() + 4500 }
+            { id: 'ai-1', name: 'Alex · AI Eng', homeWx: -64, homeWy: -58, wx: -64, wy: -58, wz: 0, vz: 0, facing: 0.4, stride: 0, color: '#a855f7', targetWx: -72, targetWy: -52, message: 'Triple-monitor AI harness setup 💻', msgTime: Date.now() + 3400 },
+            { id: 'ai-2', name: 'Sophia · SecOps', homeWx: 64, homeWy: -58, wx: 64, wy: -58, wz: 0, vz: 0, facing: 2.1, stride: 1.5, color: '#10b981', targetWx: 72, targetWy: -54, message: 'SOC telemetry racks all green 🛡️', msgTime: Date.now() + 5200 },
+            { id: 'ai-3', name: 'Kenji · Creative', homeWx: -64, homeWy: 62, wx: -64, wy: 62, wz: 0, vz: 0, facing: -1.2, stride: 3.1, color: '#f59e0b', targetWx: -70, targetWy: 54, message: 'Fresh espresso at the SW bar ☕', msgTime: Date.now() + 2600 },
+            { id: 'ai-4', name: 'Elena · Indie', homeWx: 64, homeWy: 62, wx: 64, wy: 62, wz: 0, vz: 0, facing: -2.4, stride: 4.2, color: '#ec4899', targetWx: 70, targetWy: 54, message: 'Check out the Guestbook Arcade! 🕹️', msgTime: Date.now() + 4600 }
         ];
 
         // Real-time remote visitors map (from Supabase Broadcast)
@@ -652,6 +673,8 @@ function initModals() {
             lastBroadcastAt = now;
             if (window.broadcastLoungeState) {
                 window.broadcastLoungeState({
+                    name: player.name,
+                    color: player.color,
                     wx: Math.round(player.wx),
                     wy: Math.round(player.wy),
                     wz: Math.round(player.wz),
@@ -671,7 +694,7 @@ function initModals() {
                     id: peerId,
                     name: `Visitor #${shortTag}`,
                     wx: 0,
-                    wy: 0,
+                    wy: 45,
                     wz: 0,
                     facing: 0,
                     stride: 0,
@@ -679,6 +702,12 @@ function initModals() {
                     message: '',
                     msgTime: 0
                 };
+                if (payload.name && typeof payload.name === 'string') {
+                    existing.name = payload.name.trim().slice(0, 18) || existing.name;
+                }
+                if (payload.color && suitColors.includes(payload.color)) {
+                    existing.color = payload.color;
+                }
                 existing.wx = Number(payload.wx) || 0;
                 existing.wy = Number(payload.wy) || 0;
                 existing.wz = Number(payload.wz) || 0;
@@ -693,45 +722,79 @@ function initModals() {
             });
         }
 
+        // Bind Visitor Identity Customizer
+        if (nameInput) {
+            nameInput.addEventListener('input', () => {
+                const val = nameInput.value.trim().slice(0, 18);
+                player.name = val || 'Roldan (You)';
+                localStorage.setItem('rg_lounge_name', player.name);
+                broadcastMyState(true);
+            });
+        }
+
+        document.querySelectorAll('.lounge-color-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const c = dot.getAttribute('data-color');
+                if (c) {
+                    player.color = c;
+                    localStorage.setItem('rg_lounge_color', c);
+                    document.querySelectorAll('.lounge-color-dot').forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
+                    if (window.playSound) window.playSound('click');
+                    broadcastMyState(true);
+                }
+            });
+        });
+
+        // Station Quick-Jump Chips
+        let clickRing = null;
+        document.querySelectorAll('.lounge-station-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const stId = chip.getAttribute('data-station');
+                const st = stations.find(s => s.id === stId);
+                if (!st) return;
+                if (activeNearStation === st) {
+                    st.triggerAction();
+                    return;
+                }
+                player.targetWx = st.interactWx;
+                player.targetWy = st.interactWy;
+                clickRing = { wx: st.interactWx, wy: st.interactWy, alpha: 1, color: st.accent };
+                if (window.playSound) window.playSound('click');
+            });
+        });
+
         // Ambient floating 3D particles (holo dust & coffee steam)
-        const particles = Array.from({ length: 18 }, (_, i) => ({
-            wx: (Math.random() - 0.5) * 240,
-            wy: (Math.random() - 0.5) * 240,
-            wz: Math.random() * 55 + 6,
-            speedZ: 0.22 + Math.random() * 0.25,
+        const particles = Array.from({ length: 20 }, (_, i) => ({
+            wx: (Math.random() - 0.5) * 250,
+            wy: (Math.random() - 0.5) * 250,
+            wz: Math.random() * 58 + 6,
+            speedZ: 0.22 + Math.random() * 0.24,
             color: i % 3 === 0 ? '#22d3ee' : (i % 3 === 1 ? '#a855f7' : '#34d399')
         }));
 
         const randomQuotes = [
-            'Isometric 3D engine running at 60 FPS ⚡',
-            'Press Q or E to rotate the 3D camera!',
+            'Cutaway 3D walls auto-switch on Q/E rotate!',
+            'Click any station chip to walk right to it ⚡',
             'Walk near any corner station & press F!',
-            'Try jumping over the holo-table with Space!',
+            'Customize your nickname & suit color above 🎨',
             'Supabase Realtime syncs across live tabs 🌐',
-            'Check out the CyberOps Lab on the NE rack 🛡️',
-            'Click anywhere on the 3D floor to pathfind!'
-        ];
-
-        const waypointTargets = [
-            { wx: -72, wy: -68 },
-            { wx: 72, wy: -68 },
-            { wx: -72, wy: 72 },
-            { wx: 72, wy: 72 },
-            { wx: 0, wy: -52 },
-            { wx: 0, wy: 56 }
+            'Check out the 3-bay SOC Server Rack 🛡️',
+            'Try jumping over the holo-table with Space!'
         ];
 
         const quoteInterval = setInterval(() => {
             const randomAi = aiAvatars[Math.floor(Math.random() * aiAvatars.length)];
             randomAi.message = randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
-            randomAi.msgTime = Date.now() + 4200;
-            const wp = waypointTargets[Math.floor(Math.random() * waypointTargets.length)];
-            randomAi.targetWx = wp.wx + (Math.random() - 0.5) * 24;
-            randomAi.targetWy = wp.wy + (Math.random() - 0.5) * 24;
-            if (Math.random() < 0.35 && randomAi.wz === 0) {
-                randomAi.vz = 4.6;
+            randomAi.msgTime = Date.now() + 4000;
+            // Patrol within their home quadrant + occasional visit near center ring
+            const roamRadius = 26;
+            randomAi.targetWx = randomAi.homeWx + (Math.random() - 0.5) * roamRadius * 2;
+            randomAi.targetWy = randomAi.homeWy + (Math.random() - 0.5) * roamRadius * 2;
+            if (Math.random() < 0.3 && randomAi.wz === 0) {
+                randomAi.vz = 4.5;
             }
-        }, 3800);
+        }, 4200);
 
         const keys = {};
 
@@ -744,7 +807,7 @@ function initModals() {
         }
 
         function handleKeyDown(e) {
-            if (document.activeElement === chatInput) return;
+            if (document.activeElement === chatInput || document.activeElement === nameInput) return;
             keys[e.code] = true;
             if (e.code === 'Space') {
                 e.preventDefault();
@@ -769,7 +832,6 @@ function initModals() {
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
 
-        // Camera & Jump HUD Buttons
         const camLeftBtn = document.getElementById('lounge-cam-left');
         const camRightBtn = document.getElementById('lounge-cam-right');
         const jumpBtn = document.getElementById('lounge-jump-btn');
@@ -809,18 +871,35 @@ function initModals() {
             });
         }
 
-        // Click / Tap on 3D Floor to Walk
-        let clickRing = null;
+        // Click / Tap on 3D Floor or Station to Walk / Interact
         canvas.addEventListener('pointerdown', (e) => {
             const rect = canvas.getBoundingClientRect();
             const sx = (e.clientX - rect.left) * (cssWidth / rect.width);
             const sy = (e.clientY - rect.top) * (cssHeight / rect.height);
             const pt = unprojectFloor(sx, sy);
+
+            // Check if user clicked directly on one of the 4 stations
+            for (let i = 0; i < stations.length; i++) {
+                const st = stations[i];
+                if (Math.hypot(pt.wx - st.wx, pt.wy - st.wy) < 42) {
+                    if (activeNearStation === st) {
+                        if (window.playSound) window.playSound('open');
+                        st.triggerAction();
+                    } else {
+                        player.targetWx = st.interactWx;
+                        player.targetWy = st.interactWy;
+                        clickRing = { wx: st.interactWx, wy: st.interactWy, alpha: 1, color: st.accent };
+                        if (window.playSound) window.playSound('click');
+                    }
+                    return;
+                }
+            }
+
             const clampedX = Math.max(-WORLD_LIMIT, Math.min(WORLD_LIMIT, pt.wx));
             const clampedY = Math.max(-WORLD_LIMIT, Math.min(WORLD_LIMIT, pt.wy));
             player.targetWx = clampedX;
             player.targetWy = clampedY;
-            clickRing = { wx: clampedX, wy: clampedY, alpha: 1 };
+            clickRing = { wx: clampedX, wy: clampedY, alpha: 1, color: '#22d3ee' };
             if (window.playSound) window.playSound('key');
         });
 
@@ -865,14 +944,86 @@ function initModals() {
             });
         }
 
+        // Draw Dynamic Cutaway 3D Back Walls (automatically selects the 2 farthest walls for any camera angle)
+        function drawCutawayWalls(now) {
+            const wallH = 66;
+            const wallThick = 8;
+            const candidateWalls = [
+                { id: 'N', cx: 0, cy: -FLOOR_SIZE - wallThick / 2, w: FLOOR_SIZE * 2 + wallThick * 2, d: wallThick, midX: 0, midY: -FLOOR_SIZE },
+                { id: 'S', cx: 0, cy: FLOOR_SIZE + wallThick / 2, w: FLOOR_SIZE * 2 + wallThick * 2, d: wallThick, midX: 0, midY: FLOOR_SIZE },
+                { id: 'W', cx: -FLOOR_SIZE - wallThick / 2, cy: 0, w: wallThick, d: FLOOR_SIZE * 2 + wallThick * 2, midX: -FLOOR_SIZE, midY: 0 },
+                { id: 'E', cx: FLOOR_SIZE + wallThick / 2, cy: 0, w: wallThick, d: FLOOR_SIZE * 2 + wallThick * 2, midX: FLOOR_SIZE, midY: 0 }
+            ];
+
+            candidateWalls.forEach(w => {
+                w.depth = project3D(w.midX, w.midY, 0).depth;
+            });
+            candidateWalls.sort((a, b) => a.depth - b.depth);
+
+            // Render the 2 back-most walls
+            const backWalls = candidateWalls.slice(0, 2);
+            backWalls.forEach((bw, idx) => {
+                drawIsoBox(bw.cx, bw.cy, 0, bw.w, bw.d, wallH, {
+                    top: '#1e293b',
+                    sideA: '#0f172a',
+                    sideB: '#111827',
+                    stroke: 'rgba(56, 189, 248, 0.24)'
+                });
+
+                // Glowing neon cornice strip along top of cutaway wall
+                drawIsoBox(bw.cx, bw.cy, wallH - 3, bw.w * 0.92, bw.d, 2.5, {
+                    top: idx === 0 ? '#22d3ee' : '#a855f7',
+                    sideA: idx === 0 ? '#0284c7' : '#7e22ce',
+                    sideB: idx === 0 ? '#0369a1' : '#6b21a8'
+                });
+
+                // Architectural wall feature: Cyber Window on wall 0, LED Command Sign on wall 1
+                if (idx === 0) {
+                    const isHoriz = bw.w > bw.d;
+                    drawIsoBox(
+                        bw.cx,
+                        bw.cy,
+                        20,
+                        isHoriz ? 86 : wallThick + 2,
+                        isHoriz ? wallThick + 2 : 86,
+                        32,
+                        {
+                            top: '#38bdf8',
+                            sideA: 'rgba(14, 165, 233, 0.32)',
+                            sideB: 'rgba(56, 189, 248, 0.25)',
+                            stroke: 'rgba(56, 189, 248, 0.65)'
+                        }
+                    );
+                } else {
+                    const signPos = project3D(bw.midX * 0.94, bw.midY * 0.94, 42);
+                    const pulse = (Math.sin(now * 0.005) + 1) * 0.5;
+                    ctx.font = 'bold 9px monospace';
+                    ctx.fillStyle = `rgba(167, 139, 250, ${0.65 + pulse * 0.35})`;
+                    ctx.textAlign = 'center';
+                    ctx.fillText('ROLDAN.OS // CYBER-LOFT', signPos.x, signPos.y);
+                }
+            });
+        }
+
         // Draw 3D Floor Platform & Glowing Grid
         function drawIsoFloor(now) {
-            // Thick 3D base slab (z from -16 to 0)
             drawIsoBox(0, 0, -16, FLOOR_SIZE * 2, FLOOR_SIZE * 2, 16, {
-                top: '#0c1322',
+                top: '#0b1120',
                 sideA: '#070b14',
                 sideB: '#05080f',
-                stroke: 'rgba(56, 189, 248, 0.28)'
+                stroke: 'rgba(56, 189, 248, 0.32)'
+            });
+
+            // Subtle floor specular ambient pools under the 4 corner stations
+            stations.forEach(st => {
+                const sp = project3D(st.wx, st.wy, 0.2);
+                const rad = ctx.createRadialGradient(sp.x, sp.y, 4, sp.x, sp.y, 48);
+                rad.addColorStop(0, st.accent + '33');
+                rad.addColorStop(1, 'transparent');
+                ctx.fillStyle = rad;
+                ctx.beginPath();
+                ctx.ellipse(sp.x, sp.y, 48, 26, 0, 0, Math.PI * 2);
+                ctx.fill();
             });
 
             // Isometric floor grid lines on z = 0
@@ -881,7 +1032,7 @@ function initModals() {
             for (let g = -FLOOR_SIZE; g <= FLOOR_SIZE; g += step) {
                 const p1 = project3D(g, -FLOOR_SIZE, 0);
                 const p2 = project3D(g, FLOOR_SIZE, 0);
-                ctx.strokeStyle = g === 0 ? 'rgba(34, 211, 238, 0.16)' : 'rgba(148, 163, 184, 0.07)';
+                ctx.strokeStyle = g === 0 ? 'rgba(34, 211, 238, 0.18)' : 'rgba(148, 163, 184, 0.07)';
                 ctx.beginPath();
                 ctx.moveTo(p1.x, p1.y);
                 ctx.lineTo(p2.x, p2.y);
@@ -897,7 +1048,7 @@ function initModals() {
 
             // Glowing floor circuit ring around center
             const ringPts = 28;
-            const ringR = 44;
+            const ringR = 42;
             ctx.beginPath();
             for (let i = 0; i <= ringPts; i++) {
                 const a = (i / ringPts) * Math.PI * 2;
@@ -905,7 +1056,7 @@ function initModals() {
                 if (i === 0) ctx.moveTo(p.x, p.y);
                 else ctx.lineTo(p.x, p.y);
             }
-            ctx.strokeStyle = `rgba(34, 211, 238, ${0.22 + 0.1 * Math.sin(now * 0.003)})`;
+            ctx.strokeStyle = `rgba(34, 211, 238, ${0.24 + 0.1 * Math.sin(now * 0.003)})`;
             ctx.lineWidth = 1.5;
             ctx.stroke();
 
@@ -913,88 +1064,167 @@ function initModals() {
             if (clickRing && clickRing.alpha > 0.02) {
                 const cp = project3D(clickRing.wx, clickRing.wy, 0.6);
                 ctx.beginPath();
-                ctx.ellipse(cp.x, cp.y, 12 * (1.2 - clickRing.alpha * 0.4), 6 * (1.2 - clickRing.alpha * 0.4), 0, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(34, 211, 238, ${clickRing.alpha})`;
+                ctx.ellipse(cp.x, cp.y, 13 * (1.2 - clickRing.alpha * 0.4), 6.5 * (1.2 - clickRing.alpha * 0.4), 0, 0, Math.PI * 2);
+                ctx.strokeStyle = clickRing.color || '#22d3ee';
+                ctx.globalAlpha = clickRing.alpha;
                 ctx.lineWidth = 1.8;
                 ctx.stroke();
+                ctx.globalAlpha = 1;
                 clickRing.alpha *= 0.92;
             }
         }
 
-        // Draw 3D Station & Hologram Label
+        // Draw Multi-Part 3D Station & Hologram Label
         function drawStation3D(st, now, isNear) {
-            // Base glowing pad on floor
-            drawIsoBox(st.wx, st.wy, 0, st.w + 14, st.d + 14, 2, {
-                top: isNear ? 'rgba(34, 211, 238, 0.25)' : 'rgba(30, 41, 59, 0.65)',
+            // Base glowing rug/pad on floor
+            drawIsoBox(st.wx, st.wy, 0, st.w + 18, st.d + 18, 2, {
+                top: isNear ? 'rgba(34, 211, 238, 0.25)' : 'rgba(15, 23, 42, 0.85)',
                 sideA: '#0f172a',
                 sideB: '#090d16',
-                stroke: isNear ? st.accent : 'rgba(148, 163, 184, 0.2)'
+                stroke: isNear ? st.accent : 'rgba(148, 163, 184, 0.24)'
             });
 
-            // Main station 3D structure
-            drawIsoBox(st.wx, st.wy, 2, st.w, st.d, st.h, {
-                top: '#1e293b',
-                sideA: '#131c2e',
-                sideB: '#0f172a',
-                stroke: isNear ? st.accent : 'rgba(255, 255, 255, 0.14)'
-            });
-
-            // Station-specific 3D details on top
             if (st.id === 'dev-rig') {
-                // Dual 3D monitors on desk
-                drawIsoBox(st.wx - 8, st.wy - 4, 2 + st.h, 18, 5, 14, {
+                // Desk legs & main surface
+                drawIsoBox(st.wx, st.wy - 4, 2, 50, 26, 16, {
+                    top: '#1e293b',
+                    sideA: '#0f172a',
+                    sideB: '#111827',
+                    stroke: isNear ? st.accent : 'rgba(255,255,255,0.15)'
+                });
+                // L-desk side wing
+                drawIsoBox(st.wx - 16, st.wy + 12, 2, 18, 20, 16, {
+                    top: '#1e293b',
+                    sideA: '#0f172a',
+                    sideB: '#111827'
+                });
+                // Left & Center ultrawide monitors
+                drawIsoBox(st.wx - 10, st.wy - 8, 18, 16, 4, 13, {
                     top: '#38bdf8',
                     sideA: '#0284c7',
-                    sideB: '#0369a1',
+                    sideB: '#0c4a6e',
                     stroke: '#7dd3fc'
                 });
-                drawIsoBox(st.wx + 12, st.wy + 2, 2 + st.h, 10, 12, 16, {
-                    top: '#1e1b4b',
-                    sideA: '#312e81',
+                drawIsoBox(st.wx + 6, st.wy - 8, 18, 14, 4, 13, {
+                    top: '#22d3ee',
+                    sideA: '#0891b2',
+                    sideB: '#164e63',
+                    stroke: '#67e8f9'
+                });
+                // Glass RGB PC Tower
+                drawIsoBox(st.wx + 18, st.wy + 2, 18, 9, 14, 17, {
+                    top: '#312e81',
+                    sideA: '#4c1d95',
                     sideB: '#1e1b4b',
                     stroke: '#a855f7'
                 });
+                // Ergonomic 3D Chair in front
+                drawIsoBox(st.wx + 4, st.wy + 16, 2, 12, 12, 11, {
+                    top: '#334155',
+                    sideA: '#1e293b',
+                    sideB: '#0f172a',
+                    stroke: '#64748b'
+                });
             } else if (st.id === 'soc-rack') {
-                // Glowing server blade strips
-                const ledPulse = (Math.sin(now * 0.008) + 1) * 0.5;
-                drawIsoBox(st.wx, st.wy, 2 + st.h, st.w - 10, st.d - 10, 5, {
-                    top: ledPulse > 0.5 ? '#10b981' : '#059669',
-                    sideA: '#065f46',
-                    sideB: '#047857',
-                    stroke: '#34d399'
+                // 3 Server Rack Towers side-by-side
+                [-14, 0, 14].forEach((offset, idx) => {
+                    drawIsoBox(st.wx + offset, st.wy - 4, 2, 11, 24, 44, {
+                        top: '#1e293b',
+                        sideA: '#0f172a',
+                        sideB: '#090d16',
+                        stroke: isNear ? '#34d399' : 'rgba(52, 211, 153, 0.32)'
+                    });
+                    // Blinking telemetry blade strip
+                    const pulse = (Math.sin(now * 0.009 + idx * 1.7) + 1) * 0.5;
+                    drawIsoBox(st.wx + offset, st.wy - 3, 14 + idx * 8, 11.5, 24.5, 4, {
+                        top: pulse > 0.45 ? '#10b981' : '#0284c7',
+                        sideA: pulse > 0.45 ? '#059669' : '#0369a1',
+                        sideB: '#064e3b'
+                    });
+                });
+                // Angled Security Console in front
+                drawIsoBox(st.wx, st.wy + 16, 2, 28, 12, 15, {
+                    top: '#065f46',
+                    sideA: '#064e3b',
+                    sideB: '#022c22',
+                    stroke: '#10b981'
                 });
             } else if (st.id === 'espresso-bar') {
-                // Espresso machine block
-                drawIsoBox(st.wx - 6, st.wy, 2 + st.h, 20, 18, 14, {
-                    top: '#d97706',
-                    sideA: '#b45309',
-                    sideB: '#78350f',
-                    stroke: '#fbbf24'
+                // L-shaped Espresso Bar Counter
+                drawIsoBox(st.wx, st.wy - 2, 2, 50, 22, 20, {
+                    top: '#78350f',
+                    sideA: '#451a03',
+                    sideB: '#271206',
+                    stroke: '#d97706'
+                });
+                // Dual-group Copper Espresso Machine
+                drawIsoBox(st.wx - 10, st.wy - 4, 22, 20, 14, 13, {
+                    top: '#f59e0b',
+                    sideA: '#d97706',
+                    sideB: '#92400e',
+                    stroke: '#fde68a'
+                });
+                // Audio-reactive Lo-Fi Speaker Tower
+                const beat = 1 + Math.sin(now * 0.012) * 2.5;
+                drawIsoBox(st.wx + 16, st.wy - 4, 22, 11, 11, 18 + beat, {
+                    top: '#1e293b',
+                    sideA: '#0f172a',
+                    sideB: '#334155',
+                    stroke: '#38bdf8'
+                });
+                // 2 Barstools in front
+                [-12, 6].forEach(bx => {
+                    drawIsoBox(st.wx + bx, st.wy + 16, 2, 9, 9, 12, {
+                        top: '#b45309',
+                        sideA: '#78350f',
+                        sideB: '#451a03'
+                    });
                 });
             } else if (st.id === 'arcade-guestbook') {
-                // Arcade glowing top marquee
-                drawIsoBox(st.wx, st.wy, 2 + st.h, st.w - 6, st.d - 6, 8, {
+                // Upright Retro-Cyber Arcade Cabinet Base
+                drawIsoBox(st.wx - 6, st.wy - 2, 2, 24, 24, 24, {
+                    top: '#3b0764',
+                    sideA: '#2e1065',
+                    sideB: '#1e1b4b',
+                    stroke: '#a855f7'
+                });
+                // Glowing CRT Screen & Upper Cabinet
+                drawIsoBox(st.wx - 6, st.wy - 4, 26, 22, 18, 16, {
                     top: '#a855f7',
-                    sideA: '#7e22ce',
-                    sideB: '#581c87',
-                    stroke: '#d8b4fe'
+                    sideA: '#22d3ee',
+                    sideB: '#4c1d95',
+                    stroke: '#e879f9'
+                });
+                // Top Neon Marquee
+                drawIsoBox(st.wx - 6, st.wy - 3, 42, 24, 20, 6, {
+                    top: '#ec4899',
+                    sideA: '#db2777',
+                    sideB: '#9d174d',
+                    stroke: '#fbcfe8'
+                });
+                // Lounge Sofa beside Arcade
+                drawIsoBox(st.wx + 16, st.wy + 8, 2, 16, 26, 12, {
+                    top: '#334155',
+                    sideA: '#1e293b',
+                    sideB: '#0f172a',
+                    stroke: '#64748b'
                 });
             }
 
             // Floating 3D Hologram Banner above station
-            const hoverZ = st.h + 24 + Math.sin(now * 0.004 + st.wx) * 3;
+            const hoverZ = st.h + 24 + Math.sin(now * 0.004 + st.wx) * 2.5;
             const topPos = project3D(st.wx, st.wy, hoverZ);
             const label = `${st.icon} ${st.name}`;
             ctx.font = 'bold 10px monospace';
             const tw = ctx.measureText(label).width + 14;
             const th = 20;
 
-            ctx.fillStyle = isNear ? 'rgba(8, 20, 38, 0.94)' : 'rgba(11, 15, 25, 0.82)';
+            ctx.fillStyle = isNear ? 'rgba(8, 20, 38, 0.95)' : 'rgba(11, 15, 25, 0.84)';
             ctx.beginPath();
             ctx.roundRect(topPos.x - tw / 2, topPos.y - th / 2, tw, th, 6);
             ctx.fill();
-            ctx.strokeStyle = isNear ? st.accent : 'rgba(255, 255, 255, 0.18)';
-            ctx.lineWidth = isNear ? 1.5 : 1;
+            ctx.strokeStyle = isNear ? st.accent : 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = isNear ? 1.6 : 1;
             ctx.stroke();
 
             ctx.fillStyle = isNear ? '#ffffff' : '#cbd5e1';
@@ -1005,18 +1235,17 @@ function initModals() {
 
         // Draw Central 3D Holographic Command Core
         function drawCenterHoloCore(now) {
-            drawIsoBox(0, 0, 0, 42, 42, 16, {
+            drawIsoBox(0, 0, 0, 38, 38, 15, {
                 top: '#162032',
                 sideA: '#0f172a',
                 sideB: '#090d16',
-                stroke: 'rgba(34, 211, 238, 0.4)'
+                stroke: 'rgba(34, 211, 238, 0.42)'
             });
 
-            // Floating rotating 3D holo-crystal above table
-            const floatZ = 28 + Math.sin(now * 0.004) * 4;
-            const pTop = project3D(0, 0, floatZ + 12);
-            const pBot = project3D(0, 0, floatZ - 8);
-            const r = 11;
+            const floatZ = 27 + Math.sin(now * 0.004) * 3.5;
+            const pTop = project3D(0, 0, floatZ + 11);
+            const pBot = project3D(0, 0, floatZ - 7);
+            const r = 10.5;
             const rot = now * 0.0025;
             const corners = [0, 1, 2, 3].map(i => {
                 const a = rot + i * Math.PI * 0.5;
@@ -1044,32 +1273,31 @@ function initModals() {
             }
         }
 
+        // Queue of active speech bubbles for post-scene anti-overlap rendering
+        const activeBubbles = [];
+
         // Draw 3D Articulated Voxel/Character Avatar
         function drawAvatar3D(ent) {
             const groundPos = project3D(ent.wx, ent.wy, 0);
             const shadowScale = Math.max(0.45, 1 - ent.wz / 60);
 
-            // Ground shadow on z = 0
             ctx.beginPath();
-            ctx.ellipse(groundPos.x, groundPos.y, 11 * shadowScale, 5.5 * shadowScale, 0, 0, Math.PI * 2);
+            ctx.ellipse(groundPos.x, groundPos.y, 10.5 * shadowScale, 5.2 * shadowScale, 0, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
             ctx.fill();
 
             if (ent.isPlayer) {
-                // Glowing player selection ring on floor
                 ctx.beginPath();
                 ctx.ellipse(groundPos.x, groundPos.y, 14 * shadowScale, 7 * shadowScale, 0, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(34, 211, 238, 0.65)';
-                ctx.lineWidth = 1.5;
+                ctx.strokeStyle = ent.color || '#22d3ee';
+                ctx.lineWidth = 1.6;
                 ctx.stroke();
             }
 
-            // Walking bob & 3D body prism
-            const bob = ent.wz > 0 ? 0 : Math.abs(Math.sin(ent.stride)) * 2.2;
+            const bob = ent.wz > 0 ? 0 : Math.abs(Math.sin(ent.stride)) * 2.1;
             const baseZ = ent.wz + bob;
 
-            // 3D Legs
-            const legOffset = Math.sin(ent.stride) * 2.5;
+            const legOffset = Math.sin(ent.stride) * 2.4;
             const leftFoot = project3D(ent.wx - 3, ent.wy + legOffset, ent.wz);
             const rightFoot = project3D(ent.wx + 3, ent.wy - legOffset, ent.wz);
             const hipLeft = project3D(ent.wx - 3, ent.wy, baseZ + 7);
@@ -1085,15 +1313,13 @@ function initModals() {
             ctx.lineTo(rightFoot.x, rightFoot.y);
             ctx.stroke();
 
-            // 3D Extruded Torso Box
             drawIsoBox(ent.wx, ent.wy, baseZ + 6, 12, 10, 13, {
                 top: ent.color,
                 sideA: ent.color,
                 sideB: '#1e293b',
-                stroke: ent.isPlayer ? '#ffffff' : 'rgba(255,255,255,0.35)'
+                stroke: ent.isPlayer ? '#ffffff' : 'rgba(255,255,255,0.38)'
             });
 
-            // 3D Head Cube / Sphere
             const headPos = project3D(ent.wx, ent.wy, baseZ + 25);
             ctx.beginPath();
             ctx.arc(headPos.x, headPos.y, 7.2, 0, Math.PI * 2);
@@ -1103,61 +1329,96 @@ function initModals() {
             ctx.strokeStyle = '#0f172a';
             ctx.stroke();
 
-            // Directional Cyber-Visor
             const viewAngle = ent.facing - camAngle;
             const vx = Math.cos(viewAngle) * 3.2;
             const vy = Math.sin(viewAngle) * 1.8;
-            ctx.fillStyle = ent.isPlayer ? '#0284c7' : '#0f172a';
+            ctx.fillStyle = ent.isPlayer ? ent.color : '#0f172a';
             ctx.beginPath();
             ctx.roundRect(headPos.x + vx - 4.2, headPos.y + vy - 2, 8.4, 3.6, 1.8);
             ctx.fill();
 
-            // Nameplate below feet
             ctx.font = ent.isPlayer ? 'bold 10px monospace' : '10px monospace';
-            ctx.fillStyle = ent.isPlayer ? '#22d3ee' : '#cbd5e1';
+            ctx.fillStyle = ent.isPlayer ? ent.color : '#cbd5e1';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
             ctx.fillText(ent.name, groundPos.x, groundPos.y + 7);
 
-            // 3D Floating Speech Bubble
             if (ent.message && Date.now() < ent.msgTime) {
-                drawSpeechBubble(headPos.x, headPos.y - 12, ent.message, ent.isPlayer);
+                activeBubbles.push({
+                    x: headPos.x,
+                    y: headPos.y - 12,
+                    text: ent.message,
+                    speaker: ent.name.split('·')[0].trim(),
+                    color: ent.color || '#22d3ee',
+                    isPlayer: Boolean(ent.isPlayer)
+                });
             }
         }
 
-        function drawSpeechBubble(x, y, text, isPlayer = false) {
-            ctx.font = '11px monospace';
-            const padding = 8;
-            const metrics = ctx.measureText(text);
-            const w = metrics.width + padding * 2;
-            const h = 22;
-            const bx = Math.max(8, Math.min(cssWidth - w - 8, x - w / 2));
-            const by = Math.max(8, y - h - 6);
+        // Render glassmorphic speech bubbles with vertical collision avoidance
+        function renderSpeechBubblesPass() {
+            if (activeBubbles.length === 0) return;
+            const placedRects = [];
 
-            ctx.fillStyle = isPlayer ? '#22d3ee' : '#ffffff';
-            ctx.beginPath();
-            ctx.roundRect(bx, by, w, h, 6);
-            ctx.fill();
+            // Sort so player bubble gets priority placement near head
+            activeBubbles.sort((a, b) => (b.isPlayer ? 1 : 0) - (a.isPlayer ? 1 : 0));
 
-            ctx.beginPath();
-            ctx.moveTo(x - 4, by + h);
-            ctx.lineTo(x + 4, by + h);
-            ctx.lineTo(x, by + h + 4);
-            ctx.fillStyle = isPlayer ? '#22d3ee' : '#ffffff';
-            ctx.fill();
+            activeBubbles.forEach(b => {
+                ctx.font = '10.5px monospace';
+                const fullLabel = `${b.speaker}: ${b.text}`;
+                const w = Math.min(cssWidth - 20, ctx.measureText(fullLabel).width + 18);
+                const h = 22;
+                let bx = Math.max(8, Math.min(cssWidth - w - 8, b.x - w / 2));
+                let by = Math.max(8, b.y - h - 6);
 
-            ctx.fillStyle = '#090d16';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(text, bx + w / 2, by + h / 2);
+                // Shift upward if overlapping an already-placed speech bubble
+                for (let iter = 0; iter < 4; iter++) {
+                    const hit = placedRects.find(r =>
+                        bx < r.x + r.w + 4 &&
+                        bx + w + 4 > r.x &&
+                        by < r.y + r.h + 4 &&
+                        by + h + 4 > r.y
+                    );
+                    if (hit) {
+                        by = Math.max(6, hit.y - h - 5);
+                    } else {
+                        break;
+                    }
+                }
+
+                placedRects.push({ x: bx, y: by, w, h });
+
+                // Dark cyber-glass pill
+                ctx.fillStyle = 'rgba(10, 15, 28, 0.92)';
+                ctx.beginPath();
+                ctx.roundRect(bx, by, w, h, 7);
+                ctx.fill();
+                ctx.strokeStyle = b.color;
+                ctx.lineWidth = b.isPlayer ? 1.6 : 1.1;
+                ctx.stroke();
+
+                // Pointer triangle
+                const ptrX = Math.max(bx + 8, Math.min(bx + w - 8, b.x));
+                ctx.beginPath();
+                ctx.moveTo(ptrX - 4, by + h);
+                ctx.lineTo(ptrX + 4, by + h);
+                ctx.lineTo(ptrX, by + h + 4);
+                ctx.fillStyle = b.color;
+                ctx.fill();
+
+                ctx.fillStyle = '#f8fafc';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(fullLabel, bx + w / 2, by + h / 2);
+            });
+            activeBubbles.length = 0;
         }
 
         function collidesWithFurniture(wx, wy) {
-            // Central holo-core collision radius
-            if (Math.hypot(wx, wy) < 28) return true;
+            if (Math.hypot(wx, wy) < 26) return true;
             for (let i = 0; i < stations.length; i++) {
                 const st = stations[i];
-                if (Math.abs(wx - st.wx) < st.w * 0.58 && Math.abs(wy - st.wy) < st.d * 0.58) {
+                if (Math.abs(wx - st.wx) < st.w * 0.56 && Math.abs(wy - st.wy) < st.d * 0.56) {
                     return true;
                 }
             }
@@ -1165,10 +1426,8 @@ function initModals() {
         }
 
         function updatePhysicsAndAI() {
-            // Smooth camera orbit interpolation
             camAngle += (targetCamAngle - camAngle) * 0.14;
 
-            // Player directional input in screen space -> rotated world space
             let inX = 0;
             let inY = 0;
             if (keys['KeyW'] || keys['ArrowUp']) inY -= 1;
@@ -1179,7 +1438,6 @@ function initModals() {
             if (inX !== 0 || inY !== 0) {
                 player.targetWx = null;
                 player.targetWy = null;
-                // Convert screen-aligned input into isometric world vector
                 const cosA = Math.cos(camAngle);
                 const sinA = Math.sin(camAngle);
                 const rx = inX + inY;
@@ -1221,7 +1479,6 @@ function initModals() {
                 }
             }
 
-            // Jump gravity physics for player
             if (player.wz > 0 || player.vz !== 0) {
                 player.wz += player.vz;
                 player.vz -= 0.45;
@@ -1233,7 +1490,7 @@ function initModals() {
 
             // Proximity check to 4 interactive stations
             let foundStation = null;
-            let bestDist = 66;
+            let bestDist = 68;
             for (let i = 0; i < stations.length; i++) {
                 const d = Math.hypot(player.wx - stations[i].wx, player.wy - stations[i].wy);
                 if (d < bestDist) {
@@ -1256,22 +1513,43 @@ function initModals() {
                 }
             }
 
-            // Update AI waypoint roaming & jump physics
-            aiAvatars.forEach(ai => {
+            // Update AI waypoint roaming + Boids social separation so they never crowd
+            aiAvatars.forEach((ai, idx) => {
+                let vx = 0;
+                let vy = 0;
                 const dx = ai.targetWx - ai.wx;
                 const dy = ai.targetWy - ai.wy;
                 const dist = Math.hypot(dx, dy);
                 if (dist > 4) {
-                    const step = 0.85;
-                    const nx = ai.wx + (dx / dist) * step;
-                    const ny = ai.wy + (dy / dist) * step;
+                    vx += (dx / dist) * 0.78;
+                    vy += (dy / dist) * 0.78;
+                }
+
+                // Social repulsion from other AI avatars & player
+                const others = [player, ...aiAvatars];
+                others.forEach(other => {
+                    if (other === ai) return;
+                    const odx = ai.wx - other.wx;
+                    const ody = ai.wy - other.wy;
+                    const od = Math.hypot(odx, ody);
+                    if (od > 0.1 && od < 38) {
+                        const push = ((38 - od) / 38) * 0.9;
+                        vx += (odx / od) * push;
+                        vy += (ody / od) * push;
+                    }
+                });
+
+                if (Math.hypot(vx, vy) > 0.08) {
+                    const nx = Math.max(-WORLD_LIMIT, Math.min(WORLD_LIMIT, ai.wx + vx));
+                    const ny = Math.max(-WORLD_LIMIT, Math.min(WORLD_LIMIT, ai.wy + vy));
                     if (!collidesWithFurniture(nx, ny)) {
                         ai.wx = nx;
                         ai.wy = ny;
-                        ai.facing = Math.atan2(dy, dx);
-                        ai.stride += 0.16;
+                        ai.facing = Math.atan2(vy, vx);
+                        ai.stride += 0.15;
                     }
                 }
+
                 if (ai.wz > 0 || ai.vz !== 0) {
                     ai.wz += ai.vz;
                     ai.vz -= 0.42;
@@ -1288,26 +1566,26 @@ function initModals() {
 
             updatePhysicsAndAI();
 
-            // Deep cyber-loft background gradient
             const bgGrad = ctx.createRadialGradient(centerX, centerY * 0.85, 20, centerX, centerY, cssWidth * 0.75);
             bgGrad.addColorStop(0, '#0f172a');
             bgGrad.addColorStop(1, '#050811');
             ctx.fillStyle = bgGrad;
             ctx.fillRect(0, 0, cssWidth, cssHeight);
 
-            // Render 3D Floor Slab & Circuit Grid
+            // 1. Render 3D Floor Slab & Specular Light Pools
             drawIsoFloor(now);
 
-            // Build depth-sorted render queue (Painter's Algorithm in 3D camera space)
+            // 2. Render Dynamic Cutaway 3D Back Walls (behind all furniture & avatars)
+            drawCutawayWalls(now);
+
+            // 3. Build depth-sorted render queue (Painter's Algorithm in 3D camera space)
             const renderables = [];
 
-            // 1. Central Holo-Core
             renderables.push({
                 depth: project3D(0, 0, 8).depth,
                 draw: () => drawCenterHoloCore(now)
             });
 
-            // 2. 4 Corner 3D Stations
             stations.forEach(st => {
                 renderables.push({
                     depth: project3D(st.wx, st.wy, st.h * 0.5).depth,
@@ -1315,7 +1593,6 @@ function initModals() {
                 });
             });
 
-            // 3. Resident AI Engineers
             aiAvatars.forEach(ai => {
                 renderables.push({
                     depth: project3D(ai.wx, ai.wy, ai.wz + 10).depth,
@@ -1323,7 +1600,6 @@ function initModals() {
                 });
             });
 
-            // 4. Live Remote Visitors (prune stale > 25s)
             remotePeers.forEach((peer, key) => {
                 if (Date.now() - peer.lastSeen > 25000) {
                     remotePeers.delete(key);
@@ -1335,17 +1611,15 @@ function initModals() {
                 });
             });
 
-            // 5. Local Player
             renderables.push({
                 depth: project3D(player.wx, player.wy, player.wz + 10).depth,
                 draw: () => drawAvatar3D(player)
             });
 
-            // Sort back-to-front by isometric depth
             renderables.sort((a, b) => a.depth - b.depth);
             renderables.forEach(item => item.draw());
 
-            // Render rising 3D ambient holo particles
+            // 4. Render rising 3D ambient holo particles
             particles.forEach(pt => {
                 pt.wz += pt.speedZ;
                 if (pt.wz > 68) pt.wz = 4;
@@ -1357,6 +1631,9 @@ function initModals() {
                 ctx.fill();
             });
             ctx.globalAlpha = 1;
+
+            // 5. Render anti-overlap glassmorphic speech bubbles on top
+            renderSpeechBubblesPass();
 
             animationFrameId = requestAnimationFrame(gameLoop);
         }

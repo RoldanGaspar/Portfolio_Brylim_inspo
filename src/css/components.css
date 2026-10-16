@@ -637,6 +637,27 @@
     border: 1px solid var(--border-color);
 }
 
+#lounge-open-guestbook-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-color);
+    background-color: var(--tag-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 4px 9px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+#lounge-open-guestbook-btn:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+
 .lounge-hud-bar {
     display: flex;
     align-items: center;
@@ -672,6 +693,75 @@
 .lounge-hud-btn:hover {
     border-color: var(--accent-cyan);
     background-color: var(--tag-bg);
+    transform: translateY(-1px);
+}
+
+.lounge-identity-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 3px 8px;
+}
+
+.lounge-name-input {
+    width: 105px;
+    font-family: var(--mono-font);
+    font-size: 0.71rem;
+    color: var(--text-color);
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.lounge-color-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s, border-color 0.15s;
+}
+
+.lounge-color-dot.active,
+.lounge-color-dot:hover {
+    transform: scale(1.2);
+    border-color: var(--text-color);
+}
+
+.lounge-station-bar {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    z-index: 11;
+}
+
+.lounge-station-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono-font);
+    font-size: 0.67rem;
+    color: #e2e8f0;
+    background: rgba(11, 15, 25, 0.78);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    backdrop-filter: blur(6px);
+    padding: 4px 8px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s, transform 0.12s;
+}
+
+.lounge-station-chip:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(15, 23, 42, 0.94);
     transform: translateY(-1px);
 }
 
