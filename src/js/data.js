@@ -22,68 +22,68 @@ window.portfolioData = {
         {
             id: "tarsi-budget-tracker",
             title: "Tarsi – Budget Tracker",
-            badge: "#1 FINANCE APP",
-            subtitle: "APP STORE HIDDEN GEMS",
+            badge: "OFFLINE-FIRST",
+            subtitle: "LOCAL DATA PRIVACY",
             iconText: "T",
-            iconBg: "#40c057",
-            tagline: "An offline-first budget & expense tracker powered by on-device AI.",
-            desc: "Tarsi is an intuitive, privacy-first personal finance app built for speed. Designed for users who want total control over their financial data without subscription paywalls or cloud data sharing.",
-            problem: "Most budget apps force cloud synchronization, charge monthly subscriptions, or parse bank logins with privacy risks.",
-            solution: "Tarsi runs 100% offline using Apple's CoreML to automatically parse receipts, categorize transactions, and generate spending forecasts locally on your device.",
+            iconBg: "#10b981",
+            tagline: "An offline-first budget & expense tracker powered by local on-device storage.",
+            desc: "Tarsi is an intuitive, privacy-first personal finance application built for speed. Designed for users who want total control over their financial records without subscription paywalls, advertising trackers, or cloud data exposure.",
+            problem: "Most budget apps force third-party cloud synchronization, charge recurring subscriptions, or parse bank logins with privacy risks.",
+            solution: "Tarsi operates 100% locally on-device, parsing expense records, categorizing daily transactions, and computing monthly budget forecasts with instant response times.",
             highlights: [
-                "100% Offline & Private (Zero cloud tracking)",
-                "Local CoreML receipt scanner & OCR engine",
-                "Automated recurring expense detection",
-                "App Store Hidden Gems & #1 Finance App selection"
+                "100% Offline & Private (Zero cloud tracking or remote sync)",
+                "Instant transaction entry and category categorization",
+                "Automated recurring expense and balance detection",
+                "Encrypted local storage with zero advertising telemetry"
             ],
-            techStack: ["Swift", "SwiftUI", "CoreML", "CoreData", "Charts"],
-            stats: { rank: "#1 Finance App", downloads: "50,000+", rating: "4.9 ★" },
+            techStack: ["Swift", "SwiftUI", "CoreData", "Charts", "Local Storage"],
+            stats: { rank: "Offline-First", downloads: "Local Storage", rating: "Zero Cloud Sync" },
             downloadUrl: "https://github.com/RoldanGaspar",
             mockupBg: "#1f2937"
         },
         {
-            id: "kabi-fitness",
-            title: "Kabi – Gym Companion",
-            badge: "#1 PAID FITNESS APP",
-            subtitle: "EDITORIAL CHOICE",
-            iconText: "K",
-            iconBg: "#212529",
-            tagline: "A gym companion app for progressive overload and workout tracking.",
-            desc: "Kabi is built for serious lifters who demand zero friction during workouts. Track sets, rest timers, and volume progression with single-tap gesture controls.",
-            problem: "Workout trackers are often bloated with complex menus that interrupt workout flow between heavy sets.",
-            solution: "Kabi prioritizes haptic feedback and ultra-fast set logging so you can focus on lifting while the app handles automatic rest timing and progressive overload calculations.",
+            id: "awardena-security",
+            title: "AWarden-A — AppLocker & Credential Defense",
+            badge: "CYBERSECURITY TOOL",
+            subtitle: "WINDOWS DEFENSE & AUTOMATION",
+            iconText: "🛡️",
+            iconBg: "#0ea5e9",
+            tagline: "AppLocker policy automation and credential security tooling for Windows administration.",
+            desc: "AWarden-A streamlines Windows AppLocker policy enforcement, credential protection, and security posture automation for system administrators, SOC analysts, and defense teams.",
+            problem: "Manual AppLocker rule authoring is error-prone, fragile across large environments, and often leaves administrative bypasses or credential theft vectors open in Windows enterprise deployments.",
+            solution: "AWarden-A provides automated policy rule generation, binary hash validation, and execution auditing with least-privilege enforcement to prevent unauthorized script and executable execution.",
             highlights: [
-                "Single-tap set logging with Apple Watch haptic sync",
-                "Automated progressive overload calculation",
-                "Live Activity widgets for lock screen rest timers",
-                "#1 Paid Fitness App on the App Store"
+                "Automated AppLocker XML rule generation & verification",
+                "Credential Guard and LSASS defense posture auditing",
+                "Windows event log ingestion for unauthorized execution attempts",
+                "Open-source TypeScript automation suite"
             ],
-            techStack: ["SwiftUI", "WatchKit", "ActivityKit", "CoreData"],
-            stats: { rank: "#1 Paid Fitness", downloads: "35,000+", rating: "4.8 ★" },
-            downloadUrl: "https://github.com/RoldanGaspar",
-            mockupBg: "#111827"
+            techStack: ["TypeScript", "PowerShell", "Windows Security", "AppLocker", "Defense-in-Depth"],
+            stats: { rank: "Security Tool", downloads: "GitHub Repo", rating: "TypeScript / PS" },
+            downloadUrl: "https://github.com/RoldanGaspar/AWarden-A-applocker_credentials",
+            mockupBg: "#0f172a"
         },
         {
-            id: "travel-buddy",
-            title: "Travel Buddy",
-            badge: "AI TRAVEL PLANNER",
-            subtitle: "BEST NEW PRODUCT",
-            iconText: "TB",
-            iconBg: "#3b82f6",
-            tagline: "Smart itinerary planning & local recommendations powered by GenAI.",
-            desc: "Travel Buddy turns chaotic trip planning into a 10-second prompt. Generates personalized day-by-day travel itineraries based on budget, mood, and real-time weather.",
-            problem: "Planning trips requires jumping across 10+ tabs of blogs, maps, weather apps, and booking sites.",
-            solution: "Travel Buddy consolidates AI trip generation, interactive offline maps, and group itinerary sharing into one seamless mobile experience.",
+            id: "pos-inventory",
+            title: "POS & Inventory System",
+            badge: "FULL-STACK SUITE",
+            subtitle: "TRANSACTIONAL MANAGEMENT",
+            iconText: "📦",
+            iconBg: "#f59e0b",
+            tagline: "Point of Sale & inventory desktop suite with automated stock replenishment and sales analytics.",
+            desc: "A robust desktop POS and inventory management suite engineered for low-latency retail checkouts, barcode scanning, and multi-tier inventory reconciliation.",
+            problem: "Small and medium retail establishments suffer from inventory discrepancies, manual stock calculations, and fragile spreadsheet-based accounting.",
+            solution: "Architected a relational inventory engine with atomic SQL transactions, barcode parsing, receipt generation, and real-time revenue reporting.",
             highlights: [
-                "AI-powered day-by-day itinerary generation",
-                "Offline vector maps & pin saving",
-                "Multi-currency budget converter",
-                "Featured on Tech Product Weekly"
+                "Atomic transactional sales logging and receipt generation",
+                "Real-time stock depletion alerts and reorder calculations",
+                "User role-based access control (Cashier vs Manager)",
+                "Daily and monthly revenue analytical reporting"
             ],
-            techStack: ["React Native", "TypeScript", "FastAPI", "OpenAI APIs"],
-            stats: { rank: "Featured AI App", downloads: "20,000+", rating: "4.9 ★" },
-            downloadUrl: "https://github.com/RoldanGaspar",
-            mockupBg: "#0f172a"
+            techStack: ["Python", "SQLite/PostgreSQL", "Tkinter/PyQt", "Data Analytics"],
+            stats: { rank: "Full-Stack Suite", downloads: "GitHub Repo", rating: "Python / SQL" },
+            downloadUrl: "https://github.com/RoldanGaspar/pos_with_inventory_system",
+            mockupBg: "#18181b"
         }
     ],
     blog: [
@@ -346,36 +346,43 @@ window.portfolioData = {
     ],
     certsList: [
         {
-            title: "Generative AI Leader",
-            issuer: "GOOGLE",
-            date: "2025",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg",
-            verifyUrl: "#/certifications",
-            skills: ["LLM Architecture", "GenAI Strategy", "Prompt Engineering"]
+            title: "Network Defense",
+            issuer: "CISCO NETWORKING ACADEMY",
+            date: "2026",
+            badgeUrl: "https://images.credly.com/images/51526f76-711b-4caf-b04d-27f89512b112/NetworkDefense_v1_091721.png",
+            credlyUrl: "https://www.credly.com/badges/4317f869-fb2b-4cfd-a377-3ff898d6d236",
+            verifyUrl: "https://www.credly.com/badges/4317f869-fb2b-4cfd-a377-3ff898d6d236",
+            certificateImage: "assets/certificates/network-defense.png",
+            skills: ["Network Security", "Security Operations", "Perimeter Defense"]
         },
         {
-            title: "Generative AI Certified Professional",
-            issuer: "ORACLE",
-            date: "2025",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg",
-            verifyUrl: "#/certifications",
-            skills: ["Oracle AI Services", "Vector Search", "Fine-Tuning"]
+            title: "Ethical Hacker",
+            issuer: "CISCO NETWORKING ACADEMY",
+            date: "2026",
+            badgeUrl: "https://images.credly.com/images/242902b5-f527-42ad-865e-977c9e1b5b58/image.png",
+            credlyUrl: "https://www.credly.com/badges/b75d8f5e-1b06-4be1-8f2e-d5a2fc5ead83",
+            verifyUrl: "https://www.credly.com/badges/b75d8f5e-1b06-4be1-8f2e-d5a2fc5ead83",
+            certificateImage: "assets/certificates/ethical-hacker.png",
+            skills: ["Ethical Hacking", "Vulnerability Discovery", "Threat Analysis"]
         },
         {
-            title: "Neo4j Certified Professional",
-            issuer: "NEO4J",
-            date: "2024",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Neo4j-logo.svg",
-            verifyUrl: "#/certifications",
-            skills: ["Graph Databases", "Cypher Query", "Knowledge Graphs"]
-        },
-        {
-            title: "AWS Certified AI Practitioner",
+            title: "AWS Educate Introduction to Cloud 101",
             issuer: "AMAZON WEB SERVICES",
-            date: "2024",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
-            verifyUrl: "#/certifications",
-            skills: ["AWS Bedrock", "SageMaker", "Cloud AI Security"]
+            date: "2026",
+            badgeUrl: "https://images.credly.com/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob",
+            credlyUrl: "https://www.credly.com/badges/7eda7327-b679-4eaf-b005-a761222d2fc9",
+            verifyUrl: "https://www.credly.com/badges/7eda7327-b679-4eaf-b005-a761222d2fc9",
+            skills: ["AWS Cloud", "Cloud Foundations", "Compute & Storage"]
+        },
+        {
+            title: "Python Essentials (1 & 2)",
+            issuer: "CISCO NETWORKING ACADEMY",
+            date: "2026",
+            badgeUrl: "https://images.credly.com/images/68c0b94d-f6ac-40b1-a0e0-921439eb092e/image.png",
+            credlyUrl: "https://www.credly.com/badges/ae0773b6-42f5-4558-9d79-7f769fa1a114",
+            verifyUrl: "https://www.credly.com/badges/ae0773b6-42f5-4558-9d79-7f769fa1a114",
+            certificateImage: "assets/certificates/python-essentials-1.png",
+            skills: ["Python", "Programming Fundamentals", "Data Structures"]
         }
     ],
     netacadCertsList: [

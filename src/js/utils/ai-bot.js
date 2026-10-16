@@ -178,11 +178,11 @@ function initAIBot() {
         if (query.includes('project') || query.includes('built') || query.includes('work') || query.includes('portfolio') || query.includes('app')) {
             return `
                 🚀 <strong>Featured Projects by Roldan:</strong><br>
-                • <strong>Tarsi:</strong> Offline-first Personal Finance &amp; Budget Tracker (#1 Finance App on App Store Philippines)<br>
-                • <strong>Kabi:</strong> Gym Companion for staying consistent &amp; tracking progressive overload<br>
-                • <strong>Travel Buddy:</strong> Smart trip planning companion powered by GenAI<br>
-                • <strong>AWarden-A:</strong> AppLocker &amp; Credential Security tooling for Windows administration<br>
-                • <strong>POS System:</strong> Point of Sale &amp; Inventory Suite in Python<br><br>
+                • <strong>Tarsi:</strong> Offline-first personal budget &amp; expense tracker with local encryption<br>
+                • <strong>AWarden-A:</strong> Windows AppLocker policy automation &amp; credential security tooling<br>
+                • <strong>POS &amp; Inventory:</strong> Full-stack retail management suite with transactional reporting<br>
+                • <strong>Pet Hub:</strong> Veterinary clinic employee management &amp; automated payroll calculation<br>
+                • <strong>Developer Portfolio SPA:</strong> Zero-dependency vanilla engine with 3D Cyber-Loft lounge<br><br>
                 <button class="ai-action-btn" onclick="window.location.hash='#/projects'">
                     <i class="ph-fill ph-squares-four"></i> Browse Projects
                 </button>

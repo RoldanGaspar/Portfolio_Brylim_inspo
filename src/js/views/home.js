@@ -45,20 +45,20 @@ function renderHome() {
         <!-- Stats Section -->
         <section class="stats reveal">
             <div class="stat-card">
-                <h3>200K+ <span class="stat-arrow">↗</span></h3>
-                <p>COMMUNITY</p>
+                <h3>10+ <span class="stat-arrow">↗</span></h3>
+                <p>CREDENTIALS</p>
             </div>
             <div class="stat-card">
-                <h3>6+ yrs <span class="stat-arrow">↗</span></h3>
-                <p>SHIPPING</p>
+                <h3>4 <span class="stat-arrow">↗</span></h3>
+                <p>OPEN REPOS</p>
             </div>
             <div class="stat-card">
-                <h3>10x <span class="stat-arrow">↗</span></h3>
-                <p>HACKATHONS</p>
+                <h3>0 <span class="stat-arrow">↗</span></h3>
+                <p>DEPENDENCIES</p>
             </div>
             <div class="stat-card">
-                <h3>PH100 <span class="stat-arrow">↗</span></h3>
-                <p>STELLARPH</p>
+                <h3>100% <span class="stat-arrow">↗</span></h3>
+                <p>VERIFIED</p>
             </div>
         </section>
 
@@ -90,52 +90,52 @@ function renderHome() {
                 <a href="#/projects" class="view-all magnetic">ALL PROJECTS &rarr;</a>
             </div>
             <div class="projects-stack-container" id="projects-stack-deck">
-                <!-- Left Background Card: Kabi -->
-                <div class="project-stack-card pos-left" data-id="kabi-fitness" data-url="#/projects/kabi-fitness">
+                <!-- Left Background Card: AWarden-A -->
+                <div class="project-stack-card pos-left" data-id="awardena-security" data-url="#/projects/awardena-security">
                     <div class="stack-card-tags">
-                        <span class="stack-tag dark">&lang; #1 PAID FITNESS APP &rang;</span>
+                        <span class="stack-tag dark">&lang; CYBERSECURITY TOOL &rang;</span>
                     </div>
                     <div class="stack-card-header">
-                        <div class="app-icon-badge kabi-bg">
-                            <i class="ph-fill ph-barbell"></i>
+                        <div class="app-icon-badge kabi-bg" style="background:#0ea5e9;">
+                            <i class="ph-fill ph-shield-checkered"></i>
                         </div>
                         <div class="app-card-title">
-                            <h4>Kabi &mdash; Gym Companion</h4>
+                            <h4>AWarden-A &mdash; AppLocker Defense</h4>
                         </div>
                     </div>
-                    <p class="stack-card-desc">A gym companion for staying consistent and tracking overload.</p>
+                    <p class="stack-card-desc">Windows AppLocker policy automation and credential security tooling.</p>
                     <div class="stack-store-badges">
-                        <div class="store-badge-svg appstore"><i class="ph-fill ph-apple-logo"></i> App Store</div>
-                        <div class="store-badge-svg playstore"><i class="ph-fill ph-google-play-logo"></i> Google Play</div>
+                        <div class="store-badge-svg appstore"><i class="ph-fill ph-github-logo"></i> GitHub</div>
+                        <div class="store-badge-svg playstore"><i class="ph-fill ph-code"></i> TypeScript</div>
                     </div>
                 </div>
                 
-                <!-- Right Background Card: Travel Buddy -->
-                <div class="project-stack-card pos-right" data-id="travel-buddy" data-url="#/projects/travel-buddy">
+                <!-- Right Background Card: POS & Inventory System -->
+                <div class="project-stack-card pos-right" data-id="pos-inventory" data-url="#/projects/pos-inventory">
                     <div class="stack-card-tags">
-                        <span class="stack-tag dark">&lang; AI TRAVEL PLANNER &rang;</span>
+                        <span class="stack-tag dark">&lang; FULL-STACK SUITE &rang;</span>
                     </div>
                     <div class="stack-card-header">
-                        <div class="app-icon-badge travel-bg">
-                            <i class="ph-fill ph-airplane-tilt"></i>
+                        <div class="app-icon-badge travel-bg" style="background:#f59e0b;">
+                            <i class="ph-fill ph-package"></i>
                         </div>
                         <div class="app-card-title">
-                            <h4>Travel Buddy</h4>
+                            <h4>POS &amp; Inventory System</h4>
                         </div>
                     </div>
-                    <p class="stack-card-desc">Planning trips and exploring with GenAI trip assistant.</p>
+                    <p class="stack-card-desc">Point of Sale &amp; inventory desktop suite with automated stock replenishment.</p>
                     <div class="stack-store-badges">
-                        <div class="store-badge-svg appstore"><i class="ph-fill ph-apple-logo"></i> App Store</div>
-                        <div class="store-badge-svg playstore"><i class="ph-fill ph-google-play-logo"></i> Google Play</div>
+                        <div class="store-badge-svg appstore"><i class="ph-fill ph-github-logo"></i> GitHub</div>
+                        <div class="store-badge-svg playstore"><i class="ph-fill ph-terminal-window"></i> Python</div>
                     </div>
                 </div>
 
                 <!-- Center Active Card: Tarsi -->
                 <div class="project-stack-card pos-center" data-id="tarsi-budget-tracker" data-url="#/projects/tarsi-budget-tracker">
                     <div class="stack-card-tags">
-                        <span class="stack-tag dark">&lang; #1 FINANCE APP &rang;</span>
-                        <span class="stack-tag">APP STORE HIDDEN GEMS</span>
-                        <span class="stack-tag">APPS MADE IN THE PHILIPPINES</span>
+                        <span class="stack-tag dark">&lang; OFFLINE-FIRST &rang;</span>
+                        <span class="stack-tag">LOCAL ENCRYPTION</span>
+                        <span class="stack-tag">ZERO CLOUD SYNC</span>
                     </div>
                     <div class="stack-card-header">
                         <div class="app-icon-badge tarsi-bg">
@@ -145,10 +145,10 @@ function renderHome() {
                             <h4>Tarsi &mdash; Budget Tracker</h4>
                         </div>
                     </div>
-                    <p class="stack-card-desc">An offline-first budget & expense tracker powered by on-device AI.</p>
+                    <p class="stack-card-desc">An offline-first budget &amp; expense tracker powered by local on-device storage.</p>
                     <div class="stack-store-badges">
-                        <div class="store-badge-svg appstore"><i class="ph-fill ph-apple-logo"></i> App Store</div>
-                        <div class="store-badge-svg playstore"><i class="ph-fill ph-google-play-logo"></i> Google Play</div>
+                        <div class="store-badge-svg appstore"><i class="ph-fill ph-shield-check"></i> Privacy First</div>
+                        <div class="store-badge-svg playstore"><i class="ph-fill ph-database"></i> SQLite / Local</div>
                     </div>
                 </div>
             </div>
@@ -209,27 +209,27 @@ function renderHome() {
             <div class="cert-grid">
                 <div class="cert-card tilt-card">
                     <div class="cert-logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="cert-logo">
+                        <img src="https://images.credly.com/images/51526f76-711b-4caf-b04d-27f89512b112/NetworkDefense_v1_091721.png" alt="Cisco Network Defense" class="cert-logo" style="object-fit:contain; border-radius:4px;">
                     </div>
-                    <h4>Generative AI Leader</h4>
-                    <p>GOOGLE</p>
-                    <a href="#/certifications" class="cert-verify">{ VERIFY }</a>
+                    <h4>Network Defense</h4>
+                    <p>CISCO NETWORKING ACADEMY</p>
+                    <a href="https://www.credly.com/badges/4317f869-fb2b-4cfd-a377-3ff898d6d236" target="_blank" rel="noopener noreferrer" class="cert-verify">{ VERIFY &nearr; }</a>
                 </div>
                 <div class="cert-card tilt-card">
                     <div class="cert-logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle" class="cert-logo">
+                        <img src="https://images.credly.com/images/242902b5-f527-42ad-865e-977c9e1b5b58/image.png" alt="Cisco Ethical Hacker" class="cert-logo" style="object-fit:contain; border-radius:4px;">
                     </div>
-                    <h4>Generative AI Certified Professional</h4>
-                    <p>ORACLE</p>
-                    <a href="#/certifications" class="cert-verify">{ VERIFY }</a>
+                    <h4>Ethical Hacker</h4>
+                    <p>CISCO NETWORKING ACADEMY</p>
+                    <a href="https://www.credly.com/badges/b75d8f5e-1b06-4be1-8f2e-d5a2fc5ead83" target="_blank" rel="noopener noreferrer" class="cert-verify">{ VERIFY &nearr; }</a>
                 </div>
                 <div class="cert-card tilt-card">
                     <div class="cert-logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Neo4j-logo.svg" alt="Neo4j" class="cert-logo">
+                        <img src="https://images.credly.com/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob" alt="AWS Educate Cloud 101" class="cert-logo" style="object-fit:contain; border-radius:4px;">
                     </div>
-                    <h4>Neo4j Certified Professional</h4>
-                    <p>NEO4J</p>
-                    <a href="#/certifications" class="cert-verify">{ VERIFY }</a>
+                    <h4>AWS Cloud 101</h4>
+                    <p>AMAZON WEB SERVICES</p>
+                    <a href="https://www.credly.com/badges/7eda7327-b679-4eaf-b005-a761222d2fc9" target="_blank" rel="noopener noreferrer" class="cert-verify">{ VERIFY &nearr; }</a>
                 </div>
             </div>
             <div class="certs-provider-callout">

@@ -23,26 +23,22 @@ function renderProjectDetail(project) {
                 </div>
                 
                 <div class="project-header-actions">
-                    <a href="${project.downloadUrl}" class="btn-primary magnetic">
-                        <i class="ph ph-apple-logo"></i> Download on App Store
+                    <a href="${project.downloadUrl}" target="_blank" rel="noopener noreferrer" class="btn-primary magnetic">
+                        ${project.downloadUrl && project.downloadUrl.includes('github.com') 
+                            ? `<i class="ph ph-github-logo"></i> View on GitHub &nearr;` 
+                            : `<i class="ph ph-arrow-square-out"></i> View Project &nearr;`}
                     </a>
                 </div>
             </div>
 
             <!-- Stats Bar -->
             <div class="project-stats-bar">
-                <div class="p-stat">
-                    <span class="stat-label">RANK</span>
-                    <span class="stat-val">${project.stats.rank}</span>
-                </div>
-                <div class="p-stat">
-                    <span class="stat-label">DOWNLOADS</span>
-                    <span class="stat-val">${project.stats.downloads}</span>
-                </div>
-                <div class="p-stat">
-                    <span class="stat-label">RATING</span>
-                    <span class="stat-val">${project.stats.rating}</span>
-                </div>
+                ${Object.entries(project.stats || {}).map(([key, val]) => `
+                    <div class="p-stat">
+                        <span class="stat-label">${key.toUpperCase()}</span>
+                        <span class="stat-val">${val}</span>
+                    </div>
+                `).join('')}
             </div>
 
             <!-- Visual Mockup Showcase -->

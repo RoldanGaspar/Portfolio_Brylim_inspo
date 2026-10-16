@@ -5,7 +5,7 @@ function renderExperienceAll() {
         <div class="experience-page-container reveal">
             <div class="page-header">
                 <h2 class="page-title-clean">experience</h2>
-                <p class="page-desc-clean">Six years building across AI engineering and full-stack development &mdash; from internal GenAI platforms at global enterprises to 60+ products shipped for startups.</p>
+                <p class="page-desc-clean">Software engineering, AI systems, and cybersecurity &mdash; focused on dependable full-stack applications, network defense, and practical AI tooling.</p>
             </div>
 
             <div class="exp-timeline-list">

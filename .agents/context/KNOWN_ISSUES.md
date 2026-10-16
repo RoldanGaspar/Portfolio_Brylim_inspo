@@ -9,15 +9,18 @@ Needs Roldan's confirmation before it stays on a live site under his name. Do no
 
 | Content | Location |
 |---|---|
-| Projects Tarsi, Kabi, Travel Buddy — "#1 Finance App", "#1 Paid Fitness", download counts, ratings | `data.js#projects`, `home.js`, `ai-bot.js`, `command-palette.js`, `modals.js` |
 | Experience: Lead AI Engineer @ Standard Chartered, AI Ops @ CoE GenAI Cambridge, Sr Full-Stack @ Core Technology | `data.js#experienceList`, `experience-all.js`, `home.js` |
-| "Six years… 60+ products shipped" | `experience-all.js` |
-| Hero stats: 200K+ community, 6+ yrs, 10x hackathons, PH100 StellarPH | `home.js` |
 | Recommendations from Henry Aguda (DICT Secretary), Joshua Shailes, Cris Lawrence Adrian(o) | `data.js#recsList`, `home.js` |
-| Certs: Google GenAI Leader, Oracle GenAI Professional, Neo4j, AWS AI Practitioner | `data.js#certsList` |
 | Gear (MacBook Pro M3 Max 128GB, Studio Display, WHOOP…) | `data.js#gear` |
 | Consulting rates (₱10k/hr, ₱20k/hr) | `data.js#consulting` |
 | Stack list (~70 technologies) | `stack-all.js` |
+
+> Note: The following items were successfully audited and aligned with Roldan's authentic verified credentials and GitHub repos:
+> - **Certifications:** Top certs in `data.js#certsList` and `home.js` now strictly feature Cisco NetAcad (Network Defense, Ethical Hacker, Python Essentials) and AWS Cloud 101 with direct Credly verification links.
+> - **Hero Stats:** Replaced template numbers with authentic facts (`10+ Credentials`, `4 Open Repos`, `0 Dependencies`, `100% Verified`).
+> - **Projects:** Replaced template claims with Roldan's active repositories (`AWarden-A`, `pos_with_inventory_system`, `Tarsi`) with honest technical metrics and GitHub links.
+> - **Favicon & CDN:** Replaced 2.9 MB image with dedicated `favicon-32.png` and `apple-touch-icon.png` (<3 KB), and pinned Phosphor to `@2.1.1`.
+> - **3D Cyber-Loft:** Added collapsible persistent live chat drawer with live feed and unread badge.
 
 ## 🟠 Maintainability
 

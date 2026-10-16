@@ -404,6 +404,9 @@ function initModals() {
                         <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="🚀 Shipping!">🚀</button>
                         <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="☕ Espresso!">☕</button>
                         <button type="button" class="lounge-hud-btn lounge-emote-btn" data-emote="🛡️ Secured!">🛡️</button>
+                        <button type="button" class="lounge-hud-btn" id="lounge-chat-drawer-toggle" title="Toggle Live Chat Feed">
+                            <i class="ph ph-chat-centered-text"></i> Chat <span class="lounge-chat-badge" id="lounge-chat-badge">0</span>
+                        </button>
                     </div>
                 </div>
                 
@@ -419,6 +422,15 @@ function initModals() {
                         <button type="button" class="lounge-station-action-btn" id="lounge-station-action-btn">Interact [F]</button>
                     </div>
                     <canvas id="game-canvas" width="680" height="382"></canvas>
+                    <div class="lounge-chat-drawer" id="lounge-chat-drawer" aria-hidden="true">
+                        <div class="lounge-drawer-header">
+                            <span class="lounge-drawer-title"><i class="ph ph-chat-centered-dots" style="color:var(--accent-cyan);"></i> Cyber-Loft Live Feed</span>
+                            <button type="button" class="lounge-drawer-close" id="lounge-chat-drawer-close" aria-label="Close Chat Feed">✕</button>
+                        </div>
+                        <div class="lounge-drawer-feed" id="lounge-chat-drawer-feed">
+                            <div class="lounge-drawer-empty">No broadcasts yet.<br>Chat below or tap an emote!</div>
+                        </div>
+                    </div>
                     <div class="lounge-station-bar">
                         <button type="button" class="lounge-station-chip" data-station="dev-rig">💻 AI Rig</button>
                         <button type="button" class="lounge-station-chip" data-station="soc-rack">🛡️ SOC Rack</button>
@@ -455,6 +467,65 @@ function initModals() {
         const stationNameEl = document.getElementById('lounge-station-name');
         const stationDescEl = document.getElementById('lounge-station-desc');
         const stationActionBtn = document.getElementById('lounge-station-action-btn');
+        const chatDrawer = document.getElementById('lounge-chat-drawer');
+        const chatDrawerToggle = document.getElementById('lounge-chat-drawer-toggle');
+        const chatDrawerClose = document.getElementById('lounge-chat-drawer-close');
+        const chatDrawerFeed = document.getElementById('lounge-chat-drawer-feed');
+        const chatBadge = document.getElementById('lounge-chat-badge');
+        let unreadChatCount = 0;
+        let isChatDrawerOpen = false;
+
+        function toggleChatDrawer(forceOpen) {
+            isChatDrawerOpen = typeof forceOpen === 'boolean' ? forceOpen : !isChatDrawerOpen;
+            if (chatDrawer) {
+                chatDrawer.classList.toggle('active', isChatDrawerOpen);
+                chatDrawer.setAttribute('aria-hidden', String(!isChatDrawerOpen));
+            }
+            if (isChatDrawerOpen) {
+                unreadChatCount = 0;
+                if (chatBadge) {
+                    chatBadge.textContent = '0';
+                    chatBadge.classList.remove('unread');
+                }
+            }
+        }
+
+        if (chatDrawerToggle) {
+            chatDrawerToggle.addEventListener('click', () => toggleChatDrawer());
+        }
+        if (chatDrawerClose) {
+            chatDrawerClose.addEventListener('click', () => toggleChatDrawer(false));
+        }
+
+        function appendChatDrawerMessage(author, color, text, isAi = false) {
+            if (!chatDrawerFeed || !text) return;
+            const emptyNotice = chatDrawerFeed.querySelector('.lounge-drawer-empty');
+            if (emptyNotice) emptyNotice.remove();
+
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const row = document.createElement('div');
+            row.className = 'lounge-msg-row';
+            row.innerHTML = `
+                <div class="lounge-msg-meta">
+                    <span class="lounge-msg-author" style="color:${color || 'var(--accent-cyan)'}">
+                        <span class="lounge-msg-dot" style="background:${color || 'var(--accent-cyan)'}"></span>
+                        ${escapeTerminalText(author)}
+                    </span>
+                    <span class="lounge-msg-time">${timeStr}</span>
+                </div>
+                <div class="lounge-msg-body">${escapeTerminalText(text)}</div>
+            `;
+            chatDrawerFeed.appendChild(row);
+            chatDrawerFeed.scrollTop = chatDrawerFeed.scrollHeight;
+
+            if (!isChatDrawerOpen) {
+                unreadChatCount++;
+                if (chatBadge) {
+                    chatBadge.textContent = unreadChatCount > 99 ? '99+' : String(unreadChatCount);
+                    chatBadge.classList.add('unread');
+                }
+            }
+        }
 
         // High-DPI Retina Canvas Scaling
         const modalArea = canvas.closest('.modal-content-area');
@@ -714,8 +785,10 @@ function initModals() {
                 existing.facing = Number(payload.facing) || 0;
                 existing.stride += 0.35;
                 if (payload.message) {
-                    existing.message = String(payload.message).slice(0, 60);
+                    const msg = String(payload.message).slice(0, 60);
+                    existing.message = msg;
                     existing.msgTime = Date.now() + 4500;
+                    appendChatDrawerMessage(existing.name, existing.color, msg, false);
                 }
                 existing.lastSeen = Date.now();
                 remotePeers.set(peerId, existing);
@@ -785,8 +858,10 @@ function initModals() {
 
         const quoteInterval = setInterval(() => {
             const randomAi = aiAvatars[Math.floor(Math.random() * aiAvatars.length)];
-            randomAi.message = randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
+            const quote = randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
+            randomAi.message = quote;
             randomAi.msgTime = Date.now() + 4000;
+            appendChatDrawerMessage(randomAi.name, randomAi.color, quote, true);
             // Patrol within their home quadrant + occasional visit near center ring
             const roamRadius = 26;
             randomAi.targetWx = randomAi.homeWx + (Math.random() - 0.5) * roamRadius * 2;
@@ -857,6 +932,7 @@ function initModals() {
                 const emote = btn.getAttribute('data-emote') || '👋';
                 player.message = emote;
                 player.msgTime = Date.now() + 4000;
+                appendChatDrawerMessage(player.name, player.color, emote, false);
                 triggerJump();
                 broadcastMyState(true);
             });
@@ -924,6 +1000,7 @@ function initModals() {
                 player.message = val;
                 player.msgTime = Date.now() + 5000;
                 chatInput.value = '';
+                appendChatDrawerMessage(player.name, player.color, val, false);
                 if (window.playSound) window.playSound('click');
                 broadcastMyState(true);
             }
@@ -1650,6 +1727,7 @@ function initModals() {
 
         animationFrameId = requestAnimationFrame(gameLoop);
         broadcastMyState(true);
+        appendChatDrawerMessage('Alex · AI Eng', '#a855f7', 'Welcome to the 3D Cyber-Loft v2.0! 🚀', true);
 
         overlay.addEventListener('click', () => {
             isDisposed = true;
