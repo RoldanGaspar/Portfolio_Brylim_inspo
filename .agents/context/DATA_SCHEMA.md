@@ -65,6 +65,9 @@ Same as NetAcad minus `hours`, `verifyUrl`, `certificateImage`.
 ### `recsList[]` → `views/recommendations-all.js`
 `author`, `role`, `text`, `initials`.
 
+### `cyberLab` → `views/cyber-lab.js` (`#/cyber-lab`) ✅ verified foundations
+`subtitle`, `nodes[]` (`id`, `label`, `ip`, `role`, `ports`, `tier`, `lane`), `defenseRules[]` (`id`, `label`, `code`, `desc`, `active`), `threatScenarios[]` (`id`, `label`, `mitre`, `protocol`, `target`, `mitigatedBy`, `payload`), `verifiedFoundations[]`.
+
 ## Duplication map
 
 Content that lives in more than one place. **When you change one, change all — or better, refactor the copy to read from `portfolioData`.**

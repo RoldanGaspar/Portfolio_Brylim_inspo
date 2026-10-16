@@ -431,5 +431,35 @@ window.portfolioData = {
             text: "Roldan was the most talented software engineer I've mentored in a long time. He's a fast learner, and he always takes full ownership of complex engineering problems.",
             initials: "CA"
         }
-    ]
+    ],
+    cyberLab: {
+        subtitle: "Interactive SOC telemetry, packet inspection, and threat mitigation sandbox grounded in Cisco NetAcad CyberOps, Network Defense, and Ethical Hacking coursework.",
+        nodes: [
+            { id: "wan", label: "WAN Ingress", ip: "203.0.113.1", role: "External Untrusted Edge", ports: "80, 443, 22", tier: 0 },
+            { id: "fw", label: "Perimeter IDS/FW", ip: "10.0.0.1", role: "Stateful Firewall & Snort IPS", ports: "ACL Policy #104", tier: 1 },
+            { id: "sw", label: "Core L3 Switch", ip: "10.0.1.1", role: "VLAN 10/20/30 Trunking", ports: "802.1Q / OSPF", tier: 2 },
+            { id: "web", label: "App Gateway", ip: "10.0.10.12", role: "Reverse Proxy & TLS Termination", ports: "443/TCP", tier: 3, lane: -1 },
+            { id: "sec", label: "SOC Endpoint", ip: "10.0.20.45", role: "Hardened Workstation & EDR", ports: "Syslog 514/UDP", tier: 3, lane: 0 },
+            { id: "db", label: "Data Vault", ip: "10.0.30.88", role: "PostgreSQL + RLS Enforced", ports: "5432/TCP", tier: 3, lane: 1 }
+        ],
+        defenseRules: [
+            { id: "acl", label: "Stateful ACL Filtering", code: "permit tcp any eq 443", desc: "Drops unauthorized port scans and malformed non-TLS ingress packets.", active: true },
+            { id: "rate", label: "SYN Flood Rate Limiter", code: "limit-pps 100 burst 25", desc: "Throttles volumetric TCP SYN floods at the perimeter edge.", active: true },
+            { id: "dpi", label: "Deep Packet WAF / SQLi", code: "inspect http-payload sqli", desc: "Inspects Layer-7 payloads for union select & script injection signatures.", active: true },
+            { id: "ztna", label: "Zero-Trust SSH Guard", code: "deny tcp any eq 22 brute", desc: "Blocks credential stuffing and unauthorized lateral movement to endpoints.", active: true }
+        ],
+        threatScenarios: [
+            { id: "ddos", label: "SYN Flood DDoS", mitre: "T1498.001", protocol: "TCP SYN", target: "web", mitigatedBy: "rate", payload: "SYN_FLOOD len=64 flags=[S] seq=0 win=512" },
+            { id: "sqli", label: "SQLi Auth Bypass", mitre: "T1190", protocol: "HTTPS L7", target: "db", mitigatedBy: "dpi", payload: "POST /login ' OR 1=1 -- UNION SELECT" },
+            { id: "scan", label: "Stealth Port Scan", mitre: "T1046", protocol: "TCP FIN/NULL", target: "sw", mitigatedBy: "acl", payload: "NMAP_SCAN ports=1-1024 flags=[F,P,U]" },
+            { id: "brute", label: "SSH Brute-Force", mitre: "T1110.001", protocol: "SSH-2.0", target: "sec", mitigatedBy: "ztna", payload: "AUTH_ATTEMPT user=root tries=48/sec" }
+        ],
+        verifiedFoundations: [
+            "CyberOps Associate",
+            "Ethical Hacker",
+            "Network Defense",
+            "Endpoint Security",
+            "Networking Devices & Config"
+        ]
+    }
 };

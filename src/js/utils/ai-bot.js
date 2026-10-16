@@ -138,13 +138,24 @@ function initAIBot() {
             return `
                 🎓 <strong>Verified Credentials &amp; Certifications:</strong><br>
                 Roldan holds <strong>10 Cisco Networking Academy credentials</strong> and an <strong>AWS Educate Cloud 101</strong> badge:<br>
-                • <strong>Cybersecurity Essentials &amp; Network Defense</strong><br>
+                • <strong>CyberOps Associate &amp; Network Defense</strong><br>
+                • <strong>Ethical Hacker &amp; Endpoint Security</strong><br>
                 • <strong>Python Essentials 1 &amp; 2</strong><br>
                 • <strong>JavaScript Essentials 1</strong><br>
-                • <strong>Ethical Hacker &amp; Threat Analysis</strong><br>
                 • <strong>AWS Educate: Cloud 101</strong><br><br>
                 <button class="ai-action-btn" onclick="window.location.hash='#/certifications'">
                     <i class="ph-fill ph-seal-check"></i> View All Certifications
+                </button>
+            `;
+        }
+
+        // 2b. Cybersecurity & Interactive Cyber Lab
+        if (query.includes('cyber') || query.includes('security') || query.includes('network') || query.includes('firewall') || query.includes('lab') || query.includes('simulator')) {
+            return `
+                🛡️ <strong>CyberOps &amp; Network Defense Lab:</strong><br>
+                Roldan built an interactive <strong>SOC Telemetry &amp; Packet Inspection Simulator</strong> grounded in his 10 verified Cisco NetAcad credentials (CyberOps Associate, Ethical Hacker, Network Defense, Endpoint Security).<br><br>
+                <button class="ai-action-btn" onclick="window.location.hash='#/cyber-lab'">
+                    <i class="ph-fill ph-shield-check"></i> Launch Cyber Lab
                 </button>
             `;
         }

@@ -12,7 +12,8 @@ const routes = {
     '#/resources': renderResources,
     '#/collabs': renderCollabs,
     '#/consulting': renderConsulting,
-    '#/audio': renderAudioLounge
+    '#/audio': renderAudioLounge,
+    '#/cyber-lab': renderCyberLab
 };
 
 let currentView = null;
@@ -66,6 +67,7 @@ function router() {
             if (window.initProjectsStack) initProjectsStack();
             if (window.initVerifiedBadgeConfetti) initVerifiedBadgeConfetti();
             if (window.initAudioLoungeEvents && viewHash === '#/audio') initAudioLoungeEvents();
+            if (window.initCyberLabEvents && viewHash === '#/cyber-lab') initCyberLabEvents();
             if (window.initGithubGraph && (viewHash === '#/' || viewHash === '#home')) initGithubGraph();
             if (window.playSound) playSound('nav');
         }, currentView === null ? 0 : 200);

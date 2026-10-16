@@ -15,6 +15,7 @@ const commandItems = [
     { title: "Gear Setup", type: "Navigation", icon: "ph-desktop", url: "#/gear" },
     { title: "Resources & AI Courses", type: "Navigation", icon: "ph-book-open", url: "#/resources" },
     { title: "Consulting Services", type: "Navigation", icon: "ph-handshake", url: "#/consulting" },
+    { title: "CyberOps & Network Defense Lab", type: "Navigation", icon: "ph-shield-check", url: "#/cyber-lab" },
     { title: "Toggle Theme (Light / Dark)", type: "Action", icon: "ph-moon", action: "toggleTheme" },
     { title: "Play Ambient Lo-Fi Beats", type: "Audio", icon: "ph-headphones", action: "playLofi" },
     { title: "Play Gentle Rain Soundscape", type: "Audio", icon: "ph-cloud-rain", action: "playRain" },

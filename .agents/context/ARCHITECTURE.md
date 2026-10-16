@@ -55,6 +55,7 @@ initVerifiedBadgeConfetti(); initAudioLoungeEvents() /* only on #/audio */; play
 | `#/collabs` | `renderCollabs` | `views/collabs.js` |
 | `#/consulting` | `renderConsulting` | `views/consulting.js` |
 | `#/audio` | `renderAudioLounge` | `views/audio-lounge.js` |
+| `#/cyber-lab` | `renderCyberLab` | `views/cyber-lab.js` |
 | `#/affiliations` | *(none — falls back to Home, no scroll)* | — |
 
 ## Global API surface (what other files call)
@@ -74,6 +75,7 @@ initVerifiedBadgeConfetti(); initAudioLoungeEvents() /* only on #/audio */; play
 | `initCommandPalette`, `commandItems` | `command-palette.js` | self (DOMContentLoaded) |
 | `generateGithubGraph` | `components/github-graph.js` | `home.js` |
 | `initAudioLoungeEvents`, Pomodoro fns | `audio-lounge.js` | router |
+| `renderCyberLab`, `initCyberLabEvents` | `cyber-lab.js` | router |
 
 ## Keyboard shortcuts
 
