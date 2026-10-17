@@ -1,6 +1,9 @@
 function initModals() {
     const modalContainer = document.createElement('div');
+    modalContainer.id = 'modal-container';
     modalContainer.className = 'modal-container';
+    modalContainer.setAttribute('role', 'dialog');
+    modalContainer.setAttribute('aria-modal', 'true');
     modalContainer.innerHTML = `
         <div class="modal-overlay"></div>
         <div class="modal-content-area"></div>
@@ -9,18 +12,56 @@ function initModals() {
 
     const overlay = modalContainer.querySelector('.modal-overlay');
     const contentArea = modalContainer.querySelector('.modal-content-area');
+    let lastFocusedModalTrigger = null;
+    let activeModalCleanup = null;
 
-    function openModal(contentHtml) {
+    function openModal(contentHtml, onCleanup) {
+        if (typeof activeModalCleanup === 'function') {
+            activeModalCleanup();
+            activeModalCleanup = null;
+        }
+        lastFocusedModalTrigger = document.activeElement;
+        activeModalCleanup = typeof onCleanup === 'function' ? onCleanup : null;
         contentArea.innerHTML = contentHtml;
         modalContainer.classList.add('active');
         if (window.playSound) window.playSound('open');
     }
 
     function closeModal() {
+        if (!modalContainer.classList.contains('active')) return;
+        if (typeof activeModalCleanup === 'function') {
+            const fn = activeModalCleanup;
+            activeModalCleanup = null;
+            fn();
+        }
         modalContainer.classList.remove('active');
         if (window.playSound) window.playSound('close');
         setTimeout(() => { contentArea.innerHTML = ''; }, 300);
+        if (lastFocusedModalTrigger && typeof lastFocusedModalTrigger.focus === 'function') {
+            lastFocusedModalTrigger.focus();
+            lastFocusedModalTrigger = null;
+        }
     }
+
+    document.addEventListener('keydown', (e) => {
+        if (!modalContainer.classList.contains('active')) return;
+        if (e.key === 'Escape') {
+            closeModal();
+        } else if (e.key === 'Tab') {
+            const focusable = contentArea.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+            if (focusable.length > 0) {
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        }
+    });
 
     overlay.addEventListener('click', closeModal);
 
@@ -61,9 +102,6 @@ function initModals() {
         if (e.altKey && e.key.toLowerCase() === 'j') {
             e.preventDefault();
             openTypingModal();
-        }
-        if (e.key === 'Escape') {
-            closeModal();
         }
     });
 
@@ -197,9 +235,9 @@ function initModals() {
             stack: `<span class="t-green">Languages:</span> TypeScript, JavaScript, Python, Swift, SQL<br>
                     <span class="t-green">Frontend:</span> React, Next.js, Vanilla JS SPA, CSS Tokens<br>
                     <span class="t-green">Security &amp; Cloud:</span> Cisco CyberOps, Supabase RLS, AWS, Vercel`,
-            projects: `<span class="t-green">Tarsi</span> — #1 Finance App on App Store 🏆<br>
-                       <span class="t-green">Kabi</span> — #1 Paid Fitness App<br>
-                       <span class="t-green">Travel Buddy</span> — Trip planning companion`,
+            projects: `<span class="t-green">Tarsi</span> — Offline-First Budget Tracker<br>
+                       <span class="t-green">AWarden-A</span> — Windows AppLocker Defense &amp; Credential Security<br>
+                       <span class="t-green">POS &amp; Inventory System</span> — Full-Stack Retail Suite`,
             whoami: `<span class="t-green">User:</span> operator@roldangaspar.dev<br>
                      <span class="t-green">Location:</span> Pampanga, Philippines 📍<br>
                      <span class="t-green">Clearance:</span> Zero-Trust Verified`,
@@ -269,6 +307,7 @@ function initModals() {
         const words = ['become', 'school', 'call', 'consider', 'feel', 'both', 'well', 'program', 'just', 'much', 'own', 'system', 'state', 'should', 'between', 'each', 'life', 'people', 'under', 'work', 'build', 'think', 'great', 'code', 'design', 'create', 'learn', 'focus', 'ship', 'craft'];
         const shuffled = words.sort(() => Math.random() - 0.5).slice(0, 20);
         const wordSpans = shuffled.map((w, i) => `<span class="typing-word" data-idx="${i}">${w}</span>`).join(' ');
+        let timerInterval = null;
         
         openModal(`
             <div class="typing-modal fade-in">
@@ -281,7 +320,9 @@ function initModals() {
                 <input type="text" id="typing-input" class="typing-hidden-input" autofocus>
                 <p class="typing-hint">Start typing to begin the test...</p>
             </div>
-        `);
+        `, () => {
+            if (timerInterval) clearInterval(timerInterval);
+        });
         
         const input = document.getElementById('typing-input');
         const display = document.getElementById('typing-display');
@@ -301,7 +342,6 @@ function initModals() {
         let startTime = null;
         let correctWords = 0;
         let totalAttempted = 0;
-        let timerInterval = null;
         
         const wordEls = display.querySelectorAll('.typing-word');
         if (wordEls[0]) wordEls[0].classList.add('current');
@@ -1715,28 +1755,25 @@ function initModals() {
             animationFrameId = requestAnimationFrame(gameLoop);
         }
 
-        function cleanupAndClose() {
+        function disposeLounge() {
+            if (isDisposed) return;
             isDisposed = true;
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
             clearInterval(quoteInterval);
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             if (window.subscribeLoungeBroadcast) window.subscribeLoungeBroadcast(null);
+        }
+
+        function cleanupAndClose() {
+            disposeLounge();
             closeModal();
         }
 
+        activeModalCleanup = disposeLounge;
         animationFrameId = requestAnimationFrame(gameLoop);
         broadcastMyState(true);
         appendChatDrawerMessage('Alex · AI Eng', '#a855f7', 'Welcome to the 3D Cyber-Loft v2.0! 🚀', true);
-
-        overlay.addEventListener('click', () => {
-            isDisposed = true;
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('keyup', handleKeyUp);
-            clearInterval(quoteInterval);
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            if (window.subscribeLoungeBroadcast) window.subscribeLoungeBroadcast(null);
-        }, { once: true });
     }
 
     window.openCommunityModal = openCommunityModal;

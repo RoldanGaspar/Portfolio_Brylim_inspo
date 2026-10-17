@@ -30,6 +30,7 @@ const commandItems = [
 ];
 
 let selectedIdx = 0;
+let cmdLastFocusedElement = null;
 
 function initCommandPalette() {
     // Add Keyboard listener (Ctrl + K or Cmd + K)
@@ -40,6 +41,23 @@ function initCommandPalette() {
         }
         if (e.key === 'Escape') {
             closeCommandPalette();
+        }
+        if (e.key === 'Tab') {
+            const modal = document.getElementById('cmd-palette-modal');
+            if (modal && modal.classList.contains('active')) {
+                const focusable = modal.querySelectorAll('input, button, [href], [tabindex]:not([tabindex="-1"])');
+                if (focusable.length > 0) {
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+                    if (e.shiftKey && document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+            }
         }
     });
 
@@ -55,6 +73,9 @@ function initCommandPalette() {
         const modal = document.createElement('div');
         modal.id = 'cmd-palette-modal';
         modal.className = 'cmd-modal-overlay';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-label', 'Command Palette');
         modal.innerHTML = `
             <div class="cmd-palette-container">
                 <div class="cmd-header">
@@ -96,6 +117,7 @@ function openCommandPalette() {
     const input = document.getElementById('cmd-input');
     if (!modal || !input) return;
 
+    cmdLastFocusedElement = document.activeElement;
     modal.classList.add('active');
     input.value = '';
     selectedIdx = 0;
@@ -106,9 +128,13 @@ function openCommandPalette() {
 
 function closeCommandPalette() {
     const modal = document.getElementById('cmd-palette-modal');
-    if (modal) {
+    if (modal && modal.classList.contains('active')) {
         modal.classList.remove('active');
         if (window.playSound) window.playSound('close');
+        if (cmdLastFocusedElement && typeof cmdLastFocusedElement.focus === 'function') {
+            cmdLastFocusedElement.focus();
+            cmdLastFocusedElement = null;
+        }
     }
 }
 
@@ -122,7 +148,11 @@ function renderCmdResults(filterQuery) {
     );
 
     if (filtered.length === 0) {
-        resultsContainer.innerHTML = `<div class="cmd-empty">No results matching "${filterQuery}"</div>`;
+        resultsContainer.innerHTML = '';
+        const emptyEl = document.createElement('div');
+        emptyEl.className = 'cmd-empty';
+        emptyEl.textContent = `No results matching "${filterQuery}"`;
+        resultsContainer.appendChild(emptyEl);
         return;
     }
 

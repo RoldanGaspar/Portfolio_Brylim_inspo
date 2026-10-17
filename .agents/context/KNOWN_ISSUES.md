@@ -21,26 +21,17 @@ Needs Roldan's confirmation before it stays on a live site under his name. Do no
 > - **Projects:** Replaced template claims with Roldan's active repositories (`AWarden-A`, `pos_with_inventory_system`, `Tarsi`) with honest technical metrics and GitHub links.
 > - **Favicon & CDN:** Replaced 2.9 MB image with dedicated `favicon-32.png` and `apple-touch-icon.png` (<3 KB), and pinned Phosphor to `@2.1.1`.
 > - **3D Cyber-Loft:** Added collapsible persistent live chat drawer with live feed and unread badge.
+> - **Accessibility, Reduced Motion & README (Phase 6):** Implemented global `prefers-reduced-motion` guards in CSS and JS, WCAG keyboard navigation & ARIA semantics (`role="button"`, `tabindex="0"`, `Enter`/`Space`/`Arrow` keys) on `#hero-verified-badge` and `.project-stack-card`, modal/command palette focus trapping & restoration, and synchronized `README.md` with the zero-build classic `<script>` architecture.
 
 ## 🟠 Maintainability
 
 - **Duplicated content** across files — see `DATA_SCHEMA.md#duplication-map`.
-- **README is inaccurate:** says "ES6 Modules" (actually classic scripts), directory tree omits several files, `LICENSE` file referenced but missing, license badge URL malformed (`green.style=` → `green?style=`).
 - **Legacy root files** `data.js`, `main.js`, `style.css` are dead code (~90 KB). Candidate for deletion with approval.
 - `views.css` is ~4,500 lines; finding styles is slow. Consider splitting per view (keep `@import` order).
 - `ai-bot.js` answers are hard-coded strings, not derived from `portfolioData`.
 
-## 🟠 Accessibility
-
-- Partial `prefers-reduced-motion` handling (added in `#/cyber-lab` and `#/blog/:id`, still missing on tilt, magnetic, confetti, page transitions, reveal).
-- Hero verified badge is an `<i>` with a click handler — not keyboard-focusable, no role/label.
-- Project stack cards are clickable `<div>`s — not keyboard accessible.
-- Command palette / modals: verify focus trap and focus return.
-
 ## 🟢 Performance
 
-- `MyPic.png` (~2.9 MB) is still used as favicon (hero now uses `MyPic.webp` at 34 KB). Consider 32/180px PNGs for icons.
-- Phosphor Icons loaded from unpkg without a pinned version (`@phosphor-icons/web`) — unpredictable upgrades; consider pinning `@2.1.1`.
 - ~29 separate script requests; fine on HTTP/2 but all render-blocking at end of body.
 - Blog/gear images are hot-linked from Unsplash.
 

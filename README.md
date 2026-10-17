@@ -10,7 +10,7 @@
     <a href="https://roldangaspar.vercel.app" target="_blank">
       <img src="https://img.shields.io/badge/Live_Demo-roldangaspar.vercel.app-38bdf8?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
     </a>
-    <img src="https://img.shields.io/badge/License-MIT-green.style=for-the-badge" alt="License" />
+    <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
     <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status" />
   </p>
 
@@ -51,7 +51,7 @@
 
 ## 🛠️ Technology Stack
 
-- **Core**: Vanilla HTML5, JavaScript (ES6 Modules)
+- **Core**: Vanilla HTML5, JavaScript (Zero-build classic `<script>` architecture sharing globals)
 - **Styling**: Vanilla CSS3 (Custom Tokens, Glassmorphism, Dark/Light Mode Themes)
 - **Audio & Visuals**: Web Audio API (Procedural Oscillators & Gain Nodes), HTML5 Canvas API
 - **Icons & Typography**: Phosphor Icons, Google Fonts (*Inter*, *Space Mono*)
@@ -63,10 +63,13 @@
 
 ```text
 PORTFOLIO/
-├── index.html              # Main HTML entry point & sidebar layout
+├── index.html              # Main HTML entry point, sidebar layout & ordered script tags
 ├── vercel.json             # Vercel deployment configuration
-├── MyPic.png               # Profile picture & browser tab favicon
-├── assets/                 # Certificates, PDFs, audio assets, and media
+├── MyPic.webp              # Optimized WebP hero profile portrait
+├── MyPic.png               # High-res fallback profile portrait
+├── favicon-32.png          # 32x32 browser tab icon
+├── apple-touch-icon.png    # 180x180 Apple touch icon
+├── assets/                 # Certificates, PDFs, resumes, and media
 │   └── certificates/       # High-res badges, previews, and PDF credentials
 ├── src/
 │   ├── css/
@@ -75,23 +78,31 @@ PORTFOLIO/
 │   │   ├── layout.css      # App container, sidebar, & responsive grids
 │   │   ├── components.css  # Buttons, cards, modals, & confetti styles
 │   │   ├── views.css       # Page-specific views & 3D card deck styles
-│   │   └── animations.css # Smooth keyframe transitions & entrance reveals
+│   │   └── animations.css  # Smooth keyframe transitions & entrance reveals
 │   └── js/
 │       ├── app.js          # App initialization & global state listeners
 │       ├── data.js         # Portfolio content database (Projects, Recs, Certs)
 │       ├── router.js       # Hash-based Single Page Application router
+│       ├── components/
+│       │   └── github-graph.js # Live GitHub contribution calendar & repos
 │       ├── views/          # Modular page view renderers
 │       │   ├── home.js
 │       │   ├── audio-lounge.js
 │       │   ├── certifications-all.js
+│       │   ├── cyber-lab.js
 │       │   ├── projects-all.js
 │       │   ├── project-detail.js
 │       │   ├── recommendations-all.js
 │       │   └── ...
 │       └── utils/
-│           ├── audio.js    # Procedural Web Audio API Soundscape engine
-│           ├── effects.js  # Confetti explosion, 3D card tilt & swap logic
-│           └── command-palette.js # Spotlight search modal (Ctrl+K)
+│           ├── ai-bot.js          # Grounded AI portfolio assistant
+│           ├── audio.js           # Procedural Web Audio API Soundscape engine
+│           ├── command-palette.js # Spotlight search modal (Ctrl+K)
+│           ├── effects.js         # Confetti explosion, 3D card tilt & swap logic
+│           ├── modals.js          # Contact, Guestbook, Booking & Cert lightbox modals
+│           ├── scroll.js          # Scroll reveal observer & back-to-top
+│           ├── supabase-client.js # Supabase RPC & RLS client helpers
+│           └── theme.js           # Dark/Light theme switcher
 ```
 
 ---
@@ -105,7 +116,7 @@ PORTFOLIO/
    ```
 
 2. **Run locally**:
-   Since the app uses standard ES6 modules, serve it using any local HTTP server:
+   Since the app uses zero-build classic ordered `<script>` tags with static assets, serve it using any local HTTP server:
    ```bash
    # Using VS Code Live Server extension or npx serve:
    npx serve .
@@ -127,7 +138,7 @@ npx vercel --prod
 
 ## 📄 License
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+Distributed under the **MIT License**.
 
 <div align="center">
   <sub>Built with ❤️ by <b>Roldan Gaspar</b></sub>

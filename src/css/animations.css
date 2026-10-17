@@ -168,3 +168,34 @@
     transform: translateX(160px) rotate(12deg) scale(0.9);
 }
 
+/* Keyboard Focus Indicators */
+.verified-badge:focus-visible,
+.project-stack-card:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 3px;
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    #router-view,
+    .tilt-card,
+    .magnetic,
+    .shimmer-badge,
+    .verified-spin,
+    .lightning-bolt,
+    .pulse-icon,
+    .shield-icon,
+    .fade-in {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+}
+
+

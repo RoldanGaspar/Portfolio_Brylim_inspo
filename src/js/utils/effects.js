@@ -1,4 +1,5 @@
 function initTiltCards() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     document.querySelectorAll('.tilt-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
@@ -19,6 +20,7 @@ function initTiltCards() {
 }
 
 function initMagnetic() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     document.querySelectorAll('.magnetic').forEach(el => {
         el.addEventListener('mousemove', (e) => {
             const rect = el.getBoundingClientRect();
@@ -105,6 +107,19 @@ function initProjectsStack() {
                 if (window.playSound) window.playSound('open');
             }
         });
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.click();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                rotateDeck('next');
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                rotateDeck('prev');
+            }
+        });
     });
 
     // Touch gesture swipe support for mobile
@@ -144,58 +159,70 @@ function initVerifiedBadgeConfetti() {
 
     badge.style.cursor = 'pointer';
 
-    badge.addEventListener('click', (e) => {
+    function triggerVerifiedBadge(e) {
         e.stopPropagation();
         if (window.playSound) window.playSound('open');
 
-        // Spin animation on checkmark
-        badge.classList.add('verified-spin');
-        setTimeout(() => badge.classList.remove('verified-spin'), 700);
+        const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // Confetti Radial Explosion
-        const rect = badge.getBoundingClientRect();
-        const originX = rect.left + rect.width / 2;
-        const originY = rect.top + rect.height / 2;
+        if (!reducedMotion) {
+            // Spin animation on checkmark
+            badge.classList.add('verified-spin');
+            setTimeout(() => badge.classList.remove('verified-spin'), 700);
 
-        const emojis = ['💙', '✔️', '✨', '⚡', '🌟', '💎', '🎉', '🏅'];
-        const colors = ['#1d9bf0', '#00f2fe', '#38bdf8', '#34d399', '#c084fc', '#fbbf24'];
+            // Confetti Radial Explosion
+            const rect = badge.getBoundingClientRect();
+            const originX = rect.left + rect.width / 2;
+            const originY = rect.top + rect.height / 2;
 
-        for (let i = 0; i < 40; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'verified-confetti-particle';
-            
-            const isEmoji = Math.random() > 0.5;
-            if (isEmoji) {
-                particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                particle.style.fontSize = (14 + Math.random() * 12) + 'px';
-            } else {
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.width = (6 + Math.random() * 8) + 'px';
-                particle.style.height = (6 + Math.random() * 8) + 'px';
-                particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            const emojis = ['💙', '✔️', '✨', '⚡', '🌟', '💎', '🎉', '🏅'];
+            const colors = ['#1d9bf0', '#00f2fe', '#38bdf8', '#34d399', '#c084fc', '#fbbf24'];
+
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'verified-confetti-particle';
+                
+                const isEmoji = Math.random() > 0.5;
+                if (isEmoji) {
+                    particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    particle.style.fontSize = (14 + Math.random() * 12) + 'px';
+                } else {
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.width = (6 + Math.random() * 8) + 'px';
+                    particle.style.height = (6 + Math.random() * 8) + 'px';
+                    particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                }
+
+                particle.style.left = originX + 'px';
+                particle.style.top = originY + 'px';
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 80 + Math.random() * 180;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity - 40;
+
+                document.body.appendChild(particle);
+
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1) rotate(0deg)', opacity: 1 },
+                    { transform: `translate(${vx}px, ${vy + 120}px) scale(0) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                ], {
+                    duration: 900 + Math.random() * 400,
+                    easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
+                }).onfinish = () => particle.remove();
             }
-
-            particle.style.left = originX + 'px';
-            particle.style.top = originY + 'px';
-
-            const angle = Math.random() * Math.PI * 2;
-            const velocity = 80 + Math.random() * 180;
-            const vx = Math.cos(angle) * velocity;
-            const vy = Math.sin(angle) * velocity - 40;
-
-            document.body.appendChild(particle);
-
-            particle.animate([
-                { transform: 'translate(0, 0) scale(1) rotate(0deg)', opacity: 1 },
-                { transform: `translate(${vx}px, ${vy + 120}px) scale(0) rotate(${Math.random() * 720}deg)`, opacity: 0 }
-            ], {
-                duration: 900 + Math.random() * 400,
-                easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
-            }).onfinish = () => particle.remove();
         }
 
         // Show Floating Verified Toast
         showVerifiedToast();
+    }
+
+    badge.addEventListener('click', triggerVerifiedBadge);
+    badge.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            triggerVerifiedBadge(e);
+        }
     });
 }
 

@@ -10,7 +10,7 @@ function renderHome() {
             <div class="hero-text">
                 <h2 class="hero-title">
                     Roldan Gaspar 
-                    <i class="ph-fill ph-seal-check verified-badge" id="hero-verified-badge" title="Click to verify Roldan Gaspar! ✔️"></i>
+                    <i class="ph-fill ph-seal-check verified-badge" id="hero-verified-badge" role="button" tabindex="0" aria-label="Verify Roldan Gaspar" title="Click to verify Roldan Gaspar! ✔️"></i>
                 </h2>
                 <div class="hero-location">
                     <i class="ph-fill ph-map-pin location-icon"></i>
@@ -91,7 +91,7 @@ function renderHome() {
             </div>
             <div class="projects-stack-container" id="projects-stack-deck">
                 <!-- Left Background Card: AWarden-A -->
-                <div class="project-stack-card pos-left" data-id="awardena-security" data-url="#/projects/awardena-security">
+                <div class="project-stack-card pos-left" data-id="awardena-security" data-url="#/projects/awardena-security" role="button" tabindex="0" aria-label="Open project: AWarden-A">
                     <div class="stack-card-tags">
                         <span class="stack-tag dark">&lang; CYBERSECURITY TOOL &rang;</span>
                     </div>
@@ -111,7 +111,7 @@ function renderHome() {
                 </div>
                 
                 <!-- Right Background Card: POS & Inventory System -->
-                <div class="project-stack-card pos-right" data-id="pos-inventory" data-url="#/projects/pos-inventory">
+                <div class="project-stack-card pos-right" data-id="pos-inventory" data-url="#/projects/pos-inventory" role="button" tabindex="0" aria-label="Open project: POS with Inventory System">
                     <div class="stack-card-tags">
                         <span class="stack-tag dark">&lang; FULL-STACK SUITE &rang;</span>
                     </div>
@@ -131,7 +131,7 @@ function renderHome() {
                 </div>
 
                 <!-- Center Active Card: Tarsi -->
-                <div class="project-stack-card pos-center" data-id="tarsi-budget-tracker" data-url="#/projects/tarsi-budget-tracker">
+                <div class="project-stack-card pos-center" data-id="tarsi-budget-tracker" data-url="#/projects/tarsi-budget-tracker" role="button" tabindex="0" aria-label="Open project: Tarsi">
                     <div class="stack-card-tags">
                         <span class="stack-tag dark">&lang; OFFLINE-FIRST &rang;</span>
                         <span class="stack-tag">LOCAL ENCRYPTION</span>
