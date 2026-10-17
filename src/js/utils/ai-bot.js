@@ -167,12 +167,13 @@ function initAIBot() {
 
         // 3. Technical Skills & Stack
         if (query.includes('skill') || query.includes('stack') || query.includes('tech') || query.includes('language') || query.includes('framework')) {
+            const cats = window.portfolioData?.stackCategories || [];
+            const stackLines = cats.length > 0
+                ? cats.slice(0, 5).map(c => `• <strong>${c.title}:</strong> ${(c.items || []).slice(0, 6).join(', ')}`).join('<br>')
+                : `• <strong>Languages:</strong> TypeScript, JavaScript, Python, SQL, HTML5/CSS3<br>• <strong>Security &amp; Cloud:</strong> Network Defense, Ethical Hacking, Supabase RLS, AWS, Vercel`;
             return `
                 ⚡ <strong>Roldan's Core Technical Stack:</strong><br>
-                • <strong>Languages:</strong> TypeScript, JavaScript, Python, C#, Swift, SQL, HTML5/CSS3<br>
-                • <strong>Frontend &amp; UI:</strong> React, Next.js, Vanilla JS (custom SPA routing), CSS tokens<br>
-                • <strong>AI &amp; LLMs:</strong> OpenAI APIs, Anthropic Claude, LangChain, PyTorch, RAG architectures<br>
-                • <strong>Backend &amp; Cloud:</strong> Node.js, FastAPI, Supabase (PostgreSQL with RLS), Docker, AWS, Vercel<br><br>
+                ${stackLines}<br><br>
                 <button class="ai-action-btn" onclick="window.location.hash='#/stack'">
                     <i class="ph-fill ph-cpu"></i> Explore Tech Stack
                 </button>

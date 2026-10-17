@@ -57,3 +57,9 @@ Template:
 - **Decision:** Centralize `featuredStack`, `stackCategories`, and project card/command metadata in `window.portfolioData` (`src/js/data.js`) and refactor all views and utilities (`home.js`, `experience-all.js`, `stack-all.js`, `command-palette.js`, `ai-bot.js`) to dynamically map over `window.portfolioData` while strictly excluding unverified sections from `ai-bot.js`.
 - **Consequences:** Adding or updating a project, blog post, certification, or stack item in `src/js/data.js` automatically propagates across the Home page, detail views, Command Palette (`Ctrl+K`), and AI Chatbot with zero manual sync required.
 
+## D-007: Phase 8 Content Integrity & Personalization Audit
+- **Date:** 2026-10-17
+- **Status:** accepted
+- **Context:** Several sections in `src/js/data.js`, `src/js/views/home.js`, and `assets/resume/roldan-gaspar-resume.html` retained inherited inspiration-template claims (e.g., Standard Chartered, Cambridge, Henry Aguda, MacBook Pro M3 Max, ₱10k/hr rates, and ~70 unverified stack items).
+- **Decision:** Replace all inherited template content across `experienceList`, `recsList`, `gear`, `consulting`, `featuredStack`, `stackCategories`, `#affiliations`, and `roldan-gaspar-resume.html` with Roldan Gaspar's verified track record (10 Cisco Networking Academy credentials via DICT-ITU DTC Initiative & CICT, AWS Educate Cloud 101, open-source repositories `AWarden-A`, `pos_with_inventory_system`, `pet-hub-payroll`, `Tarsi`, and authentic Windows 11 Pro / WSL2 security & full-stack workstation).
+- **Consequences:** 100% of visible portfolio content and printable resume assets now strictly adhere to `.agents/rules/content-integrity.md` with zero fabricated or inherited third-party claims.

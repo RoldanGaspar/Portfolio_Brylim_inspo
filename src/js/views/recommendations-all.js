@@ -2,7 +2,7 @@ function renderRecommendationsAll() {
     return `
         <div class="page-header reveal">
             <h2>recommendations</h2>
-            <p class="page-desc">Testimonials and recommendations from government leaders, AI scientists, and product managers I've worked with.</p>
+            <p class="page-desc">Verified institutional credentials, academy completions, and technical program milestones across cybersecurity, cloud, and software engineering.</p>
         </div>
 
         <div class="recs-full-grid reveal">

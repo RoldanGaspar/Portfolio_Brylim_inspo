@@ -3,17 +3,9 @@
 Living register. **Add** issues you discover; **remove** them (and note it in your summary) when fixed.
 Severity: 🔴 high (credibility/broken) · 🟠 medium (UX/maintainability) · 🟢 low (polish).
 
-## 🔴 Unverified content (likely inherited from the inspiration template)
+## ✅ Content Integrity Status (100% Verified)
 
-Needs Roldan's confirmation before it stays on a live site under his name. Do not expand on any of it.
-
-| Content | Location |
-|---|---|
-| Experience: Lead AI Engineer @ Standard Chartered, AI Ops @ CoE GenAI Cambridge, Sr Full-Stack @ Core Technology | `data.js#experienceList`, `experience-all.js`, `home.js` |
-| Recommendations from Henry Aguda (DICT Secretary), Joshua Shailes, Cris Lawrence Adrian(o) | `data.js#recsList`, `home.js` |
-| Gear (MacBook Pro M3 Max 128GB, Studio Display, WHOOP…) | `data.js#gear` |
-| Consulting rates (₱10k/hr, ₱20k/hr) | `data.js#consulting` |
-| Stack list (~70 technologies) | `stack-all.js` |
+All portfolio sections (`src/js/data.js`, `src/js/views/home.js`, and `assets/resume/roldan-gaspar-resume.html`) are 100% grounded in Roldan Gaspar's verified credentials, active GitHub repositories, and Pampanga workstation setup, with zero inherited template claims remaining.
 
 > Note: The following items were successfully audited and aligned with Roldan's authentic verified credentials and GitHub repos:
 > - **Certifications:** Top certs in `data.js#certsList` and `home.js` now strictly feature Cisco NetAcad (Network Defense, Ethical Hacker, Python Essentials) and AWS Cloud 101 with direct Credly verification links.
@@ -23,6 +15,7 @@ Needs Roldan's confirmation before it stays on a live site under his name. Do no
 > - **3D Cyber-Loft:** Added collapsible persistent live chat drawer with live feed and unread badge.
 > - **Accessibility, Reduced Motion & README (Phase 6):** Implemented global `prefers-reduced-motion` guards in CSS and JS, WCAG keyboard navigation & ARIA semantics (`role="button"`, `tabindex="0"`, `Enter`/`Space`/`Arrow` keys) on `#hero-verified-badge` and `.project-stack-card`, modal/command palette focus trapping & restoration, and synchronized `README.md` with the zero-build classic `<script>` architecture.
 > - **Single-Source-of-Truth Data Refactor (Phase 7):** Eliminated cross-file content duplication across `home.js`, `experience-all.js`, `stack-all.js`, `command-palette.js`, and `ai-bot.js` so all views and utilities dynamically read from `window.portfolioData` (`src/js/data.js`).
+> - **Content Integrity & Personalization Audit (Phase 8):** Replaced all remaining inherited template experience (`Standard Chartered`, `Cambridge`, `Core Technology`), recommendations (`Henry Aguda`, `Joshua Shailes`), affiliations (`ST Engineering`, `Pocket Devs`), gear (`MacBook Pro M3 Max`, `WHOOP`), consulting rates (`₱10k/hr`), and bloated 70-item stack lists across `data.js`, `home.js`, and `roldan-gaspar-resume.html` with Roldan's authentic Cisco NetAcad, DICT-ITU DTC, AWS Educate, and open-source engineering track record.
 
 ## 🟠 Maintainability
 

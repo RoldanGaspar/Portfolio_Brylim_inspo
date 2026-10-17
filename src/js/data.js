@@ -315,18 +315,17 @@ window.portfolioData = {
         }
     ],
     gear: {
-        "DESK SETUP": [
-            { name: "MacBook Pro", desc: "M3 Max - 128GB memory - 4TB", image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=400&auto=format&fit=crop" },
-            { name: "Apple Studio Display", desc: "5K display for the desk.", image: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?q=80&w=400&auto=format&fit=crop" },
-            { name: "Magic Keyboard", desc: "Compact, white - with Touch ID.", image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=400&auto=format&fit=crop" },
-            { name: "Magic Mouse", desc: "White wireless mouse.", image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?q=80&w=400&auto=format&fit=crop" },
-            { name: "Xiaomi Monitor Light Bar", desc: "Glare-free desk lighting.", image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=400&auto=format&fit=crop" },
-            { name: "Desky Sit-Stand Desk", desc: "Single-motor sit/stand desk.", image: "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?q=80&w=400&auto=format&fit=crop" }
+        "WORKSTATION & HARDWARE": [
+            { name: "Windows Development Workstation", desc: "Windows 11 · Multi-core CPU · Local AI, CyberOps Lab & Full-Stack Dev", image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=400&auto=format&fit=crop" },
+            { name: "Dual-Display Coding Setup", desc: "Primary high-refresh coding monitor + vertical documentation & telemetry display.", image: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?q=80&w=400&auto=format&fit=crop" },
+            { name: "Tactile Mechanical Keyboard", desc: "Custom-mapped shortcuts for terminal, IDE navigation, and rapid debugging.", image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=400&auto=format&fit=crop" },
+            { name: "Precision Wireless Mouse", desc: "Ergonomic low-latency mouse for daily engineering and UI craft.", image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?q=80&w=400&auto=format&fit=crop" },
+            { name: "Monitor Light Bar", desc: "Glare-free desk lighting for late-night coding sessions.", image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=400&auto=format&fit=crop" }
         ],
-        "EVERYDAY CARRY": [
-            { name: "iPhone 15 Pro Max", desc: "1TB - phone & B-roll camera.", image: "https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=400&auto=format&fit=crop" },
-            { name: "AirPods Pro", desc: "Daily audio & calls.", image: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=400&auto=format&fit=crop" },
-            { name: "WHOOP 5.0", desc: "Recovery & strain tracking.", image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b0?q=80&w=400&auto=format&fit=crop" }
+        "AI & CYBERSECURITY ENVIRONMENT": [
+            { name: "Antigravity & VS Code", desc: "Spec-driven agentic workflow with GSD Core, Roo Code, Ralph Loop & CodeRabbit.", image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400&auto=format&fit=crop" },
+            { name: "Cisco Packet Tracer & CyberOps Lab", desc: "Network topology simulation, ACL hardening, and intrusion detection labs.", image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=400&auto=format&fit=crop" },
+            { name: "Supabase & Vercel Cloud CLI", desc: "PostgreSQL with Row-Level Security (RLS) and zero-build edge deployments.", image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=400&auto=format&fit=crop" }
         ]
     },
     resources: {
@@ -346,13 +345,13 @@ window.portfolioData = {
     consulting: [
         {
             title: "Private Coaching",
-            price: "From ₱10k/hr",
+            price: "Open for Inquiry",
             desc: "1:1 mentoring and guidance — career, code, AI, and building products, tailored to where you are.",
             points: ["1:1 sessions", "Career & technical", "Flexible scheduling"]
         },
         {
             title: "AI & Software Trainings",
-            price: "₱20k/hr",
+            price: "Custom Quote",
             desc: "Hands-on, practical workshops for teams — generative AI, modern web & mobile, and shipping faster with AI-native tooling.",
             points: ["Team workshops", "Custom curriculum", "On-site or remote"]
         },
@@ -371,43 +370,54 @@ window.portfolioData = {
     ],
     experienceList: [
         {
-            id: "lead-ai-engineer",
-            initials: "SC",
-            year: "AUG 2025 – PRESENT · 11 MOS",
-            shortYear: "2025",
-            title: "Lead AI Engineer",
-            company: "Standard Chartered",
-            shortCompany: "Standard Chartered",
-            employmentType: "Full-time",
-            location: "",
-            desc: "Driving AI initiatives and system-level solutions across key areas of the business. Focused on scalable, secure, and responsible innovation.",
-            highlights: [],
-            tech: ["Artificial Intelligence (AI)", "Generative AI", "+2 skills"]
-        },
-        {
-            id: "ai-ops-engineer",
-            initials: "CU",
-            year: "FEB 2025 – AUG 2025 · 7 MOS",
-            shortYear: "2025",
-            title: "AI Ops Engineer",
-            company: "Cambridge University Press & Assessment",
-            shortCompany: "CoE for GenAI - Cambridge",
-            employmentType: "Full-time · 1 yr 2 mos",
-            location: "Makati, National Capital Region, Philippines · Hybrid",
-            desc: "Pioneered the GenAI Centre of Excellence to deliver scalable AI solutions that support the organization's global education and publishing initiatives.",
+            id: "independent-software-ai-engineer",
+            initials: "RG",
+            year: "2025 – PRESENT",
+            shortYear: "2026",
+            title: "Software & AI Systems Builder",
+            company: "Independent & Open-Source Engineering",
+            shortCompany: "Independent & Open-Source",
+            employmentType: "Self-Directed · Portfolio & Production",
+            location: "Pampanga, Philippines · Remote",
+            desc: "Designing and shipping zero-dependency web applications, AI agent harnesses, and cloud-backed developer tools on Vercel and Supabase.",
             highlights: [
-                "Led GenAI model deployments across Azure Foundry and AWS Bedrock, leveraging Dockerized workflows orchestrated through ECS with Fargate, App Runner, and Amplify. Standardized DevOps practices with CI/CD pipelines, IAM policy hardening, automated EC2/Lambda provisioning, and secure secret management via AWS Secrets Manager and Parameter Store. Integrated centralized observability using CloudWatch for logs, metrics, and alerting.",
-                "Architected and deployed a WhatsApp-based lesson planner for South African Foundation Phase educators. The solution utilized Turn.io for conversational UX, n8n for orchestration, and Qdrant for vector search, enabling context-aware RAG over curriculum documents for rapid lesson plan generation."
+                "Architected a zero-build single-page portfolio and interactive 3D Cyber-Loft backed by Supabase PostgreSQL Row-Level Security (RLS) and atomic telemetry RPCs.",
+                "Built deterministic AI engineering workflows using Model Context Protocol (MCP) integrations, static verification scripts, and grounded assistant guardrails."
             ],
-            tech: []
+            tech: ["JavaScript (ES6+)", "TypeScript", "Python", "Supabase (PostgreSQL)", "AI Harnesses & MCP"]
         },
         {
-            id: "senior-fullstack-dev",
-            shortYear: "2024",
-            title: "Senior Full-Stack Developer",
-            company: "Core Technology - Cambridge",
-            shortCompany: "Core Technology - Cambridge",
-            homeOnly: true
+            id: "cybersecurity-network-defense",
+            initials: "CN",
+            year: "2025 – 2026 · 315+ HRS COURSEWORK",
+            shortYear: "2026",
+            title: "Cybersecurity & Network Defense Track",
+            company: "Cisco Networking Academy & DICT-ITU DTC Initiative",
+            shortCompany: "Cisco NetAcad · DICT-ITU",
+            employmentType: "Verified Credential Track",
+            location: "Philippines",
+            desc: "Completed 9 verified Cisco Networking Academy certifications and AWS Cloud 101 training covering network defense, ethical hacking, security alerts, and Python/JavaScript engineering.",
+            highlights: [
+                "Earned verified credentials in Ethical Hacker (70 hrs), Network Defense (27 hrs), JavaScript Essentials 1 & 2 (90 hrs), Python Essentials 1 & 2 (70 hrs), Data Analytics Essentials (30 hrs), and Networking Basics (22 hrs).",
+                "Engineered AWarden-A (Windows AppLocker & credential defense automation) and an interactive browser-based CyberOps SOC telemetry simulator."
+            ],
+            tech: ["Network Defense", "Ethical Hacking", "AppLocker", "Python", "AWS Cloud 101"]
+        },
+        {
+            id: "open-source-fullstack-systems",
+            initials: "OS",
+            year: "2024 – 2026",
+            shortYear: "2025",
+            title: "Full-Stack & Desktop Application Developer",
+            company: "Open-Source Projects (GitHub @RoldanGaspar)",
+            shortCompany: "Open-Source · GitHub",
+            employmentType: "Project Engineering",
+            location: "Pampanga, Philippines",
+            desc: "Built offline-first personal finance software, retail point-of-sale inventory suites, and automated payroll computation systems.",
+            highlights: [
+                "Developed Tarsi (offline-first budget & expense tracker with local storage), POS & Inventory System (Python/SQL transactional retail suite), and Pet Hub Payroll (TypeScript employee payroll engine)."
+            ],
+            tech: ["Python", "TypeScript", "SQLite / SQL", "Offline-First Architecture"]
         }
     ],
     certsList: [
@@ -612,59 +622,55 @@ window.portfolioData = {
     ],
     recsList: [
         {
-            author: "Henry Aguda",
-            role: "Secretary, Dept. of Information & Communications Technology",
-            shortRole: "SECRETARY, DICT...",
-            text: "Roldan, I believe, would be the next Philippine unicorn. He is technically skilled, deeply driven, and possesses an extraordinary ability to execute AI & software ideas into real products.",
-            shortText: "Roldan, I believe, would be the next Philippine unicorn. He is technically skilled, deeply driven, and executes AI ideas into real products.",
-            initials: "HA"
+            author: "Cisco Networking Academy",
+            role: "Cybersecurity & Software Engineering Track (9 Verified Certificates)",
+            shortRole: "9 VERIFIED CERTIFICATES",
+            text: "Verified completion of over 315 hours of technical coursework across Ethical Hacking, Network Defense, Python Essentials 1 & 2, JavaScript Essentials 1 & 2, Networking Basics, and Introduction to Cybersecurity.",
+            shortText: "Verified completion of 315+ hours across Ethical Hacking, Network Defense, Python 1 & 2, and JavaScript 1 & 2.",
+            initials: "CN"
         },
         {
-            author: "Joshua Shailes",
-            role: "Senior AI Data Scientist @ GenAI CoE",
-            shortRole: "SENIOR AI DATA SCIENTIST...",
-            text: "It was a real pleasure to work with Roldan. He's not only a fantastic professional who consistently delivers clean code, but also a visionary AI engineer who understands user experience.",
-            shortText: "It was a real pleasure to work with Roldan. He's not only a fantastic professional who consistently delivers clean code...",
-            initials: "JS"
+            author: "DICT-ITU DTC Initiative",
+            role: "Cisco Networking Academy · Data Analytics Essentials",
+            shortRole: "DATA ANALYTICS TRACK",
+            text: "Completed the 30-hour Data Analytics Essentials program under the Department of Information and Communications Technology (DICT) and ITU Digital Transformation Centres Initiative.",
+            shortText: "Completed the 30-hour Data Analytics Essentials program under the DICT-ITU Digital Transformation Centres Initiative.",
+            initials: "DT"
         },
         {
-            author: "Cris Lawrence Adriano",
-            role: "Integrations Product Manager",
-            shortRole: "INTEGRATIONS PRODUCT MGR...",
-            text: "Roldan was the most talented software engineer I've mentored in a long time. He's a fast learner, and he always takes full ownership of complex engineering problems.",
-            shortText: "Roldan was the most talented software engineer I've mentored in a long time. He's a fast learner, and he always takes full ownership...",
-            initials: "CA"
+            author: "Amazon Web Services (AWS)",
+            role: "AWS Educate · Introduction to Cloud 101",
+            shortRole: "AWS EDUCATE CLOUD 101",
+            text: "Verified Credly training badge demonstrating foundational proficiency in AWS cloud architecture, core compute, storage services, and cloud security principles.",
+            shortText: "Verified Credly badge in AWS cloud foundations, core compute, storage services, and cloud security principles.",
+            initials: "AW"
         }
     ],
-    featuredStack: ["TypeScript", "React", "Next.js", "Node.js", "Python", "AWS", "PyTorch"],
+    featuredStack: ["TypeScript", "JavaScript", "Python", "SQL", "Supabase", "AWS", "Network Defense"],
     stackCategories: [
         {
-            title: "FRONTEND",
-            items: ["JavaScript", "TypeScript", "React", "Next.js", "Vue.js", "Tailwind CSS", "SCSS", "Styled Components", "Vite", "Webpack", "ESLint", "Prettier"]
+            title: "LANGUAGES & CORE",
+            items: ["JavaScript (ES6+)", "TypeScript", "Python", "SQL", "HTML5", "CSS3", "PowerShell", "Bash"]
         },
         {
-            title: "BACKEND",
-            items: ["Node.js", "Python", "Java", "PHP", "Express.js", "NestJS", "FastAPI", "Spring Boot", "Laravel", "PostgreSQL", "MySQL", "MongoDB", "DynamoDB", "OAuth", "JWT", "LDAP", "REST", "GraphQL", "gRPC", "AWS Lambda"]
+            title: "FRONTEND & WEB ARCHITECTURE",
+            items: ["Vanilla JS SPA", "React", "Next.js", "CSS Custom Tokens", "Web Audio API", "HTML5 Canvas", "Responsive UI"]
         },
         {
-            title: "DEVOPS & CLOUD",
-            items: ["AWS", "GCP", "Azure", "GitHub Actions", "Jenkins", "GitLab CI", "Terraform", "AWS CloudFormation", "Docker", "Kubernetes", "Prometheus", "Grafana", "Datadog"]
+            title: "BACKEND & DATABASE",
+            items: ["Node.js", "FastAPI", "Supabase", "PostgreSQL", "Row-Level Security (RLS)", "SQLite", "REST APIs"]
         },
         {
-            title: "AI & MACHINE LEARNING",
-            items: ["TensorFlow", "PyTorch", "LangChain", "Transformers", "OpenAI", "Anthropic", "Mistral", "Hugging Face", "LlamaIndex", "AutoGPT", "Claude Code", "Codex"]
+            title: "AI & AGENTIC WORKFLOWS",
+            items: ["Model Context Protocol (MCP)", "GSD Core", "Roo Code", "Ralph Loop", "CodeRabbit", "Prompt Engineering", "RAG Pipelines"]
         },
         {
-            title: "SECURITY & IDENTITY",
-            items: ["AWS IAM", "Azure AD", "Okta", "SAP CDC", "Auth0", "Cognito", "AES", "RSA", "SHA", "GDPR", "SOC 2", "ISO 27001"]
+            title: "CYBERSECURITY & CLOUD",
+            items: ["Network Defense", "Ethical Hacking", "Windows AppLocker", "Endpoint Security", "AWS Cloud Foundations", "Vercel Edge CDN"]
         },
         {
-            title: "CMS & NO-CODE",
-            items: ["WordPress", "Strapi", "Bubble", "Webflow", "Microsoft Power Platform", "n8n"]
-        },
-        {
-            title: "DEVELOPER TOOLS",
-            items: ["Git", "GitHub", "GitLab", "Bitbucket", "VS Code", "JetBrains IntelliJ", "PyCharm", "Slack", "Discord", "Teams", "JIRA", "Trello", "ClickUp"]
+            title: "DEVELOPER & DATA TOOLS",
+            items: ["Git", "GitHub", "VS Code", "Antigravity IDE", "Cisco Packet Tracer", "Data Analytics"]
         }
     ],
     cyberLab: {

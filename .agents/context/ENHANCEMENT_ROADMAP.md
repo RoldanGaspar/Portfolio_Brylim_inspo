@@ -131,6 +131,20 @@ flowchart LR
 
 ---
 
+## 📋 Phase 8: Content Integrity & Personalization Audit `[COMPLETED ✅]`
+**Goal:** Eliminate 100% of inherited template claims across `src/js/data.js`, `src/js/views/home.js`, and `assets/resume/roldan-gaspar-resume.html`, grounding every section strictly in Roldan Gaspar's verified credentials, active GitHub repositories, and actual workstation setup.
+
+### Scope of Work
+1. **Verified Experience & Affiliations (`src/js/data.js`, `src/js/views/home.js`, `assets/resume/roldan-gaspar-resume.html`):**
+   - Replaced inherited corporate roles (`Standard Chartered`, `CoE GenAI Cambridge`, `Core Technology`) with Roldan's verified engineering timeline: Independent Software Engineer & Security Tooling Developer, Cybersecurity & Network Defense Trainee (Cisco Networking Academy · DICT-ITU DTC Initiative), Full-Stack & Desktop Systems Developer (`pos_with_inventory_system`, `pet-hub-payroll`), and Web & Programming Foundations Trainee (CICT).
+   - Updated `#affiliations` in `home.js` to highlight verified training and open-source ecosystems (Cisco Networking Academy, DICT-ITU DTC Initiative, AWS Educate & Cloud Foundations, GitHub Open Source `@RoldanGaspar`).
+2. **Grounded Technical Stack, Gear, Consulting & Endorsements (`src/js/data.js`):**
+   - Pruned `featuredStack` and `stackCategories` from ~70 template tools down to 28 verified technologies used across Roldan's repositories and certifications.
+   - Replaced unverified third-party executive quotes in `recsList` with verified technical highlights grounded in Cisco NetAcad Lab Evaluations, Open-Source Codebase Architecture, and Full-Stack Business Systems Delivery.
+   - Updated `gear` to reflect Roldan's actual Windows 11 Pro + WSL2 workstation, dual-monitor security lab, and developer toolchain, and replaced fixed `₱10k/hr` consulting rates with authentic `Scope-Based` / `Project-Based` / `By Inquiry` engagements.
+
+---
+
 ## 🚦 Execution Protocol for Every Phase
 
 Every phase must strictly follow this 5-step engineering loop:

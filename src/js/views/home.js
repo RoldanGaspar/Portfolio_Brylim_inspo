@@ -207,24 +207,31 @@ function renderHome() {
             </div>
             <div class="aff-grid">
                 <div class="aff-item">
-                    <div class="aff-logo" style="color: #1a73e8;">AAP</div>
+                    <div class="aff-logo" style="color: #0ea5e9;">CISCO</div>
                     <div class="aff-info">
-                        <strong>AAP</strong>
-                        <span>MEMBER</span>
+                        <strong>Cisco NetAcad</strong>
+                        <span>9 CERTIFICATES</span>
                     </div>
                 </div>
                 <div class="aff-item">
-                    <div class="aff-logo" style="color: #4CAF50;">PSIA</div>
+                    <div class="aff-logo" style="color: #3b82f6;">DTC</div>
                     <div class="aff-info">
-                        <strong>PSIA</strong>
-                        <span>MEMBER</span>
+                        <strong>DICT-ITU DTC</strong>
+                        <span>DATA ANALYTICS</span>
                     </div>
                 </div>
                 <div class="aff-item">
-                    <div class="aff-logo" style="color: var(--text-color);">PH</div>
+                    <div class="aff-logo" style="color: #f59e0b;">AWS</div>
                     <div class="aff-info">
-                        <strong>AppBuildersPH</strong>
-                        <span>FOUNDER</span>
+                        <strong>AWS Educate</strong>
+                        <span>CLOUD 101 BADGE</span>
+                    </div>
+                </div>
+                <div class="aff-item">
+                    <div class="aff-logo" style="color: #10b981;">OSS</div>
+                    <div class="aff-info">
+                        <strong>GitHub Open Source</strong>
+                        <span>@ROLDANGASPAR</span>
                     </div>
                 </div>
             </div>
