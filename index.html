@@ -3,8 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roldan Gaspar - Portfolio</title>
+    <title>Roldan Gaspar — Software Engineer · AI · Cybersecurity</title>
     <meta name="description" content="Roldan Gaspar — Software Engineer, AI, and Cybersecurity enthusiast based in Pampanga, Philippines. Explore projects, certifications, and soundscapes.">
+    <meta name="author" content="Roldan Gaspar">
+    <link rel="canonical" href="https://roldangaspar.vercel.app/">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "name": "Roldan Gaspar",
+                "jobTitle": "Software Engineer",
+                "url": "https://roldangaspar.vercel.app/",
+                "image": "https://roldangaspar.vercel.app/MyPic.webp",
+                "email": "mailto:gaspar26roldan@gmail.com",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Pampanga",
+                    "addressCountry": "PH"
+                },
+                "sameAs": [
+                    "https://github.com/RoldanGaspar",
+                    "https://www.linkedin.com/in/roldangaspar"
+                ],
+                "knowsAbout": [
+                    "Software Engineering",
+                    "Artificial Intelligence",
+                    "Cybersecurity",
+                    "Network Defense",
+                    "TypeScript",
+                    "Python",
+                    "JavaScript"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "name": "Roldan Gaspar Portfolio",
+                "url": "https://roldangaspar.vercel.app/"
+            }
+        ]
+    }
+    </script>
     
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website">
@@ -31,6 +73,7 @@
     <link rel="stylesheet" href="src/css/main.css">
 </head>
 <body>
+    <div id="route-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     <!-- Mobile Sticky Top Bar -->
     <header class="mobile-header-bar">
         <a href="#/" class="mobile-logo">Roldan Gaspar</a>
@@ -152,11 +195,11 @@
                 <div class="sidebar-footer">
                     <div class="theme-toggles">
                         <div class="theme-group">
-                            <button class="theme-btn" data-set-theme="system"><i class="ph ph-desktop"></i></button>
-                            <button class="theme-btn active" data-set-theme="light"><i class="ph ph-sun"></i></button>
-                            <button class="theme-btn" data-set-theme="dark"><i class="ph ph-moon"></i></button>
+                            <button class="theme-btn" data-set-theme="system" aria-label="Use system theme" title="System theme"><i class="ph ph-desktop"></i></button>
+                            <button class="theme-btn active" data-set-theme="light" aria-label="Switch to light theme" title="Light theme"><i class="ph ph-sun"></i></button>
+                            <button class="theme-btn" data-set-theme="dark" aria-label="Switch to dark theme" title="Dark theme"><i class="ph ph-moon"></i></button>
                         </div>
-                        <button class="theme-btn sound-btn" id="soundscape-toggle-btn" title="Toggle Lo-Fi Ambient Soundscape"><i class="ph ph-speaker-slash"></i></button>
+                        <button class="theme-btn sound-btn" id="soundscape-toggle-btn" aria-label="Toggle Lo-Fi Ambient Soundscape" title="Toggle Lo-Fi Ambient Soundscape"><i class="ph ph-speaker-slash"></i></button>
                     </div>
                     <p class="contact-text">For work, collabs & everything else, reach me at</p>
                     <a href="mailto:gaspar26roldan@gmail.com" class="contact-email"><span class="icon"><i class="ph ph-envelope-simple"></i></span> gaspar26roldan@gmail.com</a>
@@ -193,7 +236,7 @@
                     <h3>Roldan's AI Assistant</h3>
                     <span class="online-status">● Online</span>
                 </div>
-                <button id="ai-drawer-close" class="ai-close-btn"><i class="ph ph-x"></i></button>
+                <button id="ai-drawer-close" class="ai-close-btn" aria-label="Close AI Assistant"><i class="ph ph-x"></i></button>
             </div>
             
             <div id="ai-chat-messages" class="ai-chat-messages">
@@ -209,8 +252,8 @@
             </div>
 
             <div class="ai-drawer-footer">
-                <input type="text" id="ai-user-input" placeholder="Ask AI about Roldan..." maxlength="100">
-                <button id="ai-send-btn"><i class="ph-fill ph-paper-plane-right"></i></button>
+                <input type="text" id="ai-user-input" aria-label="Ask AI about Roldan" placeholder="Ask AI about Roldan..." maxlength="100">
+                <button id="ai-send-btn" aria-label="Send message to AI Assistant"><i class="ph-fill ph-paper-plane-right"></i></button>
             </div>
         </div>
     </div>

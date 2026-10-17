@@ -14,7 +14,7 @@ function renderGear() {
                     ${items.map(item => `
                         <div class="gear-card tilt-card">
                             <div class="gear-image">
-                                <img src="${item.image}" alt="${item.name}">
+                                <img src="${item.image}" alt="${item.name}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
                             </div>
                             <h4>${item.name}</h4>
                             <p>${item.desc}</p>

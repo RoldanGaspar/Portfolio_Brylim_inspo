@@ -157,7 +157,7 @@ function renderHome() {
                 ${portfolioData.certsList.slice(0, 3).map(cert => `
                     <div class="cert-card tilt-card">
                         <div class="cert-logo-box">
-                            <img src="${cert.badgeUrl}" alt="${cert.title}" class="cert-logo" style="object-fit:contain; border-radius:4px;">
+                            <img src="${cert.badgeUrl}" alt="${cert.title}" class="cert-logo" loading="lazy" decoding="async" style="object-fit:contain; border-radius:4px;">
                         </div>
                         <h4>${cert.shortTitle || cert.title}</h4>
                         <p>${cert.issuer}</p>
@@ -166,7 +166,7 @@ function renderHome() {
                 `).join('')}
             </div>
             <div class="certs-provider-callout">
-                <img src="${portfolioData.netacadCertsList?.[0]?.badgeUrl || ''}" alt="JavaScript Essentials 1 badge" class="certs-provider-callout-badge">
+                <img src="${portfolioData.netacadCertsList?.[0]?.badgeUrl || ''}" alt="JavaScript Essentials 1 badge" class="certs-provider-callout-badge" loading="lazy" decoding="async">
                 <div class="certs-provider-callout-copy">
                     <span class="cert-provider-kicker">CISCO NETWORKING ACADEMY</span>
                     <h4>10 Credly badges &amp; 9 certificates</h4>

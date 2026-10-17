@@ -145,6 +145,21 @@ flowchart LR
 
 ---
 
+## 📋 Phase 9: SEO, Structured Data, Dynamic Route Metadata & Image Performance `[COMPLETED ✅]`
+**Goal:** Elevate technical SEO, screen-reader route announcements, and image loading performance across all SPA views without introducing a build step.
+
+### Scope of Work
+1. **Schema.org JSON-LD & Accessible Shell (`index.html`, `src/css/layout.css`):**
+   - Added Schema.org `@graph` (`Person` + `WebSite`) JSON-LD structured data in `index.html` referencing Roldan's verified credentials, skills, and social profiles.
+   - Added `.sr-only` `#route-announcer` (`aria-live="polite"`) for screen-reader SPA navigation announcements, `fetchpriority="high" decoding="async"` on the hero avatar, and explicit `aria-label` attributes on icon-only buttons (`#ai-send-btn`, `#ai-drawer-close`, `.theme-btn`, `.widget-btn`).
+2. **Dynamic Per-Route Metadata (`src/js/router.js`):**
+   - Implemented `updateRouteMeta(hash)` to dynamically update `document.title`, `<meta name="description">`, `og:title`, `og:description`, `twitter:title`, `twitter:description`, and `#route-announcer` across all top-level and detail routes (`#/projects/:id`, `#/blog/:id`, `#/shop/:id`).
+3. **Lazy-Loading, Async Image Decoding & Copy Polish (`gear.js`, `blog-detail.js`, `certifications-all.js`, `home.js`):**
+   - Added `loading="lazy" decoding="async"` (and `referrerpolicy="no-referrer"` on external gear images) across below-the-fold view images.
+   - Removed residual unverified issuer names from the `certifications-all.js` header description.
+
+---
+
 ## 🚦 Execution Protocol for Every Phase
 
 Every phase must strictly follow this 5-step engineering loop:

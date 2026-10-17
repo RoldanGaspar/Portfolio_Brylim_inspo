@@ -96,7 +96,7 @@ function renderBlogDetail(post) {
 
                     <div class="blog-author-card">
                         <div class="blog-author-top">
-                            <img src="MyPic.webp" alt="Roldan Gaspar" class="blog-author-avatar">
+                            <img src="MyPic.webp" alt="Roldan Gaspar" class="blog-author-avatar" loading="lazy" decoding="async" width="44" height="44">
                             <div>
                                 <strong>Roldan Gaspar</strong>
                                 <span>Software Engineer &bull; AI &bull; Cyber</span>

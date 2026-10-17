@@ -63,3 +63,11 @@ Template:
 - **Context:** Several sections in `src/js/data.js`, `src/js/views/home.js`, and `assets/resume/roldan-gaspar-resume.html` retained inherited inspiration-template claims (e.g., Standard Chartered, Cambridge, Henry Aguda, MacBook Pro M3 Max, ₱10k/hr rates, and ~70 unverified stack items).
 - **Decision:** Replace all inherited template content across `experienceList`, `recsList`, `gear`, `consulting`, `featuredStack`, `stackCategories`, `#affiliations`, and `roldan-gaspar-resume.html` with Roldan Gaspar's verified track record (10 Cisco Networking Academy credentials via DICT-ITU DTC Initiative & CICT, AWS Educate Cloud 101, open-source repositories `AWarden-A`, `pos_with_inventory_system`, `pet-hub-payroll`, `Tarsi`, and authentic Windows 11 Pro / WSL2 security & full-stack workstation).
 - **Consequences:** 100% of visible portfolio content and printable resume assets now strictly adhere to `.agents/rules/content-integrity.md` with zero fabricated or inherited third-party claims.
+
+## D-008: Dynamic SPA Route Metadata, JSON-LD Structured Data & Lazy Image Decoding (Phase 9)
+- **Date:** 2026-10-17
+- **Status:** accepted
+- **Context:** As a hash-routed SPA (`#/route`), navigating between views left `document.title` and `<meta name="description">` static, did not announce route changes to assistive technologies, and loaded below-the-fold images eagerly.
+- **Decision:** Embed Schema.org `Person` and `WebSite` JSON-LD structured data in `index.html`, add `updateRouteMeta(hash)` in `src/js/router.js` to dynamically update `document.title`, meta/OpenGraph descriptions, and an `aria-live="polite"` `#route-announcer` region on every route transition (including detail routes `#/projects/:id`, `#/blog/:id`, `#/shop/:id`), and add `loading="lazy" decoding="async"` across below-the-fold images.
+- **Consequences:** Browser tabs, bookmarks, JS-capable search crawlers, and screen readers receive accurate per-page titles and descriptions while maintaining the zero-build hash-router architecture.
+

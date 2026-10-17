@@ -35,9 +35,9 @@ function renderCertificationsAll() {
             <div class="cert-card-top">
                 <div class="cert-visual">
                     ${cert.badgeUrl
-                        ? `<img src="${cert.badgeUrl}" alt="${cert.title} badge" class="cert-badge-large" decoding="async">`
+                        ? `<img src="${cert.badgeUrl}" alt="${cert.title} badge" class="cert-badge-large" loading="lazy" decoding="async">`
                         : `<div class="cert-logo-fallback-wrap">
-                            <img src="${cert.logo}" alt="${cert.issuer}" class="cert-logo-large" loading="lazy" onerror="this.hidden = true; this.nextElementSibling.hidden = false;">
+                            <img src="${cert.logo}" alt="${cert.issuer}" class="cert-logo-large" loading="lazy" decoding="async" onerror="this.hidden = true; this.nextElementSibling.hidden = false;">
                             <span class="cert-logo-fallback" hidden>${cert.issuer.split(/\s+/).filter(word => word.length > 1).slice(0, 2).map(word => word[0]).join('')}</span>
                         </div>`}
                 </div>
@@ -141,7 +141,7 @@ function renderCertificationsAll() {
     return `
         <div class="page-header reveal">
             <h2>certifications</h2>
-            <p class="page-desc">Professional certifications, verified Credly badges, and high-resolution certificates from Cisco Networking Academy, AWS, Oracle, Google, and Neo4j.</p>
+            <p class="page-desc">Professional certifications, verified Credly badges, and high-resolution certificates from Cisco Networking Academy, DICT-ITU, and AWS Educate.</p>
         </div>
 
         <!-- Filter Pills Bar -->
@@ -190,7 +190,7 @@ function renderCertificationsAll() {
                 <div class="achievement-grid">
                     ${portfolioData.netacadAchievementsList.map(achievement => `
                         <a href="https://www.netacad.com/profile?tab=badges" target="_blank" rel="noopener noreferrer" class="achievement-card">
-                            <img src="${achievement.badgeUrl}" alt="${achievement.title} achievement badge" loading="lazy">
+                            <img src="${achievement.badgeUrl}" alt="${achievement.title} achievement badge" loading="lazy" decoding="async">
                             <span>
                                 <strong>${achievement.title}</strong>
                                 <small>MODULE ACHIEVEMENT &middot; ${achievement.date}</small>
@@ -211,7 +211,7 @@ function renderCertificationsAll() {
                     <span id="lightbox-issuer" class="lightbox-issuer-pill"></span>
                 </div>
                 <div class="lightbox-image-wrap">
-                    <img id="lightbox-img" src="" alt="Certificate Preview">
+                    <img id="lightbox-img" src="" alt="Certificate Preview" decoding="async">
                 </div>
                 <div class="lightbox-footer">
                     <a id="lightbox-credly-link" href="https://www.netacad.com/profile?tab=badges" target="_blank" rel="noopener noreferrer" class="lightbox-action-btn credly">
