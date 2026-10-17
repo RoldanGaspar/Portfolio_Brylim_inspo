@@ -100,6 +100,37 @@ flowchart LR
 
 ---
 
+## 📋 Phase 6: Accessibility, Reduced Motion & README Sync `[COMPLETED ✅]`
+**Goal:** Ensure WCAG keyboard navigation, reduced-motion compliance across CSS and JS, and accurate root repository documentation.
+
+### Scope of Work
+1. **Reduced Motion Guards (`tokens.css`, `effects.js`, `cyber-lab.js`):**
+   - Added global `@media (prefers-reduced-motion: reduce)` rule in `src/css/tokens.css` and `matchMedia` guards in `effects.js` and `cyber-lab.js`.
+2. **Keyboard Accessibility & Focus Management (`home.js`, `modals.js`, `command-palette.js`):**
+   - Added `role="button"`, `tabindex="0"`, `aria-label`, and `Enter`/`Space`/`Arrow` key handlers to `#hero-verified-badge` and `.project-stack-card`.
+   - Added `role="dialog"`, `aria-modal="true"`, `Tab` focus trapping, and focus restoration to modals and the Command Palette.
+3. **README Architecture Synchronization (`README.md`):**
+   - Rewrote `README.md` to accurately reflect the zero-build classic `<script>` architecture and live portfolio routes.
+
+---
+
+## 📋 Phase 7: Single-Source-of-Truth Data Refactor `[COMPLETED ✅]`
+**Goal:** Eliminate cross-file content duplication so `window.portfolioData` (`src/js/data.js`) is the true single source of truth for all views, the Command Palette, and the AI Chatbot.
+
+### Scope of Work
+1. **Centralized Schema Expansion (`src/js/data.js`):**
+   - Added `featuredStack` and `stackCategories` to `window.portfolioData`.
+   - Enriched `projects` with stack-deck and command-palette presentation fields (`homeCard`, `cmdTitle`, `cmdIcon`).
+   - Added `shortCompany` and `homeOnly` support to `experienceList`, `shortTitle` to `certsList`, and `shortRole`/`shortText` to `recsList`.
+2. **Dynamic View Rendering (`home.js`, `experience-all.js`, `stack-all.js`):**
+   - Refactored `home.js` to dynamically render the Tech Stack preview, Featured Projects stack deck, Experience timeline, Top Certifications, and Recommendations from `window.portfolioData`.
+   - Refactored `experience-all.js` and `stack-all.js` to dynamically render from `portfolioData.experienceList` and `portfolioData.stackCategories`.
+3. **Dynamic Command Palette & Grounded AI Assistant (`command-palette.js`, `ai-bot.js`):**
+   - Updated `command-palette.js` (`Ctrl+K`) to dynamically populate all Projects, Blog posts, and Shop items from `window.portfolioData`.
+   - Updated `ai-bot.js` to dynamically read verified projects, NetAcad/Credly certifications, Cyber Lab foundations, blog posts, and shop template URLs from `window.portfolioData` without exposing unverified sections.
+
+---
+
 ## 🚦 Execution Protocol for Every Phase
 
 Every phase must strictly follow this 5-step engineering loop:

@@ -3,17 +3,29 @@
 const commandItems = [
     { title: "Home", type: "Navigation", icon: "ph-house", url: "#/" },
     { title: "Projects Showcase", type: "Navigation", icon: "ph-squares-four", url: "#/projects" },
-    { title: "Tarsi – Budget Tracker Case Study", type: "Project", icon: "ph-wallet", url: "#/projects/tarsi-budget-tracker" },
-    { title: "AWarden-A – AppLocker Defense Tool", type: "Project", icon: "ph-shield-check", url: "#/projects/awardena-security" },
-    { title: "POS & Inventory Management Suite", type: "Project", icon: "ph-package", url: "#/projects/pos-inventory" },
+    ...(window.portfolioData?.projects || []).map(p => ({
+        title: p.cmdTitle || p.title,
+        type: "Project",
+        icon: p.cmdIcon || "ph-folder",
+        url: "#/projects/" + p.id
+    })),
     { title: "Experience & History", type: "Navigation", icon: "ph-briefcase", url: "#/experience" },
     { title: "Tech Stack & Skills", type: "Navigation", icon: "ph-cpu", url: "#/stack" },
     { title: "Certifications & Badges", type: "Navigation", icon: "ph-seal-check", url: "#/certifications" },
     { title: "Recommendations & Endorsements", type: "Navigation", icon: "ph-quotes", url: "#/recommendations" },
-    { title: "Developer Resume Template", type: "Shop", icon: "ph-file-text", url: "#/shop/developer-resume-template" },
+    ...(window.portfolioData?.shop || []).map(s => ({
+        title: s.title,
+        type: "Shop",
+        icon: "ph-shopping-bag",
+        url: "#/shop/" + s.id
+    })),
     { title: "Blog & Engineering Notes", type: "Navigation", icon: "ph-article", url: "#/blog" },
-    { title: "Blog: Stop Focusing Only on the AI Model", type: "Blog", icon: "ph-article", url: "#/blog/building-ai-harnesses" },
-    { title: "Blog: Boring Guardrails Make AI Features Better", type: "Blog", icon: "ph-shield-check", url: "#/blog/boring-ai-guardrails" },
+    ...(window.portfolioData?.blog || []).map(b => ({
+        title: b.title,
+        type: "Blog",
+        icon: "ph-article",
+        url: "#/blog/" + b.id
+    })),
     { title: "Gear Setup", type: "Navigation", icon: "ph-desktop", url: "#/gear" },
     { title: "Resources & AI Courses", type: "Navigation", icon: "ph-book-open", url: "#/resources" },
     { title: "Consulting Services", type: "Navigation", icon: "ph-handshake", url: "#/consulting" },

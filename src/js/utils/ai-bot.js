@@ -122,11 +122,12 @@ function initAIBot() {
 
         // 1. Resume / CV Inquiries
         if (query.includes('resume') || query.includes('cv') || query.includes('curriculum')) {
+            const templateUrl = window.portfolioData?.shop?.[0]?.downloadUrl || 'assets/resume/developer-resume-template.docx';
             return `
                 📄 <strong>Roldan's Developer Resume &amp; Templates:</strong><br>
                 You can view and download Roldan's verified developer CV or get the free ATS resume template:<br><br>
-                • <a href="assets/resume/roldan-gaspar-resume.html" target="_blank" class="ai-link">View Roldan's Printable Resume &nearr;</a><br>
-                • <a href="assets/resume/developer-resume-template.docx" download class="ai-link">Download ATS Resume Template (.docx) &darr;</a><br><br>
+                • <a href="assets/resume/roldan-gaspar-resume.html" target="_blank" rel="noopener noreferrer" class="ai-link">View Roldan's Printable Resume &nearr;</a><br>
+                • <a href="${templateUrl}" download class="ai-link">Download ATS Resume Template (.docx) &darr;</a><br><br>
                 <button class="ai-action-btn" onclick="window.open('assets/resume/roldan-gaspar-resume.html','_blank')">
                     <i class="ph-fill ph-file-pdf"></i> Open Printable Resume
                 </button>
@@ -135,14 +136,16 @@ function initAIBot() {
 
         // 2. Certifications & Badges
         if (query.includes('cert') || query.includes('badge') || query.includes('credential') || query.includes('cisco') || query.includes('credly')) {
+            const netacad = window.portfolioData?.netacadCertsList || [];
+            const credly = window.portfolioData?.credlyAdditionalBadgesList || [];
+            const topCerts = [...netacad.slice(0, 4), ...credly.slice(0, 1)];
+            const certLines = topCerts.length > 0
+                ? topCerts.map(c => `• <strong>${c.title}</strong> (${c.issuer})`).join('<br>')
+                : `• <strong>CyberOps Associate &amp; Network Defense</strong><br>• <strong>Ethical Hacker &amp; Endpoint Security</strong><br>• <strong>AWS Educate: Cloud 101</strong>`;
             return `
                 🎓 <strong>Verified Credentials &amp; Certifications:</strong><br>
-                Roldan holds <strong>10 Cisco Networking Academy credentials</strong> and an <strong>AWS Educate Cloud 101</strong> badge:<br>
-                • <strong>CyberOps Associate &amp; Network Defense</strong><br>
-                • <strong>Ethical Hacker &amp; Endpoint Security</strong><br>
-                • <strong>Python Essentials 1 &amp; 2</strong><br>
-                • <strong>JavaScript Essentials 1</strong><br>
-                • <strong>AWS Educate: Cloud 101</strong><br><br>
+                Roldan holds <strong>${netacad.length || 10} Cisco Networking Academy credentials</strong> and ${credly.length || 1} additional Credly badge(s):<br>
+                ${certLines}<br><br>
                 <button class="ai-action-btn" onclick="window.location.hash='#/certifications'">
                     <i class="ph-fill ph-seal-check"></i> View All Certifications
                 </button>
@@ -151,9 +154,11 @@ function initAIBot() {
 
         // 2b. Cybersecurity & Interactive Cyber Lab
         if (query.includes('cyber') || query.includes('security') || query.includes('network') || query.includes('firewall') || query.includes('lab') || query.includes('simulator')) {
+            const netacadCount = (window.portfolioData?.netacadCertsList || []).length || 10;
+            const foundations = window.portfolioData?.cyberLab?.verifiedFoundations || ['Cisco CyberOps Associate', 'Cisco Ethical Hacker', 'Cisco Network Defense', 'Cisco Endpoint Security'];
             return `
                 🛡️ <strong>CyberOps &amp; Network Defense Lab:</strong><br>
-                Roldan built an interactive <strong>SOC Telemetry &amp; Packet Inspection Simulator</strong> grounded in his 10 verified Cisco NetAcad credentials (CyberOps Associate, Ethical Hacker, Network Defense, Endpoint Security).<br><br>
+                Roldan built an interactive <strong>SOC Telemetry &amp; Packet Inspection Simulator</strong> grounded in his ${netacadCount} verified Cisco NetAcad credentials (${foundations.join(', ')}).<br><br>
                 <button class="ai-action-btn" onclick="window.location.hash='#/cyber-lab'">
                     <i class="ph-fill ph-shield-check"></i> Launch Cyber Lab
                 </button>
@@ -176,15 +181,28 @@ function initAIBot() {
 
         // 4. Projects & Work
         if (query.includes('project') || query.includes('built') || query.includes('work') || query.includes('portfolio') || query.includes('app')) {
+            const projects = window.portfolioData?.projects || [];
+            const projectLines = projects.length > 0
+                ? projects.map(p => `• <a href="#/projects/${p.id}" class="ai-link"><strong>${p.title}</strong></a>: ${p.tagline || p.subtitle}`).join('<br>')
+                : `• <strong>Tarsi:</strong> Offline-first personal budget &amp; expense tracker<br>• <strong>AWarden-A:</strong> Windows AppLocker policy &amp; credential security tooling`;
             return `
                 🚀 <strong>Featured Projects by Roldan:</strong><br>
-                • <strong>Tarsi:</strong> Offline-first personal budget &amp; expense tracker with local encryption<br>
-                • <strong>AWarden-A:</strong> Windows AppLocker policy automation &amp; credential security tooling<br>
-                • <strong>POS &amp; Inventory:</strong> Full-stack retail management suite with transactional reporting<br>
-                • <strong>Pet Hub:</strong> Veterinary clinic employee management &amp; automated payroll calculation<br>
-                • <strong>Developer Portfolio SPA:</strong> Zero-dependency vanilla engine with 3D Cyber-Loft lounge<br><br>
+                ${projectLines}<br><br>
                 <button class="ai-action-btn" onclick="window.location.hash='#/projects'">
                     <i class="ph-fill ph-squares-four"></i> Browse Projects
+                </button>
+            `;
+        }
+
+        // 4b. Blog & Engineering Notes
+        if (query.includes('blog') || query.includes('article') || query.includes('post') || query.includes('write') || query.includes('harness')) {
+            const posts = (window.portfolioData?.blog || []).slice(0, 3);
+            const postLines = posts.map(b => `• <a href="#/blog/${b.id}" class="ai-link"><strong>${b.title}</strong></a> (${b.readTime})`).join('<br>');
+            return `
+                ✍️ <strong>Latest Engineering Notes &amp; Blog Posts:</strong><br>
+                ${postLines}<br><br>
+                <button class="ai-action-btn" onclick="window.location.hash='#/blog'">
+                    <i class="ph-fill ph-article"></i> Read All Posts
                 </button>
             `;
         }
@@ -194,7 +212,7 @@ function initAIBot() {
             return `
                 📬 <strong>Reach Roldan Directly:</strong><br>
                 • <strong>Email:</strong> <a href="mailto:gaspar26roldan@gmail.com" class="ai-link">gaspar26roldan@gmail.com</a><br>
-                • <strong>GitHub:</strong> <a href="https://github.com/RoldanGaspar" target="_blank" class="ai-link">@RoldanGaspar</a><br>
+                • <strong>GitHub:</strong> <a href="https://github.com/RoldanGaspar" target="_blank" rel="noopener noreferrer" class="ai-link">@RoldanGaspar</a><br>
                 • <strong>Location:</strong> 📍 Pampanga, Philippines<br><br>
                 <button class="ai-action-btn" onclick="if(window.openContactModal)window.openContactModal('Hiring');">
                     <i class="ph-fill ph-paper-plane-tilt"></i> Send Direct Message
@@ -232,7 +250,7 @@ function initAIBot() {
             return `
                 🐙 <strong>GitHub &amp; Open Source:</strong><br>
                 Roldan maintains <strong>19 public repositories</strong> with live synced contribution activity.<br>
-                • Profile: <a href="https://github.com/RoldanGaspar" target="_blank" class="ai-link">github.com/RoldanGaspar</a><br><br>
+                • Profile: <a href="https://github.com/RoldanGaspar" target="_blank" rel="noopener noreferrer" class="ai-link">github.com/RoldanGaspar</a><br><br>
                 <button class="ai-action-btn" onclick="window.open('https://github.com/RoldanGaspar','_blank')">
                     <i class="ph-fill ph-github-logo"></i> Open GitHub Profile
                 </button>

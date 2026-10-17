@@ -90,67 +90,28 @@ function renderHome() {
                 <a href="#/projects" class="view-all magnetic">ALL PROJECTS &rarr;</a>
             </div>
             <div class="projects-stack-container" id="projects-stack-deck">
-                <!-- Left Background Card: AWarden-A -->
-                <div class="project-stack-card pos-left" data-id="awardena-security" data-url="#/projects/awardena-security" role="button" tabindex="0" aria-label="Open project: AWarden-A">
-                    <div class="stack-card-tags">
-                        <span class="stack-tag dark">&lang; CYBERSECURITY TOOL &rang;</span>
-                    </div>
-                    <div class="stack-card-header">
-                        <div class="app-icon-badge kabi-bg" style="background:#0ea5e9;">
-                            <i class="ph-fill ph-shield-checkered"></i>
+                ${['awardena-security', 'pos-inventory', 'tarsi-budget-tracker']
+                    .map(id => portfolioData.projects.find(p => p.id === id))
+                    .filter(p => p && p.homeCard)
+                    .map(p => `
+                    <div class="project-stack-card ${p.homeCard.posClass}" data-id="${p.id}" data-url="#/projects/${p.id}" role="button" tabindex="0" aria-label="${p.homeCard.ariaLabel}">
+                        <div class="stack-card-tags">
+                            ${p.homeCard.tags.map(tag => `<span class="stack-tag${tag.dark ? ' dark' : ''}">${tag.text}</span>`).join('')}
                         </div>
-                        <div class="app-card-title">
-                            <h4>AWarden-A &mdash; AppLocker Defense</h4>
+                        <div class="stack-card-header">
+                            <div class="app-icon-badge ${p.homeCard.badgeClass}"${p.homeCard.badgeStyle ? ` style="${p.homeCard.badgeStyle}"` : ''}>
+                                <i class="${p.homeCard.iconClass}"></i>
+                            </div>
+                            <div class="app-card-title">
+                                <h4>${p.homeCard.shortTitle}</h4>
+                            </div>
                         </div>
-                    </div>
-                    <p class="stack-card-desc">Windows AppLocker policy automation and credential security tooling.</p>
-                    <div class="stack-store-badges">
-                        <div class="store-badge-svg appstore"><i class="ph-fill ph-github-logo"></i> GitHub</div>
-                        <div class="store-badge-svg playstore"><i class="ph-fill ph-code"></i> TypeScript</div>
-                    </div>
-                </div>
-                
-                <!-- Right Background Card: POS & Inventory System -->
-                <div class="project-stack-card pos-right" data-id="pos-inventory" data-url="#/projects/pos-inventory" role="button" tabindex="0" aria-label="Open project: POS with Inventory System">
-                    <div class="stack-card-tags">
-                        <span class="stack-tag dark">&lang; FULL-STACK SUITE &rang;</span>
-                    </div>
-                    <div class="stack-card-header">
-                        <div class="app-icon-badge travel-bg" style="background:#f59e0b;">
-                            <i class="ph-fill ph-package"></i>
-                        </div>
-                        <div class="app-card-title">
-                            <h4>POS &amp; Inventory System</h4>
+                        <p class="stack-card-desc">${p.homeCard.shortDesc}</p>
+                        <div class="stack-store-badges">
+                            ${p.homeCard.storeBadges.map(badge => `<div class="store-badge-svg ${badge.cls}"><i class="${badge.icon}"></i> ${badge.label}</div>`).join('')}
                         </div>
                     </div>
-                    <p class="stack-card-desc">Point of Sale &amp; inventory desktop suite with automated stock replenishment.</p>
-                    <div class="stack-store-badges">
-                        <div class="store-badge-svg appstore"><i class="ph-fill ph-github-logo"></i> GitHub</div>
-                        <div class="store-badge-svg playstore"><i class="ph-fill ph-terminal-window"></i> Python</div>
-                    </div>
-                </div>
-
-                <!-- Center Active Card: Tarsi -->
-                <div class="project-stack-card pos-center" data-id="tarsi-budget-tracker" data-url="#/projects/tarsi-budget-tracker" role="button" tabindex="0" aria-label="Open project: Tarsi">
-                    <div class="stack-card-tags">
-                        <span class="stack-tag dark">&lang; OFFLINE-FIRST &rang;</span>
-                        <span class="stack-tag">LOCAL ENCRYPTION</span>
-                        <span class="stack-tag">ZERO CLOUD SYNC</span>
-                    </div>
-                    <div class="stack-card-header">
-                        <div class="app-icon-badge tarsi-bg">
-                            <i class="ph-fill ph-wallet"></i>
-                        </div>
-                        <div class="app-card-title">
-                            <h4>Tarsi &mdash; Budget Tracker</h4>
-                        </div>
-                    </div>
-                    <p class="stack-card-desc">An offline-first budget &amp; expense tracker powered by local on-device storage.</p>
-                    <div class="stack-store-badges">
-                        <div class="store-badge-svg appstore"><i class="ph-fill ph-shield-check"></i> Privacy First</div>
-                        <div class="store-badge-svg playstore"><i class="ph-fill ph-database"></i> SQLite / Local</div>
-                    </div>
-                </div>
+                `).join('')}
             </div>
             <div class="projects-stack-hint">
                 <i class="ph-bold ph-hand-swipe-left"></i>
@@ -165,21 +126,13 @@ function renderHome() {
                 <a href="#/experience" class="view-all magnetic">FULL HISTORY &rarr;</a>
             </div>
             <div class="experience-list">
-                <a href="#/experience" class="exp-item">
-                    <span class="exp-year">2025</span>
-                    <span class="exp-title">Lead AI Engineer</span>
-                    <span class="exp-company">Standard Chartered</span>
-                </a>
-                <a href="#/experience" class="exp-item">
-                    <span class="exp-year">2025</span>
-                    <span class="exp-title">AI Ops Engineer</span>
-                    <span class="exp-company">CoE for GenAI - Cambridge</span>
-                </a>
-                <a href="#/experience" class="exp-item">
-                    <span class="exp-year">2024</span>
-                    <span class="exp-title">Senior Full-Stack Developer</span>
-                    <span class="exp-company">Core Technology - Cambridge</span>
-                </a>
+                ${portfolioData.experienceList.map(exp => `
+                    <a href="#/experience" class="exp-item">
+                        <span class="exp-year">${exp.shortYear}</span>
+                        <span class="exp-title">${exp.title}</span>
+                        <span class="exp-company">${exp.shortCompany || exp.company}</span>
+                    </a>
+                `).join('')}
             </div>
             
             <div id="stack" class="stack-section">
@@ -188,14 +141,8 @@ function renderHome() {
                     <a href="#/stack" class="view-all magnetic">VIEW ALL &rarr;</a>
                 </div>
                 <div class="tech-tags">
-                    <a href="#/stack" class="tech-tag">TypeScript</a>
-                    <a href="#/stack" class="tech-tag">React</a>
-                    <a href="#/stack" class="tech-tag">Next.js</a>
-                    <a href="#/stack" class="tech-tag">Node.js</a>
-                    <a href="#/stack" class="tech-tag">Python</a>
-                    <a href="#/stack" class="tech-tag">AWS</a>
-                    <a href="#/stack" class="tech-tag">PyTorch</a>
-                    <a href="#/stack" class="tech-tag">+ more</a>
+                    ${portfolioData.featuredStack.map(tech => `<a href="#/stack" class="tech-tag">${tech}</a>`).join('')}
+                    <a href="#/stack" class="tech-tag tag tag-more magnetic">+ more</a>
                 </div>
             </div>
         </section>
@@ -207,33 +154,19 @@ function renderHome() {
                 <a href="#/certifications" class="view-all magnetic">ALL CERTIFICATIONS &rarr;</a>
             </div>
             <div class="cert-grid">
-                <div class="cert-card tilt-card">
-                    <div class="cert-logo-box">
-                        <img src="https://images.credly.com/images/51526f76-711b-4caf-b04d-27f89512b112/NetworkDefense_v1_091721.png" alt="Cisco Network Defense" class="cert-logo" style="object-fit:contain; border-radius:4px;">
+                ${portfolioData.certsList.slice(0, 3).map(cert => `
+                    <div class="cert-card tilt-card">
+                        <div class="cert-logo-box">
+                            <img src="${cert.badgeUrl}" alt="${cert.title}" class="cert-logo" style="object-fit:contain; border-radius:4px;">
+                        </div>
+                        <h4>${cert.shortTitle || cert.title}</h4>
+                        <p>${cert.issuer}</p>
+                        <a href="${cert.verifyUrl}" target="_blank" rel="noopener noreferrer" class="cert-verify">{ VERIFY &nearr; }</a>
                     </div>
-                    <h4>Network Defense</h4>
-                    <p>CISCO NETWORKING ACADEMY</p>
-                    <a href="https://www.credly.com/badges/4317f869-fb2b-4cfd-a377-3ff898d6d236" target="_blank" rel="noopener noreferrer" class="cert-verify">{ VERIFY &nearr; }</a>
-                </div>
-                <div class="cert-card tilt-card">
-                    <div class="cert-logo-box">
-                        <img src="https://images.credly.com/images/242902b5-f527-42ad-865e-977c9e1b5b58/image.png" alt="Cisco Ethical Hacker" class="cert-logo" style="object-fit:contain; border-radius:4px;">
-                    </div>
-                    <h4>Ethical Hacker</h4>
-                    <p>CISCO NETWORKING ACADEMY</p>
-                    <a href="https://www.credly.com/badges/b75d8f5e-1b06-4be1-8f2e-d5a2fc5ead83" target="_blank" rel="noopener noreferrer" class="cert-verify">{ VERIFY &nearr; }</a>
-                </div>
-                <div class="cert-card tilt-card">
-                    <div class="cert-logo-box">
-                        <img src="https://images.credly.com/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob" alt="AWS Educate Cloud 101" class="cert-logo" style="object-fit:contain; border-radius:4px;">
-                    </div>
-                    <h4>AWS Cloud 101</h4>
-                    <p>AMAZON WEB SERVICES</p>
-                    <a href="https://www.credly.com/badges/7eda7327-b679-4eaf-b005-a761222d2fc9" target="_blank" rel="noopener noreferrer" class="cert-verify">{ VERIFY &nearr; }</a>
-                </div>
+                `).join('')}
             </div>
             <div class="certs-provider-callout">
-                <img src="${portfolioData.netacadCertsList[0].badgeUrl}" alt="JavaScript Essentials 1 badge" class="certs-provider-callout-badge">
+                <img src="${portfolioData.netacadCertsList?.[0]?.badgeUrl || ''}" alt="JavaScript Essentials 1 badge" class="certs-provider-callout-badge">
                 <div class="certs-provider-callout-copy">
                     <span class="cert-provider-kicker">CISCO NETWORKING ACADEMY</span>
                     <h4>10 Credly badges &amp; 9 certificates</h4>
@@ -250,39 +183,19 @@ function renderHome() {
                 <a href="#/recommendations" class="view-all magnetic">ALL RECOMMENDATIONS &rarr;</a>
             </div>
             <div class="rec-grid">
-                <div class="rec-card tilt-card">
-                    <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                    <p class="rec-text">Roldan, I believe, would be the next Philippine unicorn. He is technically skilled, deeply driven, and executes AI ideas into real products.</p>
-                    <div class="rec-author">
-                        <div class="rec-avatar">HA</div>
-                        <div class="rec-info">
-                            <strong>Henry Aguda</strong>
-                            <span>SECRETARY, DICT...</span>
+                ${portfolioData.recsList.map(rec => `
+                    <div class="rec-card tilt-card">
+                        <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
+                        <p class="rec-text">${rec.shortText || rec.text}</p>
+                        <div class="rec-author">
+                            <div class="rec-avatar">${rec.initials}</div>
+                            <div class="rec-info">
+                                <strong>${rec.author}</strong>
+                                <span>${rec.shortRole || rec.role}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="rec-card tilt-card">
-                    <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                    <p class="rec-text">It was a real pleasure to work with Roldan. He's not only a fantastic professional who consistently delivers clean code...</p>
-                    <div class="rec-author">
-                        <div class="rec-avatar">JS</div>
-                        <div class="rec-info">
-                            <strong>Joshua Shailes</strong>
-                            <span>SENIOR AI DATA SCIENTIST...</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="rec-card tilt-card">
-                    <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                    <p class="rec-text">Roldan was the most talented software engineer I've mentored in a long time. He's a fast learner, and he always takes full ownership...</p>
-                    <div class="rec-author">
-                        <div class="rec-avatar">CA</div>
-                        <div class="rec-info">
-                            <strong>Cris Lawrence Adriano</strong>
-                            <span>INTEGRATIONS PRODUCT MGR...</span>
-                        </div>
-                    </div>
-                </div>
+                `).join('')}
             </div>
         </section>
 

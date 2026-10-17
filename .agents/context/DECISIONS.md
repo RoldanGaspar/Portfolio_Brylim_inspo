@@ -38,7 +38,7 @@ Template:
 
 ## D-004: Content centralized in `src/js/data.js`
 - **Date:** 2026 (initial commit)
-- **Status:** accepted (partially implemented — see duplication map)
+- **Status:** superseded by D-006
 - **Context:** Content edits shouldn't require touching view markup.
 - **Decision:** All content in `window.portfolioData`; views are pure renderers.
 - **Consequences:** Several views still hard-code content. New work must not add more.
@@ -49,3 +49,11 @@ Template:
 - **Context:** The site is built and maintained primarily with AI agents; without written context, agents guess (e.g. add `import` statements, invent content).
 - **Decision:** Always-on rules (architecture, content integrity, production safety) + on-demand rules (code style, design system) + skills (playbooks) + context docs, all in `.agents/`. `AGENTS.md` at root as the tool-agnostic entry point.
 - **Consequences:** Docs must be kept in sync with code. Any agent that changes structure must update the relevant `.agents/` file in the same change.
+
+## D-006: Single-source-of-truth dynamic rendering from `window.portfolioData`
+- **Date:** 2026-10-17
+- **Status:** accepted
+- **Context:** Previously, `home.js`, `experience-all.js`, `stack-all.js`, `command-palette.js`, and `ai-bot.js` contained hard-coded copies of projects, experience entries, recommendations, tech stack categories, and certifications, creating synchronization drift whenever `src/js/data.js` changed.
+- **Decision:** Centralize `featuredStack`, `stackCategories`, and project card/command metadata in `window.portfolioData` (`src/js/data.js`) and refactor all views and utilities (`home.js`, `experience-all.js`, `stack-all.js`, `command-palette.js`, `ai-bot.js`) to dynamically map over `window.portfolioData` while strictly excluding unverified sections from `ai-bot.js`.
+- **Consequences:** Adding or updating a project, blog post, certification, or stack item in `src/js/data.js` automatically propagates across the Home page, detail views, Command Palette (`Ctrl+K`), and AI Chatbot with zero manual sync required.
+

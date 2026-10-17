@@ -22,6 +22,8 @@ window.portfolioData = {
         {
             id: "tarsi-budget-tracker",
             title: "Tarsi – Budget Tracker",
+            cmdTitle: "Tarsi – Budget Tracker Case Study",
+            cmdIcon: "ph-wallet",
             badge: "OFFLINE-FIRST",
             subtitle: "LOCAL DATA PRIVACY",
             iconText: "T",
@@ -39,11 +41,31 @@ window.portfolioData = {
             techStack: ["Swift", "SwiftUI", "CoreData", "Charts", "Local Storage"],
             stats: { rank: "Offline-First", downloads: "Local Storage", rating: "Zero Cloud Sync" },
             downloadUrl: "https://github.com/RoldanGaspar",
-            mockupBg: "#1f2937"
+            mockupBg: "#1f2937",
+            homeCard: {
+                posClass: "pos-center",
+                ariaLabel: "Open project: Tarsi",
+                shortTitle: "Tarsi &mdash; Budget Tracker",
+                shortDesc: "An offline-first budget &amp; expense tracker powered by local on-device storage.",
+                tags: [
+                    { text: "&lang; OFFLINE-FIRST &rang;", dark: true },
+                    { text: "LOCAL ENCRYPTION", dark: false },
+                    { text: "ZERO CLOUD SYNC", dark: false }
+                ],
+                iconClass: "ph-fill ph-wallet",
+                badgeClass: "tarsi-bg",
+                badgeStyle: "",
+                storeBadges: [
+                    { cls: "appstore", icon: "ph-fill ph-shield-check", label: "Privacy First" },
+                    { cls: "playstore", icon: "ph-fill ph-database", label: "SQLite / Local" }
+                ]
+            }
         },
         {
             id: "awardena-security",
             title: "AWarden-A — AppLocker & Credential Defense",
+            cmdTitle: "AWarden-A – AppLocker Defense Tool",
+            cmdIcon: "ph-shield-check",
             badge: "CYBERSECURITY TOOL",
             subtitle: "WINDOWS DEFENSE & AUTOMATION",
             iconText: "🛡️",
@@ -61,11 +83,29 @@ window.portfolioData = {
             techStack: ["TypeScript", "PowerShell", "Windows Security", "AppLocker", "Defense-in-Depth"],
             stats: { rank: "Security Tool", downloads: "GitHub Repo", rating: "TypeScript / PS" },
             downloadUrl: "https://github.com/RoldanGaspar/AWarden-A-applocker_credentials",
-            mockupBg: "#0f172a"
+            mockupBg: "#0f172a",
+            homeCard: {
+                posClass: "pos-left",
+                ariaLabel: "Open project: AWarden-A",
+                shortTitle: "AWarden-A &mdash; AppLocker Defense",
+                shortDesc: "Windows AppLocker policy automation and credential security tooling.",
+                tags: [
+                    { text: "&lang; CYBERSECURITY TOOL &rang;", dark: true }
+                ],
+                iconClass: "ph-fill ph-shield-checkered",
+                badgeClass: "kabi-bg",
+                badgeStyle: "background:#0ea5e9;",
+                storeBadges: [
+                    { cls: "appstore", icon: "ph-fill ph-github-logo", label: "GitHub" },
+                    { cls: "playstore", icon: "ph-fill ph-code", label: "TypeScript" }
+                ]
+            }
         },
         {
             id: "pos-inventory",
             title: "POS & Inventory System",
+            cmdTitle: "POS & Inventory Management Suite",
+            cmdIcon: "ph-package",
             badge: "FULL-STACK SUITE",
             subtitle: "TRANSACTIONAL MANAGEMENT",
             iconText: "📦",
@@ -83,7 +123,23 @@ window.portfolioData = {
             techStack: ["Python", "SQLite/PostgreSQL", "Tkinter/PyQt", "Data Analytics"],
             stats: { rank: "Full-Stack Suite", downloads: "GitHub Repo", rating: "Python / SQL" },
             downloadUrl: "https://github.com/RoldanGaspar/pos_with_inventory_system",
-            mockupBg: "#18181b"
+            mockupBg: "#18181b",
+            homeCard: {
+                posClass: "pos-right",
+                ariaLabel: "Open project: POS with Inventory System",
+                shortTitle: "POS &amp; Inventory System",
+                shortDesc: "Point of Sale &amp; inventory desktop suite with automated stock replenishment.",
+                tags: [
+                    { text: "&lang; FULL-STACK SUITE &rang;", dark: true }
+                ],
+                iconClass: "ph-fill ph-package",
+                badgeClass: "travel-bg",
+                badgeStyle: "background:#f59e0b;",
+                storeBadges: [
+                    { cls: "appstore", icon: "ph-fill ph-github-logo", label: "GitHub" },
+                    { cls: "playstore", icon: "ph-fill ph-terminal-window", label: "Python" }
+                ]
+            }
         }
     ],
     blog: [
@@ -321,6 +377,7 @@ window.portfolioData = {
             shortYear: "2025",
             title: "Lead AI Engineer",
             company: "Standard Chartered",
+            shortCompany: "Standard Chartered",
             employmentType: "Full-time",
             location: "",
             desc: "Driving AI initiatives and system-level solutions across key areas of the business. Focused on scalable, secure, and responsible innovation.",
@@ -334,6 +391,7 @@ window.portfolioData = {
             shortYear: "2025",
             title: "AI Ops Engineer",
             company: "Cambridge University Press & Assessment",
+            shortCompany: "CoE for GenAI - Cambridge",
             employmentType: "Full-time · 1 yr 2 mos",
             location: "Makati, National Capital Region, Philippines · Hybrid",
             desc: "Pioneered the GenAI Centre of Excellence to deliver scalable AI solutions that support the organization's global education and publishing initiatives.",
@@ -342,6 +400,14 @@ window.portfolioData = {
                 "Architected and deployed a WhatsApp-based lesson planner for South African Foundation Phase educators. The solution utilized Turn.io for conversational UX, n8n for orchestration, and Qdrant for vector search, enabling context-aware RAG over curriculum documents for rapid lesson plan generation."
             ],
             tech: []
+        },
+        {
+            id: "senior-fullstack-dev",
+            shortYear: "2024",
+            title: "Senior Full-Stack Developer",
+            company: "Core Technology - Cambridge",
+            shortCompany: "Core Technology - Cambridge",
+            homeOnly: true
         }
     ],
     certsList: [
@@ -367,6 +433,7 @@ window.portfolioData = {
         },
         {
             title: "AWS Educate Introduction to Cloud 101",
+            shortTitle: "AWS Cloud 101",
             issuer: "AMAZON WEB SERVICES",
             date: "2026",
             badgeUrl: "https://images.credly.com/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob",
@@ -547,20 +614,57 @@ window.portfolioData = {
         {
             author: "Henry Aguda",
             role: "Secretary, Dept. of Information & Communications Technology",
+            shortRole: "SECRETARY, DICT...",
             text: "Roldan, I believe, would be the next Philippine unicorn. He is technically skilled, deeply driven, and possesses an extraordinary ability to execute AI & software ideas into real products.",
+            shortText: "Roldan, I believe, would be the next Philippine unicorn. He is technically skilled, deeply driven, and executes AI ideas into real products.",
             initials: "HA"
         },
         {
             author: "Joshua Shailes",
             role: "Senior AI Data Scientist @ GenAI CoE",
+            shortRole: "SENIOR AI DATA SCIENTIST...",
             text: "It was a real pleasure to work with Roldan. He's not only a fantastic professional who consistently delivers clean code, but also a visionary AI engineer who understands user experience.",
+            shortText: "It was a real pleasure to work with Roldan. He's not only a fantastic professional who consistently delivers clean code...",
             initials: "JS"
         },
         {
-            author: "Cris Lawrence Adrian",
+            author: "Cris Lawrence Adriano",
             role: "Integrations Product Manager",
+            shortRole: "INTEGRATIONS PRODUCT MGR...",
             text: "Roldan was the most talented software engineer I've mentored in a long time. He's a fast learner, and he always takes full ownership of complex engineering problems.",
+            shortText: "Roldan was the most talented software engineer I've mentored in a long time. He's a fast learner, and he always takes full ownership...",
             initials: "CA"
+        }
+    ],
+    featuredStack: ["TypeScript", "React", "Next.js", "Node.js", "Python", "AWS", "PyTorch"],
+    stackCategories: [
+        {
+            title: "FRONTEND",
+            items: ["JavaScript", "TypeScript", "React", "Next.js", "Vue.js", "Tailwind CSS", "SCSS", "Styled Components", "Vite", "Webpack", "ESLint", "Prettier"]
+        },
+        {
+            title: "BACKEND",
+            items: ["Node.js", "Python", "Java", "PHP", "Express.js", "NestJS", "FastAPI", "Spring Boot", "Laravel", "PostgreSQL", "MySQL", "MongoDB", "DynamoDB", "OAuth", "JWT", "LDAP", "REST", "GraphQL", "gRPC", "AWS Lambda"]
+        },
+        {
+            title: "DEVOPS & CLOUD",
+            items: ["AWS", "GCP", "Azure", "GitHub Actions", "Jenkins", "GitLab CI", "Terraform", "AWS CloudFormation", "Docker", "Kubernetes", "Prometheus", "Grafana", "Datadog"]
+        },
+        {
+            title: "AI & MACHINE LEARNING",
+            items: ["TensorFlow", "PyTorch", "LangChain", "Transformers", "OpenAI", "Anthropic", "Mistral", "Hugging Face", "LlamaIndex", "AutoGPT", "Claude Code", "Codex"]
+        },
+        {
+            title: "SECURITY & IDENTITY",
+            items: ["AWS IAM", "Azure AD", "Okta", "SAP CDC", "Auth0", "Cognito", "AES", "RSA", "SHA", "GDPR", "SOC 2", "ISO 27001"]
+        },
+        {
+            title: "CMS & NO-CODE",
+            items: ["WordPress", "Strapi", "Bubble", "Webflow", "Microsoft Power Platform", "n8n"]
+        },
+        {
+            title: "DEVELOPER TOOLS",
+            items: ["Git", "GitHub", "GitLab", "Bitbucket", "VS Code", "JetBrains IntelliJ", "PyCharm", "Slack", "Discord", "Teams", "JIRA", "Trello", "ClickUp"]
         }
     ],
     cyberLab: {

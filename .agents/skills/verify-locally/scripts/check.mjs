@@ -137,12 +137,15 @@ if (data) {
     const projectIds = new Set((data.projects || []).map(p => p.id));
     for (const file of ['src/js/views/home.js', 'src/js/utils/command-palette.js']) {
         const src = read(file);
+        const isDynamicProjects = /portfolioData\??\.projects/.test(src);
         const referenced = new Set([...src.matchAll(/#\/projects\/([\w-]+)/g)].map(m => m[1]));
         for (const id of referenced) {
             if (!projectIds.has(id)) err(`${file} links to #/projects/${id} but no such project in data.js`);
         }
-        for (const id of projectIds) {
-            if (!referenced.has(id)) warn(`Project "${id}" is not referenced in ${file} (out of sync?)`);
+        if (!isDynamicProjects) {
+            for (const id of projectIds) {
+                if (!referenced.has(id)) warn(`Project "${id}" is not referenced in ${file} (out of sync?)`);
+            }
         }
     }
 }

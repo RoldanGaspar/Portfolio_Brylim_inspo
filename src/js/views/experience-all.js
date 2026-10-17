@@ -1,5 +1,5 @@
 function renderExperienceAll() {
-    const items = portfolioData.experienceList || [];
+    const items = (portfolioData.experienceList || []).filter(exp => !exp.homeOnly);
 
     return `
         <div class="experience-page-container reveal">

@@ -22,13 +22,12 @@ Needs Roldan's confirmation before it stays on a live site under his name. Do no
 > - **Favicon & CDN:** Replaced 2.9 MB image with dedicated `favicon-32.png` and `apple-touch-icon.png` (<3 KB), and pinned Phosphor to `@2.1.1`.
 > - **3D Cyber-Loft:** Added collapsible persistent live chat drawer with live feed and unread badge.
 > - **Accessibility, Reduced Motion & README (Phase 6):** Implemented global `prefers-reduced-motion` guards in CSS and JS, WCAG keyboard navigation & ARIA semantics (`role="button"`, `tabindex="0"`, `Enter`/`Space`/`Arrow` keys) on `#hero-verified-badge` and `.project-stack-card`, modal/command palette focus trapping & restoration, and synchronized `README.md` with the zero-build classic `<script>` architecture.
+> - **Single-Source-of-Truth Data Refactor (Phase 7):** Eliminated cross-file content duplication across `home.js`, `experience-all.js`, `stack-all.js`, `command-palette.js`, and `ai-bot.js` so all views and utilities dynamically read from `window.portfolioData` (`src/js/data.js`).
 
 ## 🟠 Maintainability
 
-- **Duplicated content** across files — see `DATA_SCHEMA.md#duplication-map`.
 - **Legacy root files** `data.js`, `main.js`, `style.css` are dead code (~90 KB). Candidate for deletion with approval.
 - `views.css` is ~4,500 lines; finding styles is slow. Consider splitting per view (keep `@import` order).
-- `ai-bot.js` answers are hard-coded strings, not derived from `portfolioData`.
 
 ## 🟢 Performance
 
