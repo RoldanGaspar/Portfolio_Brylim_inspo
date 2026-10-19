@@ -23,7 +23,7 @@ Verified credential trail: 9 Cisco Networking Academy certificates (JavaScript E
 
 ## Origin
 
-Forked/inspired from **Bryl Lim's portfolio** (repo name: `Portfolio_Brylim_inspo`). The layout, section structure, and some copy came from that inspiration. Part of the ongoing work is replacing inherited content with Roldan's real content. See `KNOWN_ISSUES.md` → "Unverified content".
+Forked/inspired from **Bryl Lim's portfolio** (repo name: `Portfolio_Brylim_inspo`). All inherited template content was audited and replaced with Roldan Gaspar's verified credentials, active GitHub repositories, and Pampanga workstation setup (see `KNOWN_ISSUES.md` → "Content Integrity Status").
 
 ## Voice
 
@@ -37,13 +37,17 @@ Forked/inspired from **Bryl Lim's portfolio** (repo name: `Portfolio_Brylim_insp
 |---|---|
 | Hero with verified-badge confetti + toast | `views/home.js`, `utils/effects.js` |
 | 3-card project stack deck (click side card to swap, center to open) | `views/home.js`, `utils/effects.js#initProjectsStack` |
-| Project case-study pages `#/projects/:id` | `views/project-detail.js` |
+| 4-project gallery & deep-dive case studies `#/projects/:id` with system architecture blueprints, copy-link, and prev/next navigation | `views/projects-all.js`, `views/project-detail.js` |
+| CyberOps & Network Defense Lab `#/cyber-lab` with interactive SOC telemetry & packet simulator | `views/cyber-lab.js` |
 | Certifications gallery with filters + lightbox + PDFs | `views/certifications-all.js` |
-| Command palette (Ctrl/Cmd + K) | `utils/command-palette.js` |
-| Terminal modal (Alt + K), typing test (Alt + J), community mini-game | `utils/modals.js` |
-| Audio Lounge: 5 procedural tracks, visualizer, mixer, Pomodoro | `views/audio-lounge.js`, `utils/audio.js` |
+| Command palette (Ctrl/Cmd + K) dynamically backed by `window.portfolioData` | `utils/command-palette.js` |
+| Terminal modal (Alt + K), typing test (Alt + J), 3D Cyber-Loft Dev Lounge with persistent live chat | `utils/modals.js`, `utils/game3d.js` |
+| Audio Lounge: 6 procedural tracks (including 40Hz Deep Focus Binaural Beats), visualizer, mixer, Pomodoro | `views/audio-lounge.js`, `utils/audio.js` |
 | UI sound effects (off by default) | `utils/audio.js#playSound` |
-| Rule-based "AI" chat widget (keyword matching, not an LLM) | `utils/ai-bot.js` |
-| Light / dark / system theme | `utils/theme.js`, `css/tokens.css` |
-| Shop, Blog, Gear, Resources, Collabs, Consulting pages | `views/*.js` |
-| Fake GitHub contribution graph (random) | `components/github-graph.js` |
+| Grounded AI Assistant widget dynamically backed by `window.portfolioData` | `utils/ai-bot.js` |
+| Real 365-day GitHub contribution graph & featured open-source repositories | `components/github-graph.js` |
+| Supabase-backed Contact Modal, Live Visitor Counter & Developer Guestbook with PostgreSQL RLS | `utils/supabase-client.js`, `utils/contact-modal.js`, `utils/guestbook-modal.js` |
+| Printable ATS HTML Resume & downloadable DOCX Developer Resume Template | `assets/resume/`, `views/shop-detail.js` |
+| Light / dark / system theme + dynamic per-route SEO metadata & JSON-LD | `utils/theme.js`, `css/tokens.css`, `router.js`, `index.html` |
+| Shop, Blog, Gear, Resources, Experience, Stack, Recommendations, Consulting pages | `views/*.js` |
+

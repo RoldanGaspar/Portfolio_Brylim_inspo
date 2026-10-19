@@ -182,6 +182,7 @@ function router() {
             if (window.initCyberLabEvents && viewHash === '#/cyber-lab') initCyberLabEvents();
             if (window.initBlogListEvents && viewHash === '#/blog') initBlogListEvents();
             if (window.initBlogDetailEvents && viewHash === '#/blog') initBlogDetailEvents();
+            if (window.initProjectDetailEvents && viewHash === '#/projects') initProjectDetailEvents();
             if (window.initGithubGraph && (viewHash === '#/' || viewHash === '#home')) initGithubGraph();
             if (window.playSound) playSound('nav');
         }, currentView === null ? 0 : 200);

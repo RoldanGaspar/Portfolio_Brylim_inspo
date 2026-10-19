@@ -1,11 +1,21 @@
 function renderProjectDetail(project) {
     if (!project) return renderProjectsAll();
+
+    const projects = portfolioData.projects || [];
+    const currentIndex = projects.findIndex(p => p.id === project.id);
+    const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
+    const nextProject = currentIndex >= 0 && currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
     
     return `
         <div class="project-detail-page reveal">
-            <a href="#/projects" class="project-back-link magnetic">
-                &larr; projects
-            </a>
+            <div class="blog-detail-topbar">
+                <a href="#/projects" class="back-link project-back-link magnetic">
+                    <i class="ph ph-arrow-left"></i> projects
+                </a>
+                <button type="button" class="blog-share-btn" id="project-copy-link-btn" aria-label="Copy link to case study">
+                    <i class="ph ph-link"></i> <span>Copy link</span>
+                </button>
+            </div>
             
             <div class="project-detail-header">
                 <div class="project-header-left">
@@ -78,6 +88,24 @@ function renderProjectDetail(project) {
                     </div>
                 </div>
 
+                ${project.architecture ? `
+                    <div class="case-section">
+                        <div class="case-arch-header">
+                            <h3 class="case-heading"><span class="icon"><i class="ph-fill ph-cpu"></i></span> System Architecture</h3>
+                            <span class="case-arch-badge">${project.architecture.pattern}</span>
+                        </div>
+                        <div class="case-arch-grid">
+                            ${project.architecture.layers.map(layer => `
+                                <div class="case-arch-step">
+                                    <span class="case-arch-num">${layer.step}</span>
+                                    <h4 class="case-arch-title">${layer.label}</h4>
+                                    <p class="case-arch-desc">${layer.detail}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
                 <div class="case-section">
                     <h3>Key Features & Highlights</h3>
                     <ul class="project-highlights-list">
@@ -91,7 +119,44 @@ function renderProjectDetail(project) {
                         ${project.techStack.map(t => `<span class="tech-tag">${t}</span>`).join('')}
                     </div>
                 </div>
+
+                <nav class="blog-adjacent-grid" aria-label="Other projects">
+                    ${prevProject ? `
+                        <a href="#/projects/${prevProject.id}" class="blog-adjacent-card prev">
+                            <span class="adjacent-label">&larr; PREVIOUS PROJECT</span>
+                            <strong>${prevProject.title}</strong>
+                        </a>
+                    ` : '<div></div>'}
+                    ${nextProject ? `
+                        <a href="#/projects/${nextProject.id}" class="blog-adjacent-card next">
+                            <span class="adjacent-label">NEXT PROJECT &rarr;</span>
+                            <strong>${nextProject.title}</strong>
+                        </a>
+                    ` : '<div></div>'}
+                </nav>
             </div>
         </div>
     `;
 }
+
+function initProjectDetailEvents() {
+    const copyBtn = document.getElementById('project-copy-link-btn');
+    if (!copyBtn) return;
+
+    copyBtn.addEventListener('click', () => {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href);
+        }
+        if (window.playSound) playSound('click');
+        copyBtn.classList.add('copied');
+        const span = copyBtn.querySelector('span');
+        if (span) span.textContent = 'Copied!';
+        setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            if (span) span.textContent = 'Copy link';
+        }, 1800);
+    });
+}
+
+window.renderProjectDetail = renderProjectDetail;
+window.initProjectDetailEvents = initProjectDetailEvents;

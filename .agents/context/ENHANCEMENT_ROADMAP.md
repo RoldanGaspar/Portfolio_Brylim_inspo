@@ -160,6 +160,32 @@ flowchart LR
 
 ---
 
+## 📋 Phase 10: Project Case Studies 2.0 & 4-Repo Parity `[COMPLETED ✅]`
+**Goal:** Achieve full 4-repository parity across the portfolio (`tarsi-budget-tracker`, `awardena-security`, `pos-inventory`, `pet-hub-payroll`) and enrich every project with structured system architecture metadata.
+
+### Scope of Work
+1. **4th Flagship Case Study (`pet-hub-payroll` in `src/js/data.js`):**
+   - Added **Pet Hub – Employee & Payroll Management System** (`https://github.com/RoldanGaspar/pet-hub-payroll`) to `portfolioData.projects`, matching the `4 Open Repos` Hero stat and GitHub repository showcase.
+   - Automatically propagated to `#/projects` (clean 2×2 grid), Command Palette (`Ctrl+K`), AI Chatbot (`ai-bot.js`), and dynamic route metadata (`router.js`).
+2. **4-Layer System Architecture Blueprints (`src/js/data.js`):**
+   - Added `architecture: { pattern, layers: [{ step, label, detail }] }` to all 4 projects in `portfolioData.projects` detailing real data flow, security boundaries, and storage engines.
+
+---
+
+## 📋 Phases 11 & 12: Case Study Reader UX, Crawlability Assets & Context Sync `[COMPLETED ✅]`
+**Goal:** Upgrade `#/projects/:id` into an interactive engineering case study reader, add standard search crawlability assets (`robots.txt`, `sitemap.xml`), and synchronize `.agents/context/PROJECT_BRIEF.md`.
+
+### Scope of Work
+1. **Interactive Case Study Reader (`src/js/views/project-detail.js`, `src/js/router.js`, `src/css/views.css`):**
+   - Rendered the 4-layer **System Architecture Blueprint** grid on `#/projects/:id` with monospace layer badges and pattern pill.
+   - Added a **Copy Case Study Link** button in the top navigation bar (`initProjectDetailEvents()` in `project-detail.js`, invoked via `router.js`) with clipboard feedback and sound effects.
+   - Added **Previous / Next Project** sequential footer navigation cards at the bottom of every project detail view.
+2. **Crawlability Assets & Context Synchronization (`robots.txt`, `sitemap.xml`, `PROJECT_BRIEF.md`):**
+   - Created root `robots.txt` and `sitemap.xml` indexing `https://roldangaspar.vercel.app/` and `https://roldangaspar.vercel.app/assets/resume/roldan-gaspar-resume.html`.
+   - Synchronized `.agents/context/PROJECT_BRIEF.md`, `DATA_SCHEMA.md`, `KNOWN_ISSUES.md`, and `DECISIONS.md` (`D-009`).
+
+---
+
 ## 🚦 Execution Protocol for Every Phase
 
 Every phase must strictly follow this 5-step engineering loop:

@@ -4890,8 +4890,132 @@
 @media (prefers-reduced-motion: reduce) {
     .blog-card-link,
     .blog-adjacent-card,
-    .blog-progress-fill {
+    .blog-progress-fill,
+    .project-card-cta i,
+    .case-arch-step {
         transition: none;
+    }
+}
+
+/* Project Gallery Card Footer & Case Study Architecture Blueprint */
+.project-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.project-card-tech-preview {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-card-cta {
+    font-family: var(--mono-font);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.project-gallery-card:hover .project-card-cta {
+    color: var(--accent-blue);
+    transform: translateX(2px);
+}
+
+.case-arch-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.case-arch-header .case-heading {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.case-arch-header .case-heading .icon {
+    color: var(--accent-blue);
+    display: inline-flex;
+    align-items: center;
+}
+
+.case-arch-badge {
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    color: var(--accent-blue);
+}
+
+.case-arch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.case-arch-step {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: var(--card-shadow);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.case-arch-step:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.case-arch-num {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    letter-spacing: 0.8px;
+}
+
+.case-arch-title {
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.case-arch-desc {
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .case-arch-grid {
+        grid-template-columns: 1fr;
     }
 }
 

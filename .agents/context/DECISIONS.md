@@ -71,3 +71,9 @@ Template:
 - **Decision:** Embed Schema.org `Person` and `WebSite` JSON-LD structured data in `index.html`, add `updateRouteMeta(hash)` in `src/js/router.js` to dynamically update `document.title`, meta/OpenGraph descriptions, and an `aria-live="polite"` `#route-announcer` region on every route transition (including detail routes `#/projects/:id`, `#/blog/:id`, `#/shop/:id`), and add `loading="lazy" decoding="async"` across below-the-fold images.
 - **Consequences:** Browser tabs, bookmarks, JS-capable search crawlers, and screen readers receive accurate per-page titles and descriptions while maintaining the zero-build hash-router architecture.
 
+## D-009: 4-Repo Case Study Parity, System Architecture Blueprints & Crawlability Assets (Phases 10–12)
+- **Date:** 2026-10-19
+- **Status:** accepted
+- **Context:** The Hero stat badge advertised `4 Open Repos` and the GitHub section listed `pet-hub-payroll`, but `portfolioData.projects` only had 3 entries (`tarsi-budget-tracker`, `awardena-security`, `pos-inventory`). Additionally, project detail pages (`#/projects/:id`) lacked an engineering architecture breakdown, copy-link utility, and sequential prev/next navigation (`blog-detail.js` had these, `project-detail.js` did not), and the root lacked `robots.txt` and `sitemap.xml`.
+- **Decision:** Add `pet-hub-payroll` as the 4th entry in `portfolioData.projects` (keeping the Home 3D stack deck scoped to the 3 cards with `homeCard` while `#/projects` renders all 4 in a 2×2 grid); enrich every project with a 3-layer `architecture` (`pattern` + `layers`) blueprint rendered in `project-detail.js` alongside `initProjectDetailEvents()` (copy-link button) and Previous/Next Project footer cards; and add root `robots.txt` and `sitemap.xml`.
+- **Consequences:** Complete 4-repo parity across Hero stats, `#/projects`, Command Palette, and AI Bot; deeper technical storytelling on every case study page; and standard search crawler discovery at the root domain.

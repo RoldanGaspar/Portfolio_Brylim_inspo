@@ -14,14 +14,16 @@ Fields marked `html` are inserted raw via template literals — only trusted, ha
 | `downloadUrl` | url | `"assets/resume/developer-resume-template.docx"` |
 
 ### `projects[]` → `views/projects-all.js`, `views/project-detail.js`, `views/home.js`, `utils/command-palette.js`, `utils/ai-bot.js`, router (`#/projects/:id`)
+Contains all 4 flagship repositories (`tarsi-budget-tracker`, `awardena-security`, `pos-inventory`, `pet-hub-payroll`).
 | Field | Type | Notes |
 |---|---|---|
 | `id` | slug | URL key, unique |
 | `title`, `badge`, `subtitle`, `tagline`, `desc`, `problem`, `solution` | string | |
 | `iconText` | 1–2 chars | app icon letters |
 | `iconBg`, `mockupBg` | hex color | per-project brand color (allowed exception to token rule) |
-| `homeCard` | `{ posClass, ariaLabel, shortTitle, shortDesc, tags[], iconClass, badgeClass, badgeStyle, storeBadges[] }` | used by `home.js` interactive 3D stack deck |
+| `homeCard` | `{ posClass, ariaLabel, shortTitle, shortDesc, tags[], iconClass, badgeClass, badgeStyle, storeBadges[] }` | optional; used by `home.js` interactive 3D stack deck (first 3 projects) |
 | `cmdTitle`, `cmdIcon` | string | used by `command-palette.js` (`Ctrl+K`) |
+| `architecture` | `{ pattern: string, layers: { step, label, detail }[] }` | rendered as the 3-layer System Architecture Blueprint in `project-detail.js` |
 | `highlights` | string[] | |
 | `techStack` | string[] | |
 | `stats` | `{ rank, downloads, rating }` | all strings; all three required by `project-detail.js` |
@@ -37,13 +39,13 @@ Item: `name`, `desc`, `image`. Category keys are UPPERCASE display labels.
 Item: `title`, `desc`, `url` (official external documentation URL).
 
 ### `consulting[]` → `views/consulting.js`
-`title`, `price` (string, ₱), `desc`, `points` (string[]).
+`title`, `price` (string), `desc`, `points` (string[]).
 
 ### `experienceList[]` → `views/experience-all.js`, `views/home.js`
 `id`, `initials`, `year`, `shortYear`, `title`, `company`, `shortCompany` (optional), `employmentType`, `location`, `desc`, `highlights[]`, `tech[]`, `homeOnly` (boolean, optional — rendered on Home compact preview only).
 
 ### `featuredStack[]` → `views/home.js`
-`string[]` — compact array of top technologies (`["TypeScript", "React", "Next.js", "Node.js", "Python", "AWS", "PyTorch"]`) rendered on the Home page.
+`string[]` — compact array of top verified technologies (`["JavaScript (ES6+)", "TypeScript", "Python", "Supabase (PostgreSQL)", "Network Defense", "AWS Cloud", "AI Agent Harnesses"]`) rendered on the Home page.
 
 ### `stackCategories[]` → `views/stack-all.js` (`#/stack`)
 `title` (category title), `items[]` (`string[]` of technology names).

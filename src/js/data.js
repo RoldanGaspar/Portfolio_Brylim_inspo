@@ -38,6 +38,14 @@ window.portfolioData = {
                 "Automated recurring expense and balance detection",
                 "Encrypted local storage with zero advertising telemetry"
             ],
+            architecture: {
+                pattern: "Offline-First Local Persistence",
+                layers: [
+                    { step: "01", label: "Transaction Capture UI", detail: "Zero-latency expense and income entry with category tagging and recurring rules." },
+                    { step: "02", label: "On-Device Forecast Engine", detail: "Computes daily burn rates, category allocations, and monthly balance projections locally." },
+                    { step: "03", label: "Encrypted Local Store", detail: "Persists structured financial records in local storage with zero remote telemetry." }
+                ]
+            },
             techStack: ["Swift", "SwiftUI", "CoreData", "Charts", "Local Storage"],
             stats: { rank: "Offline-First", downloads: "Local Storage", rating: "Zero Cloud Sync" },
             downloadUrl: "https://github.com/RoldanGaspar",
@@ -80,6 +88,14 @@ window.portfolioData = {
                 "Windows event log ingestion for unauthorized execution attempts",
                 "Open-source TypeScript automation suite"
             ],
+            architecture: {
+                pattern: "Least-Privilege Policy Pipeline",
+                layers: [
+                    { step: "01", label: "Binary & Script Discovery", detail: "Scans target Windows directories to fingerprint executables, scripts, and publisher signatures." },
+                    { step: "02", label: "AppLocker Rule Synthesizer", detail: "Generates deterministic XML policy rules and audits LSASS / Credential Guard posture." },
+                    { step: "03", label: "Enforcement & Event Telemetry", detail: "Deploys least-privilege execution policies and ingests Windows Security event logs." }
+                ]
+            },
             techStack: ["TypeScript", "PowerShell", "Windows Security", "AppLocker", "Defense-in-Depth"],
             stats: { rank: "Security Tool", downloads: "GitHub Repo", rating: "TypeScript / PS" },
             downloadUrl: "https://github.com/RoldanGaspar/AWarden-A-applocker_credentials",
@@ -120,6 +136,14 @@ window.portfolioData = {
                 "User role-based access control (Cashier vs Manager)",
                 "Daily and monthly revenue analytical reporting"
             ],
+            architecture: {
+                pattern: "ACID Transactional Retail Engine",
+                layers: [
+                    { step: "01", label: "Checkout & Barcode Terminal", detail: "Captures SKU scans, cart line items, and role-authenticated cashier actions." },
+                    { step: "02", label: "Atomic SQL Ledger", detail: "Executes ACID-compliant stock decrements and invoice commits in a single transaction." },
+                    { step: "03", label: "Replenishment & Analytics", detail: "Triggers low-stock threshold alerts and aggregates daily/monthly revenue reports." }
+                ]
+            },
             techStack: ["Python", "SQLite/PostgreSQL", "Tkinter/PyQt", "Data Analytics"],
             stats: { rank: "Full-Stack Suite", downloads: "GitHub Repo", rating: "Python / SQL" },
             downloadUrl: "https://github.com/RoldanGaspar/pos_with_inventory_system",
@@ -140,6 +164,38 @@ window.portfolioData = {
                     { cls: "playstore", icon: "ph-fill ph-terminal-window", label: "Python" }
                 ]
             }
+        },
+        {
+            id: "pet-hub-payroll",
+            title: "Pet Hub — Veterinary & Payroll Suite",
+            cmdTitle: "Pet Hub – Veterinary & Payroll System",
+            cmdIcon: "ph-calculator",
+            badge: "WORKFORCE & PAYROLL",
+            subtitle: "AUTOMATED HR & CLINIC OPS",
+            iconText: "🐾",
+            iconBg: "#8b5cf6",
+            tagline: "Veterinary clinic employee management and automated payroll computation suite.",
+            desc: "Pet Hub Payroll streamlines veterinary clinic operations by unifying staff scheduling, attendance tracking, statutory deductions, and automated payslip generation into a single TypeScript application.",
+            problem: "Veterinary clinics and small healthcare teams often rely on disconnected spreadsheets to track shift attendance, overtime, and payroll deductions, leading to calculation errors and delayed payouts.",
+            solution: "Engineered a modular TypeScript workforce and payroll engine that automates timekeeping aggregation, gross-to-net salary computation, and role-based clinic staff records.",
+            highlights: [
+                "Automated gross-to-net payroll calculation with deduction rules",
+                "Veterinary staff scheduling, shift attendance, and role management",
+                "Instant itemized payslip breakdown and audit-ready summary exports",
+                "Type-safe modular TypeScript architecture"
+            ],
+            architecture: {
+                pattern: "Modular TypeScript Domain Engine",
+                layers: [
+                    { step: "01", label: "Attendance & Shift Ingestion", detail: "Validates staff time-in/out logs, shift differentials, and clinic role assignments." },
+                    { step: "02", label: "Payroll Computation Core", detail: "Applies deterministic gross-to-net rules, overtime multipliers, and deduction tables." },
+                    { step: "03", label: "Payslip & Audit Ledger", detail: "Generates structured per-employee payslip summaries and clinic payroll reports." }
+                ]
+            },
+            techStack: ["TypeScript", "JavaScript", "HTML5", "CSS3", "Payroll Automation"],
+            stats: { rank: "Clinic Ops", downloads: "GitHub Repo", rating: "TypeScript" },
+            downloadUrl: "https://github.com/RoldanGaspar/pet-hub-payroll",
+            mockupBg: "#1e1b4b"
         }
     ],
     blog: [

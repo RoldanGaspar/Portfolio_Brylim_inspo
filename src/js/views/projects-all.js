@@ -20,6 +20,10 @@ function renderProjectsAll() {
                     <div class="gallery-tags">
                         ${proj.techStack.map(t => `<span class="tag">${t}</span>`).join('')}
                     </div>
+                    <div class="project-card-footer">
+                        <span class="project-card-tech-preview">${proj.techStack.slice(0, 3).join(' · ')}</span>
+                        <span class="project-card-cta">Read Case Study <i class="ph-bold ph-arrow-right"></i></span>
+                    </div>
                 </a>
             `).join('')}
         </div>
