@@ -61,7 +61,7 @@ Template:
 - **Date:** 2026-10-17
 - **Status:** accepted
 - **Context:** Several sections in `src/js/data.js`, `src/js/views/home.js`, and `assets/resume/roldan-gaspar-resume.html` retained inherited inspiration-template claims (e.g., Standard Chartered, Cambridge, Henry Aguda, MacBook Pro M3 Max, ₱10k/hr rates, and ~70 unverified stack items).
-- **Decision:** Replace all inherited template content across `experienceList`, `recsList`, `gear`, `consulting`, `featuredStack`, `stackCategories`, `#affiliations`, and `roldan-gaspar-resume.html` with Roldan Gaspar's verified track record (10 Cisco Networking Academy credentials via DICT-ITU DTC Initiative & CICT, AWS Educate Cloud 101, open-source repositories `AWarden-A`, `pos_with_inventory_system`, `pet-hub-payroll`, `Tarsi`, and authentic Windows 11 Pro / WSL2 security & full-stack workstation).
+- **Decision:** Replace all inherited template content across `experienceList`, `recsList`, `gear`, `consulting`, `featuredStack`, `stackCategories`, `#affiliations`, and `roldan-gaspar-resume.html` with Roldan Gaspar's verified track record (9 Cisco Networking Academy certifications via DICT-ITU DTC Initiative & CICT, 1 AWS Educate Cloud 101 training badge for 10 verified credentials total, 5 NetAcad achievement badges, open-source repositories `AWarden-A`, `pos_with_inventory_system`, `pet-hub-payroll`, `Tarsi`, and authentic Windows 11 Pro / WSL2 security & full-stack workstation).
 - **Consequences:** 100% of visible portfolio content and printable resume assets now strictly adhere to `.agents/rules/content-integrity.md` with zero fabricated or inherited third-party claims.
 
 ## D-008: Dynamic SPA Route Metadata, JSON-LD Structured Data & Lazy Image Decoding (Phase 9)

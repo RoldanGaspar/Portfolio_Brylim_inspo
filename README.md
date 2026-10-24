@@ -34,7 +34,7 @@
   - Instant search modal for real-time filtering across all routes, projects, tech stack, blog posts, gear, and audio tracks.
 
 - **🎧 Web Audio Studio & Soundscape Engine (`#/audio`)**:
-  - Procedural Web Audio API synthesizers generating 5 ambient focus tracks (*Midnight Lo-Fi Chords*, *Late Night Rain & Coffee*, *Cyberpunk Synthwave Pulse*, *Space Echo Piano*, *Cherry MX Blue Keyboard ASMR*).
+  - Procedural Web Audio API synthesizers generating 6 ambient focus tracks (*Midnight Lo-Fi Chords*, *Late Night Rain & Coffee*, *Cyberpunk Synthwave Pulse*, *Space Echo Piano*, *Cherry MX Blue Keyboard ASMR*, *40Hz Deep Focus Binaural Beats*).
   - Features spinning cassette tape reels, dark chassis visualizer canvas (Spectrum, Waveform, Cosmic Particles), multi-layer ambient sound mixer (*Vinyl Crackle* & *Rain Overlay*), and Developer Focus Pomodoro timer.
 
 - **💬 Redesigned Recommendations & Certifications**:
@@ -99,9 +99,9 @@ PORTFOLIO/
 │           ├── audio.js           # Procedural Web Audio API Soundscape engine
 │           ├── command-palette.js # Spotlight search modal (Ctrl+K)
 │           ├── effects.js         # Confetti explosion, 3D card tilt & swap logic
-│           ├── modals.js          # Contact, Guestbook, Booking & Cert lightbox modals
+│           ├── modals.js          # Terminal, Typing test, 2D/3D Cyber-Loft & Cert lightbox modals
 │           ├── scroll.js          # Scroll reveal observer & back-to-top
-│           ├── supabase-client.js # Supabase RPC & RLS client helpers
+│           ├── supabase-client.js # Supabase client, Contact & Guestbook modals, visitor telemetry & presence
 │           └── theme.js           # Dark/Light theme switcher
 ```
 
@@ -115,14 +115,20 @@ PORTFOLIO/
    cd Portfolio_Brylim_inspo
    ```
 
-2. **Run locally**:
+2. **Verify locally**:
+   ```bash
+   # Run static verification check (0 errors / 0 warnings baseline):
+   node .agents/skills/verify-locally/scripts/check.mjs
+   ```
+
+3. **Run locally**:
    Since the app uses zero-build classic ordered `<script>` tags with static assets, serve it using any local HTTP server:
    ```bash
    # Using VS Code Live Server extension or npx serve:
    npx serve .
    ```
 
-3. Open `http://localhost:3000` (or `http://127.0.0.1:5500`) in your browser.
+4. Open `http://localhost:3000` (or `http://127.0.0.1:5500`) in your browser.
 
 ---
 
@@ -138,7 +144,7 @@ npx vercel --prod
 
 ## 📄 License
 
-Distributed under the **MIT License**.
+Distributed under the **[MIT License](LICENSE)**.
 
 <div align="center">
   <sub>Built with ❤️ by <b>Roldan Gaspar</b></sub>

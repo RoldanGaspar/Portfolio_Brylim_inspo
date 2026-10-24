@@ -29,23 +29,24 @@ Follow the field list in `DATA_SCHEMA.md` exactly. All fields are required unles
 - Dates: blog `"Mon YYYY"`, certs `"Mon D, YYYY"`.
 - Trusted HTML only in fields documented as `html`.
 
-## 3. Update the hard-coded copies
+## 3. Verify Consumers & Update Remaining Static Exceptions
 
-Per the duplication map. Typical sets:
+Views (`experience-all.js`, `recommendations-all.js`, `stack-all.js`, `projects-all.js`, `project-detail.js`, `ai-bot.js`, and `command-palette.js`) dynamically read from `window.portfolioData` (`src/js/data.js`). **Do not reintroduce hard-coded duplicate markup into those views.**
 
-| Changing… | Also update |
-|---|---|
-| A project | `home.js` stack deck card, `command-palette.js` `commandItems`, `ai-bot.js` projects answer, `modals.js` terminal output |
-| Experience | `experience-all.js`, `home.js` experience list (and `data.js#experienceList`) |
-| A recommendation | `home.js` rec grid |
-| Stack | `stack-all.js` `stackCategories`, `home.js` tag row, `ai-bot.js` skills answer |
-| Contact/location/socials | `index.html` sidebar, `home.js` hero, `ai-bot.js`, `effects.js` toast |
+However, check and synchronize the following **static exceptions**:
 
-**Preferred when touching a copy:** refactor that spot to read from `portfolioData` instead of re-hard-coding — but only if the user agrees to the scope increase.
+| Changing… | Dynamic Consumer (Auto) | Remaining Static Exceptions (Manual Sync Needed) |
+|---|---|---|
+| **A project** | `projects-all.js`, `project-detail.js`, `command-palette.js`, `ai-bot.js` | `home.js` (if changing one of the 3 featured 3D deck cards), `modals.js` (terminal `cat projects` / commands), `assets/resume/roldan-gaspar-resume.html` |
+| **Experience** | `experience-all.js`, `home.js` (reads `data.js#experienceList`) | `assets/resume/roldan-gaspar-resume.html` |
+| **A recommendation** | `recommendations-all.js`, `home.js` (reads `data.js#recsList`) | None (fully dynamic) |
+| **Stack** | `stack-all.js`, `home.js` (reads `data.js#featuredStack`), `ai-bot.js` | `assets/resume/roldan-gaspar-resume.html` |
+| **Certifications** | `certifications-all.js`, `home.js` (reads `data.js#certsList`) | `modals.js` (terminal `verify-certs` / `cat certs.json`), `assets/resume/roldan-gaspar-resume.html` |
+| **Contact / Bio / Socials** | `ai-bot.js` | `index.html` sidebar, `home.js` hero text, `assets/resume/roldan-gaspar-resume.html` |
 
 ## 4. Removing content
 
-Remove from every location above. Search for the `id` and the title afterward to confirm zero references remain. If a project is removed, the home stack deck needs exactly 3 cards (`pos-left`, `pos-center`, `pos-right`) — ask which project replaces it.
+Remove the item from `src/js/data.js`. If a project is removed, verify whether it was featured in the Home 3D stack deck in `home.js` (which requires exactly 3 cards: `pos-left`, `pos-center`, `pos-right`); ask which active project replaces it if needed. Check `command-palette.js` and `modals.js` terminal pool if applicable.
 
 ## 5. Verify
 

@@ -10,13 +10,13 @@ sequenceDiagram
     participant A as app.js
     participant R as router.js
     B->>H: GET /
-    H->>S: data.js, github-graph, audio, scroll, effects, theme, modals, ai-bot, command-palette, views/*, router, app
+    H->>S: data.js, supabase-client, github-graph, audio, scroll, effects, theme, modals, ai-bot, command-palette, views/*, router, app
     Note over S: Top-level functions become globals.<br/>ai-bot + command-palette self-register on DOMContentLoaded.
     B->>A: DOMContentLoaded
     A->>R: router()
     R->>R: hash → renderX() → innerHTML into #router-view
     R->>R: post-render hooks (initScrollReveal, initTiltCards, ...)
-    A->>A: initTheme, initModals, initSoundToggle, mobile menu
+    A->>A: initTheme, initModals, initSoundToggle, mobile menu, updateVisitorCounterUI
     B->>A: hashchange
     A->>R: router() + close mobile drawer
 ```
@@ -24,7 +24,7 @@ sequenceDiagram
 ## Routing (`src/js/router.js`)
 
 1. `hash = location.hash || '#/'`
-2. Prefix routes first: `#/shop/<id>` → `renderShopDetail(item)`, `#/projects/<id>` → `renderProjectDetail(project)` (looked up in `portfolioData`).
+2. Prefix routes first: `#/shop/<id>` → `renderShopDetail(item)`, `#/projects/<id>` → `renderProjectDetail(project)`, `#/blog/<id>` → `renderBlogDetail(post)` (looked up in `portfolioData`).
 3. Otherwise `routes[hash]`. Unknown `#/...` falls back to `renderHome`.
 4. A hash NOT starting with `#/` (e.g. `#certifications`) renders Home and smooth-scrolls to that element ID.
 5. If the view changed: add `page-exit`, wait 200 ms, swap `innerHTML`, add `page-enter`, scroll to top, run hooks:
@@ -34,7 +34,7 @@ initScrollReveal(); initTiltCards(); initMagnetic(); initProjectsStack();
 initVerifiedBadgeConfetti(); initAudioLoungeEvents() /* only on #/audio */; playSound('nav');
 ```
 
-6. Sidebar `a.active` is set by exact `href === hash`.
+6. Sidebar `a.active` is set by matching hash or parent view (`viewHash`), with hash anchors (e.g. `#certifications`) maintaining Home activation. Detail views (`#/projects/:id`, `#/shop/:id`, `#/blog/:id`) keep their parent nav links active.
 
 **Implication:** a hook runs on every page, so each `initX` must no-op when its elements are absent (`if (!el) return;`).
 
@@ -77,6 +77,7 @@ initVerifiedBadgeConfetti(); initAudioLoungeEvents() /* only on #/audio */; play
 | `initAudioLoungeEvents`, Pomodoro fns | `audio-lounge.js` | router |
 | `renderCyberLab`, `initCyberLabEvents` | `cyber-lab.js` | router |
 | `renderBlog`, `initBlogListEvents`, `renderBlogDetail`, `initBlogDetailEvents` | `blog.js` · `blog-detail.js` | router |
+| `getSupabaseClient`, `openContactModal`, `closeContactModal`, `openGuestbookModal`, `closeGuestbookModal`, `submitContactMessage`, `submitGuestbookEntry`, `updateVisitorCounterUI` | `supabase-client.js` | `app.js`, sidebar, home, command palette |
 
 ## Keyboard shortcuts
 
@@ -85,11 +86,11 @@ initVerifiedBadgeConfetti(); initAudioLoungeEvents() /* only on #/audio */; play
 | Ctrl/Cmd + K | Command palette | `command-palette.js` |
 | Alt + K | Terminal modal ("Ask anything" button label) | `modals.js` |
 | Alt + J | Typing test | `modals.js` |
-| Esc | Close palette/modals | `command-palette.js`, `modals.js` |
+| Esc | Close palette/modals/contact & guestbook | `command-palette.js`, `modals.js`, `supabase-client.js` |
 
 ## CSS architecture
 
-`main.css` → `tokens.css` (vars, reset) → `layout.css` (shell, sidebar, mobile header) → `components.css` (buttons, cards, modals, AI widget, palette, confetti) → `views.css` (per-page; largest file, ~3k lines) → `animations.css` (keyframes, reveal, page transitions).
+`main.css` → `tokens.css` (vars, reset) → `layout.css` (shell, sidebar, mobile header) → `components.css` (buttons, cards, modals, AI widget, palette, confetti) → `views.css` (per-page; largest file, ~5k lines) → `animations.css` (keyframes, reveal, page transitions).
 
 Theme switch = `data-theme` attribute on `<html>`; all colors flow from tokens.
 

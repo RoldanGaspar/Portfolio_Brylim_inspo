@@ -94,8 +94,14 @@ flowchart LR
 
 ---
 
-## 🚦 Execution Protocol
-1. **Plan & Report:** Formulate exact file diffs before making changes.
-2. **Await Approval:** Strict chain of user approval (`"APPROVED"`) before each phase is executed.
-3. **Verify Locally:** `node .agents/skills/verify-locally/scripts/check.mjs` must pass with `0 errors`.
-4. **Deploy & Verify:** Commit, push to `main`, and verify on [roldangaspar.vercel.app](https://roldangaspar.vercel.app).
+## 📱 Multi-Device & Theme Validation Matrix (Verified 2026-10-21)
+
+| Viewport Width | Target Form Factor | Key Verifications Passed |
+|---|---|---|
+| **320px – 380px** | Compact Mobile (iPhone SE, Galaxy A-series) | Hero typography (`clamp`) wraps without clipping; 3D card deck horizontal displacement bounded; touch targets $\ge 44\times 44\text{px}$; no horizontal body scroll. |
+| **390px – 480px** | Modern Mobile (iPhone 14/15/16, Pixel 8) | AI drawer expands to bottom-sheet (`85dvh`); Contact/Guestbook bottom-sheets fit viewport with safe area insets; mobile menu drawer scrolls smoothly. |
+| **600px – 768px** | Mini Tablets & Large Foldables | Galleries transition cleanly to 2-column auto-fit grids; Project stats bar stacks gracefully; cassette deck controls remain centered. |
+| **992px – 1024px** | Tablets & Small Laptops | Sidebar displays in full vertical column; 3-column cert/recs grids render with equal card heights; audio visualizer matches canvas container. |
+| **1200px+** | Desktop & Ultra-wide Monitors | Max content container constrained to `1200px`; 3D tilt cards rotate with spring damping; Command Palette (`Ctrl+K`) and Terminal modals center. |
+| **Theme Switching** | Dark / Light / System Mode | All tokens (`--bg-primary`, `--text-primary`, `--border-color`, `--card-bg`) respond instantaneously; contrast exceeds WCAG AAA ($\ge 7:1$). |
+| **Accessibility** | Keyboard & Screen Readers | Escape closes modals/drawers; Tab focus trapping active on Contact, Guestbook, Terminal, and Command Palette; `#route-announcer` announces transitions. |

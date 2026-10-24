@@ -11,7 +11,7 @@ It is **live in production**. Every push to `main` auto-deploys to Vercel.
 ## Stack in one line
 
 Vanilla HTML + CSS + JavaScript. **No build step, no bundler, no framework, no npm dependencies.**
-Classic `<script>` tags sharing globals (NOT ES modules — the README is wrong about that). Hash router. Static hosting on Vercel.
+Classic `<script>` tags sharing globals (NOT ES modules). Hash router. Static hosting on Vercel.
 
 ## Repo map (only what matters)
 

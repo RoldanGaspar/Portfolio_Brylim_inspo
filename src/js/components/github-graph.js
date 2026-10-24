@@ -95,9 +95,9 @@ function generateGithubGraph() {
             </div>
             <div class="github-footer-row">
                 <p class="github-footer" id="github-footer-status">
-                    <strong id="github-contributions-count">105+</strong> CONTRIBUTIONS IN THE LAST YEAR
+                    <strong id="github-contributions-count">&mdash;</strong> CONTRIBUTIONS IN THE LAST YEAR
                 </p>
-                <span class="github-live-badge"><i class="ph-fill ph-circle"></i> live synced</span>
+                <span class="github-live-badge" id="github-sync-badge"><i class="ph ph-arrows-clockwise"></i> syncing...</span>
             </div>
             <div class="github-scroll-hint">
                 <i class="ph-bold ph-arrows-horizontal"></i>
@@ -126,6 +126,7 @@ async function initGithubGraph() {
             const data = await res.json();
             const grid = document.getElementById('github-calendar-grid');
             const countEl = document.getElementById('github-contributions-count');
+            const badgeEl = document.getElementById('github-sync-badge');
 
             if (grid && Array.isArray(data.contributions) && data.contributions.length > 0) {
                 let html = '';
@@ -140,9 +141,25 @@ async function initGithubGraph() {
             if (countEl && data.total && data.total.lastYear !== undefined) {
                 countEl.textContent = Number(data.total.lastYear).toLocaleString();
             }
+
+            if (badgeEl) {
+                badgeEl.innerHTML = '<i class="ph-fill ph-circle"></i> live synced';
+                badgeEl.classList.remove('offline');
+            }
+        } else {
+            throw new Error(`GitHub contributions HTTP ${res.status}`);
         }
     } catch (e) {
         console.warn('Live GitHub contribution fetch notice:', e);
+        const countEl = document.getElementById('github-contributions-count');
+        const badgeEl = document.getElementById('github-sync-badge');
+        if (countEl && (countEl.textContent === '—' || countEl.textContent === '--')) {
+            countEl.textContent = '100+';
+        }
+        if (badgeEl) {
+            badgeEl.innerHTML = '<i class="ph ph-cloud-slash"></i> cached estimate';
+            badgeEl.classList.add('offline');
+        }
     }
 
     // 2. Fetch real live repositories

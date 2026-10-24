@@ -35,8 +35,9 @@ flowchart TD
         C4[INTEGRATIONS]
         C5[PIPELINE_WORKFLOW]
         C6[ENHANCEMENT_ROADMAP]
-        C7[KNOWN_ISSUES]
-        C8[DECISIONS]
+        C7[RESPONSIVENESS_ROADMAP]
+        C8[KNOWN_ISSUES]
+        C9[DECISIONS]
     end
 ```
 
@@ -79,9 +80,10 @@ AGENTS.md
     ├── DATA_SCHEMA.md            every data field + duplication map
     ├── INTEGRATIONS.md           Vercel & Supabase hosting & database architecture
     ├── PIPELINE_WORKFLOW.md      Tri-MCP development pipeline & failure recovery
-    ├── ENHANCEMENT_ROADMAP.md    5-phase strategic enhancement plan
-    ├── KNOWN_ISSUES.md           audit findings, prioritized
-    └── DECISIONS.md              why things are the way they are
+    ├── ENHANCEMENT_ROADMAP.md    Strategic enhancement plan (Phases 1–12)
+    ├── RESPONSIVENESS_ROADMAP.md Multi-device responsiveness roadmap & validation matrix
+    ├── KNOWN_ISSUES.md           Audit findings & claim-to-evidence register
+    └── DECISIONS.md              Why things are the way they are
 ```
 
 ## Using it (for humans)

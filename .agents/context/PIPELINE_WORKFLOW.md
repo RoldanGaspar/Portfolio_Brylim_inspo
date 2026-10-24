@@ -22,7 +22,8 @@ flowchart TD
 
     subgraph VCS_Stage ["🐙 VCS Stage (GitHub MCP)"]
         GitCommit["Atomic Git Commit<br/>(Conventional Commits)"]
-        GitPush["Direct Branch Push<br/>to origin/main"]
+        UserApprove{"Explicit User<br/>Approval Gate?"}
+        GitPush["Push to origin/main<br/>(production-safety.md)"]
     end
 
     subgraph Deployment_Stage ["▲ Deployment Stage (Vercel MCP)"]
@@ -32,8 +33,10 @@ flowchart TD
 
     Plan --> Backend_Stage
     Backend_Stage --> Code
-    Code --> VCS_Stage
-    VCS_Stage --> Deployment_Stage
+    Code --> GitCommit
+    GitCommit --> UserApprove
+    UserApprove -->|Approved| GitPush
+    GitPush --> Deployment_Stage
     Deployment_Stage -->|If Build Error| Code
 ```
 
@@ -96,11 +99,15 @@ sequenceDiagram
     Agent->>Local: Run verification check (check.mjs)
     Local-->>Agent: 0 errors, health check passed
 
-    Note over Agent: Phase 3: Push & Deploy
+    Note over Agent: Phase 3: Verification & User Approval Gate
+    Agent->>Dev: Present verification results & request explicit push approval (production-safety.md)
+    Dev-->>Agent: "Approved to deploy"
+
+    Note over Agent: Phase 4: Push & Deploy
     Agent->>Git: Push commit to origin/main
     Git-->>Vercel: Webhook triggers production deployment
 
-    Note over Agent: Phase 4: Observability
+    Note over Agent: Phase 5: Observability
     Agent->>Vercel: Query deployment status
     Vercel-->>Agent: State: READY (URL: roldangaspar.vercel.app)
     Agent->>Live: HTTP Head check (200 OK)
@@ -115,8 +122,8 @@ sequenceDiagram
 | :--- | :--- | :--- |
 | **Database Migration Error** | Supabase MCP error response | Abort frontend changes, review SQL syntax, and ensure table or policy names do not conflict. |
 | **Local Check Script Error** | `node check.mjs` exits with code 1 | Fix missing script tags, global name collisions, or broken file paths before committing. |
-| **Vercel Build Error** | Vercel MCP returns `state: ERROR` | Query `getVercelDeploymentEvents`, identify missing assets or syntax errors, and push a hotfix commit. |
-| **Critical Production Bug** | Live site broken or reports 5xx | Revert the latest commit via Git (`git revert HEAD`), push to `main`, and verify Vercel rolls back. |
+| **Vercel Build Error** | Vercel MCP returns `state: ERROR` | Query `getVercelDeploymentEvents`, identify missing assets or syntax errors, fix locally, request approval, and push a hotfix commit. |
+| **Critical Production Bug** | Live site broken or reports 5xx | Revert the latest commit via Git (`git revert HEAD`), request approval, push to `main`, and verify Vercel rolls back. |
 
 ---
 

@@ -167,7 +167,7 @@ flowchart LR
 1. **4th Flagship Case Study (`pet-hub-payroll` in `src/js/data.js`):**
    - Added **Pet Hub – Employee & Payroll Management System** (`https://github.com/RoldanGaspar/pet-hub-payroll`) to `portfolioData.projects`, matching the `4 Open Repos` Hero stat and GitHub repository showcase.
    - Automatically propagated to `#/projects` (clean 2×2 grid), Command Palette (`Ctrl+K`), AI Chatbot (`ai-bot.js`), and dynamic route metadata (`router.js`).
-2. **4-Layer System Architecture Blueprints (`src/js/data.js`):**
+2. **3-Layer System Architecture Blueprints (`src/js/data.js`):**
    - Added `architecture: { pattern, layers: [{ step, label, detail }] }` to all 4 projects in `portfolioData.projects` detailing real data flow, security boundaries, and storage engines.
 
 ---
@@ -177,7 +177,7 @@ flowchart LR
 
 ### Scope of Work
 1. **Interactive Case Study Reader (`src/js/views/project-detail.js`, `src/js/router.js`, `src/css/views.css`):**
-   - Rendered the 4-layer **System Architecture Blueprint** grid on `#/projects/:id` with monospace layer badges and pattern pill.
+   - Rendered the 3-layer **System Architecture Blueprint** grid on `#/projects/:id` with monospace layer badges and pattern pill.
    - Added a **Copy Case Study Link** button in the top navigation bar (`initProjectDetailEvents()` in `project-detail.js`, invoked via `router.js`) with clipboard feedback and sound effects.
    - Added **Previous / Next Project** sequential footer navigation cards at the bottom of every project detail view.
 2. **Crawlability Assets & Context Synchronization (`robots.txt`, `sitemap.xml`, `PROJECT_BRIEF.md`):**

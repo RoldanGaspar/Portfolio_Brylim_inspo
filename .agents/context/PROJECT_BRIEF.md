@@ -41,12 +41,12 @@ Forked/inspired from **Bryl Lim's portfolio** (repo name: `Portfolio_Brylim_insp
 | CyberOps & Network Defense Lab `#/cyber-lab` with interactive SOC telemetry & packet simulator | `views/cyber-lab.js` |
 | Certifications gallery with filters + lightbox + PDFs | `views/certifications-all.js` |
 | Command palette (Ctrl/Cmd + K) dynamically backed by `window.portfolioData` | `utils/command-palette.js` |
-| Terminal modal (Alt + K), typing test (Alt + J), 3D Cyber-Loft Dev Lounge with persistent live chat | `utils/modals.js`, `utils/game3d.js` |
+| Terminal modal (Alt + K), typing test (Alt + J), Cyber-Loft Dev Lounge with realtime visitor presence & collaborative chat | `utils/modals.js` |
 | Audio Lounge: 6 procedural tracks (including 40Hz Deep Focus Binaural Beats), visualizer, mixer, Pomodoro | `views/audio-lounge.js`, `utils/audio.js` |
 | UI sound effects (off by default) | `utils/audio.js#playSound` |
 | Grounded AI Assistant widget dynamically backed by `window.portfolioData` | `utils/ai-bot.js` |
 | Real 365-day GitHub contribution graph & featured open-source repositories | `components/github-graph.js` |
-| Supabase-backed Contact Modal, Live Visitor Counter & Developer Guestbook with PostgreSQL RLS | `utils/supabase-client.js`, `utils/contact-modal.js`, `utils/guestbook-modal.js` |
+| Supabase-backed Contact Modal, Live Visitor Counter & Developer Guestbook with PostgreSQL RLS | `utils/supabase-client.js` |
 | Printable ATS HTML Resume & downloadable DOCX Developer Resume Template | `assets/resume/`, `views/shop-detail.js` |
 | Light / dark / system theme + dynamic per-route SEO metadata & JSON-LD | `utils/theme.js`, `css/tokens.css`, `router.js`, `index.html` |
 | Shop, Blog, Gear, Resources, Experience, Stack, Recommendations, Consulting pages | `views/*.js` |

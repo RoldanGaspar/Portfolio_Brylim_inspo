@@ -5,6 +5,33 @@ const SUPABASE_URL = 'https://prxqtwfznexnxohgfbrm.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByeHF0d2Z6bmV4bnhvaGdmYnJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE2NTI0NTgsImV4cCI6MjEwNzIyODQ1OH0.eDYbRRr5VQOsxxwkT7ep-I-fZC8pkqIOaxwYEtjA-kE';
 
 let supabaseClient = null;
+let lastFocusedContactTrigger = null;
+let lastFocusedGuestbookTrigger = null;
+
+// Helper to trap focus within an active dialog
+function handleModalKeydown(e, modalContainer, contentCardSelector, closeFn) {
+    if (!modalContainer || !modalContainer.classList.contains('active')) return;
+    if (e.key === 'Escape') {
+        e.preventDefault();
+        closeFn();
+        return;
+    }
+    if (e.key === 'Tab') {
+        const card = modalContainer.querySelector(contentCardSelector);
+        if (!card) return;
+        const focusable = card.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
+}
 
 function getSupabaseClient() {
     if (!supabaseClient && window.supabase && window.supabase.createClient) {
@@ -39,11 +66,15 @@ async function submitContactMessage(payload) {
 
 // Contact Modal Management
 function openContactModal(defaultInquiry = 'Hiring') {
+    lastFocusedContactTrigger = document.activeElement;
     let modal = document.getElementById('contact-form-modal');
     if (!modal) {
         modal = document.createElement('div');
         modal.id = 'contact-form-modal';
         modal.className = 'contact-modal-overlay';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-labelledby', 'contact-modal-title');
         modal.innerHTML = `
             <div class="contact-modal-card">
                 <div class="contact-modal-header">
@@ -52,7 +83,7 @@ function openContactModal(defaultInquiry = 'Hiring') {
                             <i class="ph-fill ph-paper-plane-tilt"></i>
                         </div>
                         <div>
-                            <h3>Send a Message</h3>
+                            <h3 id="contact-modal-title">Send a Message</h3>
                             <p>Direct to Roldan's inbox via Supabase</p>
                         </div>
                     </div>
@@ -115,6 +146,11 @@ function openContactModal(defaultInquiry = 'Hiring') {
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeContactModal();
+        });
+
+        // Accessible keyboard trapping (Escape + Tab)
+        document.addEventListener('keydown', (e) => {
+            handleModalKeydown(e, document.getElementById('contact-form-modal'), '.contact-modal-card', closeContactModal);
         });
 
         // Pill selector interactivity
@@ -198,6 +234,10 @@ function closeContactModal() {
     if (modal && modal.classList.contains('active')) {
         modal.classList.remove('active');
         if (window.playSound) window.playSound('close');
+        if (lastFocusedContactTrigger && typeof lastFocusedContactTrigger.focus === 'function') {
+            lastFocusedContactTrigger.focus();
+            lastFocusedContactTrigger = null;
+        }
     }
 }
 
@@ -403,11 +443,15 @@ async function submitGuestbookEntry(payload) {
 }
 
 function openGuestbookModal() {
+    lastFocusedGuestbookTrigger = document.activeElement;
     let modal = document.getElementById('guestbook-modal');
     if (!modal) {
         modal = document.createElement('div');
         modal.id = 'guestbook-modal';
         modal.className = 'contact-modal-overlay guestbook-modal-overlay';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-labelledby', 'guestbook-modal-title');
         modal.innerHTML = `
             <div class="contact-modal-card guestbook-modal-card">
                 <div class="contact-modal-header">
@@ -416,7 +460,7 @@ function openGuestbookModal() {
                             <i class="ph-fill ph-book-bookmark"></i>
                         </div>
                         <div>
-                            <h3>Developer Guestbook</h3>
+                            <h3 id="guestbook-modal-title">Developer Guestbook</h3>
                             <p>Leave a note, feedback, or greeting for Roldan</p>
                         </div>
                     </div>
@@ -470,6 +514,11 @@ function openGuestbookModal() {
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeGuestbookModal();
+        });
+
+        // Accessible keyboard trapping (Escape + Tab)
+        document.addEventListener('keydown', (e) => {
+            handleModalKeydown(e, document.getElementById('guestbook-modal'), '.guestbook-modal-card', closeGuestbookModal);
         });
 
         // Form Submit Handler
@@ -532,6 +581,10 @@ function closeGuestbookModal() {
     if (modal && modal.classList.contains('active')) {
         modal.classList.remove('active');
         if (window.playSound) window.playSound('close');
+        if (lastFocusedGuestbookTrigger && typeof lastFocusedGuestbookTrigger.focus === 'function') {
+            lastFocusedGuestbookTrigger.focus();
+            lastFocusedGuestbookTrigger = null;
+        }
     }
 }
 

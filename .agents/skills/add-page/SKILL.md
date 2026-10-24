@@ -8,7 +8,7 @@ description: >-
 
 # Add a Page / Route
 
-Touch points (all required): view file → `index.html` script tag → `router.js` → sidebar link → command palette → CSS → docs.
+Touch points (all required): view file → `index.html` script tag → `router.js` (`routes` + `routeMeta`) → sidebar link → command palette → CSS → docs.
 
 ## Steps
 
@@ -52,8 +52,16 @@ Touch points (all required): view file → `index.html` script tag → `router.j
 4. **Script tag** in `index.html`, inside the views group (after the other `views/*.js`, before `router.js`):
    `<script src="src/js/views/talks.js"></script>`
 
-5. **Route** in `router.js` `routes` map: `'#/talks': renderTalks,`
-   For a detail route (`#/talks/:id`) add a `hash.startsWith('#/talks/')` branch next to the projects/shop branches, set `viewHash = '#/talks'`, and fall back to the list view if the id isn't found.
+5. **Route & Metadata registration in `src/js/router.js`:**
+   - Add to `routes` map: `'#/talks': renderTalks,`
+   - **Crucial: Add to `routeMeta` map** so the page receives accurate SEO titles, OG tags, and screen-reader announcements:
+     ```js
+     '#/talks': {
+         title: 'Talks — Roldan Gaspar',
+         desc: 'Technical talks and presentations on software engineering and AI by Roldan Gaspar.'
+     },
+     ```
+   - For a detail route (`#/talks/:id`), add a `hash.startsWith('#/talks/')` branch next to the projects/shop/blog branches in `router()`, set `viewHash = '#/talks'`, set dynamic `metaTitle` / `metaDesc` based on the item, and fall back to the list view if the ID isn't found.
 
 6. **Sidebar link** in `index.html` in the right `<ul>` group, with a Phosphor icon if the group uses icons:
    `<li><a href="#/talks"><span class="icon"><i class="ph ph-microphone-stage"></i></span> Talks</a></li>`
@@ -63,6 +71,8 @@ Touch points (all required): view file → `index.html` script tag → `router.j
 
 8. **Styles** in `src/css/views.css` under a banner comment. Tokens only. Reuse existing list/card classes where possible.
 
-9. **Verify** — run the `verify-locally` skill. The checker will error if the render function isn't loaded and warn if the sidebar link has no route.
+9. **Verify** — run the `verify-locally` skill:
+   - `node .agents/skills/verify-locally/scripts/check.mjs` checks render function availability and routeMeta coverage.
+   - Test navigation in browser: confirm `#route-announcer` updates ("Navigated to Talks — Roldan Gaspar") and browser tab title reflects the routeMeta title.
 
 10. **Docs** — add the route to the route table in `.agents/context/ARCHITECTURE.md`.

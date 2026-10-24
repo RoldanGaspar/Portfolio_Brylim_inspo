@@ -59,13 +59,21 @@ for (const m of mainCss.matchAll(/@import\s+['"]([^'"]+)['"]/g)) {
     if (!exists(path.join('src/css', m[1]))) err(`main.css imports missing file: ${m[1]}`);
 }
 
-// ---------- 4. Router render functions exist ----------
+// ---------- 4. Router render functions exist & routeMeta coverage ----------
 const routerSrc = read('src/js/router.js');
 const renderFns = new Set([...routerSrc.matchAll(/\b(render[A-Z]\w*)\b/g)].map(m => m[1]));
 for (const fn of renderFns) {
     if (!topLevelFns.has(fn)) err(`router.js uses ${fn}() but no script in index.html defines it`);
 }
-const routeKeys = [...routerSrc.matchAll(/'(#\/[\w-]*)'\s*:/g)].map(m => m[1]);
+const routesBlock = routerSrc.match(/const\s+routes\s*=\s*\{([\s\S]*?)\};/)?.[1] || '';
+const routeKeys = [...new Set([...routesBlock.matchAll(/'(#\/[\w-]*)'\s*:/g)].map(m => m[1]))];
+
+const metaBlock = routerSrc.match(/const\s+routeMeta\s*=\s*\{([\s\S]*?)\};/)?.[1] || '';
+const metaKeys = new Set([...metaBlock.matchAll(/'(#\/[\w-]*)'\s*:/g)].map(m => m[1]));
+
+for (const r of routeKeys) {
+    if (r && !metaKeys.has(r)) warn(`Route "${r}" is missing routeMeta in router.js (inherits fallback Home metadata)`);
+}
 const navLinks = [...html.matchAll(/class="sidebar-nav"[\s\S]*?<\/nav>/g)].join('');
 for (const m of navLinks.matchAll(/href="(#\/[\w-]+)"/g)) {
     if (!routeKeys.includes(m[1])) warn(`Sidebar link ${m[1]} has no route in router.js (falls back to Home)`);
@@ -113,7 +121,8 @@ if (data) {
     requireFields(data.shop, 'shop', ['id', 'title', 'price', 'desc']);
     uniqueIds(data.shop, 'shop');
 
-    requireFields(data.blog, 'blog', ['title', 'preview', 'date', 'readTime', 'image']);
+    requireFields(data.blog, 'blog', ['id', 'title', 'preview', 'date', 'readTime', 'image']);
+    uniqueIds(data.blog, 'blog');
 
     requireFields(data.netacadCertsList, 'netacadCertsList',
         ['title', 'issuer', 'date', 'description', 'badgeUrl', 'credlyUrl', 'certificateImage', 'skills']);
@@ -135,6 +144,12 @@ if (data) {
 
     // ---------- 6. Cross-file sync: project ids ----------
     const projectIds = new Set((data.projects || []).map(p => p.id));
+    const homeSrc = read('src/js/views/home.js');
+    const homeFeaturedIds = [...homeSrc.matchAll(/portfolioData\.projects\.find\(p\s*=>\s*p\.id\s*===\s*['"]([^'"]+)['"]\)/g)].map(m => m[1]);
+    for (const hId of homeFeaturedIds) {
+        if (!projectIds.has(hId)) err(`src/js/views/home.js explicitly references project "${hId}", but it is missing in data.js`);
+    }
+
     for (const file of ['src/js/views/home.js', 'src/js/utils/command-palette.js']) {
         const src = read(file);
         const isDynamicProjects = /portfolioData\??\.projects/.test(src);

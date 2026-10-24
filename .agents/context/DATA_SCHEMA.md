@@ -83,13 +83,13 @@ Same as NetAcad minus `hours`, `verifyUrl`, `certificateImage`.
 
 | Content | Single Source (`src/js/data.js`) | Dynamic Consumers | Remaining Static Exceptions |
 |---|---|---|---|
-| Projects | `portfolioData.projects` | `projects-all.js`, `project-detail.js`, `home.js` (stack deck), `command-palette.js`, `ai-bot.js` | `modals.js` (terminal easter egg output) |
-| Experience | `portfolioData.experienceList` | `experience-all.js`, `home.js` (timeline preview) | None (excluded from `ai-bot.js` per content-integrity rules) |
-| Recommendations | `portfolioData.recsList` | `recommendations-all.js`, `home.js` (3-card preview) | None (excluded from `ai-bot.js` per content-integrity rules) |
-| Tech stack | `portfolioData.featuredStack` & `portfolioData.stackCategories` | `home.js`, `stack-all.js` | `ai-bot.js` (curated summary string) |
-| Certifications | `portfolioData.certsList`, `netacadCertsList`, `credlyAdditionalBadgesList` | `certifications-all.js`, `home.js`, `ai-bot.js` | None |
+| Projects | `portfolioData.projects` | `projects-all.js`, `project-detail.js`, `command-palette.js`, `ai-bot.js` | `home.js` (explicitly selects 3 featured project IDs for 3D deck), `modals.js` (terminal `projects` list), `assets/resume/roldan-gaspar-resume.html` |
+| Experience | `portfolioData.experienceList` | `experience-all.js`, `home.js` (timeline preview) | `assets/resume/roldan-gaspar-resume.html` |
+| Recommendations | `portfolioData.recsList` | `recommendations-all.js`, `home.js` (3-card preview) | None |
+| Tech stack | `portfolioData.featuredStack` & `portfolioData.stackCategories` | `home.js`, `stack-all.js` | `ai-bot.js` (curated summary string), `assets/resume/roldan-gaspar-resume.html` |
+| Certifications | `portfolioData.certsList`, `netacadCertsList`, `credlyAdditionalBadgesList` | `certifications-all.js`, `home.js`, `ai-bot.js` | `modals.js` (terminal `verify-certs`), `assets/resume/roldan-gaspar-resume.html` |
 | Blog & Shop | `portfolioData.blog`, `portfolioData.shop` | `blog.js`, `blog-detail.js`, `shop.js`, `shop-detail.js`, `home.js`, `command-palette.js`, `ai-bot.js` | None |
-| Contact / location | N/A | N/A | `index.html` sidebar, `ai-bot.js`, `effects.js` toast, `home.js` hero |
+| Contact / location | N/A | N/A | `index.html` sidebar, `ai-bot.js`, `effects.js` toast, `home.js` hero, `assets/resume/roldan-gaspar-resume.html` |
 
 ## Adding a new collection
 
