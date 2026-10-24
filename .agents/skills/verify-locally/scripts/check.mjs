@@ -54,10 +54,23 @@ for (const file of scriptOrder) {
 }
 
 // ---------- 3. CSS @imports ----------
-const mainCss = read('src/css/main.css');
-for (const m of mainCss.matchAll(/@import\s+['"]([^'"]+)['"]/g)) {
-    if (!exists(path.join('src/css', m[1]))) err(`main.css imports missing file: ${m[1]}`);
-}
+const scannedCss = new Set();
+const scanCssImports = (relPath) => {
+    if (scannedCss.has(relPath)) return;
+    scannedCss.add(relPath);
+    if (!exists(relPath)) {
+        err(`Missing CSS file: ${relPath}`);
+        return;
+    }
+    const cssContent = read(relPath);
+    const dir = path.dirname(relPath);
+    for (const m of cssContent.matchAll(/@import\s+['"]([^'"]+)['"]/g)) {
+        const target = path.join(dir, m[1]);
+        if (!exists(target)) err(`${relPath} imports missing file: ${m[1]}`);
+        else scanCssImports(target);
+    }
+};
+scanCssImports('src/css/main.css');
 
 // ---------- 4. Router render functions exist & routeMeta coverage ----------
 const routerSrc = read('src/js/router.js');

@@ -90,7 +90,7 @@ initVerifiedBadgeConfetti(); initAudioLoungeEvents() /* only on #/audio */; play
 
 ## CSS architecture
 
-`main.css` → `tokens.css` (vars, reset) → `layout.css` (shell, sidebar, mobile header) → `components.css` (buttons, cards, modals, AI widget, palette, confetti) → `views.css` (per-page; largest file, ~5k lines) → `animations.css` (keyframes, reveal, page transitions).
+`main.css` → `tokens.css` (vars, reset) → `layout.css` (shell, sidebar, mobile header) → `components.css` (buttons, cards, modals, AI widget, palette, confetti) → `views.css` (modular index importing `src/css/views/*.css`: `home`, `projects`, `experience`, `stack`, `certifications`, `recommendations`, `shop`, `blog`, `audio`, `cyber-lab`, `misc`, `responsive`) → `animations.css` (keyframes, reveal, page transitions).
 
 Theme switch = `data-theme` attribute on `<html>`; all colors flow from tokens.
 

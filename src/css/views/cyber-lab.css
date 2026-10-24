@@ -1,0 +1,558 @@
+/* ==========================================
+   CYBEROPS & NETWORK DEFENSE LAB (#/cyber-lab)
+   ========================================== */
+
+.cyber-lab-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 48px;
+}
+
+.cyber-foundations-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.cyber-foundation-label {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: var(--accent-blue);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 4px;
+}
+
+.cyber-foundation-pill {
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background-color: var(--tag-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.cyber-foundation-pill:hover,
+.cyber-foundation-pill.active {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    background-color: var(--hover-bg);
+}
+
+.cyber-verify-link {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin-left: auto;
+    transition: opacity 0.2s ease;
+}
+
+.cyber-verify-link:hover {
+    opacity: 0.8;
+}
+
+.cyber-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.cyber-metric-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: var(--card-shadow);
+}
+
+.cyber-metric-label {
+    font-family: var(--mono-font);
+    font-size: 0.68rem;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+
+.cyber-metric-value {
+    font-family: var(--mono-font);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.cyber-metric-value.accent {
+    color: var(--accent-blue);
+}
+
+.cyber-metric-value.danger {
+    color: var(--status-danger);
+}
+
+.cyber-metric-sub {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+}
+
+.cyber-canvas-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: var(--card-shadow);
+}
+
+.cyber-canvas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cyber-canvas-title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cyber-live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--status-ok);
+    box-shadow: 0 0 8px var(--status-ok);
+}
+
+.cyber-canvas-title {
+    font-family: var(--mono-font);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: var(--text-color);
+}
+
+.cyber-canvas-legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-dot.normal {
+    background-color: var(--accent-blue);
+}
+
+.legend-dot.threat {
+    background-color: var(--status-danger);
+}
+
+.legend-dot.blocked {
+    background-color: var(--accent-violet);
+}
+
+.cyber-canvas-wrap {
+    width: 100%;
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    position: relative;
+}
+
+.cyber-canvas-wrap canvas {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+
+.cyber-node-inspector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+}
+
+.inspector-badge {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.inspector-meta-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: var(--text-color);
+}
+
+.inspector-meta-list code {
+    font-family: var(--mono-font);
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--tag-bg);
+    border: 1px solid var(--border-color);
+}
+
+.inspector-hint {
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.cyber-bottom-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.cyber-controls-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cyber-panel-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: var(--card-shadow);
+}
+
+.cyber-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.cyber-panel-header h3 {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cyber-panel-badge {
+    font-family: var(--mono-font);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background-color: var(--tag-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+.cyber-panel-desc {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.cyber-threat-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.cyber-threat-btn {
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.cyber-threat-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--status-danger);
+    background-color: var(--status-danger-bg);
+}
+
+.threat-btn-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+}
+
+.threat-btn-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-color);
+}
+
+.threat-mitre-tag {
+    font-family: var(--mono-font);
+    font-size: 0.66rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--status-danger);
+}
+
+.threat-btn-proto {
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.cyber-reset-btn {
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    transition: border-color 0.2s ease;
+}
+
+.cyber-reset-btn:hover {
+    border-color: var(--accent-blue);
+}
+
+.cyber-rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cyber-rule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.cyber-rule-item.disabled {
+    opacity: 0.65;
+}
+
+.rule-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rule-title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rule-name {
+    font-size: 0.85rem;
+    color: var(--text-color);
+}
+
+.rule-code {
+    font-family: var(--mono-font);
+    font-size: 0.68rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--accent-blue);
+}
+
+.rule-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.cyber-rule-toggle {
+    width: 44px;
+    height: 24px;
+    border-radius: 999px;
+    background-color: var(--border-color);
+    position: relative;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+}
+
+.cyber-rule-toggle.on {
+    background-color: var(--accent-blue);
+}
+
+.cyber-rule-toggle .toggle-knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    transition: transform 0.2s ease;
+}
+
+.cyber-rule-toggle.on .toggle-knob {
+    transform: translateX(20px);
+}
+
+.cyber-log-card {
+    height: 100%;
+}
+
+.cyber-log-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 460px;
+    overflow-y: auto;
+    padding-right: 4px;
+    font-family: var(--mono-font);
+    font-size: 0.73rem;
+}
+
+.cyber-log-entry {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    line-height: 1.4;
+}
+
+.log-time {
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    flex-shrink: 0;
+}
+
+.log-badge {
+    font-size: 0.66rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--tag-bg);
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.log-badge.ok {
+    color: var(--status-ok);
+}
+
+.log-badge.warn {
+    color: var(--status-warn);
+}
+
+.log-badge.danger {
+    color: var(--status-danger);
+}
+
+.log-badge.info {
+    color: var(--accent-blue);
+}
+
+.log-msg {
+    color: var(--text-color);
+    word-break: break-word;
+}
+
+@media (max-width: 992px) {
+    .cyber-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cyber-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .cyber-node-inspector {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .cyber-metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cyber-threat-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .cyber-canvas-card {
+        padding: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cyber-threat-btn,
+    .cyber-rule-toggle,
+    .cyber-rule-toggle .toggle-knob {
+        transition: none;
+    }
+}
+

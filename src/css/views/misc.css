@@ -1,0 +1,223 @@
+/* ==========================================
+   VIEW SPECIFIC STYLES (Shop, Blog, Gear, etc.)
+   ========================================== */
+
+/* Page Headers */
+.page-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-header h2 {
+    font-family: var(--mono-font);
+    font-size: clamp(1.6rem, 4.5vw, 2.5rem);
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.page-desc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 700px;
+}
+
+
+/* Gear View */
+.gear-category {
+    margin-bottom: 60px;
+}
+
+.gear-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gear-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.15s, box-shadow 0.3s;
+}
+
+.gear-card:hover .gear-image img {
+    transform: scale(1.05);
+}
+
+.gear-image {
+    height: 120px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gear-image img {
+    max-height: 100%;
+    max-width: 100%;
+    mix-blend-mode: multiply;
+    transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .gear-image img {
+    filter: invert(1);
+    mix-blend-mode: screen;
+}
+
+.gear-card h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.gear-card p {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Resources View */
+.resource-category {
+    margin-bottom: 40px;
+}
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.resource-card {
+    display: block;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card:hover {
+    background-color: var(--hover-bg);
+    border-color: var(--text-color);
+}
+
+.resource-card::after {
+    content: '→';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    opacity: 0;
+    transition: all 0.2s;
+    font-size: 1.2rem;
+}
+
+.resource-card:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.resource-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.resource-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Collabs View */
+.brand-logos {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-size: 2.5rem;
+    color: var(--text-muted);
+    margin-bottom: 60px;
+}
+
+.brand-logos span {
+    font-family: var(--mono-font);
+    font-size: 1rem;
+}
+
+.world-map {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.map-placeholder {
+    height: 300px;
+    background-image: radial-gradient(var(--text-muted) 1px, transparent 1px);
+    background-size: 10px 10px;
+    opacity: 0.5;
+}
+
+.map-caption {
+    font-family: var(--mono-font);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+.contact-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    border-radius: 16px;
+}
+
+.contact-info {
+    max-width: 60%;
+}
+
+/* Consulting View */
+.consulting-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.consulting-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    transition: transform 0.15s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.consulting-card:hover {
+    border-color: var(--text-color);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-top .price {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.consulting-card .desc {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    min-height: 80px;
+}
+
+.points {
+    list-style: none;
+}
+

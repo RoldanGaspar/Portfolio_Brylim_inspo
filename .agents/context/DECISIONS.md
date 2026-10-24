@@ -84,3 +84,10 @@ Template:
 - **Context:** The repository root contained `/data.js`, `/main.js`, and `/style.css` (~88.6 KB total) leftover from Bryl Lim's initial template fork. All production code had previously been moved to `src/js/` and `src/css/`, leaving these files unreferenced and dead.
 - **Decision:** Safely remove `data.js`, `main.js`, and `style.css` from the repository root with explicit user approval under Phase 2 of the Master Execution Plan.
 - **Consequences:** Eliminates ~90 KB of dead code bloat, prevents AI coding agents from reading stale patterns or syncing content to dead files, and leaves `index.html` and `src/` as the single canonical source of application code.
+
+## D-011: Modularization of View Stylesheets (`src/css/views/*.css`)
+- **Date:** 2026-10-24
+- **Status:** accepted
+- **Context:** `src/css/views.css` grew to 5,024 lines in a single file, making finding and editing styles slow and increasing merge conflict risks.
+- **Decision:** Split `views.css` into 12 dedicated, cohesive view stylesheets under `src/css/views/` (`home.css`, `projects.css`, `experience.css`, `stack.css`, `certifications.css`, `recommendations.css`, `shop.css`, `blog.css`, `audio.css`, `cyber-lab.css`, `misc.css`, `responsive.css`) imported via standard `@import` rules in `views.css`. Updated `check.mjs` to recursively validate all nested `@import` targets.
+- **Consequences:** Eliminates the monolithic CSS file without adding bundlers or build steps; keeps stylesheets focused (<1,000 lines each) and instantly maintainable.

@@ -1,0 +1,69 @@
+/* Recommendations Full Grid (#/recommendations) */
+.recs-full-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.rec-card-full {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    transition: border-color 0.2s ease;
+}
+
+.rec-card-full:hover {
+    border-color: var(--text-color);
+}
+
+.rec-body-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    z-index: 1;
+}
+
+.rec-author-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.rec-avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    font-family: var(--mono-font);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.rec-author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.rec-author-info strong {
+    font-family: var(--mono-font);
+    font-size: 0.9rem;
+}
+
+.rec-author-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+

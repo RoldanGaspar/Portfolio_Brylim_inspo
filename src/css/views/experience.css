@@ -1,0 +1,213 @@
+/* Experience Full Timeline View (#/experience) */
+.exp-full-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.exp-card-full {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.exp-card-full:hover {
+    border-color: var(--text-color);
+}
+
+.exp-year-badge {
+    font-family: var(--mono-font);
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.exp-card-header h3 {
+    font-family: var(--mono-font);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.exp-company-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.exp-desc-text {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.exp-highlights-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.exp-highlights-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.exp-highlights-list i {
+    color: #22c55e;
+}
+
+.exp-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+
+/* Clean Page Headers */
+.page-title-clean {
+    font-family: var(--mono-font);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.page-desc-clean {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 680px;
+    margin-bottom: 40px;
+}
+
+/* Experience Page Layout (Screenshot 1 Match) */
+.exp-timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.exp-timeline-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.exp-avatar-square {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-family: var(--mono-font);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.exp-timeline-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.exp-company-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.exp-company-header h3 {
+    font-family: var(--mono-font);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.exp-employment-type {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.exp-location-tag {
+    font-family: var(--mono-font);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.exp-role-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.exp-role-title {
+    font-family: var(--mono-font);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.exp-date-duration {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.exp-summary-text {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-top: 4px;
+}
+
+.exp-detail-bullets {
+    list-style: disc;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.exp-detail-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.exp-dashed-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.dashed-skill {
+    font-family: var(--mono-font);
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 14px;
+    border: 1px dashed var(--border-color);
+    color: var(--text-muted);
+}
+

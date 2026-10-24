@@ -1,0 +1,800 @@
+/* Home Section Layout */
+.content-section {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 80px;
+}
+
+.content-section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background-image: radial-gradient(var(--text-muted) 1px, transparent 1px);
+    background-size: 15px 15px;
+    mask-image: radial-gradient(circle, black 0%, transparent 60%);
+    -webkit-mask-image: radial-gradient(circle, black 0%, transparent 60%);
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Projects Stack View */
+.projects-stack-container {
+    position: relative;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    perspective: 1200px;
+}
+
+.project-stack-card {
+    position: absolute;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 28px 30px;
+    width: 420px;
+    max-width: 90vw;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, opacity 0.4s ease, z-index 0.4s;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Position 1: Left Background Card */
+.project-stack-card.pos-left {
+    z-index: 5;
+    opacity: 0.85;
+    transform: translateX(-140px) rotate(-6deg) scale(0.92);
+}
+
+/* Position 2: Right Background Card */
+.project-stack-card.pos-right {
+    z-index: 5;
+    opacity: 0.85;
+    transform: translateX(140px) rotate(6deg) scale(0.92);
+}
+
+/* Position 3: Center Active Front Card */
+.project-stack-card.pos-center {
+    z-index: 10;
+    opacity: 1;
+    transform: translateY(-10px) rotate(0deg) scale(1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 20px -5px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .project-stack-card.pos-center {
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.7), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+}
+
+.project-stack-card:hover {
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+}
+
+.projects-stack-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+    font-family: var(--mono-font);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-align: center;
+    user-select: none;
+}
+
+.projects-stack-hint i {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    opacity: 0.85;
+    animation: nudgeSwipe 2s infinite ease-in-out;
+}
+
+@keyframes nudgeSwipe {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-4px); }
+}
+
+.stack-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.stack-tag {
+    font-family: var(--mono-font);
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    background-color: var(--bg-color);
+}
+
+.stack-tag.dark {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+.stack-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.app-icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.app-icon-badge.tarsi-bg {
+    background: linear-gradient(135deg, #40c057 0%, #2b8a3e 100%);
+}
+
+.app-icon-badge.kabi-bg {
+    background: linear-gradient(135deg, #343a40 0%, #121416 100%);
+}
+
+.app-icon-badge.travel-bg {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.app-card-title h4 {
+    font-family: var(--mono-font);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.stack-card-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.stack-store-badges {
+    display: flex;
+    gap: 10px;
+}
+
+.store-badge-svg {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.store-badge-svg i {
+    font-size: 0.95rem;
+}
+
+/* Experience View */
+.exp-item {
+    display: grid;
+    grid-template-columns: 100px 2fr 1fr;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: padding-left 0.2s ease, background 0.2s ease;
+    border-radius: 8px;
+}
+
+.exp-item:last-child {
+    border-bottom: none;
+}
+
+.exp-item:hover {
+    padding-left: 12px;
+    background: var(--hover-bg);
+}
+
+.exp-year {
+    font-family: var(--mono-font);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.exp-title {
+    font-weight: 600;
+}
+
+.exp-company {
+    color: var(--text-muted);
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.stack-section {
+    margin-top: 60px;
+}
+
+/* Certifications View */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+@media (max-width: 992px) {
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cert-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 36px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    height: 100%;
+}
+
+.cert-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--text-color);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+    background-color: var(--hover-bg);
+}
+
+.cert-logo-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.cert-card:hover .cert-logo-box {
+    transform: scale(1.08);
+    border-color: var(--text-color);
+}
+
+.cert-logo {
+    max-width: 30px;
+    max-height: 30px;
+    object-fit: contain;
+}
+
+.cert-card h4 {
+    font-family: var(--sans-font);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.35;
+    max-width: 220px;
+}
+
+.cert-card p {
+    font-family: var(--mono-font);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin: 4px 0 0 0;
+}
+
+.certs-provider-callout {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 24px;
+    padding: 18px 20px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.certs-provider-callout:hover {
+    border-color: var(--text-color);
+    background-color: var(--hover-bg);
+}
+
+.certs-provider-callout-badge {
+    width: 58px;
+    height: 58px;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+
+.certs-provider-callout-copy {
+    min-width: 0;
+}
+
+.certs-provider-callout-copy h4 {
+    margin-top: 5px;
+    font-family: var(--mono-font);
+    font-size: 1rem;
+}
+
+.certs-provider-callout-copy p {
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-family: var(--sans-font);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.45;
+    text-transform: none;
+}
+
+.certs-provider-callout > .view-all {
+    margin-left: auto;
+    flex: 0 0 auto;
+}
+
+.cert-verify {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 4px 14px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+}
+
+.cert-verify:hover {
+    color: var(--text-color);
+    background-color: var(--hover-bg);
+    border-color: var(--text-color);
+}
+
+/* Recommendations View */
+.rec-grid,
+.recs-full-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+@media (max-width: 992px) {
+    .rec-grid,
+    .recs-full-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.rec-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    height: 100%;
+}
+
+.rec-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--text-color);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+    background-color: var(--hover-bg);
+}
+
+.quote-icon {
+    font-size: 1.8rem;
+    color: var(--border-color);
+    margin-bottom: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    transition: color 0.25s ease;
+}
+
+.rec-card:hover .quote-icon {
+    color: var(--text-color);
+}
+
+.rec-text {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: var(--text-color);
+    margin-bottom: 24px;
+    font-weight: 400;
+}
+
+.rec-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border-color);
+    margin-top: auto;
+}
+
+.rec-avatar {
+    width: 44px;
+    height: 44px;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono-font);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.rec-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.rec-info strong {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.rec-info span {
+    font-family: var(--mono-font);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
+}
+
+/* Affiliations View */
+.aff-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.aff-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.aff-item:hover {
+    transform: translateY(-2px);
+    background: var(--hover-bg);
+}
+
+.aff-logo {
+    font-family: var(--mono-font);
+    font-weight: 700;
+}
+
+.aff-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.aff-info strong {
+    font-size: 0.9rem;
+}
+
+.aff-info span {
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* GitHub Graph Component */
+.github-graph-container {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.github-graph-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.github-graph-container::-webkit-scrollbar-track {
+    background: var(--hover-bg);
+    border-radius: 4px;
+}
+
+.github-graph-container::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.github-graph-container::-webkit-scrollbar-thumb:hover {
+    background: var(--text-color);
+}
+
+.github-grid {
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-flow: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    min-width: max-content;
+}
+
+.github-dot {
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.github-dot::after {
+    content: '';
+    background-color: var(--text-color);
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.github-dot[data-level="0"]::after { width: 0; height: 0; }
+.github-dot[data-level="1"]::after { width: 4px; height: 4px; background-color: rgba(16, 185, 129, 0.45); }
+.github-dot[data-level="2"]::after { width: 6px; height: 6px; background-color: rgba(16, 185, 129, 0.7); }
+.github-dot[data-level="3"]::after { width: 9px; height: 9px; background-color: rgba(16, 185, 129, 0.85); }
+.github-dot[data-level="4"]::after { width: 12px; height: 12px; background-color: #10b981; }
+
+.github-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.github-footer {
+    font-family: var(--mono-font);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.github-footer strong {
+    color: var(--text-color);
+}
+
+.github-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 3px 9px;
+    border-radius: 12px;
+}
+
+.github-live-badge i {
+    font-size: 0.5rem;
+    animation: pulse-green 2s infinite;
+}
+
+.github-scroll-hint {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .github-scroll-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-family: var(--mono-font);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        margin-top: 10px;
+        user-select: none;
+    }
+
+    .github-scroll-hint i {
+        font-size: 0.95rem;
+        color: #10b981;
+        animation: pulseArrows 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseArrows {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.18); }
+    }
+}
+
+/* Featured Public Repositories Section */
+.github-repos-section {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.github-repos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.repos-kicker {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.repos-view-all {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.repos-view-all:hover {
+    color: var(--accent-blue);
+}
+
+.github-repos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.github-repo-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.github-repo-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.repo-card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.repo-icon {
+    font-size: 1.05rem;
+    color: var(--accent-blue);
+    display: flex;
+}
+
+.repo-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+.repo-external {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    transition: transform 0.2s, color 0.2s;
+}
+
+.github-repo-card:hover .repo-external {
+    transform: translate(2px, -2px);
+    color: var(--accent-blue);
+}
+
+.repo-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0 0 14px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.repo-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: auto;
+}
+
+.repo-lang {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.repo-stars,
+.repo-forks {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.repo-date {
+    margin-left: auto;
+    font-size: 0.68rem;
+}
+
