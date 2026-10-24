@@ -44,6 +44,13 @@ Technical specifications for how external cloud platforms connect to the Roldan 
 | **Interactive Guestbook** | `guestbook_entries` | Public visitors sign short notes; RLS allows public `SELECT` on `is_approved = true` rows and `INSERT` with character constraints. |
 | **Live Cyber-Loft Presence** | Realtime Broadcast / Presence (`roldan_portfolio_presence`) | Supabase Realtime channel for visitor presence sync and collaborative avatar count; local storage persists client nickname and avatar color (no durable server chat persistence). |
 
+### Live Verification Record (Verified 2026-10-24)
+
+- **`site_metrics`:** HTTP 200 OK — `page_views` key verified and readable by `anon`.
+- **`increment_site_views()` RPC:** HTTP 200 OK — Atomic stored procedure increments count without race conditions.
+- **`guestbook_entries`:** HTTP 200 OK — Public read query verified returning approved community entries.
+- **`contact_messages` RLS:** HTTP 200 OK — `anon` SELECT query returns 0 rows, confirming strict privacy enforcement.
+
 ### Frontend Connection Standard
 
 When client-side code in `src/js/` connects to Supabase:
