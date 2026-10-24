@@ -77,3 +77,10 @@ Template:
 - **Context:** The Hero stat badge advertised `4 Open Repos` and the GitHub section listed `pet-hub-payroll`, but `portfolioData.projects` only had 3 entries (`tarsi-budget-tracker`, `awardena-security`, `pos-inventory`). Additionally, project detail pages (`#/projects/:id`) lacked an engineering architecture breakdown, copy-link utility, and sequential prev/next navigation (`blog-detail.js` had these, `project-detail.js` did not), and the root lacked `robots.txt` and `sitemap.xml`.
 - **Decision:** Add `pet-hub-payroll` as the 4th entry in `portfolioData.projects` (keeping the Home 3D stack deck scoped to the 3 cards with `homeCard` while `#/projects` renders all 4 in a 2×2 grid); enrich every project with a 3-layer `architecture` (`pattern` + `layers`) blueprint rendered in `project-detail.js` alongside `initProjectDetailEvents()` (copy-link button) and Previous/Next Project footer cards; and add root `robots.txt` and `sitemap.xml`.
 - **Consequences:** Complete 4-repo parity across Hero stats, `#/projects`, Command Palette, and AI Bot; deeper technical storytelling on every case study page; and standard search crawler discovery at the root domain.
+
+## D-010: Liquidation of Legacy Root Files
+- **Date:** 2026-10-24
+- **Status:** accepted
+- **Context:** The repository root contained `/data.js`, `/main.js`, and `/style.css` (~88.6 KB total) leftover from Bryl Lim's initial template fork. All production code had previously been moved to `src/js/` and `src/css/`, leaving these files unreferenced and dead.
+- **Decision:** Safely remove `data.js`, `main.js`, and `style.css` from the repository root with explicit user approval under Phase 2 of the Master Execution Plan.
+- **Consequences:** Eliminates ~90 KB of dead code bloat, prevents AI coding agents from reading stale patterns or syncing content to dead files, and leaves `index.html` and `src/` as the single canonical source of application code.

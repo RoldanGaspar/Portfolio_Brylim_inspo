@@ -62,8 +62,7 @@ All portfolio sections (`src/js/data.js`, `src/js/views/home.js`, and `assets/re
 
 ## 🟠 Maintainability
 
-- **Legacy root files** `data.js`, `main.js`, `style.css` are dead code (~90 KB). Candidate for deletion with approval.
-- `views.css` is ~5,000 lines; finding styles is slow. Consider splitting per view (keep `@import` order).
+- `views.css` is ~5,000 lines; finding styles is slow. Currently being split per view in Phase 3.
 
 ## 🟢 Performance
 

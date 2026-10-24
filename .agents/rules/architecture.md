@@ -38,6 +38,6 @@ These describe how the code ACTUALLY works. Breaking them breaks the live site.
 - Tokens/theme vars → `tokens.css`. App shell/sidebar/grid → `layout.css`. Reusable pieces → `components.css`. Page-specific → `views.css`. Keyframes → `animations.css`.
 - Don't create new CSS files without a reason; if you do, `@import` them in `main.css`.
 
-## 6. Legacy files — do not touch
+## 6. Legacy files — resolved
 
-`/data.js`, `/main.js`, `/style.css` at the repo root are not referenced by `index.html`. They are dead code from an earlier version. Don't edit them, don't copy patterns from them, don't "sync" them. Deleting them requires user approval.
+Legacy root files (`/data.js`, `/main.js`, `/style.css`) from the original template fork were unreferenced dead code (~88.6 KB) and were safely deleted in Phase 2 with explicit approval (see `DECISIONS.md#D-010`). All active application code lives strictly under `src/js/` and `src/css/`. Do not recreate loose files at the repo root.

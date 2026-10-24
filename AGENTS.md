@@ -25,7 +25,6 @@ Classic `<script>` tags sharing globals (NOT ES modules). Hash router. Static ho
 | `src/js/utils/*.js` | Audio engine, effects, theme, modals, AI bot, command palette |
 | `src/css/main.css` | Imports `tokens → layout → components → views → animations` |
 | `assets/certificates/` | Certificate PNGs + `pdf/` |
-| `data.js`, `main.js`, `style.css` (repo root) | **Legacy, unreferenced. Do not edit. Do not use as reference.** |
 
 ## Non-negotiables
 
