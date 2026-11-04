@@ -36,8 +36,9 @@ flowchart TD
         C5[PIPELINE_WORKFLOW]
         C6[ENHANCEMENT_ROADMAP]
         C7[RESPONSIVENESS_ROADMAP]
-        C8[KNOWN_ISSUES]
-        C9[DECISIONS]
+        C8[EXECUTION_PLAN]
+        C9[KNOWN_ISSUES]
+        C10[DECISIONS]
     end
 ```
 
@@ -82,6 +83,7 @@ AGENTS.md
     ├── PIPELINE_WORKFLOW.md      Tri-MCP development pipeline & failure recovery
     ├── ENHANCEMENT_ROADMAP.md    Strategic enhancement plan (Phases 1–12)
     ├── RESPONSIVENESS_ROADMAP.md Multi-device responsiveness roadmap & validation matrix
+    ├── EXECUTION_PLAN.md         5-phase master hardening & delivery execution plan
     ├── KNOWN_ISSUES.md           Audit findings & claim-to-evidence register
     └── DECISIONS.md              Why things are the way they are
 ```
